@@ -22,7 +22,7 @@ function readDB() {
     };
   }
 
-  return JSON.parse(fs.readFileSync(DB_FILE));
+  return JSON.parse(fs.readFileSync(DB_FILE, "utf8"));
 }
 
 function writeDB(data) {
@@ -33,9 +33,10 @@ function writeDB(data) {
 app.post("/login", (req, res) => {
   const db = readDB();
 
-  const user = db.usuarios.find(u =>
-    u.usuario === req.body.usuario &&
-    u.senha === req.body.senha
+  const user = db.usuarios.find(
+    (u) =>
+      u.usuario === req.body.usuario &&
+      u.senha === req.body.senha
   );
 
   if (!user) {
@@ -104,9 +105,7 @@ app.get("/triagens", (req, res) => {
   res.json(db.triagens);
 });
 
-// IMPLEMENTADO: rota com lista fixa de medicações
-// A lógica da TV foi implementada nas páginas de triagem, médico e na tela da TV,
-// com o backend responsável por receber e retornar as chamadas em tempo real.
+// LISTA DE MEDICAÇÕES
 app.get("/lista-medicacoes", (req, res) => {
   res.json([
     "Dipirona",
@@ -147,5 +146,18 @@ app.get("/medicacoes", (req, res) => {
   res.json(db.consultas);
 });
 
-// START
-module.exports = app;
+// ROTA INICIAL
+app.get("/", (req, res) => {
+  res.send("Sistema Sentinela funcionando!");
+});
+
+// ==========================================
+// INICIAR SERVIDOR
+// ==========================================
+
+const PORT = process.env.PORT || 10000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Servidor Sentinela rodando na porta ${PORT}`);
+});
+
