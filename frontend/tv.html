@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Saúde Integra - TV</title>
+
+<link rel="stylesheet" href="style.css">
+
+
+<style>
+
+/* =====================================
+   TELA PRINCIPAL
+===================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body.tv-body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf6ff 0%,
+            #d7edff 45%,
+            #bfe3ff 100%
+        );
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #123b5d;
+
+}
+
+
+/* =====================================
+   CONTAINER
+===================================== */
+
+.tv-container {
+
+    min-height: 100vh;
+
+    padding: 35px;
+
+    display: grid;
+
+    grid-template-columns:
+        32% 68%;
+
+    gap: 25px;
+
+}
+
+
+/* =====================================
+   CAIXAS
+===================================== */
+
+.tv-box {
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.96
+    );
+
+    border-radius: 20px;
+
+    border: 2px solid #c5e4fa;
+
+    box-shadow:
+        0 10px 30px
+        rgba(
+            0,
+            90,
+            150,
+            0.14
+        );
+
+}
+
+
+/* =====================================
+   LADO ESQUERDO
+===================================== */
+
+.tv-left {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+}
+
+
+/* =====================================
+   LADO DIREITO
+===================================== */
+
+.tv-right {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 25px;
+
+}
+
+
+/* =====================================
+   TÍTULO DAS CAIXAS
+===================================== */
+
+.tv-title {
+
+    background:
+        linear-gradient(
+            135deg,
+            #0077cc,
+            #005bb5
+        );
+
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    padding: 16px 20px;
+
+    border-radius:
+        18px 18px 0 0;
+
+}
+
+
+/* =====================================
+   LOCAL
+===================================== */
+
+.local-box {
+
+    text-align: center;
+
+    overflow: hidden;
+
+    min-height: 330px;
+
+}
+
+
+#local-tipo {
+
+    margin-top: 40px;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    color: #0077cc;
+
+}
+
+
+.local-number {
+
+    margin-top: 15px;
+
+    font-size: 100px;
+
+    line-height: 1;
+
+    font-weight: bold;
+
+    color: #004f91;
+
+}
+
+
+/* =====================================
+   HISTÓRICO
+===================================== */
+
+.history-box {
+
+    overflow: hidden;
+
+    flex: 1;
+
+}
+
+
+#history-list {
+
+    list-style: none;
+
+    padding: 20px;
+
+    margin: 0;
+
+}
+
+
+#history-list li {
+
+    background: #eef8ff;
+
+    border-left:
+        6px solid #0088dd;
+
+    padding: 16px;
+
+    margin-bottom: 12px;
+
+    border-radius: 10px;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #24506d;
+
+}
+
+
+/* =====================================
+   PACIENTE
+===================================== */
+
+.patient-box {
+
+    text-align: center;
+
+    overflow: hidden;
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+.patient-name {
+
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 40px;
+
+    font-size: 65px;
+
+    font-weight: bold;
+
+    color: #005baa;
+
+    text-transform: uppercase;
+
+}
+
+
+/* =====================================
+   ANIMAÇÃO DA CHAMADA
+===================================== */
+
+.patient-box.flash {
+
+    animation:
+        chamada 1s ease-in-out 3;
+
+}
+
+
+@keyframes chamada {
+
+    0% {
+
+        transform: scale(1);
+
+        box-shadow:
+            0 10px 30px
+            rgba(0, 90, 150, 0.14);
+
+    }
+
+    50% {
+
+        transform: scale(1.02);
+
+        box-shadow:
+            0 0 45px
+            rgba(0, 136, 221, 0.65);
+
+        border-color: #0088dd;
+
+    }
+
+    100% {
+
+        transform: scale(1);
+
+    }
+
+}
+
+
+/* =====================================
+   LOGO
+===================================== */
+
+.tv-logo {
+
+    min-height: 180px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    color: #006dcc;
+
+    font-weight: bold;
+
+    font-size: 35px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #eaf7ff
+        );
+
+}
+
+
+.tv-logo div {
+
+    margin-top: 10px;
+
+    font-size: 30px;
+
+    color: #00549a;
+
+}
+
+
+/* =====================================
+   RODAPÉ VISUAL
+===================================== */
+
+.tv-logo::after {
+
+    content:
+        "Cuidando de você com integração e qualidade";
+
+    margin-top: 12px;
+
+    font-size: 15px;
+
+    font-weight: normal;
+
+    color: #6b899f;
+
+}
+
+
+/* =====================================
+   RESPONSIVO
+===================================== */
+
+@media (max-width: 900px) {
+
+    .tv-container {
+
+        grid-template-columns: 1fr;
+
+        padding: 20px;
+
+    }
+
+    .patient-name {
+
+        font-size: 45px;
+
+    }
+
+    .local-number {
+
+        font-size: 75px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body class="tv-body">
+
+
+<div class="tv-container">
+
+
+    <!-- ==========================
+         LADO ESQUERDO
+    =========================== -->
+
+    <div class="tv-left">
+
+
+        <!-- LOCAL -->
+
+        <div class="tv-box local-box">
+
+
+            <div class="tv-title">
+
+                📍 LOCAL
+
+            </div>
+
+
+            <div id="local-tipo">
+
+                GUICHÊ
+
+            </div>
+
+
+            <div
+                id="local-numero"
+                class="local-number"
+            >
+
+                --
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- HISTÓRICO -->
+
+        <div class="tv-box history-box">
+
+
+            <div class="tv-title">
+
+                📋 ÚLTIMAS CHAMADAS
+
+            </div>
+
+
+            <ul id="history-list"></ul>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ==========================
+         LADO DIREITO
+    =========================== -->
+
+    <div class="tv-right">
+
+
+        <!-- PACIENTE -->
+
+        <div class="tv-box patient-box">
+
+
+            <div class="tv-title">
+
+                👤 PACIENTE
+
+            </div>
+
+
+            <div
+                id="patient-name"
+                class="patient-name"
+            >
+
+                AGUARDANDO...
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- LOGO -->
+
+        <div class="tv-box tv-logo">
+
+
+            🏥
+
+
+            <div>
+
+                Saúde Integra
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================
+   CONTROLE DA TV
+===================================== */
+
+let ultimoId = null;
+
+
+
+async function atualizar() {
+
+
+    try {
+
+
+        const resposta =
+            await fetch(
+                "/tv/chamada"
+            );
+
+
+        const data =
+            await resposta.json();
+
+
+        const chamada =
+            data.chamada;
+
+
+        const historico =
+            data.historico || [];
+
+
+
+        /* ==========================
+           CHAMADA ATUAL
+        =========================== */
+
+        if (chamada) {
+
+
+            document.getElementById(
+                "local-tipo"
+            ).innerText =
+                chamada.localTipo ||
+                "GUICHÊ";
+
+
+            document.getElementById(
+                "local-numero"
+            ).innerText =
+                chamada.localNumero ||
+                "--";
+
+
+            document.getElementById(
+                "patient-name"
+            ).innerText =
+                chamada.paciente ||
+                "AGUARDANDO...";
+
+
+
+            /* ==========================
+               ANIMAÇÃO
+            =========================== */
+
+            if (
+                chamada.id !==
+                ultimoId
+            ) {
+
+
+                ultimoId =
+                    chamada.id;
+
+
+                const box =
+                    document.querySelector(
+                        ".patient-box"
+                    );
+
+
+                box.classList.remove(
+                    "flash"
+                );
+
+
+                void box.offsetWidth;
+
+
+                box.classList.add(
+                    "flash"
+                );
+
+
+            }
+
+
+        }
+
+
+
+        /* ==========================
+           HISTÓRICO
+        =========================== */
+
+        const lista =
+            document.getElementById(
+                "history-list"
+            );
+
+
+        lista.innerHTML = "";
+
+
+        historico
+            .slice(0, 4)
+            .forEach(h => {
+
+
+                const li =
+                    document.createElement(
+                        "li"
+                    );
+
+
+                li.innerText =
+
+                    `${h.localTipo || "GUICHÊ"} ` +
+
+                    `${h.localNumero || ""} - ` +
+
+                    `${h.paciente}`;
+
+
+                lista.appendChild(li);
+
+
+            });
+
+
+    }
+
+
+    catch (erro) {
+
+
+        console.error(
+            "Erro ao atualizar TV:",
+            erro
+        );
+
+
+    }
+
+
+}
+
+
+
+/* ==========================
+   INICIAR
+=========================== */
+
+atualizar();
+
+
+/* Atualiza a cada 2 segundos */
+
+setInterval(
+    atualizar,
+    2000
+);
+
+
+</script>
+
+
+</body>
+
+</html>

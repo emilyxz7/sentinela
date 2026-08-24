@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Atendimento</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="topo">
+
+        <div>
+            <span class="icone">🧑‍💼</span>
+
+            <h2>Atendimento</h2>
+
+            <p>Cadastro de pacientes</p>
+        </div>
+
+        <a href="index.html" class="btn-voltar">
+            Sair
+        </a>
+
+    </div>
+
+    <input
+        id="nome"
+        placeholder="Nome completo"
+    >
+
+    <input
+        id="cpf"
+        placeholder="CPF"
+    >
+
+    <select id="tipo">
+
+        <option value="Convenio">
+            Convênio
+        </option>
+
+        <option value="Particular">
+            Particular
+        </option>
+
+    </select>
+
+    <input
+        type="file"
+        id="foto"
+        accept="image/*"
+    >
+
+    <button onclick="cadastrar()">
+        Cadastrar paciente
+    </button>
+
+    <div id="mensagem"></div>
+
+</div>
+
+<script>
+
+async function cadastrar() {
+
+    const nome =
+        document.getElementById("nome").value.trim();
+
+    const cpf =
+        document.getElementById("cpf").value.trim();
+
+    const tipo =
+        document.getElementById("tipo").value;
+
+    const mensagem =
+        document.getElementById("mensagem");
+
+    if (!nome) {
+
+        mensagem.innerHTML =
+            "Digite o nome do paciente.";
+
+        return;
+    }
+
+    try {
+
+        const resposta = await fetch(
+            "/atendimento",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    nome,
+                    cpf,
+                    tipo
+                })
+            }
+        );
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Erro ao cadastrar"
+            );
+
+        }
+
+        mensagem.className = "sucesso";
+
+        mensagem.innerHTML =
+            "✅ Paciente enviado para a triagem!";
+
+        document.getElementById("nome").value = "";
+        document.getElementById("cpf").value = "";
+
+    } catch (erro) {
+
+        mensagem.className = "erro";
+
+        mensagem.innerHTML =
+            "❌ Erro ao cadastrar paciente.";
+
+        console.error(erro);
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

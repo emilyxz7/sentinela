@@ -1,0 +1,510 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    font-family: Arial, sans-serif;
+
+    background: #eef5fb;
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    color: #263238;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-container {
+
+    width: 90%;
+
+    max-width: 430px;
+
+    margin: 80px auto;
+
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0, 86, 153, 0.15);
+
+}
+
+.logo {
+
+    font-size: 60px;
+
+}
+
+.login-container h1 {
+
+    color: #0878c9;
+
+    margin-bottom: 5px;
+
+}
+
+.subtitle {
+
+    color: #78909c;
+
+    margin-bottom: 25px;
+
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+
+    width: 90%;
+
+    max-width: 900px;
+
+    margin: 30px auto;
+
+    background: white;
+
+    padding: 25px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(0, 0, 0, 0.08);
+
+}
+
+/* =========================
+   CAMPOS
+========================= */
+
+input,
+select,
+textarea,
+button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    margin-top: 10px;
+
+    border-radius: 8px;
+
+    border: 1px solid #cfd8dc;
+
+    font-size: 16px;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    outline: none;
+
+    border-color: #0878c9;
+
+}
+
+/* =========================
+   TEXTAREA
+========================= */
+
+textarea {
+
+    min-height: 100px;
+
+    resize: vertical;
+
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+button {
+
+    background: #0878c9;
+
+    color: white;
+
+    border: none;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+}
+
+button:hover {
+
+    background: #0563a5;
+
+}
+
+/* =========================
+   CARD
+========================= */
+
+.card {
+
+    border: 1px solid #dce6ed;
+
+    padding: 15px;
+
+    margin: 15px 0;
+
+    border-radius: 10px;
+
+    background: white;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.06);
+
+}
+
+/* =========================
+   RISCO
+========================= */
+
+.verde {
+
+    background: #2ecc71;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    display: inline-block;
+
+}
+
+.amarelo {
+
+    background: #f1c40f;
+
+    color: #222;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    display: inline-block;
+
+}
+
+.vermelho {
+
+    background: #e74c3c;
+
+    color: white;
+
+    padding: 5px 10px;
+
+    border-radius: 6px;
+
+    display: inline-block;
+
+}
+
+/* =========================
+   TOPO
+========================= */
+
+.topo {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+}
+
+.topo h2 {
+
+    color: #0878c9;
+
+}
+
+.icone {
+
+    font-size: 25px;
+
+}
+
+.btn-voltar {
+
+    background: #e74c3c;
+
+    color: white;
+
+    padding: 9px 15px;
+
+    border-radius: 7px;
+
+    text-decoration: none;
+
+}
+
+/* =========================
+   MENSAGENS
+========================= */
+
+.sucesso {
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    background: #d4edda;
+
+    color: #155724;
+
+    border-radius: 8px;
+
+}
+
+.erro {
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    background: #f8d7da;
+
+    color: #721c24;
+
+    border-radius: 8px;
+
+}
+
+/* =========================
+   TV
+========================= */
+
+.tv-body {
+
+    background:
+        linear-gradient(
+            135deg,
+            #006bb6,
+            #00a8e8
+        );
+
+    overflow: hidden;
+
+}
+
+.tv-container {
+
+    min-height: 100vh;
+
+    padding: 25px;
+
+    display: grid;
+
+    grid-template-columns: 35% 65%;
+
+    gap: 20px;
+
+}
+
+.tv-left,
+.tv-right {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+.tv-box {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0, 0, 0, 0.15);
+
+}
+
+.tv-title {
+
+    color: #0878c9;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+}
+
+.local-box {
+
+    text-align: center;
+
+}
+
+.local-box > div:nth-child(2) {
+
+    font-size: 30px;
+
+    font-weight: bold;
+
+}
+
+.local-number {
+
+    font-size: 75px;
+
+    font-weight: bold;
+
+    color: #0878c9;
+
+}
+
+.history-box {
+
+    flex: 1;
+
+}
+
+.history-box ul {
+
+    padding: 0;
+
+    margin: 0;
+
+    list-style: none;
+
+}
+
+.history-box li {
+
+    padding: 14px;
+
+    margin-bottom: 8px;
+
+    background: #eef7ff;
+
+    border-radius: 8px;
+
+    font-size: 18px;
+
+}
+
+.patient-box {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+.patient-name {
+
+    font-size: 55px;
+
+    font-weight: bold;
+
+    color: #0878c9;
+
+    word-break: break-word;
+
+}
+
+.tv-logo {
+
+    text-align: center;
+
+    font-size: 35px;
+
+    color: #0878c9;
+
+    font-weight: bold;
+
+}
+
+/* ANIMAÇÃO DA CHAMADA */
+
+.flash {
+
+    animation:
+        chamada 1s ease-in-out 3;
+
+}
+
+@keyframes chamada {
+
+    0% {
+        background: white;
+    }
+
+    50% {
+        background: #b3e5fc;
+    }
+
+    100% {
+        background: white;
+    }
+
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 700px) {
+
+    .tv-container {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .patient-name {
+
+        font-size: 35px;
+
+    }
+
+    .local-number {
+
+        font-size: 50px;
+
+    }
+
+}
