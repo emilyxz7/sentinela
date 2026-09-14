@@ -4,13 +4,9 @@
 <head>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Atendimento</title>
+    <title>Atendimento - Saúde Integra</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -23,28 +19,36 @@
     <div class="topo">
 
         <div>
-            <span class="icone">🧑‍💼</span>
 
-            <h2>Atendimento</h2>
+            <h2>🧑‍💼 Atendimento</h2>
 
-            <p>Cadastro de pacientes</p>
+            <p>
+                Cadastro de pacientes
+            </p>
+
         </div>
 
-        <a href="index.html" class="btn-voltar">
+        <a
+            href="index.html"
+            class="btn-voltar"
+        >
             Sair
         </a>
 
     </div>
+
 
     <input
         id="nome"
         placeholder="Nome completo"
     >
 
+
     <input
         id="cpf"
         placeholder="CPF"
     >
+
 
     <select id="tipo">
 
@@ -58,53 +62,58 @@
 
     </select>
 
-    <input
-        type="file"
-        id="foto"
-        accept="image/*"
-    >
 
     <button onclick="cadastrar()">
         Cadastrar paciente
     </button>
 
+
     <div id="mensagem"></div>
 
 </div>
+
 
 <script>
 
 async function cadastrar() {
 
     const nome =
-        document.getElementById("nome").value.trim();
+        document.getElementById("nome")
+            .value.trim();
 
     const cpf =
-        document.getElementById("cpf").value.trim();
+        document.getElementById("cpf")
+            .value.trim();
 
     const tipo =
-        document.getElementById("tipo").value;
+        document.getElementById("tipo")
+            .value;
 
     const mensagem =
         document.getElementById("mensagem");
 
+
     if (!nome) {
 
-        mensagem.innerHTML =
+        mensagem.className = "erro";
+
+        mensagem.textContent =
             "Digite o nome do paciente.";
 
         return;
     }
 
+
     try {
 
-        const resposta = await fetch(
-            "/atendimento",
-            {
+        const resposta =
+            await fetch("/atendimento", {
+
                 method: "POST",
 
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type":
+                        "application/json"
                 },
 
                 body: JSON.stringify({
@@ -112,36 +121,43 @@ async function cadastrar() {
                     cpf,
                     tipo
                 })
-            }
-        );
+            });
+
+
+        const data =
+            await resposta.json();
+
 
         if (!resposta.ok) {
-
             throw new Error(
+                data.erro ||
                 "Erro ao cadastrar"
             );
-
         }
 
-        mensagem.className = "sucesso";
 
-        mensagem.innerHTML =
-            "✅ Paciente enviado para a triagem!";
+        mensagem.className =
+            "sucesso";
 
-        document.getElementById("nome").value = "";
-        document.getElementById("cpf").value = "";
+        mensagem.textContent =
+            "✅ Paciente cadastrado e enviado para a triagem!";
+
+
+        document.getElementById("nome")
+            .value = "";
+
+        document.getElementById("cpf")
+            .value = "";
+
 
     } catch (erro) {
 
-        mensagem.className = "erro";
+        mensagem.className =
+            "erro";
 
-        mensagem.innerHTML =
-            "❌ Erro ao cadastrar paciente.";
-
-        console.error(erro);
-
+        mensagem.textContent =
+            "❌ " + erro.message;
     }
-
 }
 
 </script>
