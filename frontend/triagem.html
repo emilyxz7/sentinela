@@ -4,7 +4,11 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Triagem - Saúde Integra</title>
 
@@ -12,21 +16,31 @@
 
 </head>
 
+
 <body>
 
+
 <div class="container">
+
+
+    <!-- ==============================
+         TOPO
+    =============================== -->
 
     <div class="topo">
 
         <div>
 
-            <h2>🏥 Saúde Integra</h2>
+            <h2>
+                🏥 Saúde Integra
+            </h2>
 
             <p>
                 Sistema de Triagem Hospitalar
             </p>
 
         </div>
+
 
         <a
             href="index.html"
@@ -38,21 +52,35 @@
     </div>
 
 
+
+    <!-- ==============================
+         FILA
+    =============================== -->
+
     <div class="card">
 
         <h3>
             👥 Pacientes aguardando triagem
         </h3>
 
+
         <div id="fila">
+
             Carregando...
+
         </div>
 
     </div>
 
 
+
     <hr>
 
+
+
+    <!-- ==============================
+         FORMULÁRIO
+    =============================== -->
 
     <h3>
         🩺 Formulário de Triagem
@@ -153,24 +181,85 @@
     ></textarea>
 
 
-    <button onclick="salvarTriagem()">
+    <button
+        type="button"
+        onclick="salvarTriagem()"
+    >
         💾 Salvar Triagem
     </button>
 
 
     <div id="resultado"></div>
 
+
 </div>
+
 
 
 <script>
 
+/* =========================================
+   VARIÁVEIS
+========================================= */
+
 let pacientes = [];
 
 
-// ======================================================
-// CARREGAR PACIENTES
-// ======================================================
+
+/* =========================================
+   REQUISIÇÃO
+========================================= */
+
+async function obterJSON(url, opcoes = {}) {
+
+    const resposta =
+        await fetch(url, opcoes);
+
+
+    const texto =
+        await resposta.text();
+
+
+    let dados = {};
+
+
+    try {
+
+        dados =
+            texto
+                ? JSON.parse(texto)
+                : {};
+
+    } catch {
+
+        dados = {
+            erro:
+                texto ||
+                "Resposta inválida do servidor."
+        };
+
+    }
+
+
+    if (!resposta.ok) {
+
+        throw new Error(
+            dados.erro ||
+            `Erro HTTP ${resposta.status}`
+        );
+
+    }
+
+
+    return dados;
+
+}
+
+
+
+/* =========================================
+   CARREGAR PACIENTES
+========================================= */
 
 async function carregarPacientes() {
 
@@ -180,106 +269,169 @@ async function carregarPacientes() {
 
     try {
 
-        const resposta =
-            await fetch("/pacientes");
+        const dados =
+            await obterJSON("/pacientes");
+
 
         pacientes =
-            await resposta.json();
+            Array.isArray(dados)
+                ? dados
+                : [];
 
 
         const aguardando =
             pacientes.filter(
-                p => p.status === "triagem"
+                p =>
+                    p.status === "triagem"
             );
 
 
         if (aguardando.length === 0) {
 
-            fila.innerHTML =
-                "<p>Nenhum paciente aguardando triagem.</p>";
+            fila.innerHTML = `
+                <p>
+                    Nenhum paciente aguardando triagem.
+                </p>
+            `;
 
             return;
+
         }
 
 
         fila.innerHTML = "";
 
 
-        aguardando.forEach(p => {
+        aguardando.forEach(paciente => {
 
             const div =
                 document.createElement("div");
+
 
             div.className =
                 "fila-item";
 
 
             div.innerHTML = `
+
                 <div>
-                    <strong>${escapeHTML(p.nome)}</strong>
+
+                    <strong>
+                        ${escapeHTML(
+                            paciente.nome ||
+                            "Paciente"
+                        )}
+                    </strong>
+
                     <br>
+
                     <small>
-                        CPF: ${escapeHTML(p.cpf || "—")}
+
+                        CPF:
+                        ${escapeHTML(
+                            paciente.cpf || "—"
+                        )}
+
                         |
-                        ${escapeHTML(p.tipo || "—")}
+
+                        ${escapeHTML(
+                            paciente.tipo || "—"
+                        )}
+
                     </small>
+
                 </div>
 
-                <button onclick="selecionarPaciente('${p.id}')">
+
+                <button
+                    type="button"
+                    onclick="selecionarPaciente('${escapeHTML(
+                        paciente.id
+                    )}')"
+                >
                     Atender
                 </button>
+
             `;
 
 
             fila.appendChild(div);
+
         });
 
 
     } catch (erro) {
 
-        fila.innerHTML =
-            "<p class='erro'>Erro ao carregar pacientes.</p>";
+        console.error(erro);
+
+
+        fila.innerHTML = `
+            <p class="erro">
+                ❌ Erro ao carregar pacientes.
+                <br>
+                ${escapeHTML(erro.message)}
+            </p>
+        `;
+
     }
+
 }
 
 
-// ======================================================
-// SELECIONAR PACIENTE
-// ======================================================
+
+/* =========================================
+   SELECIONAR PACIENTE
+========================================= */
 
 function selecionarPaciente(id) {
 
     const paciente =
         pacientes.find(
-            p => p.id === id
+            p =>
+                String(p.id) === String(id)
         );
 
 
     if (!paciente) {
+
+        alert(
+            "Paciente não encontrado."
+        );
+
         return;
+
     }
 
 
     document.getElementById(
         "pacienteId"
-    ).value = paciente.id;
+    ).value =
+        paciente.id;
 
 
     document.getElementById(
         "nome"
-    ).value = paciente.nome;
+    ).value =
+        paciente.nome || "";
 
 
     window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
+
+        top:
+            document.body.scrollHeight,
+
+        behavior:
+            "smooth"
+
     });
+
 }
 
 
-// ======================================================
-// SALVAR TRIAGEM
-// ======================================================
+
+/* =========================================
+   SALVAR TRIAGEM
+========================================= */
 
 async function salvarTriagem() {
 
@@ -327,85 +479,113 @@ async function salvarTriagem() {
 
     if (!pacienteId) {
 
-        resultado.className = "erro";
+        resultado.className =
+            "erro";
+
 
         resultado.textContent =
             "Selecione um paciente.";
 
+
         return;
+
+    }
+
+
+    if (!sintoma) {
+
+        resultado.className =
+            "erro";
+
+
+        resultado.textContent =
+            "Selecione o sintoma.";
+
+
+        return;
+
     }
 
 
     try {
 
-        const resposta =
-            await fetch("/triagem", {
-
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
-
-                body: JSON.stringify({
-
-                    pacienteId,
-                    nome,
-                    sintoma,
-                    temperatura,
-                    alergia,
-                    observacao
-
-                })
-            });
-
-
         const data =
-            await resposta.json();
+            await obterJSON(
+                "/triagem",
+                {
 
+                    method: "POST",
 
-        if (!resposta.ok) {
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
 
-            throw new Error(
-                data.erro ||
-                "Erro ao salvar triagem"
+                    body: JSON.stringify({
+
+                        pacienteId,
+
+                        nome,
+
+                        sintoma,
+
+                        temperatura,
+
+                        alergia,
+
+                        observacao
+
+                    })
+
+                }
             );
-        }
 
 
         resultado.className =
-            data.risco;
+            classeRisco(data.risco);
+
 
         resultado.textContent =
             "Classificação: " +
-            data.risco.toUpperCase();
+            String(
+                data.risco ||
+                "não classificado"
+            ).toUpperCase();
 
 
         alert(
-            "Triagem salva com sucesso!"
+            "✅ Triagem salva com sucesso!"
         );
 
 
         limparFormulario();
 
-        carregarPacientes();
+
+        await carregarPacientes();
 
 
     } catch (erro) {
 
+        console.error(erro);
+
+
         resultado.className =
             "erro";
 
+
         resultado.textContent =
-            "❌ " + erro.message;
+            "❌ " +
+            erro.message;
+
     }
+
 }
 
 
-// ======================================================
-// LIMPAR
-// ======================================================
+
+/* =========================================
+   LIMPAR FORMULÁRIO
+========================================= */
 
 function limparFormulario() {
 
@@ -413,44 +593,107 @@ function limparFormulario() {
         "pacienteId"
     ).value = "";
 
+
     document.getElementById(
         "nome"
     ).value = "";
+
 
     document.getElementById(
         "sintoma"
     ).value = "";
 
+
     document.getElementById(
         "temperatura"
     ).value = "";
+
 
     document.getElementById(
         "alergia"
     ).value = "";
 
+
     document.getElementById(
         "observacao"
     ).value = "";
+
 }
 
 
-// ======================================================
-// SEGURANÇA HTML
-// ======================================================
+
+/* =========================================
+   SEGURANÇA
+========================================= */
 
 function escapeHTML(text) {
 
     return String(text)
+
         .replaceAll("&", "&amp;")
+
         .replaceAll("<", "&lt;")
+
         .replaceAll(">", "&gt;")
+
         .replaceAll('"', "&quot;")
+
         .replaceAll("'", "&#039;");
+
 }
 
 
+
+/* =========================================
+   RISCO
+========================================= */
+
+function classeRisco(risco) {
+
+    const valor =
+        String(risco || "")
+            .toLowerCase();
+
+
+    if (
+        valor.includes("vermelho")
+    ) {
+
+        return "vermelho";
+
+    }
+
+
+    if (
+        valor.includes("amarelo")
+    ) {
+
+        return "amarelo";
+
+    }
+
+
+    if (
+        valor.includes("verde")
+    ) {
+
+        return "verde";
+
+    }
+
+
+    return "";
+
+}
+
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
 carregarPacientes();
+
 
 setInterval(
     carregarPacientes,
@@ -458,6 +701,7 @@ setInterval(
 );
 
 </script>
+
 
 </body>
 </html>
