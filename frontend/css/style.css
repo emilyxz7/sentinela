@@ -6,8 +6,8 @@ body {
     margin: 0;
     min-height: 100vh;
     font-family: Arial, Helvetica, sans-serif;
-    background: #eef5fb;
-    color: #263238;
+    background: #eaf4ff;
+    color: #17324d;
 }
 
 button,
@@ -21,10 +21,10 @@ textarea {
     width: 92%;
     max-width: 1000px;
     margin: 30px auto;
-    background: white;
+    background: #ffffff;
     padding: 25px;
     border-radius: 18px;
-    box-shadow: 0 8px 30px rgba(0, 80, 140, 0.10);
+    box-shadow: 0 8px 30px rgba(0, 76, 153, 0.15);
 }
 
 .topo {
@@ -36,12 +36,12 @@ textarea {
 }
 
 .topo h2 {
-    color: #0878c9;
+    color: #0757a6;
     margin: 5px 0;
 }
 
 .topo p {
-    color: #78909c;
+    color: #607d94;
     margin: 0;
 }
 
@@ -51,10 +51,11 @@ textarea {
     width: 100%;
     padding: 13px;
     margin-bottom: 14px;
-    border: 1px solid #cfd8dc;
+    border: 1px solid #b8d2eb;
     border-radius: 9px;
     font-size: 15px;
-    background: #fff;
+    background: #ffffff;
+    color: #17324d;
 }
 
 input:focus,
@@ -62,7 +63,7 @@ select:focus,
 textarea:focus {
     outline: none;
     border-color: #0878c9;
-    box-shadow: 0 0 0 3px rgba(8, 120, 201, 0.10);
+    box-shadow: 0 0 0 3px rgba(8, 120, 201, 0.15);
 }
 
 textarea {
@@ -79,49 +80,56 @@ button {
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 91, 181, 0.18);
 }
 
 button:hover {
-    background: #0563a5;
+    background: #055a9f;
 }
 
 .btn-voltar {
     display: inline-block;
     padding: 10px 15px;
-    background: #e74c3c;
+    background: #0757a6;
     color: white;
     text-decoration: none;
     border-radius: 8px;
 }
 
+.btn-voltar:hover {
+    background: #043f7a;
+}
+
 .card {
-    background: white;
-    border: 1px solid #dce6ed;
+    background: #ffffff;
+    border: 1px solid #c9e0f5;
     border-radius: 12px;
     padding: 18px;
     margin: 14px 0;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+    box-shadow: 0 3px 12px rgba(0, 76, 153, 0.08);
 }
 
 .card h3 {
     margin-top: 0;
-    color: #0878c9;
+    color: #0757a6;
 }
 
 .sucesso {
     margin-top: 15px;
     padding: 12px;
     border-radius: 8px;
-    background: #d4edda;
-    color: #155724;
+    background: #dff4ff;
+    color: #075985;
+    border-left: 4px solid #0878c9;
 }
 
 .erro {
     margin-top: 15px;
     padding: 12px;
     border-radius: 8px;
-    background: #f8d7da;
-    color: #721c24;
+    background: #ffe4e6;
+    color: #9f1239;
+    border-left: 4px solid #e11d48;
 }
 
 .verde,
@@ -135,17 +143,17 @@ button:hover {
 }
 
 .verde {
-    background: #2ecc71;
+    background: #16a34a;
     color: white;
 }
 
 .amarelo {
-    background: #f1c40f;
+    background: #facc15;
     color: #222;
 }
 
 .vermelho {
-    background: #e74c3c;
+    background: #dc2626;
     color: white;
 }
 
@@ -156,18 +164,18 @@ button:hover {
     gap: 15px;
     padding: 15px;
     margin: 10px 0;
-    background: #f3f9ff;
-    border: 1px solid #d5eafa;
+    background: #edf7ff;
+    border: 1px solid #c5e1f7;
     border-radius: 10px;
 }
 
 .btn-tv {
-    background: #17a2b8;
+    background: #0284c7;
     white-space: nowrap;
 }
 
 .btn-tv:hover {
-    background: #117a8b;
+    background: #0369a1;
 }
 
 .painel-header {
@@ -184,7 +192,8 @@ button:hover {
     gap: 10px;
     padding: 12px;
     margin-bottom: 20px;
-    background: #eef7ff;
+    background: #e8f4ff;
+    border: 1px solid #c5e1f7;
     border-radius: 10px;
 }
 
@@ -193,6 +202,7 @@ button:hover {
     margin: 0;
     text-align: center;
     font-weight: bold;
+    color: #0757a6;
 }
 
 @media (max-width: 650px) {
