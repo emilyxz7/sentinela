@@ -1,17 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <p>Demonstração de CRUD Frontend/Backend (Node.js)</p>
+    <title>Alta - Saúde Integra</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
 
 </head>
+
 <body>
-    <div class="container">
-    <header>
-    <button onclick="window.print()" style="margin-top: 1rem; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 8px; border: none; background-color: white; color: var(--primary-color);"> Baixar PDF</button>
-</header>
+
+<div class="container">
+
+
+    <header class="topo">
+
+        <div>
+
+            <h2>
+                📋 Alta Hospitalar
+            </h2>
+
+            <p>
+                Finalização do atendimento
+            </p>
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="btn-voltar"
+        >
+            ← Voltar
+        </a>
+
+    </header>
+
+
+    <nav class="menu">
+
+        <a href="index.html">🏠 Início</a>
+
+        <a href="atendimento.html">📝 Atendimento</a>
+
+        <a href="triagem.html">🩺 Triagem</a>
+
+        <a href="medico.html">👨‍⚕️ Médico</a>
+
+        <a href="medicacoes.html">💊 Medicações</a>
+
+        <a href="alta.html">📋 Alta</a>
+
+        <a href="tv.html">📺 Painel TV</a>
+
+    </nav>
+
+
+    <div class="card">
+
+        <h3>
+            👥 Pacientes atendidos
+        </h3>
+
+
+        <div id="lista">
+            Carregando...
+        </div>
+
+    </div>
+
+
 </div>
+
+
+<script>
+
+async function carregarConsultas() {
+
+    const lista =
+        document.getElementById(
+            "lista"
+        );
+
+
+    try {
+
+        const resposta =
+            await fetch(
+                "/consultas"
+            );
+
+
+        const consultas =
+            await resposta.json();
+
+
+        lista.innerHTML = "";
+
+
+        if (!consultas.length) {
+
+            lista.innerHTML =
+                "<p>Nenhum paciente aguardando alta.</p>";
+
+            return;
+        }
+
+
+        consultas.forEach(
+            (consulta, index) => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "fila-item";
+
+
+                item.innerHTML = `
+
+                    <div>
+
+                        <strong>
+                            ${escapeHTML(
+                                consulta.paciente ||
+                                "Paciente"
+                            )}
+                        </strong>
+
+                        <br>
+
+                        <small>
+
+                            Diagnóstico:
+                            ${escapeHTML(
+                                consulta.diagnostico ||
+                                "Não informado"
+                            )}
+
+                        </small>
+
+                    </div>
+
+                `;
+
+
+                const botao =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                botao.textContent =
+                    "📋 Dar alta";
+
+
+                botao.onclick =
+                    () => darAlta(index);
+
+
+                item.appendChild(
+                    botao
+                );
+
+
+                lista.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+    catch (erro) {
+
+        lista.innerHTML =
+            "<p class='erro'>Erro ao carregar consultas.</p>";
+
+    }
+
+}
+
+
+async function darAlta(index) {
+
+    try {
+
+        const resposta =
+            await fetch(
+                "/alta",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            index
+                        })
+
+                }
+            );
+
+
+        const data =
+            await resposta.json();
+
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                data.erro ||
+                "Erro ao dar alta."
+            );
+
+        }
+
+
+        alert(
+            "✅ Alta realizada com sucesso!"
+        );
+
+
+        carregarConsultas();
+
+    }
+
+    catch (erro) {
+
+        alert(
+            "❌ " + erro.message
+        );
+
+    }
+
+}
+
+
+function escapeHTML(texto) {
+
+    return String(texto)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+carregarConsultas();
+
+setInterval(
+    carregarConsultas,
+    5000
+);
+
+</script>
+
 </body>
 </html>
