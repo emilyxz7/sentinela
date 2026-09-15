@@ -10,112 +10,104 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Saúde Integra | Painel de Chamada
-    </title>
+    <title>Painel TV - Saúde Integra</title>
 
     <link
         rel="stylesheet"
-        href="style.css"
+        href="CSS/style.css"
     >
 
 </head>
 
 
-<body class="tv-body">
+<body>
 
 
 <div class="tv-container">
 
 
-    <!-- ================================================
-         COLUNA ESQUERDA
-    ================================================= -->
-
-    <div class="tv-column">
+    <div class="tv-left">
 
 
-        <!-- LOCAL -->
-        <section class="tv-card tv-local">
+        <div class="tv-box local-box">
 
             <div class="tv-title">
-                📢 CHAMADA
+
+                📍 LOCAL DE ATENDIMENTO
+
             </div>
 
 
-            <div
-                id="local-tipo"
-                class="tv-local-type"
-            >
+            <div id="local-tipo">
+
                 CONSULTÓRIO
+
             </div>
 
 
-            <div
-                id="local-numero"
-                class="tv-local-number"
-            >
+            <div id="local-numero">
+
                 --
+
             </div>
 
-        </section>
+        </div>
 
 
-
-        <!-- HISTÓRICO -->
-        <section class="tv-card">
+        <div class="tv-box history-box">
 
             <div class="tv-title">
-                Últimas chamadas
-            </div>
 
-
-            <div
-                id="historico"
-                class="tv-history"
-            >
-
-                <div class="tv-history-item">
-                    Aguardando chamadas...
-                </div>
+                📋 ÚLTIMAS CHAMADAS
 
             </div>
 
-        </section>
+
+            <ul id="history-list"></ul>
+
+        </div>
 
 
     </div>
 
 
 
-    <!-- ================================================
-         COLUNA DIREITA
-    ================================================= -->
-
-    <div class="tv-column">
+    <div class="tv-right">
 
 
-        <section class="tv-card tv-patient">
-
+        <div class="tv-box patient-box">
 
             <div class="tv-title">
 
-                🏥 SAÚDE INTEGRA
+                👤 PACIENTE
 
             </div>
 
 
-            <div
-                id="paciente"
-                class="tv-patient-name"
-            >
+            <div id="patient-name">
 
-                AGUARDANDO
+                AGUARDANDO...
 
             </div>
 
+        </div>
 
-        </section>
+
+        <div class="tv-box logo-box">
+
+            <div style="font-size:50px;">
+                🏥
+            </div>
+
+            <h2>
+                Saúde Integra
+            </h2>
+
+            <p>
+                Sistema Hospitalar Integrado
+            </p>
+
+        </div>
 
 
     </div>
@@ -124,51 +116,12 @@
 </div>
 
 
-
 <script>
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
-
-const localTipo =
-    document.getElementById(
-        "local-tipo"
-    );
+let ultimoId = null;
 
 
-const localNumero =
-    document.getElementById(
-        "local-numero"
-    );
-
-
-const paciente =
-    document.getElementById(
-        "paciente"
-    );
-
-
-const historico =
-    document.getElementById(
-        "historico"
-    );
-
-
-
-/* =====================================================
-   HISTÓRICO
-===================================================== */
-
-let chamadasAnteriores = [];
-
-
-
-/* =====================================================
-   CARREGAR CHAMADA
-===================================================== */
-
-async function carregarChamada() {
+async function atualizarPainel() {
 
     try {
 
@@ -178,66 +131,100 @@ async function carregarChamada() {
             );
 
 
-        if (!resposta.ok) {
-
-            return;
-
-        }
-
-
-        const dados =
+        const data =
             await resposta.json();
 
 
-        if (!dados) {
+        const chamada =
+            data.chamada;
 
-            return;
+
+        const historico =
+            data.historico || [];
+
+
+        if (chamada) {
+
+            document.getElementById(
+                "local-tipo"
+            ).textContent =
+                chamada.localTipo ||
+                "CONSULTÓRIO";
+
+
+            document.getElementById(
+                "local-numero"
+            ).textContent =
+                chamada.localNumero ||
+                "--";
+
+
+            document.getElementById(
+                "patient-name"
+            ).textContent =
+                chamada.paciente ||
+                "AGUARDANDO...";
+
+
+            if (
+                chamada.id !==
+                ultimoId
+            ) {
+
+                ultimoId =
+                    chamada.id;
+
+
+                falarChamada(
+                    chamada.paciente,
+                    chamada.localTipo,
+                    chamada.localNumero
+                );
+
+            }
 
         }
 
 
-        const nome =
-            dados.paciente ||
-            dados.nome ||
-            "AGUARDANDO";
+        const lista =
+            document.getElementById(
+                "history-list"
+            );
 
 
-        const tipo =
-            dados.localTipo ||
-            dados.tipo ||
-            "CONSULTÓRIO";
+        lista.innerHTML = "";
 
 
-        const numero =
-            dados.localNumero ||
-            dados.numero ||
-            "--";
+        historico
+            .slice(0, 5)
+            .forEach(
+                chamadaHistorico => {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
 
 
-        localTipo.textContent =
-            tipo;
+                    li.textContent =
+
+                        `${chamadaHistorico.paciente || ""} - ` +
+
+                        `${chamadaHistorico.localTipo || "CONSULTÓRIO"} ` +
+
+                        `${chamadaHistorico.localNumero || ""}`;
 
 
-        localNumero.textContent =
-            numero;
+                    lista.appendChild(
+                        li
+                    );
 
+                }
+            );
 
-        paciente.textContent =
-            nome;
+    }
 
-
-        adicionarHistorico({
-
-            nome:
-                nome,
-
-            local:
-                `${tipo} ${numero}`
-
-        });
-
-
-    } catch (erro) {
+    catch (erro) {
 
         console.error(
             "Erro no painel:",
@@ -249,18 +236,14 @@ async function carregarChamada() {
 }
 
 
-
-/* =====================================================
-   HISTÓRICO
-===================================================== */
-
-function adicionarHistorico(
-    chamada
+function falarChamada(
+    paciente,
+    tipo,
+    numero
 ) {
 
     if (
-        !chamada.nome ||
-        chamada.nome === "AGUARDANDO"
+        !("speechSynthesis" in window)
     ) {
 
         return;
@@ -268,74 +251,42 @@ function adicionarHistorico(
     }
 
 
-    const ultima =
-        chamadasAnteriores[0];
+    const texto =
+
+        `Atenção. Paciente ${paciente}. ` +
+
+        `Comparecer ao ${tipo || "consultório"} ` +
+
+        `${numero || ""}.`;
 
 
-    if (
-        ultima &&
-        ultima.nome === chamada.nome &&
-        ultima.local === chamada.local
-    ) {
-
-        return;
-
-    }
-
-
-    chamadasAnteriores.unshift(
-        chamada
-    );
-
-
-    chamadasAnteriores =
-        chamadasAnteriores.slice(
-            0,
-            5
+    const fala =
+        new SpeechSynthesisUtterance(
+            texto
         );
 
 
-    historico.innerHTML =
-        "";
+    fala.lang = "pt-BR";
+
+    fala.rate = 0.9;
+
+    fala.pitch = 1;
 
 
-    chamadasAnteriores.forEach(
-        item => {
+    window.speechSynthesis.cancel();
 
-            const div =
-                document.createElement(
-                    "div"
-                );
-
-
-            div.className =
-                "tv-history-item";
-
-
-            div.textContent =
-                `${item.nome} — ${item.local}`;
-
-
-            historico.appendChild(
-                div
-            );
-
-        }
+    window.speechSynthesis.speak(
+        fala
     );
 
 }
 
 
-
-/* =====================================================
-   ATUALIZAÇÃO AUTOMÁTICA
-===================================================== */
-
-carregarChamada();
+atualizarPainel();
 
 
 setInterval(
-    carregarChamada,
+    atualizarPainel,
     2000
 );
 
@@ -343,4 +294,5 @@ setInterval(
 
 
 </body>
+
 </html>
