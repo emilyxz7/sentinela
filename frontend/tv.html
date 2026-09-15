@@ -3,430 +3,404 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>Saúde Integra - TV</title>
+    <title>Saúde Integra - TV</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 
-<style>
+    <style>
 
-/* =====================================
-   TELA PRINCIPAL
-===================================== */
+        /* =====================================
+           TV
+        ===================================== */
 
-* {
-    box-sizing: border-box;
-}
+        body.tv-body {
 
-body.tv-body {
+            margin: 0;
 
-    margin: 0;
+            min-height: 100vh;
 
-    min-height: 100vh;
+            background:
+                linear-gradient(
+                    135deg,
+                    #020b1c 0%,
+                    #061b3a 50%,
+                    #0a2f63 100%
+                );
 
-    background:
-        linear-gradient(
-            135deg,
-            #eaf6ff 0%,
-            #d7edff 45%,
-            #bfe3ff 100%
-        );
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+            color: #ffffff;
 
-    color: #123b5d;
+        }
 
-}
 
+        /* =====================================
+           CONTAINER
+        ===================================== */
 
-/* =====================================
-   CONTAINER
-===================================== */
+        .tv-container {
 
-.tv-container {
+            min-height: 100vh;
 
-    min-height: 100vh;
+            padding: 30px;
 
-    padding: 35px;
+            display: grid;
 
-    display: grid;
+            grid-template-columns:
+                32% 68%;
 
-    grid-template-columns:
-        32% 68%;
+            gap: 25px;
 
-    gap: 25px;
+        }
 
-}
 
+        /* =====================================
+           CAIXAS
+        ===================================== */
 
-/* =====================================
-   CAIXAS
-===================================== */
+        .tv-box {
 
-.tv-box {
+            background:
+                rgba(
+                    7,
+                    26,
+                    53,
+                    0.97
+                );
 
-    background: rgba(
-        255,
-        255,
-        255,
-        0.96
-    );
+            border-radius: 20px;
 
-    border-radius: 20px;
+            border:
+                1px solid #1c568f;
 
-    border: 2px solid #c5e4fa;
+            box-shadow:
+                0 10px 35px
+                rgba(0, 0, 0, 0.40);
 
-    box-shadow:
-        0 10px 30px
-        rgba(
-            0,
-            90,
-            150,
-            0.14
-        );
+            overflow: hidden;
 
-}
+        }
 
 
-/* =====================================
-   LADO ESQUERDO
-===================================== */
+        /* =====================================
+           LADOS
+        ===================================== */
 
-.tv-left {
+        .tv-left,
+        .tv-right {
 
-    display: flex;
+            display: flex;
 
-    flex-direction: column;
+            flex-direction: column;
 
-    gap: 25px;
+            gap: 25px;
 
-}
+        }
 
 
-/* =====================================
-   LADO DIREITO
-===================================== */
+        /* =====================================
+           TÍTULOS
+        ===================================== */
 
-.tv-right {
+        .tv-title {
 
-    display: flex;
+            background:
+                linear-gradient(
+                    135deg,
+                    #075da8,
+                    #032e67
+                );
 
-    flex-direction: column;
+            color: white;
 
-    gap: 25px;
+            font-size: 25px;
 
-}
+            font-weight: bold;
 
+            letter-spacing: 2px;
 
-/* =====================================
-   TÍTULO DAS CAIXAS
-===================================== */
+            padding: 18px 20px;
 
-.tv-title {
+        }
 
-    background:
-        linear-gradient(
-            135deg,
-            #0077cc,
-            #005bb5
-        );
 
-    color: white;
+        /* =====================================
+           LOCAL
+        ===================================== */
 
-    font-size: 25px;
+        .local-box {
 
-    font-weight: bold;
+            text-align: center;
 
-    letter-spacing: 2px;
+            min-height: 330px;
 
-    padding: 16px 20px;
+        }
 
-    border-radius:
-        18px 18px 0 0;
 
-}
+        #local-tipo {
 
+            margin-top: 40px;
 
-/* =====================================
-   LOCAL
-===================================== */
+            font-size: 38px;
 
-.local-box {
+            font-weight: bold;
 
-    text-align: center;
+            color: #4db8ff;
 
-    overflow: hidden;
+        }
 
-    min-height: 330px;
 
-}
+        .local-number {
 
+            margin-top: 15px;
 
-#local-tipo {
+            font-size: 100px;
 
-    margin-top: 40px;
+            line-height: 1;
 
-    font-size: 38px;
+            font-weight: bold;
 
-    font-weight: bold;
+            color: #ffffff;
 
-    color: #0077cc;
+        }
 
-}
 
+        /* =====================================
+           HISTÓRICO
+        ===================================== */
 
-.local-number {
+        .history-box {
 
-    margin-top: 15px;
+            flex: 1;
 
-    font-size: 100px;
+        }
 
-    line-height: 1;
 
-    font-weight: bold;
+        #history-list {
 
-    color: #004f91;
+            list-style: none;
 
-}
+            padding: 20px;
 
+            margin: 0;
 
-/* =====================================
-   HISTÓRICO
-===================================== */
+        }
 
-.history-box {
 
-    overflow: hidden;
+        #history-list li {
 
-    flex: 1;
+            background: #0b2b50;
 
-}
+            border-left:
+                5px solid #1597e5;
 
+            padding: 15px;
 
-#history-list {
+            margin-bottom: 12px;
 
-    list-style: none;
+            border-radius: 10px;
 
-    padding: 20px;
+            font-size: 20px;
 
-    margin: 0;
+            font-weight: bold;
 
-}
+            color: #d9edff;
 
+        }
 
-#history-list li {
 
-    background: #eef8ff;
+        /* =====================================
+           PACIENTE
+        ===================================== */
 
-    border-left:
-        6px solid #0088dd;
+        .patient-box {
 
-    padding: 16px;
+            flex: 1;
 
-    margin-bottom: 12px;
+            display: flex;
 
-    border-radius: 10px;
+            flex-direction: column;
 
-    font-size: 22px;
+        }
 
-    font-weight: bold;
 
-    color: #24506d;
+        .patient-name {
 
-}
+            flex: 1;
 
+            display: flex;
 
-/* =====================================
-   PACIENTE
-===================================== */
+            align-items: center;
 
-.patient-box {
+            justify-content: center;
 
-    text-align: center;
+            padding: 40px;
 
-    overflow: hidden;
+            font-size: 65px;
 
-    flex: 1;
+            font-weight: bold;
 
-    display: flex;
+            color: #4db8ff;
 
-    flex-direction: column;
+            text-transform: uppercase;
 
-}
+            text-align: center;
 
+        }
 
-.patient-name {
 
-    flex: 1;
+        /* =====================================
+           ANIMAÇÃO
+        ===================================== */
 
-    display: flex;
+        .patient-box.flash {
 
-    align-items: center;
+            animation:
+                chamada 1s ease-in-out 3;
 
-    justify-content: center;
+        }
 
-    padding: 40px;
 
-    font-size: 65px;
+        @keyframes chamada {
 
-    font-weight: bold;
+            0% {
 
-    color: #005baa;
+                transform: scale(1);
 
-    text-transform: uppercase;
+                box-shadow:
+                    0 10px 35px
+                    rgba(0, 0, 0, 0.40);
 
-}
+            }
 
 
-/* =====================================
-   ANIMAÇÃO DA CHAMADA
-===================================== */
+            50% {
 
-.patient-box.flash {
+                transform: scale(1.02);
 
-    animation:
-        chamada 1s ease-in-out 3;
+                box-shadow:
+                    0 0 50px
+                    rgba(30, 165, 255, 0.75);
 
-}
+                border-color:
+                    #2eafff;
 
+            }
 
-@keyframes chamada {
 
-    0% {
+            100% {
 
-        transform: scale(1);
+                transform: scale(1);
 
-        box-shadow:
-            0 10px 30px
-            rgba(0, 90, 150, 0.14);
+            }
 
-    }
+        }
 
-    50% {
 
-        transform: scale(1.02);
+        /* =====================================
+           LOGO
+        ===================================== */
 
-        box-shadow:
-            0 0 45px
-            rgba(0, 136, 221, 0.65);
+        .tv-logo {
 
-        border-color: #0088dd;
+            min-height: 180px;
 
-    }
+            display: flex;
 
-    100% {
+            align-items: center;
 
-        transform: scale(1);
+            justify-content: center;
 
-    }
+            flex-direction: column;
 
-}
+            color: #4db8ff;
 
+            font-weight: bold;
 
-/* =====================================
-   LOGO
-===================================== */
+            font-size: 35px;
 
-.tv-logo {
+            background:
+                linear-gradient(
+                    135deg,
+                    #071a35,
+                    #0b2b50
+                );
 
-    min-height: 180px;
+        }
 
-    display: flex;
 
-    align-items: center;
+        .tv-logo div {
 
-    justify-content: center;
+            margin-top: 10px;
 
-    flex-direction: column;
+            font-size: 30px;
 
-    color: #006dcc;
+            color: #ffffff;
 
-    font-weight: bold;
+        }
 
-    font-size: 35px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #eaf7ff
-        );
+        .tv-logo::after {
 
-}
+            content:
+                "Cuidando de você com integração e qualidade";
 
+            margin-top: 12px;
 
-.tv-logo div {
+            font-size: 15px;
 
-    margin-top: 10px;
+            font-weight: normal;
 
-    font-size: 30px;
+            color: #91b5d3;
 
-    color: #00549a;
+        }
 
-}
 
+        /* =====================================
+           RESPONSIVO
+        ===================================== */
 
-/* =====================================
-   RODAPÉ VISUAL
-===================================== */
+        @media (max-width: 900px) {
 
-.tv-logo::after {
+            .tv-container {
 
-    content:
-        "Cuidando de você com integração e qualidade";
+                grid-template-columns: 1fr;
 
-    margin-top: 12px;
+                padding: 20px;
 
-    font-size: 15px;
+            }
 
-    font-weight: normal;
 
-    color: #6b899f;
+            .patient-name {
 
-}
+                font-size: 45px;
 
+            }
 
-/* =====================================
-   RESPONSIVO
-===================================== */
 
-@media (max-width: 900px) {
+            .local-number {
 
-    .tv-container {
+                font-size: 75px;
 
-        grid-template-columns: 1fr;
+            }
 
-        padding: 20px;
+        }
 
-    }
-
-    .patient-name {
-
-        font-size: 45px;
-
-    }
-
-    .local-number {
-
-        font-size: 75px;
-
-    }
-
-}
-
-</style>
+    </style>
 
 </head>
+
 
 
 <body class="tv-body">
@@ -435,9 +409,9 @@ body.tv-body {
 <div class="tv-container">
 
 
-    <!-- ==========================
+    <!-- =================================
          LADO ESQUERDO
-    =========================== -->
+    ================================== -->
 
     <div class="tv-left">
 
@@ -446,18 +420,13 @@ body.tv-body {
 
         <div class="tv-box local-box">
 
-
             <div class="tv-title">
-
                 📍 LOCAL
-
             </div>
 
 
             <div id="local-tipo">
-
                 GUICHÊ
-
             </div>
 
 
@@ -465,11 +434,8 @@ body.tv-body {
                 id="local-numero"
                 class="local-number"
             >
-
                 --
-
             </div>
-
 
         </div>
 
@@ -479,27 +445,22 @@ body.tv-body {
 
         <div class="tv-box history-box">
 
-
             <div class="tv-title">
-
                 📋 ÚLTIMAS CHAMADAS
-
             </div>
 
 
             <ul id="history-list"></ul>
 
-
         </div>
-
 
     </div>
 
 
 
-    <!-- ==========================
+    <!-- =================================
          LADO DIREITO
-    =========================== -->
+    ================================== -->
 
     <div class="tv-right">
 
@@ -508,11 +469,8 @@ body.tv-body {
 
         <div class="tv-box patient-box">
 
-
             <div class="tv-title">
-
                 👤 PACIENTE
-
             </div>
 
 
@@ -520,11 +478,8 @@ body.tv-body {
                 id="patient-name"
                 class="patient-name"
             >
-
                 AGUARDANDO...
-
             </div>
-
 
         </div>
 
@@ -534,19 +489,13 @@ body.tv-body {
 
         <div class="tv-box tv-logo">
 
-
             🏥
 
-
             <div>
-
                 Saúde Integra
-
             </div>
 
-
         </div>
-
 
     </div>
 
@@ -557,25 +506,35 @@ body.tv-body {
 
 <script>
 
-
-/* =====================================
-   CONTROLE DA TV
-===================================== */
+/* =========================================
+   CONTROLE
+========================================= */
 
 let ultimoId = null;
 
 
 
+/* =========================================
+   ATUALIZAR TV
+========================================= */
+
 async function atualizar() {
 
-
     try {
-
 
         const resposta =
             await fetch(
                 "/tv/chamada"
             );
+
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                `Erro HTTP ${resposta.status}`
+            );
+
+        }
 
 
         const data =
@@ -587,16 +546,17 @@ async function atualizar() {
 
 
         const historico =
-            data.historico || [];
+            Array.isArray(data.historico)
+                ? data.historico
+                : [];
 
 
 
-        /* ==========================
+        /* ==============================
            CHAMADA ATUAL
-        =========================== */
+        =============================== */
 
         if (chamada) {
-
 
             document.getElementById(
                 "local-tipo"
@@ -629,7 +589,6 @@ async function atualizar() {
                 ultimoId
             ) {
 
-
                 ultimoId =
                     chamada.id;
 
@@ -652,17 +611,15 @@ async function atualizar() {
                     "flash"
                 );
 
-
             }
-
 
         }
 
 
 
-        /* ==========================
+        /* ==============================
            HISTÓRICO
-        =========================== */
+        =============================== */
 
         const lista =
             document.getElementById(
@@ -675,8 +632,7 @@ async function atualizar() {
 
         historico
             .slice(0, 4)
-            .forEach(h => {
-
+            .forEach(chamadaHistorico => {
 
                 const li =
                     document.createElement(
@@ -685,57 +641,43 @@ async function atualizar() {
 
 
                 li.innerText =
-
-                    `${h.localTipo || "GUICHÊ"} ` +
-
-                    `${h.localNumero || ""} - ` +
-
-                    `${h.paciente}`;
+                    `${chamadaHistorico.localTipo || "GUICHÊ"} ` +
+                    `${chamadaHistorico.localNumero || ""} - ` +
+                    `${chamadaHistorico.paciente || ""}`;
 
 
                 lista.appendChild(li);
 
-
             });
 
 
-    }
-
-
-    catch (erro) {
-
+    } catch (erro) {
 
         console.error(
             "Erro ao atualizar TV:",
             erro
         );
 
-
     }
-
 
 }
 
 
 
-/* ==========================
+/* =========================================
    INICIAR
-=========================== */
+========================================= */
 
 atualizar();
 
-
-/* Atualiza a cada 2 segundos */
 
 setInterval(
     atualizar,
     2000
 );
 
-
 </script>
 
 
 </body>
-
 </html>
