@@ -10,9 +10,12 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Painel Médico - Saúde Integra</title>
+    <title>Saúde Integra | Painel Médico</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
@@ -20,139 +23,301 @@
 <body>
 
 
-<div class="container">
+<div class="app">
 
 
-    <!-- ==============================
-         CABEÇALHO
-    =============================== -->
+    <!-- ==========================
+         MENU
+    =========================== -->
 
-    <div class="painel-header">
+    <aside class="sidebar">
 
-        <div>
+        <div class="logo">
 
-            <h2>🩺 Painel Médico</h2>
+            <div class="logo-icon">
+                🏥
+            </div>
 
-            <p>
-                Pacientes aguardando atendimento
-            </p>
+            <h1>
+                Saúde Integra
+            </h1>
+
+            <span>
+                Sistema Hospitalar
+            </span>
 
         </div>
 
 
-        <div>
+        <nav class="menu">
 
-            <button
-                type="button"
-                onclick="window.open('tv.html', '_blank')"
+            <a
+                href="index.html"
             >
-                📺 Abrir TV
-            </button>
+                <span class="menu-icon">🏠</span>
+                <span class="menu-text">Início</span>
+            </a>
+
+
+            <a
+                href="triagem.html"
+            >
+                <span class="menu-icon">🩺</span>
+                <span class="menu-text">Triagem</span>
+            </a>
+
+
+            <a
+                href="medico.html"
+                class="active"
+            >
+                <span class="menu-icon">👨‍⚕️</span>
+                <span class="menu-text">Médico</span>
+            </a>
+
+
+            <a
+                href="tv.html"
+                target="_blank"
+            >
+                <span class="menu-icon">📺</span>
+                <span class="menu-text">Painel TV</span>
+            </a>
 
 
             <a
                 href="index.html"
-                class="btn-voltar"
             >
-                Sair
+                <span class="menu-icon">🚪</span>
+                <span class="menu-text">Sair</span>
             </a>
+
+        </nav>
+
+    </aside>
+
+
+
+    <!-- ==========================
+         CONTEÚDO
+    =========================== -->
+
+    <main class="main">
+
+
+        <header class="page-header">
+
+            <div>
+
+                <h1>
+                    Painel Médico
+                </h1>
+
+                <p>
+                    Gerencie os pacientes e realize os atendimentos.
+                </p>
+
+            </div>
+
+
+            <a
+                href="tv.html"
+                target="_blank"
+                class="btn btn-tv"
+            >
+                📺 Abrir painel TV
+            </a>
+
+        </header>
+
+
+
+        <!-- ==========================
+             CONSULTÓRIO
+        =========================== -->
+
+        <div class="consultorio-box">
+
+            <div class="consultorio-info">
+
+                <div class="consultorio-icon">
+                    🏥
+                </div>
+
+                <div>
+
+                    <strong>
+                        Consultório
+                    </strong>
+
+                    <div>
+                        Informe o número do seu consultório.
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <input
+                id="consultorio"
+                value="01"
+                maxlength="4"
+                style="width:100px"
+            >
 
         </div>
 
-    </div>
+
+
+        <!-- ==========================
+             FILA
+        =========================== -->
+
+        <section class="card">
+
+            <div class="card-title">
+
+                <div>
+
+                    <h2>
+                        Pacientes aguardando
+                    </h2>
+
+                    <p>
+                        Pacientes liberados pela triagem.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div
+                id="triagens"
+                class="queue"
+            >
+
+                <div class="alert alert-info">
+                    Carregando pacientes...
+                </div>
+
+            </div>
+
+        </section>
 
 
 
-    <!-- ==============================
-         CONSULTÓRIO
-    =============================== -->
+        <!-- ==========================
+             CONSULTA
+        =========================== -->
 
-    <div class="consultorio">
+        <section class="card">
 
-        <strong>
-            Meu consultório:
-        </strong>
+            <div class="card-title">
 
+                <div>
 
-        <input
-            id="consultorio"
-            value="01"
-            maxlength="4"
-        >
+                    <h2>
+                        Atendimento
+                    </h2>
 
-    </div>
+                    <p>
+                        Registre as informações da consulta.
+                    </p>
 
+                </div>
 
-
-    <!-- ==============================
-         TRIAGENS
-    =============================== -->
-
-    <div id="triagens">
-
-        Carregando...
-
-    </div>
+            </div>
 
 
-
-    <hr>
-
-
-
-    <!-- ==============================
-         CONSULTA
-    =============================== -->
-
-    <h3>
-        📋 Consulta
-    </h3>
+            <input
+                id="pacienteId"
+                type="hidden"
+            >
 
 
-    <input
-        id="pacienteId"
-        type="hidden"
-    >
+            <div class="form-grid">
 
 
-    <input
-        id="paciente"
-        placeholder="Paciente"
-        readonly
-    >
+                <div class="form-group">
+
+                    <label>
+                        Paciente
+                    </label>
+
+                    <input
+                        id="paciente"
+                        readonly
+                        placeholder="Selecione um paciente"
+                    >
+
+                </div>
 
 
-    <input
-        id="diagnostico"
-        placeholder="Diagnóstico"
-    >
+                <div class="form-group">
+
+                    <label>
+                        Medicação
+                    </label>
+
+                    <select id="medicacao">
+
+                        <option value="">
+                            Selecione a medicação
+                        </option>
+
+                    </select>
+
+                </div>
 
 
-    <select id="medicacao">
+                <div class="form-group full">
 
-        <option value="">
-            Selecione a medicação
-        </option>
+                    <label>
+                        Diagnóstico
+                    </label>
 
-    </select>
+                    <input
+                        id="diagnostico"
+                        placeholder="Digite o diagnóstico"
+                    >
 
-
-    <textarea
-        id="obs"
-        placeholder="Observações"
-    ></textarea>
-
-
-    <button
-        type="button"
-        onclick="salvarConsulta()"
-    >
-        💾 Finalizar Consulta
-    </button>
+                </div>
 
 
-    <div id="resultado"></div>
+                <div class="form-group full">
 
+                    <label>
+                        Observações
+                    </label>
+
+                    <textarea
+                        id="obs"
+                        placeholder="Digite as observações do atendimento..."
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <button
+                class="btn"
+                type="button"
+                onclick="salvarConsulta()"
+            >
+                ✓ Finalizar consulta
+            </button>
+
+
+            <div id="resultado"></div>
+
+        </section>
+
+
+    </main>
 
 </div>
 
@@ -160,36 +325,39 @@
 
 <script>
 
-/* =========================================
+/* =====================================================
    VARIÁVEIS
-========================================= */
+===================================================== */
 
 let triagens = [];
 
 
 
-/* =========================================
-   FUNÇÃO AUXILIAR PARA REQUISIÇÕES
-========================================= */
+/* =====================================================
+   REQUISIÇÃO
+===================================================== */
 
-async function obterJSON(url, opcoes = {}) {
+async function requisicao(url, opcoes = {}) {
 
-    const resposta = await fetch(url, opcoes);
+    const resposta =
+        await fetch(url, opcoes);
 
-    const texto = await resposta.text();
+    const texto =
+        await resposta.text();
 
-    let dados = {};
+    let dados;
 
     try {
 
-        dados = texto
-            ? JSON.parse(texto)
-            : {};
+        dados =
+            texto
+                ? JSON.parse(texto)
+                : {};
 
     } catch {
 
         dados = {
-            erro: texto || "Resposta inválida do servidor."
+            erro: texto
         };
 
     }
@@ -199,7 +367,7 @@ async function obterJSON(url, opcoes = {}) {
 
         throw new Error(
             dados.erro ||
-            `Erro HTTP ${resposta.status}`
+            `Erro ${resposta.status}`
         );
 
     }
@@ -211,20 +379,24 @@ async function obterJSON(url, opcoes = {}) {
 
 
 
-/* =========================================
-   CARREGAR TRIAGENS
-========================================= */
+/* =====================================================
+   TRIAGENS
+===================================================== */
 
 async function carregarTriagens() {
 
-    const div =
-        document.getElementById("triagens");
+    const area =
+        document.getElementById(
+            "triagens"
+        );
 
 
     try {
 
         const dados =
-            await obterJSON("/triagens");
+            await requisicao(
+                "/triagens"
+            );
 
 
         triagens =
@@ -233,13 +405,11 @@ async function carregarTriagens() {
                 : [];
 
 
-        if (triagens.length === 0) {
+        if (!triagens.length) {
 
-            div.innerHTML = `
-                <div class="card">
-                    <p>
-                        Nenhum paciente aguardando médico.
-                    </p>
+            area.innerHTML = `
+                <div class="alert alert-info">
+                    Nenhum paciente aguardando atendimento.
                 </div>
             `;
 
@@ -248,87 +418,120 @@ async function carregarTriagens() {
         }
 
 
-        div.innerHTML = "";
+        area.innerHTML = "";
 
 
-        triagens.forEach((t, index) => {
+        triagens.forEach(
+            (paciente, index) => {
 
-            const card =
-                document.createElement("div");
-
-
-            card.className = "card";
-
-
-            card.innerHTML = `
-
-                <h3>
-                    ${escapeHTML(t.nome || "Paciente")}
-                </h3>
-
-                <p>
-                    <strong>Sintoma:</strong>
-                    ${escapeHTML(
-                        t.sintoma || "Não informado"
-                    )}
-                </p>
-
-                <p>
-                    <strong>Temperatura:</strong>
-                    ${
-                        t.temperatura !== undefined &&
-                        t.temperatura !== null &&
-                        t.temperatura !== ""
-                            ? escapeHTML(t.temperatura)
-                            : "Não informada"
-                    } °C
-                </p>
-
-                <p>
-                    <strong>Alergia:</strong>
-                    ${escapeHTML(
-                        t.alergia || "Nenhuma"
-                    )}
-                </p>
-
-                <p>
-                    <strong>Observação:</strong>
-                    ${escapeHTML(
-                        t.observacao || "Nenhuma"
-                    )}
-                </p>
-
-                <p>
-                    <span class="${classeRisco(t.risco)}">
-                        ${escapeHTML(
-                            t.risco || "Não classificado"
-                        )}
-                    </span>
-                </p>
+                const item =
+                    document.createElement(
+                        "div"
+                    );
 
 
-                <button
-                    type="button"
-                    onclick="selecionar(${index})"
-                >
-                    Atender
-                </button>
+                item.className =
+                    "queue-item";
 
 
-                <button
-                    type="button"
-                    class="btn-tv"
-                    onclick="chamarTV(${index})"
-                >
-                    📺 Chamar na TV
-                </button>
-
-            `;
+                const risco =
+                    String(
+                        paciente.risco || ""
+                    ).toLowerCase();
 
 
-            div.appendChild(card);
+                let classe =
+                    "";
 
-        });
+
+                if (
+                    risco.includes("verde")
+                ) {
+
+                    classe =
+                        "verde";
+
+                }
+
+
+                if (
+                    risco.includes("amarelo")
+                ) {
+
+                    classe =
+                        "amarelo";
+
+                }
+
+
+                if (
+                    risco.includes("vermelho")
+                ) {
+
+                    classe =
+                        "vermelho";
+
+                }
+
+
+                item.innerHTML = `
+
+                    <div class="patient-info">
+
+                        <strong>
+                            ${escapeHTML(
+                                paciente.nome ||
+                                "Paciente"
+                            )}
+                        </strong>
+
+                        <span>
+                            Sintoma:
+                            ${escapeHTML(
+                                paciente.sintoma ||
+                                "Não informado"
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="risco ${classe}">
+                            ${escapeHTML(
+                                paciente.risco ||
+                                "Não classificado"
+                            )}
+                        </span>
+
+
+                        <button
+                            class="btn"
+                            type="button"
+                            onclick="selecionarPaciente(${index})"
+                        >
+                            Atender
+                        </button>
+
+
+                        <button
+                            class="btn btn-tv"
+                            type="button"
+                            onclick="chamarTV(${index})"
+                        >
+                            📺 Chamar
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                area.appendChild(item);
+
+            }
+        );
 
 
     } catch (erro) {
@@ -336,12 +539,20 @@ async function carregarTriagens() {
         console.error(erro);
 
 
-        div.innerHTML = `
-            <div class="card erro">
-                ❌ Erro ao carregar os pacientes.
+        area.innerHTML = `
+
+            <div class="alert alert-error">
+
+                ❌ Não foi possível carregar a fila.
+
                 <br>
-                <small>${escapeHTML(erro.message)}</small>
+
+                ${escapeHTML(
+                    erro.message
+                )}
+
             </div>
+
         `;
 
     }
@@ -350,27 +561,25 @@ async function carregarTriagens() {
 
 
 
-/* =========================================
-   SELECIONAR PACIENTE
-========================================= */
+/* =====================================================
+   SELECIONAR
+===================================================== */
 
-function selecionar(index) {
+function selecionarPaciente(index) {
 
     const paciente =
         triagens[index];
 
 
-    if (!paciente) {
-
-        return;
-
-    }
+    if (!paciente) return;
 
 
     document.getElementById(
         "pacienteId"
     ).value =
-        paciente.pacienteId || paciente.id || "";
+        paciente.pacienteId ||
+        paciente.id ||
+        "";
 
 
     document.getElementById(
@@ -385,25 +594,13 @@ function selecionar(index) {
         paciente.observacao || "";
 
 
-    if (
-        paciente.alergia &&
-        paciente.alergia.toLowerCase() !== "nenhuma"
-    ) {
-
-        alert(
-            "⚠️ Atenção!\n\n" +
-            "Alergia registrada: " +
-            paciente.alergia
-        );
-
-    }
-
-
     window.scrollTo({
 
-        top: document.body.scrollHeight,
+        top:
+            document.body.scrollHeight,
 
-        behavior: "smooth"
+        behavior:
+            "smooth"
 
     });
 
@@ -411,9 +608,9 @@ function selecionar(index) {
 
 
 
-/* =========================================
-   CHAMAR PACIENTE NA TV
-========================================= */
+/* =====================================================
+   CHAMAR NA TV
+===================================================== */
 
 async function chamarTV(index) {
 
@@ -421,22 +618,19 @@ async function chamarTV(index) {
         triagens[index];
 
 
-    if (!paciente) {
-
-        return;
-
-    }
+    if (!paciente) return;
 
 
     const consultorio =
         document.getElementById(
             "consultorio"
-        ).value.trim() || "01";
+        ).value ||
+        "01";
 
 
     try {
 
-        await obterJSON(
+        await requisicao(
             "/tv/chamar",
             {
 
@@ -447,38 +641,33 @@ async function chamarTV(index) {
                         "application/json"
                 },
 
-                body: JSON.stringify({
+                body:
+                    JSON.stringify({
 
-                    localTipo:
-                        "CONSULTÓRIO",
+                        localTipo:
+                            "CONSULTÓRIO",
 
-                    localNumero:
-                        consultorio,
+                        localNumero:
+                            consultorio,
 
-                    paciente:
-                        paciente.nome
+                        paciente:
+                            paciente.nome
 
-                })
+                    })
 
             }
         );
 
 
         alert(
-            "📺 " +
-            paciente.nome +
-            " chamado para o Consultório " +
-            consultorio
+            "Paciente chamado na TV."
         );
 
 
     } catch (erro) {
 
-        console.error(erro);
-
-
         alert(
-            "❌ Não foi possível chamar o paciente.\n\n" +
+            "Erro ao chamar paciente: " +
             erro.message
         );
 
@@ -488,9 +677,9 @@ async function chamarTV(index) {
 
 
 
-/* =========================================
-   CARREGAR MEDICAÇÕES
-========================================= */
+/* =====================================================
+   MEDICAÇÕES
+===================================================== */
 
 async function carregarMedicacoes() {
 
@@ -502,53 +691,45 @@ async function carregarMedicacoes() {
 
     try {
 
-        const medicamentos =
-            await obterJSON(
+        const dados =
+            await requisicao(
                 "/lista-medicacoes"
             );
 
 
-        select.innerHTML =
-            `<option value="">
-                Selecione a medicação
-            </option>`;
-
-
-        if (!Array.isArray(medicamentos)) {
-
+        if (!Array.isArray(dados))
             return;
 
-        }
+
+        dados.forEach(
+            medicamento => {
+
+                const option =
+                    document.createElement(
+                        "option"
+                    );
 
 
-        medicamentos.forEach(medicamento => {
+                option.value =
+                    medicamento;
 
-            const option =
-                document.createElement("option");
-
-
-            option.value =
-                medicamento;
+                option.textContent =
+                    medicamento;
 
 
-            option.textContent =
-                medicamento;
+                select.appendChild(
+                    option
+                );
 
-
-            select.appendChild(option);
-
-        });
+            }
+        );
 
 
     } catch (erro) {
 
-        console.error(erro);
-
-
-        select.innerHTML =
-            `<option value="">
-                Erro ao carregar medicações
-            </option>`;
+        console.error(
+            erro
+        );
 
     }
 
@@ -556,9 +737,9 @@ async function carregarMedicacoes() {
 
 
 
-/* =========================================
-   SALVAR CONSULTA
-========================================= */
+/* =====================================================
+   CONSULTA
+===================================================== */
 
 async function salvarConsulta() {
 
@@ -568,54 +749,47 @@ async function salvarConsulta() {
         ).value;
 
 
-    const paciente =
-        document.getElementById(
-            "paciente"
-        ).value;
-
-
-    const diagnostico =
-        document.getElementById(
-            "diagnostico"
-        ).value.trim();
-
-
-    const medicacao =
-        document.getElementById(
-            "medicacao"
-        ).value;
-
-
-    const obs =
-        document.getElementById(
-            "obs"
-        ).value;
-
-
-    const resultado =
-        document.getElementById(
-            "resultado"
-        );
-
-
     if (!pacienteId) {
 
-        resultado.className =
-            "erro";
-
-
-        resultado.textContent =
-            "Selecione um paciente.";
-
+        alert(
+            "Selecione um paciente primeiro."
+        );
 
         return;
 
     }
 
 
+    const dados = {
+
+        pacienteId,
+
+        paciente:
+            document.getElementById(
+                "paciente"
+            ).value,
+
+        diagnostico:
+            document.getElementById(
+                "diagnostico"
+            ).value,
+
+        medicacao:
+            document.getElementById(
+                "medicacao"
+            ).value,
+
+        obs:
+            document.getElementById(
+                "obs"
+            ).value
+
+    };
+
+
     try {
 
-        await obterJSON(
+        await requisicao(
             "/consulta",
             {
 
@@ -626,49 +800,46 @@ async function salvarConsulta() {
                         "application/json"
                 },
 
-                body: JSON.stringify({
-
-                    pacienteId,
-
-                    paciente,
-
-                    diagnostico,
-
-                    medicacao,
-
-                    obs
-
-                })
+                body:
+                    JSON.stringify(dados)
 
             }
         );
 
 
-        resultado.className =
-            "sucesso";
+        document.getElementById(
+            "resultado"
+        ).innerHTML = `
+
+            <div class="alert alert-success">
+
+                ✓ Consulta finalizada com sucesso!
+
+            </div>
+
+        `;
 
 
-        resultado.textContent =
-            "✅ Consulta finalizada com sucesso!";
+        limparFormulario();
 
-
-        limparConsulta();
-
-
-        await carregarTriagens();
+        carregarTriagens();
 
 
     } catch (erro) {
 
-        console.error(erro);
+        document.getElementById(
+            "resultado"
+        ).innerHTML = `
 
+            <div class="alert alert-error">
 
-        resultado.className =
-            "erro";
+                ❌ ${escapeHTML(
+                    erro.message
+                )}
 
+            </div>
 
-        resultado.textContent =
-            "❌ " + erro.message;
+        `;
 
     }
 
@@ -676,11 +847,11 @@ async function salvarConsulta() {
 
 
 
-/* =========================================
-   LIMPAR CONSULTA
-========================================= */
+/* =====================================================
+   LIMPAR
+===================================================== */
 
-function limparConsulta() {
+function limparFormulario() {
 
     document.getElementById(
         "pacienteId"
@@ -710,75 +881,46 @@ function limparConsulta() {
 
 
 
-/* =========================================
+/* =====================================================
    SEGURANÇA
-========================================= */
+===================================================== */
 
 function escapeHTML(text) {
 
-    return String(text)
+    return String(text || "")
 
-        .replaceAll("&", "&amp;")
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-        .replaceAll("<", "&lt;")
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-        .replaceAll(">", "&gt;")
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-        .replaceAll('"', "&quot;")
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-        .replaceAll("'", "&#039;");
-
-}
-
-
-
-/* =========================================
-   CLASSE DE RISCO
-========================================= */
-
-function classeRisco(risco) {
-
-    const valor =
-        String(risco || "")
-            .toLowerCase();
-
-
-    if (
-        valor.includes("vermelho")
-    ) {
-
-        return "vermelho";
-
-    }
-
-
-    if (
-        valor.includes("amarelo")
-    ) {
-
-        return "amarelo";
-
-    }
-
-
-    if (
-        valor.includes("verde")
-    ) {
-
-        return "verde";
-
-    }
-
-
-    return "";
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
 
 
-/* =========================================
+/* =====================================================
    INICIAR
-========================================= */
+===================================================== */
 
 carregarTriagens();
 
@@ -791,7 +933,6 @@ setInterval(
 );
 
 </script>
-
 
 </body>
 </html>
