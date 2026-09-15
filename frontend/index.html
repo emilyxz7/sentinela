@@ -5,274 +5,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Saúde Integra | Início</title>
+    <title>Saúde Integra</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-    <!-- MENU LATERAL -->
-    <aside class="sidebar">
+    <header class="topo">
 
-        <div class="logo">
+        <div>
+            <h1>🏥 Saúde Integra</h1>
 
-            <div class="logo-icon">
-                🏥
-            </div>
+            <p>
+                Sistema Hospitalar Integrado
+            </p>
+        </div>
 
-            <h1>Saúde Integra</h1>
+    </header>
 
-            <span>Sistema Hospitalar</span>
+
+    <nav class="menu">
+
+        <a href="index.html">
+            🏠 Início
+        </a>
+
+        <a href="atendimento.html">
+            📝 Atendimento
+        </a>
+
+        <a href="triagem.html">
+            🩺 Triagem
+        </a>
+
+        <a href="medico.html">
+            👨‍⚕️ Médico
+        </a>
+
+        <a href="medicacoes.html">
+            💊 Medicações
+        </a>
+
+        <a href="alta.html">
+            📋 Alta
+        </a>
+
+        <a href="tv.html" target="_blank">
+            📺 Painel TV
+        </a>
+
+    </nav>
+
+
+    <div class="card">
+
+        <h2>
+            Bem-vindo ao Saúde Integra
+        </h2>
+
+        <p>
+            Sistema de gerenciamento e atendimento hospitalar.
+        </p>
+
+        <p>
+            Organize o fluxo dos pacientes desde o cadastro,
+            passando pela triagem e consulta médica,
+            até a alta hospitalar.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <h3>📝 Atendimento</h3>
+
+            <p>
+                Cadastre novos pacientes
+                no sistema.
+            </p>
+
+            <a
+                href="atendimento.html"
+                class="btn"
+            >
+                Abrir atendimento
+            </a>
 
         </div>
 
 
-        <nav class="menu">
+        <div class="card">
 
-            <a href="index.html" class="active">
-                <span class="menu-icon">🏠</span>
-                <span class="menu-text">Início</span>
-            </a>
-
-            <a href="triagem.html">
-                <span class="menu-icon">🩺</span>
-                <span class="menu-text">Triagem</span>
-            </a>
-
-            <a href="medico.html">
-                <span class="menu-icon">👨‍⚕️</span>
-                <span class="menu-text">Médico</span>
-            </a>
-
-            <a href="tv.html" target="_blank">
-                <span class="menu-icon">📺</span>
-                <span class="menu-text">Painel TV</span>
-            </a>
-
-        </nav>
-
-    </aside>
-
-
-    <!-- CONTEÚDO -->
-    <main class="main">
-
-        <header class="page-header">
-
-            <div>
-
-                <h1>
-                    Bem-vindo ao Saúde Integra
-                </h1>
-
-                <p>
-                    Sistema de gerenciamento e atendimento hospitalar.
-                </p>
-
-            </div>
-
-        </header>
-
-
-        <!-- CARDS -->
-        <section class="stats">
-
-            <div class="stat">
-
-                <div class="stat-icon">
-                    🩺
-                </div>
-
-                <strong>
-                    Triagem
-                </strong>
-
-                <span>
-                    Cadastre e classifique os pacientes.
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-icon">
-                    👨‍⚕️
-                </div>
-
-                <strong>
-                    Médico
-                </strong>
-
-                <span>
-                    Consulte e atenda os pacientes.
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-icon">
-                    📺
-                </div>
-
-                <strong>
-                    Painel TV
-                </strong>
-
-                <span>
-                    Chame os pacientes para atendimento.
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <div class="stat-icon">
-                    🏥
-                </div>
-
-                <strong>
-                    Atendimento
-                </strong>
-
-                <span>
-                    Integração de todo o processo.
-                </span>
-
-            </div>
-
-        </section>
-
-
-        <!-- ACESSO RÁPIDO -->
-        <section class="card">
-
-            <div class="card-title">
-
-                <div>
-
-                    <h2>
-                        Acesso rápido
-                    </h2>
-
-                    <p>
-                        Escolha uma área para continuar.
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="form-grid">
-
-
-                <div class="card">
-
-                    <div class="stat-icon">
-                        🩺
-                    </div>
-
-                    <h3>
-                        Triagem
-                    </h3>
-
-                    <p>
-                        Cadastre pacientes e realize a classificação de risco.
-                    </p>
-
-                    <a
-                        href="triagem.html"
-                        class="btn"
-                    >
-                        Abrir triagem
-                    </a>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="stat-icon">
-                        👨‍⚕️
-                    </div>
-
-                    <h3>
-                        Painel Médico
-                    </h3>
-
-                    <p>
-                        Visualize a fila e registre as consultas.
-                    </p>
-
-                    <a
-                        href="medico.html"
-                        class="btn"
-                    >
-                        Abrir painel
-                    </a>
-
-                </div>
-
-
-                <div class="card">
-
-                    <div class="stat-icon">
-                        📺
-                    </div>
-
-                    <h3>
-                        Painel de chamada
-                    </h3>
-
-                    <p>
-                        Exiba os pacientes chamados na televisão.
-                    </p>
-
-                    <a
-                        href="tv.html"
-                        target="_blank"
-                        class="btn btn-tv"
-                    >
-                        Abrir painel TV
-                    </a>
-
-                </div>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- INFORMAÇÃO -->
-        <section class="card">
-
-            <div class="section-title">
-                Sobre o sistema
-            </div>
+            <h3>🩺 Triagem</h3>
 
             <p>
-                O <strong>Saúde Integra</strong> organiza o fluxo
-                de atendimento, desde a triagem até a consulta médica.
+                Faça a avaliação inicial
+                e classificação de risco.
             </p>
+
+            <a
+                href="triagem.html"
+                class="btn"
+            >
+                Abrir triagem
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>👨‍⚕️ Painel Médico</h3>
 
             <p>
-                O sistema permite acompanhar os pacientes,
-                realizar a classificação de risco e chamar
-                os pacientes para atendimento.
+                Visualize pacientes e
+                registre consultas.
             </p>
 
-        </section>
+            <a
+                href="medico.html"
+                class="btn"
+            >
+                Abrir painel
+            </a>
+
+        </div>
 
 
-    </main>
+        <div class="card">
+
+            <h3>💊 Medicações</h3>
+
+            <p>
+                Consulte a lista de
+                medicamentos disponíveis.
+            </p>
+
+            <a
+                href="medicacoes.html"
+                class="btn"
+            >
+                Ver medicações
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>📋 Alta Hospitalar</h3>
+
+            <p>
+                Gerencie a alta dos
+                pacientes atendidos.
+            </p>
+
+            <a
+                href="alta.html"
+                class="btn"
+            >
+                Abrir alta
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>📺 Painel TV</h3>
+
+            <p>
+                Exiba as chamadas dos
+                pacientes na televisão.
+            </p>
+
+            <a
+                href="tv.html"
+                target="_blank"
+                class="btn"
+            >
+                Abrir painel TV
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <footer>
+
+        🏥 Saúde Integra © 2026
+
+    </footer>
+
 
 </div>
 
