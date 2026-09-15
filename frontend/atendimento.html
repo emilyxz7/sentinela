@@ -8,7 +8,7 @@
 
     <title>Atendimento - Saúde Integra</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="CSS/style.css">
 
 </head>
 
@@ -16,11 +16,12 @@
 
 <div class="container">
 
-    <div class="topo">
+
+    <header class="topo">
 
         <div>
 
-            <h2>🧑‍💼 Atendimento</h2>
+            <h2>📝 Atendimento</h2>
 
             <p>
                 Cadastro de pacientes
@@ -32,72 +33,149 @@
             href="index.html"
             class="btn-voltar"
         >
-            Sair
+            ← Voltar
         </a>
+
+    </header>
+
+
+    <nav class="menu">
+
+        <a href="index.html">
+            🏠 Início
+        </a>
+
+        <a href="atendimento.html">
+            📝 Atendimento
+        </a>
+
+        <a href="triagem.html">
+            🩺 Triagem
+        </a>
+
+        <a href="medico.html">
+            👨‍⚕️ Médico
+        </a>
+
+        <a href="medicacoes.html">
+            💊 Medicações
+        </a>
+
+        <a href="alta.html">
+            📋 Alta
+        </a>
+
+        <a href="tv.html">
+            📺 Painel TV
+        </a>
+
+    </nav>
+
+
+    <div class="card">
+
+        <h3>
+            👤 Cadastro de paciente
+        </h3>
+
+
+        <label>
+            Nome completo
+        </label>
+
+        <input
+            id="nome"
+            type="text"
+            placeholder="Digite o nome completo"
+        >
+
+
+        <label>
+            CPF
+        </label>
+
+        <input
+            id="cpf"
+            type="text"
+            placeholder="Digite o CPF"
+        >
+
+
+        <label>
+            Tipo de atendimento
+        </label>
+
+        <select id="tipo">
+
+            <option value="">
+                Selecione
+            </option>
+
+            <option value="Normal">
+                Normal
+            </option>
+
+            <option value="Preferencial">
+                Preferencial
+            </option>
+
+            <option value="Emergência">
+                Emergência
+            </option>
+
+        </select>
+
+
+        <button onclick="salvarPaciente()">
+
+            💾 Cadastrar paciente
+
+        </button>
+
+
+        <div id="resultado"></div>
 
     </div>
 
 
-    <input
-        id="nome"
-        placeholder="Nome completo"
-    >
+    <div class="card">
 
+        <h3>
+            👥 Pacientes cadastrados
+        </h3>
 
-    <input
-        id="cpf"
-        placeholder="CPF"
-    >
+        <div id="lista">
+            Carregando...
+        </div>
 
+    </div>
 
-    <select id="tipo">
-
-        <option value="Convenio">
-            Convênio
-        </option>
-
-        <option value="Particular">
-            Particular
-        </option>
-
-    </select>
-
-
-    <button onclick="cadastrar()">
-        Cadastrar paciente
-    </button>
-
-
-    <div id="mensagem"></div>
 
 </div>
 
 
 <script>
 
-async function cadastrar() {
+async function salvarPaciente() {
 
     const nome =
-        document.getElementById("nome")
-            .value.trim();
+        document.getElementById("nome").value.trim();
 
     const cpf =
-        document.getElementById("cpf")
-            .value.trim();
+        document.getElementById("cpf").value.trim();
 
     const tipo =
-        document.getElementById("tipo")
-            .value;
+        document.getElementById("tipo").value;
 
-    const mensagem =
-        document.getElementById("mensagem");
+    const resultado =
+        document.getElementById("resultado");
 
 
     if (!nome) {
 
-        mensagem.className = "erro";
+        resultado.className = "erro";
 
-        mensagem.textContent =
+        resultado.textContent =
             "Digite o nome do paciente.";
 
         return;
@@ -107,7 +185,7 @@ async function cadastrar() {
     try {
 
         const resposta =
-            await fetch("/atendimento", {
+            await fetch("/paciente", {
 
                 method: "POST",
 
@@ -121,6 +199,7 @@ async function cadastrar() {
                     cpf,
                     tipo
                 })
+
             });
 
 
@@ -129,36 +208,149 @@ async function cadastrar() {
 
 
         if (!resposta.ok) {
+
             throw new Error(
                 data.erro ||
-                "Erro ao cadastrar"
+                "Erro ao cadastrar paciente."
             );
+
         }
 
 
-        mensagem.className =
+        resultado.className =
             "sucesso";
 
-        mensagem.textContent =
-            "✅ Paciente cadastrado e enviado para a triagem!";
+        resultado.textContent =
+            "✅ Paciente cadastrado com sucesso!";
 
 
-        document.getElementById("nome")
-            .value = "";
+        document.getElementById("nome").value = "";
 
-        document.getElementById("cpf")
-            .value = "";
+        document.getElementById("cpf").value = "";
+
+        document.getElementById("tipo").value = "";
 
 
-    } catch (erro) {
+        carregarPacientes();
 
-        mensagem.className =
-            "erro";
-
-        mensagem.textContent =
-            "❌ " + erro.message;
     }
+
+    catch (erro) {
+
+        resultado.className = "erro";
+
+        resultado.textContent =
+            "❌ " + erro.message;
+
+    }
+
 }
+
+
+async function carregarPacientes() {
+
+    const lista =
+        document.getElementById("lista");
+
+
+    try {
+
+        const resposta =
+            await fetch("/pacientes");
+
+
+        const pacientes =
+            await resposta.json();
+
+
+        lista.innerHTML = "";
+
+
+        if (!pacientes.length) {
+
+            lista.innerHTML =
+                "<p>Nenhum paciente cadastrado.</p>";
+
+            return;
+        }
+
+
+        pacientes.forEach(paciente => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "fila-item";
+
+
+            item.innerHTML = `
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(
+                            paciente.nome ||
+                            "Paciente"
+                        )}
+                    </strong>
+
+                    <br>
+
+                    <small>
+
+                        CPF:
+                        ${escapeHTML(
+                            paciente.cpf ||
+                            "Não informado"
+                        )}
+
+                    </small>
+
+                </div>
+
+            `;
+
+
+            lista.appendChild(item);
+
+        });
+
+    }
+
+    catch (erro) {
+
+        lista.innerHTML =
+            "<p class='erro'>Erro ao carregar pacientes.</p>";
+
+    }
+
+}
+
+
+function escapeHTML(texto) {
+
+    return String(texto)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+carregarPacientes();
+
+setInterval(
+    carregarPacientes,
+    5000
+);
 
 </script>
 
