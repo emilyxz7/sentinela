@@ -1,286 +1,280 @@
-CTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Saúde Integra - Login</title>
+    <title>Saúde Integra | Início</title>
 
     <link rel="stylesheet" href="style.css">
-
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #003b73,
-                    #0066b3,
-                    #00a6d6
-                );
-        }
-
-        .login-box {
-            width: 100%;
-            max-width: 430px;
-            padding: 40px 35px;
-            background: white;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,.25);
-        }
-
-        .logo {
-            width: 90px;
-            height: 90px;
-            margin: 0 auto 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #0066b3,
-                    #00a6d6
-                );
-
-            font-size: 48px;
-        }
-
-        h1 {
-            color: #004b87;
-            margin-bottom: 8px;
-        }
-
-        .subtitulo {
-            color: #777;
-            margin-bottom: 30px;
-        }
-
-        .campo {
-            text-align: left;
-            margin-bottom: 18px;
-        }
-
-        .campo label {
-            display: block;
-            margin-bottom: 7px;
-            font-weight: bold;
-        }
-
-        .campo input {
-            margin: 0;
-            height: 48px;
-        }
-
-        .btn-entrar {
-            width: 100%;
-            background:
-                linear-gradient(
-                    135deg,
-                    #005ca8,
-                    #008fd1
-                );
-        }
-
-        #mensagem {
-            min-height: 22px;
-            margin-top: 15px;
-        }
-    </style>
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="app">
 
-    <div class="logo">
-        🏥
-    </div>
+    <!-- MENU LATERAL -->
+    <aside class="sidebar">
 
-    <h1>Saúde Integra</h1>
+        <div class="logo">
 
-    <p class="subtitulo">
-        Sistema de Gestão e Atendimento em Saúde
-    </p>
+            <div class="logo-icon">
+                🏥
+            </div>
 
-    <form id="loginForm">
+            <h1>Saúde Integra</h1>
 
-        <div class="campo">
-
-            <label for="usuario">
-                Usuário
-            </label>
-
-            <input
-                id="usuario"
-                autocomplete="username"
-                placeholder="Digite seu usuário"
-                required
-            >
+            <span>Sistema Hospitalar</span>
 
         </div>
 
-        <div class="campo">
 
-            <label for="senha">
-                Senha
-            </label>
+        <nav class="menu">
 
-            <input
-                id="senha"
-                type="password"
-                autocomplete="current-password"
-                placeholder="Digite sua senha"
-                required
-            >
+            <a href="index.html" class="active">
+                <span class="menu-icon">🏠</span>
+                <span class="menu-text">Início</span>
+            </a>
 
-        </div>
+            <a href="triagem.html">
+                <span class="menu-icon">🩺</span>
+                <span class="menu-text">Triagem</span>
+            </a>
 
-        <button
-            class="btn-entrar"
-            type="submit"
-        >
-            Entrar
-        </button>
+            <a href="medico.html">
+                <span class="menu-icon">👨‍⚕️</span>
+                <span class="menu-text">Médico</span>
+            </a>
 
-    </form>
+            <a href="tv.html" target="_blank">
+                <span class="menu-icon">📺</span>
+                <span class="menu-text">Painel TV</span>
+            </a>
 
-    <div id="mensagem"></div>
+        </nav>
+
+    </aside>
+
+
+    <!-- CONTEÚDO -->
+    <main class="main">
+
+        <header class="page-header">
+
+            <div>
+
+                <h1>
+                    Bem-vindo ao Saúde Integra
+                </h1>
+
+                <p>
+                    Sistema de gerenciamento e atendimento hospitalar.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- CARDS -->
+        <section class="stats">
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    🩺
+                </div>
+
+                <strong>
+                    Triagem
+                </strong>
+
+                <span>
+                    Cadastre e classifique os pacientes.
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    👨‍⚕️
+                </div>
+
+                <strong>
+                    Médico
+                </strong>
+
+                <span>
+                    Consulte e atenda os pacientes.
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    📺
+                </div>
+
+                <strong>
+                    Painel TV
+                </strong>
+
+                <span>
+                    Chame os pacientes para atendimento.
+                </span>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-icon">
+                    🏥
+                </div>
+
+                <strong>
+                    Atendimento
+                </strong>
+
+                <span>
+                    Integração de todo o processo.
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACESSO RÁPIDO -->
+        <section class="card">
+
+            <div class="card-title">
+
+                <div>
+
+                    <h2>
+                        Acesso rápido
+                    </h2>
+
+                    <p>
+                        Escolha uma área para continuar.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-grid">
+
+
+                <div class="card">
+
+                    <div class="stat-icon">
+                        🩺
+                    </div>
+
+                    <h3>
+                        Triagem
+                    </h3>
+
+                    <p>
+                        Cadastre pacientes e realize a classificação de risco.
+                    </p>
+
+                    <a
+                        href="triagem.html"
+                        class="btn"
+                    >
+                        Abrir triagem
+                    </a>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="stat-icon">
+                        👨‍⚕️
+                    </div>
+
+                    <h3>
+                        Painel Médico
+                    </h3>
+
+                    <p>
+                        Visualize a fila e registre as consultas.
+                    </p>
+
+                    <a
+                        href="medico.html"
+                        class="btn"
+                    >
+                        Abrir painel
+                    </a>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="stat-icon">
+                        📺
+                    </div>
+
+                    <h3>
+                        Painel de chamada
+                    </h3>
+
+                    <p>
+                        Exiba os pacientes chamados na televisão.
+                    </p>
+
+                    <a
+                        href="tv.html"
+                        target="_blank"
+                        class="btn btn-tv"
+                    >
+                        Abrir painel TV
+                    </a>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- INFORMAÇÃO -->
+        <section class="card">
+
+            <div class="section-title">
+                Sobre o sistema
+            </div>
+
+            <p>
+                O <strong>Saúde Integra</strong> organiza o fluxo
+                de atendimento, desde a triagem até a consulta médica.
+            </p>
+
+            <p>
+                O sistema permite acompanhar os pacientes,
+                realizar a classificação de risco e chamar
+                os pacientes para atendimento.
+            </p>
+
+        </section>
+
+
+    </main>
 
 </div>
-
-
-<script>
-
-const form =
-    document.getElementById("loginForm");
-
-const mensagem =
-    document.getElementById("mensagem");
-
-
-form.addEventListener(
-    "submit",
-    async function(event) {
-
-        event.preventDefault();
-
-        const usuario =
-            document.getElementById("usuario")
-                .value.trim();
-
-        const senha =
-            document.getElementById("senha")
-                .value;
-
-
-        mensagem.className = "";
-        mensagem.textContent =
-            "Entrando...";
-
-
-        try {
-
-            const resposta =
-                await fetch("/login", {
-
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        usuario,
-                        senha
-                    })
-                });
-
-
-            const data =
-                await resposta.json();
-
-
-            if (!resposta.ok) {
-                throw new Error(
-                    data.erro ||
-                    "Login inválido"
-                );
-            }
-
-
-            localStorage.setItem(
-                "usuario",
-                usuario
-            );
-
-            localStorage.setItem(
-                "tipo",
-                data.tipo
-            );
-
-
-            mensagem.className =
-                "sucesso";
-
-            mensagem.textContent =
-                "Login realizado com sucesso!";
-
-
-            setTimeout(() => {
-
-                if (
-                    data.tipo ===
-                    "atendimento"
-                ) {
-
-                    location.href =
-                        "atendimento.html";
-
-                } else if (
-                    data.tipo ===
-                    "triagem"
-                ) {
-
-                    location.href =
-                        "triagem.html";
-
-                } else if (
-                    data.tipo ===
-                    "medico"
-                ) {
-
-                    location.href =
-                        "medico.html";
-
-                }
-
-            }, 400);
-
-        } catch (erro) {
-
-            mensagem.className =
-                "erro";
-
-            mensagem.textContent =
-                "❌ " + erro.message;
-        }
-    }
-);
-
-</script>
 
 </body>
 </html>
