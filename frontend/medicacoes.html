@@ -1,62 +1,178 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
+
 <head>
-  <link rel="stylesheet" href="css/style.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medicações - Saúde Integra</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
+
 </head>
 
 <body>
 
 <div class="container">
 
-  <h2>💊 Medicações Prescritas</h2>
 
-  <!-- IMPLEMENTADO: local onde a lista de medicações será exibida -->
-  <div id="listaMedicacoes"></div>
+    <header class="topo">
+
+        <div>
+
+            <h2>
+                💊 Medicações
+            </h2>
+
+            <p>
+                Medicamentos disponíveis
+            </p>
+
+        </div>
+
+
+        <a
+            href="index.html"
+            class="btn-voltar"
+        >
+            ← Voltar
+        </a>
+
+    </header>
+
+
+    <nav class="menu">
+
+        <a href="index.html">🏠 Início</a>
+
+        <a href="atendimento.html">📝 Atendimento</a>
+
+        <a href="triagem.html">🩺 Triagem</a>
+
+        <a href="medico.html">👨‍⚕️ Médico</a>
+
+        <a href="medicacoes.html">💊 Medicações</a>
+
+        <a href="alta.html">📋 Alta</a>
+
+        <a href="tv.html">📺 Painel TV</a>
+
+    </nav>
+
+
+    <div class="card">
+
+        <h3>
+            💊 Lista de medicamentos
+        </h3>
+
+
+        <div id="lista">
+            Carregando...
+        </div>
+
+    </div>
+
 
 </div>
 
+
 <script>
 
-// IMPLEMENTADO: busca as consultas salvas e mostra as medicações
-function carregarMedicacoesPrescritas() {
-  fetch("/medicacoes")
-    .then(r => r.json())
-    .then(data => {
-      const div = document.getElementById("listaMedicacoes");
+async function carregarMedicacoes() {
 
-      div.innerHTML = "";
+    const lista =
+        document.getElementById(
+            "lista"
+        );
 
-      if (data.length === 0) {
-        div.innerHTML = "<p>Nenhuma medicação prescrita.</p>";
-        return;
-      }
 
-      data.forEach(c => {
-        div.innerHTML += `
-          <div class="card">
-            <h3>${c.paciente}</h3>
+    try {
 
-            <p>
-              <b>Medicação:</b>
-              ${c.medicacao}
-            </p>
+        const resposta =
+            await fetch(
+                "/lista-medicacoes"
+            );
 
-            <p>
-              <b>Diagnóstico:</b>
-              ${c.diagnostico}
-            </p>
 
-            <p>
-              <b>Observações:</b>
-              ${c.obs || "Nenhuma"}
-            </p>
-          </div>
-        `;
-      });
-    });
+        const medicamentos =
+            await resposta.json();
+
+
+        lista.innerHTML = "";
+
+
+        if (!medicamentos.length) {
+
+            lista.innerHTML =
+                "<p>Nenhuma medicação cadastrada.</p>";
+
+            return;
+        }
+
+
+        medicamentos.forEach(
+            medicamento => {
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "fila-item";
+
+
+                item.innerHTML = `
+
+                    <strong>
+                        💊 ${escapeHTML(
+                            medicamento
+                        )}
+                    </strong>
+
+                `;
+
+
+                lista.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+    catch (erro) {
+
+        lista.innerHTML =
+            "<p class='erro'>Erro ao carregar medicações.</p>";
+
+    }
+
 }
 
-carregarMedicacoesPrescritas();
+
+function escapeHTML(texto) {
+
+    return String(texto)
+
+        .replaceAll("&", "&amp;")
+
+        .replaceAll("<", "&lt;")
+
+        .replaceAll(">", "&gt;")
+
+        .replaceAll('"', "&quot;")
+
+        .replaceAll("'", "&#039;");
+
+}
+
+
+carregarMedicacoes();
 
 </script>
 
