@@ -4,30 +4,46 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Triagem - Saúde Integra</title>
 
-    <link rel="stylesheet" href="CSS/style.css">
+    <link
+        rel="stylesheet"
+        href="CSS/style.css"
+    >
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
 
     <header class="topo">
 
         <div>
 
-            <h2>🩺 Triagem</h2>
+            <h2>
+                🩺 Triagem
+            </h2>
 
             <p>
-                Avaliação inicial do paciente
+                Avaliação inicial e classificação do paciente
             </p>
 
         </div>
+
 
         <a
             href="index.html"
@@ -39,44 +55,87 @@
     </header>
 
 
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
     <nav class="menu">
 
-        <a href="index.html">🏠 Início</a>
+        <a href="index.html">
+            🏠 Início
+        </a>
 
-        <a href="atendimento.html">📝 Atendimento</a>
+        <a href="atendimento.html">
+            📝 Atendimento
+        </a>
 
-        <a href="triagem.html">🩺 Triagem</a>
+        <a href="triagem.html">
+            🩺 Triagem
+        </a>
 
-        <a href="medico.html">👨‍⚕️ Médico</a>
+        <a href="medico.html">
+            👨‍⚕️ Médico
+        </a>
 
-        <a href="medicacoes.html">💊 Medicações</a>
+        <a href="medicacoes.html">
+            💊 Medicações
+        </a>
 
-        <a href="alta.html">📋 Alta</a>
+        <a href="alta.html">
+            📋 Alta
+        </a>
 
-        <a href="tv.html">📺 Painel TV</a>
+        <a
+            href="tv.html"
+            target="_blank"
+        >
+            📺 Painel TV
+        </a>
 
     </nav>
 
 
+    <!-- =====================================================
+         PACIENTES AGUARDANDO TRIAGEM
+    ====================================================== -->
+
     <div class="card">
 
-        <h3>
+        <h2>
             👥 Pacientes aguardando triagem
-        </h3>
+        </h2>
+
+        <p>
+            Selecione um paciente para iniciar a avaliação.
+        </p>
+
 
         <div id="fila">
+
             Carregando...
+
         </div>
 
     </div>
 
 
+    <!-- =====================================================
+         FORMULÁRIO DE TRIAGEM
+    ====================================================== -->
+
     <div class="card">
 
-        <h3>
+        <h2>
             🩺 Realizar triagem
-        </h3>
+        </h2>
 
+        <p>
+            Registre os sinais e informações iniciais
+            do paciente.
+        </p>
+
+
+        <!-- ID DO PACIENTE -->
 
         <input
             id="pacienteId"
@@ -84,8 +143,10 @@
         >
 
 
-        <label>
-            Paciente
+        <!-- PACIENTE -->
+
+        <label for="nome">
+            👤 Paciente
         </label>
 
         <input
@@ -95,28 +156,35 @@
         >
 
 
-        <label>
-            Sintoma principal
+        <!-- SINTOMA -->
+
+        <label for="sintoma">
+            🩺 Sintoma principal
         </label>
 
         <textarea
             id="sintoma"
-            placeholder="Descreva os sintomas..."
+            placeholder="Descreva os sintomas apresentados pelo paciente..."
         ></textarea>
 
 
-        <label>
-            Pressão arterial
+        <!-- PRESSÃO -->
+
+        <label for="pressao">
+            ❤️ Pressão arterial
         </label>
 
         <input
             id="pressao"
+            type="text"
             placeholder="Ex.: 120/80"
         >
 
 
-        <label>
-            Temperatura
+        <!-- TEMPERATURA -->
+
+        <label for="temperatura">
+            🌡️ Temperatura
         </label>
 
         <input
@@ -127,156 +195,312 @@
         >
 
 
-        <label>
-            Frequência cardíaca
+        <!-- FREQUÊNCIA -->
+
+        <label for="frequencia">
+            ❤️ Frequência cardíaca
         </label>
 
         <input
             id="frequencia"
+            type="text"
             placeholder="Ex.: 80 bpm"
         >
 
 
-        <label>
-            Saturação
+        <!-- SATURAÇÃO -->
+
+        <label for="saturacao">
+            🫁 Saturação
         </label>
 
         <input
             id="saturacao"
+            type="text"
             placeholder="Ex.: 98%"
         >
 
 
-        <label>
-            Observações
+        <!-- OBSERVAÇÕES -->
+
+        <label for="observacao">
+            📝 Observações
         </label>
 
         <textarea
             id="observacao"
-            placeholder="Observações..."
+            placeholder="Digite outras observações da triagem..."
         ></textarea>
 
 
-        <button onclick="salvarTriagem()">
+        <!-- BOTÃO -->
+
+        <button
+            type="button"
+            onclick="salvarTriagem()"
+        >
 
             💾 Salvar triagem
 
         </button>
 
 
+        <!-- RESULTADO -->
+
         <div id="resultado"></div>
 
     </div>
 
 
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
+
+    <footer>
+
+        🏥 <strong>Saúde Integra</strong>
+
+        <br>
+
+        Sistema Hospitalar Integrado
+
+        <br><br>
+
+        © 2026 Saúde Integra — Todos os direitos reservados.
+
+    </footer>
+
+
 </div>
 
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
+
+
+/* =========================================================
+   VARIÁVEIS
+========================================================= */
 
 let pacientes = [];
 
 
+/* =========================================================
+   CARREGAR PACIENTES
+========================================================= */
+
 async function carregarPacientes() {
 
+
     const fila =
-        document.getElementById("fila");
+        document.getElementById(
+            "fila"
+        );
 
 
     try {
 
+
         const resposta =
-            await fetch("/pacientes");
+            await fetch(
+                "/pacientes"
+            );
 
 
-        pacientes =
+        const dados =
             await resposta.json();
 
 
-        fila.innerHTML = "";
+        pacientes =
+            Array.isArray(dados)
+                ? dados
+                : [];
 
+
+        fila.innerHTML =
+            "";
+
+
+        /* -------------------------------------------------
+           NENHUM PACIENTE
+        ------------------------------------------------- */
 
         if (!pacientes.length) {
 
-            fila.innerHTML =
-                "<p>Nenhum paciente aguardando.</p>";
+            fila.innerHTML = `
+
+                <div class="fila-item">
+
+                    <div>
+
+                        <strong>
+                            ✅ Nenhum paciente aguardando
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Os pacientes cadastrados aparecerão
+                            aqui para realização da triagem.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            `;
 
             return;
+
         }
 
 
-        pacientes.forEach(paciente => {
+        /* -------------------------------------------------
+           LISTAR PACIENTES
+        ------------------------------------------------- */
 
-            const item =
-                document.createElement("div");
-
-
-            item.className =
-                "fila-item";
+        pacientes.forEach(
+            paciente => {
 
 
-            const dados =
-                document.createElement("div");
+                const item =
+                    document.createElement(
+                        "div"
+                    );
 
 
-            dados.innerHTML = `
+                item.className =
+                    "fila-item";
 
-                <strong>
-                    ${escapeHTML(
-                        paciente.nome ||
-                        "Paciente"
-                    )}
-                </strong>
+
+                /* -----------------------------------------
+                   DADOS
+                ------------------------------------------ */
+
+                const dados =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                const nome =
+                    paciente.nome ||
+                    "Paciente";
+
+
+                const id =
+                    paciente.id ||
+                    "";
+
+
+                dados.innerHTML = `
+
+                    <strong>
+
+                        👤
+                        ${escapeHTML(
+                            nome
+                        )}
+
+                    </strong>
+
+                    <br>
+
+                    <small>
+
+                        🆔 ID:
+                        ${escapeHTML(
+                            String(id)
+                        )}
+
+                    </small>
+
+                `;
+
+
+                /* -----------------------------------------
+                   BOTÃO
+                ------------------------------------------ */
+
+                const botao =
+                    document.createElement(
+                        "button"
+                    );
+
+
+                botao.type =
+                    "button";
+
+
+                botao.textContent =
+                    "🩺 Selecionar";
+
+
+                botao.onclick =
+                    () =>
+                        selecionarPaciente(
+                            paciente.id
+                        );
+
+
+                item.appendChild(
+                    dados
+                );
+
+
+                item.appendChild(
+                    botao
+                );
+
+
+                fila.appendChild(
+                    item
+                );
+
+            }
+        );
+
+    }
+
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao carregar pacientes:",
+            erro
+        );
+
+
+        fila.innerHTML = `
+
+            <div class="erro">
+
+                ❌ Erro ao carregar pacientes.
 
                 <br>
 
                 <small>
-                    ID:
-                    ${escapeHTML(
-                        String(
-                            paciente.id || ""
-                        )
-                    )}
+                    Verifique se o servidor está funcionando.
                 </small>
 
-            `;
+            </div>
 
-
-            const botao =
-                document.createElement("button");
-
-
-            botao.textContent =
-                "Selecionar";
-
-
-            botao.onclick =
-                () => selecionarPaciente(
-                    paciente.id
-                );
-
-
-            item.appendChild(dados);
-
-            item.appendChild(botao);
-
-            fila.appendChild(item);
-
-        });
-
-    }
-
-    catch (erro) {
-
-        fila.innerHTML =
-            "<p class='erro'>Erro ao carregar pacientes.</p>";
+        `;
 
     }
 
 }
 
 
+/* =========================================================
+   SELECIONAR PACIENTE
+========================================================= */
+
 function selecionarPaciente(id) {
+
 
     const paciente =
         pacientes.find(
@@ -286,23 +510,45 @@ function selecionarPaciente(id) {
         );
 
 
-    if (!paciente) return;
+    if (!paciente) {
+
+        return;
+
+    }
 
 
     document.getElementById(
         "pacienteId"
-    ).value = paciente.id;
+    ).value =
+        paciente.id;
 
 
     document.getElementById(
         "nome"
-    ).value = paciente.nome;
+    ).value =
+        paciente.nome ||
+        "Paciente";
 
+
+    /* -----------------------------------------
+       FOCO NO PRIMEIRO CAMPO
+    ------------------------------------------ */
+
+    document
+        .getElementById(
+            "sintoma"
+        )
+        .focus();
 
 }
 
 
+/* =========================================================
+   SALVAR TRIAGEM
+========================================================= */
+
 async function salvarTriagem() {
+
 
     const pacienteId =
         document.getElementById(
@@ -313,13 +559,13 @@ async function salvarTriagem() {
     const sintoma =
         document.getElementById(
             "sintoma"
-        ).value;
+        ).value.trim();
 
 
     const pressao =
         document.getElementById(
             "pressao"
-        ).value;
+        ).value.trim();
 
 
     const temperatura =
@@ -331,19 +577,19 @@ async function salvarTriagem() {
     const frequencia =
         document.getElementById(
             "frequencia"
-        ).value;
+        ).value.trim();
 
 
     const saturacao =
         document.getElementById(
             "saturacao"
-        ).value;
+        ).value.trim();
 
 
     const observacao =
         document.getElementById(
             "observacao"
-        ).value;
+        ).value.trim();
 
 
     const resultado =
@@ -352,64 +598,109 @@ async function salvarTriagem() {
         );
 
 
+    /* =====================================================
+       VALIDAÇÕES
+    ====================================================== */
+
     if (!pacienteId) {
 
         resultado.className =
             "erro";
 
         resultado.textContent =
-            "Selecione um paciente.";
+            "⚠️ Selecione um paciente.";
 
         return;
+
     }
 
 
+    if (!sintoma) {
+
+        resultado.className =
+            "erro";
+
+        resultado.textContent =
+            "⚠️ Informe o sintoma principal.";
+
+        document
+            .getElementById(
+                "sintoma"
+            )
+            .focus();
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       ENVIAR PARA O SERVIDOR
+    ====================================================== */
+
     try {
 
+
         const resposta =
-            await fetch("/triagem", {
+            await fetch(
+                "/triagem",
+                {
 
-                method: "POST",
+                    method: "POST",
 
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
+                    headers: {
 
-                body: JSON.stringify({
+                        "Content-Type":
+                            "application/json"
 
-                    pacienteId,
+                    },
 
-                    sintoma,
+                    body:
+                        JSON.stringify({
 
-                    pressao,
+                            pacienteId,
 
-                    temperatura,
+                            sintoma,
 
-                    frequencia,
+                            pressao,
 
-                    saturacao,
+                            temperatura,
 
-                    observacao
+                            frequencia,
 
-                })
+                            saturacao,
 
-            });
+                            observacao
+
+                        })
+
+                }
+            );
 
 
         const data =
             await resposta.json();
 
 
+        /* -------------------------------------------------
+           VERIFICAR RESPOSTA
+        ------------------------------------------------- */
+
         if (!resposta.ok) {
 
             throw new Error(
+
                 data.erro ||
                 "Erro ao salvar triagem."
+
             );
 
         }
 
+
+        /* =================================================
+           SUCESSO
+        ================================================== */
 
         resultado.className =
             "sucesso";
@@ -418,13 +709,29 @@ async function salvarTriagem() {
             "✅ Triagem salva com sucesso!";
 
 
+        /* -------------------------------------------------
+           LIMPAR FORMULÁRIO
+        ------------------------------------------------- */
+
         limpar();
+
+
+        /* -------------------------------------------------
+           ATUALIZAR LISTA
+        ------------------------------------------------- */
 
         carregarPacientes();
 
     }
 
+
     catch (erro) {
+
+        console.error(
+            "Erro ao salvar triagem:",
+            erro
+        );
+
 
         resultado.className =
             "erro";
@@ -437,35 +744,47 @@ async function salvarTriagem() {
 }
 
 
+/* =========================================================
+   LIMPAR FORMULÁRIO
+========================================================= */
+
 function limpar() {
+
 
     document.getElementById(
         "pacienteId"
     ).value = "";
 
+
     document.getElementById(
         "nome"
     ).value = "";
+
 
     document.getElementById(
         "sintoma"
     ).value = "";
 
+
     document.getElementById(
         "pressao"
     ).value = "";
+
 
     document.getElementById(
         "temperatura"
     ).value = "";
 
+
     document.getElementById(
         "frequencia"
     ).value = "";
 
+
     document.getElementById(
         "saturacao"
     ).value = "";
+
 
     document.getElementById(
         "observacao"
@@ -474,31 +793,62 @@ function limpar() {
 }
 
 
+/* =========================================================
+   PROTEÇÃO CONTRA HTML
+========================================================= */
+
 function escapeHTML(texto) {
 
     return String(texto)
 
-        .replaceAll("&", "&amp;")
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-        .replaceAll("<", "&lt;")
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-        .replaceAll(">", "&gt;")
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-        .replaceAll('"', "&quot;")
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-        .replaceAll("'", "&#039;");
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
 
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
 carregarPacientes();
+
+
+/* =========================================================
+   ATUALIZAÇÃO AUTOMÁTICA
+========================================================= */
 
 setInterval(
     carregarPacientes,
     5000
 );
 
+
 </script>
 
+
 </body>
+
 </html>
