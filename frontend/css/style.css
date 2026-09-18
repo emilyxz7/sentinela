@@ -1,3 +1,10 @@
+/* =========================================================
+   SAÚDE INTEGRA
+   Sistema Hospitalar - Tema Azul
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,62 +12,133 @@
 }
 
 :root {
-    --azul: #0066cc;
-    --azul-escuro: #003b73;
-    --azul-forte: #0052a3;
-    --azul-claro: #d9efff;
-    --azul-muito-claro: #eef8ff;
+    --azul: #0879d1;
+    --azul-hover: #0564ad;
+    --azul-escuro: #073b6b;
+    --azul-profundo: #062d52;
+    --azul-claro: #eaf6ff;
+    --azul-suave: #f4faff;
+
     --branco: #ffffff;
-    --cinza: #64748b;
-    --texto: #18324a;
+
+    --texto: #172b3a;
+    --texto-secundario: #64748b;
+
+    --borda: #d9e8f3;
+
+    --verde: #16a36a;
+    --vermelho: #dc3545;
+    --amarelo: #f59e0b;
+
+    --sombra:
+        0 8px 30px rgba(7, 59, 107, 0.10);
+
+    --sombra-forte:
+        0 12px 35px rgba(7, 59, 107, 0.18);
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #e6f3ff;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef8ff 0%,
+            #f8fcff 50%,
+            #e8f5ff 100%
+        );
+
     color: var(--texto);
+
     min-height: 100vh;
 }
 
-/* =========================
+/* =========================================================
    CONTAINER
-========================= */
+========================================================= */
 
 .container {
-    width: 92%;
-    max-width: 1200px;
-    margin: 25px auto;
+    width: min(94%, 1250px);
+    margin: 30px auto;
 }
 
-/* =========================
-   CABEÇALHO AZUL
-========================= */
+/* =========================================================
+   CABEÇALHO
+========================================================= */
 
 .topo,
 .painel-header {
-    background: linear-gradient(
-        135deg,
-        #003b73,
-        #0066cc,
-        #0088ee
-    );
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #062d52 0%,
+            #075da5 48%,
+            #0789e8 100%
+        );
 
     color: white;
 
-    padding: 28px 35px;
+    padding: 32px 38px;
 
-    border-radius: 18px;
+    border-radius: 22px;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 
-    box-shadow:
-        0 8px 25px rgba(0, 74, 150, 0.35);
+    box-shadow: var(--sombra-forte);
+}
+
+/* brilho decorativo */
+
+.topo::before,
+.painel-header::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    right: -80px;
+    top: -100px;
+
+    background: rgba(255,255,255,.08);
+
+    border-radius: 50%;
+}
+
+.topo::after,
+.painel-header::after {
+    content: "";
+
+    position: absolute;
+
+    width: 140px;
+    height: 140px;
+
+    right: 100px;
+    bottom: -100px;
+
+    background: rgba(255,255,255,.06);
+
+    border-radius: 50%;
+}
+
+.topo > *,
+.painel-header > * {
+    position: relative;
+    z-index: 2;
 }
 
 .topo h1,
@@ -68,92 +146,182 @@ body {
 .painel-header h1,
 .painel-header h2 {
     color: white;
-    margin-bottom: 7px;
+
+    margin-bottom: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+}
+
+.topo h1 {
+    font-size: 30px;
+}
+
+.topo h2,
+.painel-header h2 {
+    font-size: 25px;
 }
 
 .topo p,
 .painel-header p {
-    color: #dff2ff;
+    color: #d9efff;
+
+    font-size: 14px;
 }
 
-/* =========================
-   MENU AZUL
-========================= */
+/* =========================================================
+   MENU
+========================================================= */
 
 .menu {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
 
-    background: #003b73;
+    gap: 5px;
 
-    padding: 10px;
+    background: rgba(6, 45, 82, 0.97);
 
-    border-radius: 13px;
+    padding: 8px;
+
+    border-radius: 14px;
 
     margin-bottom: 25px;
 
     box-shadow:
-        0 5px 15px rgba(0, 60, 120, 0.25);
+        0 5px 18px rgba(7, 59, 107, 0.15);
 }
 
 .menu a {
+    position: relative;
+
     text-decoration: none;
 
-    color: white;
+    color: #dbeeff;
 
-    padding: 12px 17px;
+    padding: 12px 16px;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
-    font-weight: bold;
+    font-size: 13px;
 
-    transition: .2s;
+    font-weight: 600;
+
+    transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
 }
 
 .menu a:hover {
-    background: #0088ee;
+    background: rgba(255,255,255,.12);
+
+    color: white;
+
+    transform: translateY(-1px);
 }
 
 .menu a:active {
-    background: white;
-    color: #003b73;
+    background: var(--azul);
+
+    color: white;
 }
 
-/* =========================
-   CARDS
-========================= */
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
 
-.card {
+.btn-voltar {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 6px;
+
+    text-decoration: none;
+
+    background: rgba(255,255,255,.14);
+
+    border: 1px solid rgba(255,255,255,.25);
+
+    color: white;
+
+    padding: 11px 17px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition: .2s;
+
+    backdrop-filter: blur(5px);
+}
+
+.btn-voltar:hover {
     background: white;
 
-    border: 2px solid #c5e5fa;
+    color: var(--azul-escuro);
 
-    border-radius: 17px;
+    transform: translateY(-2px);
+}
 
-    padding: 25px;
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card {
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+
+    border-radius: 18px;
+
+    padding: 27px;
 
     margin-bottom: 20px;
 
-    box-shadow:
-        0 7px 22px
-        rgba(0, 70, 140, 0.15);
+    box-shadow: var(--sombra);
+
+    transition:
+        box-shadow .2s ease,
+        transform .2s ease;
 }
 
-.card h2,
-.card h3 {
-    color: #003b73;
+.card h2 {
+    color: var(--azul-escuro);
 
-    margin-bottom: 15px;
+    font-size: 23px;
+
+    margin-bottom: 12px;
+}
+
+.card h3 {
+    color: var(--azul-escuro);
+
+    font-size: 17px;
+
+    margin-bottom: 16px;
+
+    font-weight: 700;
 }
 
 .card p {
-    line-height: 1.6;
+    color: var(--texto-secundario);
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+    margin-bottom: 10px;
 }
 
-/* =========================
+/* =========================================================
    GRID
-========================= */
+========================================================= */
 
 .grid {
     display: grid;
@@ -161,56 +329,83 @@ body {
     grid-template-columns:
         repeat(
             auto-fit,
-            minmax(250px, 1fr)
+            minmax(280px, 1fr)
         );
 
     gap: 20px;
 }
 
-/* =========================
-   CARDS DE INÍCIO
-========================= */
-
 .grid .card {
-    border-top: 6px solid #0066cc;
+    position: relative;
 
-    transition: .2s;
+    overflow: hidden;
+
+    min-height: 220px;
+
+    border-top: 4px solid var(--azul);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
 .grid .card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
 
     box-shadow:
-        0 12px 30px
-        rgba(0, 90, 180, 0.25);
+        0 15px 35px
+        rgba(7, 59, 107, 0.16);
 }
 
-/* =========================
-   BOTÕES AZUIS
-========================= */
+.grid .card h3 {
+    color: var(--azul-escuro);
+
+    font-size: 18px;
+}
+
+.grid .card p {
+    flex: 1;
+}
+
+/* =========================================================
+   BOTÕES
+========================================================= */
 
 button,
-.btn,
-.btn-voltar {
-    display: inline-block;
+.btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
 
     border: none;
 
-    background: linear-gradient(
-        135deg,
-        #0066cc,
-        #0088ee
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #0879d1,
+            #0797ed
+        );
 
     color: white;
 
-    padding: 13px 21px;
+    padding: 12px 19px;
 
-    border-radius: 9px;
+    border-radius: 10px;
 
-    font-size: 15px;
+    font-family: inherit;
 
-    font-weight: bold;
+    font-size: 13px;
+
+    font-weight: 700;
 
     cursor: pointer;
 
@@ -218,69 +413,125 @@ button,
 
     margin-top: 8px;
 
-    transition: .2s;
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
 
     box-shadow:
-        0 4px 10px
-        rgba(0, 100, 200, 0.2);
+        0 5px 14px
+        rgba(8, 121, 209, .20);
 }
 
 button:hover,
-.btn:hover,
-.btn-voltar:hover {
-    background: #003b73;
+.btn:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #0564ad,
+            #0879d1
+        );
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(8, 121, 209, .28);
 }
 
-/* =========================
+button:active,
+.btn:active {
+    transform: translateY(0);
+}
+
+/* =========================================================
    FORMULÁRIOS
-========================= */
+========================================================= */
+
+label {
+    display: block;
+
+    color: var(--azul-escuro);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-top: 10px;
+}
 
 input,
 select,
 textarea {
     width: 100%;
 
-    padding: 14px;
+    padding: 13px 14px;
 
-    margin-top: 8px;
+    margin-top: 7px;
 
-    margin-bottom: 14px;
+    margin-bottom: 13px;
 
-    border: 2px solid #b9d9ef;
+    border: 1px solid #cbdde9;
 
-    border-radius: 9px;
+    border-radius: 10px;
 
-    background: white;
+    background: #fbfdff;
 
-    color: #18324a;
+    color: var(--texto);
 
-    font-size: 15px;
+    font-family: inherit;
+
+    font-size: 14px;
 
     outline: none;
+
+    transition:
+        border .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+    border-color: #9fc5df;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-    border-color: #0066cc;
+    background: white;
+
+    border-color: var(--azul);
 
     box-shadow:
-        0 0 0 3px
-        rgba(0, 102, 204, 0.15);
+        0 0 0 4px
+        rgba(8, 121, 209, .10);
 }
 
-/* =========================
-   FILA
-========================= */
+textarea {
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+/* =========================================================
+   FILA DE PACIENTES
+========================================================= */
 
 .fila-item {
-    background: #eef8ff;
+    background:
+        linear-gradient(
+            90deg,
+            #f1f9ff,
+            #ffffff
+        );
 
-    border-left: 6px solid #0066cc;
+    border: 1px solid #d9eaf5;
 
-    border-radius: 10px;
+    border-left: 5px solid var(--azul);
+
+    border-radius: 12px;
 
     padding: 16px;
 
@@ -293,161 +544,216 @@ textarea:focus {
     justify-content: space-between;
 
     gap: 15px;
+
+    transition: .2s;
 }
 
 .fila-item:hover {
-    background: #d9efff;
+    background: #eaf6ff;
+
+    border-left-color: var(--azul-escuro);
+
+    transform: translateX(3px);
 }
 
-/* =========================
+.fila-item strong {
+    color: var(--azul-escuro);
+
+    font-size: 14px;
+}
+
+.fila-item small {
+    color: var(--texto-secundario);
+
+    line-height: 1.8;
+
+    font-size: 12px;
+}
+
+/* =========================================================
    CONSULTÓRIO
-========================= */
+========================================================= */
 
 .consultorio {
-    background: #003b73;
+    background:
+        linear-gradient(
+            135deg,
+            #062d52,
+            #075da5
+        );
 
     color: white;
 
-    padding: 20px;
+    padding: 20px 23px;
 
-    border-radius: 14px;
+    border-radius: 15px;
 
     margin-bottom: 20px;
 
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
     box-shadow:
-        0 6px 18px
-        rgba(0, 60, 120, 0.25);
+        0 8px 22px
+        rgba(7, 59, 107, .18);
+}
+
+.consultorio strong {
+    font-size: 14px;
 }
 
 .consultorio input {
-    width: 100px;
+    width: 90px;
 
-    margin-left: 10px;
+    margin: 0;
 
-    margin-bottom: 0;
+    background: rgba(255,255,255,.95);
+
+    border: none;
+
+    text-align: center;
+
+    font-weight: 700;
 }
 
-/* =========================
+/* =========================================================
    MENSAGENS
-========================= */
+========================================================= */
 
 .sucesso {
-    background: #d9fbe5;
+    background: #e9f9f1;
 
-    color: #166534;
+    color: #087443;
 
-    padding: 15px;
+    border: 1px solid #b9ebd0;
 
-    border-radius: 9px;
+    padding: 14px 16px;
+
+    border-radius: 10px;
 
     margin-top: 15px;
 
-    font-weight: bold;
+    font-size: 13px;
+
+    font-weight: 700;
 }
 
 .erro {
-    background: #ffe0e0;
+    background: #fff0f1;
 
-    color: #991b1b;
+    color: #b42333;
 
-    padding: 15px;
+    border: 1px solid #f5c2c7;
 
-    border-radius: 9px;
+    padding: 14px 16px;
+
+    border-radius: 10px;
 
     margin-top: 15px;
 
-    font-weight: bold;
+    font-size: 13px;
+
+    font-weight: 700;
 }
 
-/* =========================
-   RISCO
-========================= */
+/* =========================================================
+   CLASSIFICAÇÃO DE RISCO
+========================================================= */
 
-.baixo {
-    background: #dcfce7;
+.baixo,
+.moderado,
+.alto,
+.urgente {
+    display: inline-flex;
 
-    color: #166534;
+    align-items: center;
 
     padding: 7px 12px;
 
-    border-radius: 20px;
+    border-radius: 30px;
 
-    font-weight: bold;
+    font-size: 11px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+.baixo {
+    background: #dcfce7;
+    color: #166534;
 }
 
 .moderado {
     background: #fef3c7;
-
     color: #92400e;
-
-    padding: 7px 12px;
-
-    border-radius: 20px;
-
-    font-weight: bold;
 }
 
 .alto {
     background: #fed7aa;
-
     color: #9a3412;
-
-    padding: 7px 12px;
-
-    border-radius: 20px;
-
-    font-weight: bold;
 }
 
 .urgente {
     background: #fee2e2;
-
     color: #991b1b;
-
-    padding: 7px 12px;
-
-    border-radius: 20px;
-
-    font-weight: bold;
 }
 
-/* =========================
+/* =========================================================
    LINHA
-========================= */
+========================================================= */
 
 hr {
     border: none;
 
-    height: 3px;
+    height: 1px;
 
-    background: #0066cc;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #b8d8ec,
+            transparent
+        );
 
     margin: 30px 0;
-
-    border-radius: 5px;
 }
 
-/* =========================
+/* =========================================================
    RODAPÉ
-========================= */
+========================================================= */
 
 footer {
-    background: #003b73;
+    background:
+        linear-gradient(
+            135deg,
+            #062d52,
+            #075da5
+        );
 
-    color: white;
+    color: #dcefff;
 
-    padding: 25px;
+    padding: 23px;
 
-    border-radius: 15px;
+    border-radius: 16px;
 
     text-align: center;
 
     margin-top: 30px;
+
+    font-size: 12px;
+
+    box-shadow:
+        0 7px 20px
+        rgba(7, 59, 107, .12);
 }
 
-/* =========================
+/* =========================================================
    PAINEL TV
-========================= */
+========================================================= */
 
 .tv-container {
     min-height: 100vh;
@@ -455,17 +761,32 @@ footer {
     padding: 25px;
 
     background:
+        radial-gradient(
+            circle at top right,
+            #1299ec,
+            transparent 35%
+        ),
         linear-gradient(
             135deg,
-            #003b73,
-            #0066cc,
-            #0088ee
+            #031d35,
+            #064d88 55%,
+            #0788db
         );
 
     display: grid;
 
     grid-template-columns:
-        32% 68%;
+        minmax(280px, 32%)
+        minmax(400px, 68%);
+
+    gap: 25px;
+}
+
+.tv-left,
+.tv-right {
+    display: flex;
+
+    flex-direction: column;
 
     gap: 25px;
 }
@@ -473,66 +794,82 @@ footer {
 .tv-box {
     background: white;
 
-    border-radius: 18px;
+    border-radius: 20px;
 
     overflow: hidden;
 
     box-shadow:
-        0 10px 30px
-        rgba(0, 40, 100, 0.3);
+        0 15px 40px
+        rgba(0, 20, 50, .28);
 }
 
 .tv-title {
     background:
         linear-gradient(
             135deg,
-            #003b73,
-            #0066cc
+            #062d52,
+            #0879d1
         );
 
     color: white;
 
-    padding: 18px;
+    padding: 18px 22px;
 
-    font-size: 22px;
+    font-size: 17px;
 
-    font-weight: bold;
+    font-weight: 800;
+
+    letter-spacing: .3px;
 }
 
 .local-box {
     text-align: center;
+
+    min-height: 320px;
 }
 
 #local-tipo {
-    color: #0066cc;
+    color: var(--azul);
 
-    font-size: 34px;
+    font-size: 25px;
 
-    font-weight: bold;
+    font-weight: 800;
 
-    margin-top: 40px;
+    margin-top: 45px;
+
+    letter-spacing: 1px;
 }
 
 #local-numero {
-    color: #003b73;
+    color: var(--azul-escuro);
 
-    font-size: 90px;
+    font-size: 82px;
 
-    font-weight: bold;
+    font-weight: 800;
 
-    padding: 15px;
+    padding: 10px;
 }
 
 #patient-name {
-    color: #003b73;
+    color: var(--azul-escuro);
 
-    font-size: 55px;
+    font-size: clamp(35px, 5vw, 65px);
 
-    font-weight: bold;
+    font-weight: 800;
 
     text-align: center;
 
-    padding: 80px 20px;
+    padding: 70px 25px;
+
+    min-height: 230px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    word-break: break-word;
 }
 
 .history-box {
@@ -542,33 +879,81 @@ footer {
 #history-list {
     list-style: none;
 
-    padding: 20px;
+    padding: 18px;
 }
 
 #history-list li {
-    background: #eaf6ff;
+    background:
+        linear-gradient(
+            90deg,
+            #eaf6ff,
+            #f8fcff
+        );
 
-    color: #003b73;
+    color: var(--azul-escuro);
 
-    border-left: 6px solid #0066cc;
+    border-left: 5px solid var(--azul);
 
-    padding: 14px;
+    padding: 13px;
 
-    margin-bottom: 10px;
+    margin-bottom: 9px;
 
-    border-radius: 8px;
+    border-radius: 9px;
 
-    font-weight: bold;
+    font-weight: 700;
+
+    font-size: 13px;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
+.logo-box {
+    text-align: center;
 
-@media (max-width: 800px) {
+    padding: 35px;
+}
+
+.logo-box > div {
+    filter:
+        drop-shadow(
+            0 5px 8px
+            rgba(0,0,0,.15)
+        );
+}
+
+.logo-box h2 {
+    color: var(--azul-escuro);
+
+    font-size: 28px;
+
+    margin: 10px 0;
+}
+
+.logo-box p {
+    color: var(--texto-secundario);
+
+    font-size: 13px;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .container {
+        width: 94%;
+
+        margin: 18px auto;
+    }
 
     .tv-container {
         grid-template-columns: 1fr;
+
+        padding: 15px;
+    }
+
+    .tv-left,
+    .tv-right {
+        gap: 15px;
     }
 
     .topo,
@@ -576,24 +961,85 @@ footer {
         flex-direction: column;
 
         align-items: flex-start;
+
+        gap: 18px;
+
+        padding: 27px;
+    }
+
+    .btn-voltar {
+        width: 100%;
     }
 
     .menu {
         flex-direction: column;
+
+        align-items: stretch;
     }
 
     .menu a {
         width: 100%;
+
+        text-align: center;
+    }
+
+    .consultorio {
+        flex-direction: column;
+
+        align-items: stretch;
     }
 
     .consultorio input {
-        margin-left: 0;
-
         width: 100%;
     }
 
+    .fila-item {
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+    .fila-item button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .container {
+        width: 95%;
+    }
+
+    .topo,
+    .painel-header {
+        padding: 22px;
+    }
+
+    .topo h1 {
+        font-size: 25px;
+    }
+
+    .topo h2,
+    .painel-header h2 {
+        font-size: 21px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    #local-numero {
+        font-size: 65px;
+    }
+
     #patient-name {
-        font-size: 35px;
+        font-size: 32px;
+
+        padding: 55px 15px;
     }
 
 }
