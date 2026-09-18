@@ -4,18 +4,31 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Alta - Saúde Integra</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <link rel="stylesheet" href="CSS/style.css">
+    <title>Alta Hospitalar - Saúde Integra</title>
+
+    <link
+        rel="stylesheet"
+        href="CSS/style.css"
+    >
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
+
+    <!-- =====================================================
+         CABEÇALHO
+    ====================================================== -->
 
     <header class="topo">
 
@@ -26,7 +39,7 @@
             </h2>
 
             <p>
-                Finalização do atendimento
+                Finalização do atendimento dos pacientes
             </p>
 
         </div>
@@ -42,24 +55,68 @@
     </header>
 
 
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
     <nav class="menu">
 
-        <a href="index.html">🏠 Início</a>
+        <a href="index.html">
+            🏠 Início
+        </a>
 
-        <a href="atendimento.html">📝 Atendimento</a>
+        <a href="atendimento.html">
+            📝 Atendimento
+        </a>
 
-        <a href="triagem.html">🩺 Triagem</a>
+        <a href="triagem.html">
+            🩺 Triagem
+        </a>
 
-        <a href="medico.html">👨‍⚕️ Médico</a>
+        <a href="medico.html">
+            👨‍⚕️ Médico
+        </a>
 
-        <a href="medicacoes.html">💊 Medicações</a>
+        <a href="medicacoes.html">
+            💊 Medicações
+        </a>
 
-        <a href="alta.html">📋 Alta</a>
+        <a href="alta.html">
+            📋 Alta
+        </a>
 
-        <a href="tv.html">📺 Painel TV</a>
+        <a
+            href="tv.html"
+            target="_blank"
+        >
+            📺 Painel TV
+        </a>
 
     </nav>
 
+
+    <!-- =====================================================
+         INFORMAÇÃO
+    ====================================================== -->
+
+    <div class="card">
+
+        <h2>
+            🏥 Finalização de atendimento
+        </h2>
+
+        <p>
+            Nesta área são exibidos os pacientes que
+            passaram pelo atendimento médico e estão
+            aguardando a finalização do processo.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         PACIENTES
+    ====================================================== -->
 
     <div class="card">
 
@@ -67,20 +124,56 @@
             👥 Pacientes atendidos
         </h3>
 
+        <p>
+            Selecione um paciente para realizar a alta
+            hospitalar.
+        </p>
+
 
         <div id="lista">
+
             Carregando...
+
         </div>
 
     </div>
 
 
+    <!-- =====================================================
+         RODAPÉ
+    ====================================================== -->
+
+    <footer>
+
+        🏥 <strong>Saúde Integra</strong>
+
+        <br>
+
+        Sistema Hospitalar Integrado
+
+        <br><br>
+
+        © 2026 Saúde Integra — Todos os direitos reservados.
+
+    </footer>
+
+
 </div>
 
 
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
 
+
+/* =========================================================
+   CARREGAR CONSULTAS
+========================================================= */
+
 async function carregarConsultas() {
+
 
     const lista =
         document.getElementById(
@@ -89,6 +182,7 @@ async function carregarConsultas() {
 
 
     try {
+
 
         const resposta =
             await fetch(
@@ -100,20 +194,51 @@ async function carregarConsultas() {
             await resposta.json();
 
 
-        lista.innerHTML = "";
+        lista.innerHTML =
+            "";
 
+
+        /* -------------------------------------------------
+           NENHUM PACIENTE
+        ------------------------------------------------- */
 
         if (!consultas.length) {
 
-            lista.innerHTML =
-                "<p>Nenhum paciente aguardando alta.</p>";
+            lista.innerHTML = `
+
+                <div class="fila-item">
+
+                    <div>
+
+                        <strong>
+                            ✅ Nenhum paciente aguardando alta
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Quando houver pacientes atendidos
+                            pelo médico, eles aparecerão aqui.
+                        </small>
+
+                    </div>
+
+                </div>
+
+            `;
 
             return;
+
         }
 
 
+        /* -------------------------------------------------
+           LISTAR CONSULTAS
+        ------------------------------------------------- */
+
         consultas.forEach(
             (consulta, index) => {
+
 
                 const item =
                     document.createElement(
@@ -125,38 +250,79 @@ async function carregarConsultas() {
                     "fila-item";
 
 
-                item.innerHTML = `
+                /* -----------------------------------------
+                   INFORMAÇÕES DO PACIENTE
+                ------------------------------------------ */
 
-                    <div>
+                const informacoes =
+                    document.createElement(
+                        "div"
+                    );
 
-                        <strong>
-                            ${escapeHTML(
-                                consulta.paciente ||
-                                "Paciente"
-                            )}
-                        </strong>
 
-                        <br>
+                informacoes.innerHTML = `
 
-                        <small>
+                    <strong>
 
-                            Diagnóstico:
-                            ${escapeHTML(
-                                consulta.diagnostico ||
-                                "Não informado"
-                            )}
+                        👤
+                        ${escapeHTML(
+                            consulta.paciente ||
+                            "Paciente"
+                        )}
 
-                        </small>
+                    </strong>
 
-                    </div>
+                    <br>
+
+                    <small>
+
+                        🩺 Diagnóstico:
+                        ${escapeHTML(
+                            consulta.diagnostico ||
+                            "Não informado"
+                        )}
+
+                    </small>
+
+                    <br>
+
+                    <small>
+
+                        💊 Medicação:
+                        ${escapeHTML(
+                            consulta.medicacao ||
+                            "Não informada"
+                        )}
+
+                    </small>
+
+                    <br>
+
+                    <small>
+
+                        📋 Observações:
+                        ${escapeHTML(
+                            consulta.obs ||
+                            "Nenhuma observação"
+                        )}
+
+                    </small>
 
                 `;
 
+
+                /* -----------------------------------------
+                   BOTÃO DE ALTA
+                ------------------------------------------ */
 
                 const botao =
                     document.createElement(
                         "button"
                     );
+
+
+                botao.type =
+                    "button";
 
 
                 botao.textContent =
@@ -165,6 +331,11 @@ async function carregarConsultas() {
 
                 botao.onclick =
                     () => darAlta(index);
+
+
+                item.appendChild(
+                    informacoes
+                );
 
 
                 item.appendChild(
@@ -181,19 +352,46 @@ async function carregarConsultas() {
 
     }
 
+
     catch (erro) {
 
-        lista.innerHTML =
-            "<p class='erro'>Erro ao carregar consultas.</p>";
+        lista.innerHTML = `
+
+            <div class="erro">
+
+                ❌ Erro ao carregar as consultas.
+
+            </div>
+
+        `;
 
     }
 
 }
 
 
+/* =========================================================
+   DAR ALTA
+========================================================= */
+
 async function darAlta(index) {
 
+
+    const confirmar =
+        confirm(
+            "Deseja realmente dar alta para este paciente?"
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
     try {
+
 
         const resposta =
             await fetch(
@@ -203,13 +401,17 @@ async function darAlta(index) {
                     method: "POST",
 
                     headers: {
+
                         "Content-Type":
                             "application/json"
+
                     },
 
                     body:
                         JSON.stringify({
+
                             index
+
                         })
 
                 }
@@ -220,24 +422,39 @@ async function darAlta(index) {
             await resposta.json();
 
 
+        /* -------------------------------------------------
+           VERIFICAR ERRO
+        ------------------------------------------------- */
+
         if (!resposta.ok) {
 
             throw new Error(
+
                 data.erro ||
                 "Erro ao dar alta."
+
             );
 
         }
 
+
+        /* -------------------------------------------------
+           SUCESSO
+        ------------------------------------------------- */
 
         alert(
             "✅ Alta realizada com sucesso!"
         );
 
 
+        /* -------------------------------------------------
+           ATUALIZAR LISTA
+        ------------------------------------------------- */
+
         carregarConsultas();
 
     }
+
 
     catch (erro) {
 
@@ -250,31 +467,62 @@ async function darAlta(index) {
 }
 
 
+/* =========================================================
+   PROTEÇÃO CONTRA HTML
+========================================================= */
+
 function escapeHTML(texto) {
 
     return String(texto)
 
-        .replaceAll("&", "&amp;")
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
 
-        .replaceAll("<", "&lt;")
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
 
-        .replaceAll(">", "&gt;")
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
 
-        .replaceAll('"', "&quot;")
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
 
-        .replaceAll("'", "&#039;");
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
 
+/* =========================================================
+   INICIALIZAÇÃO
+========================================================= */
+
 carregarConsultas();
+
+
+/* =========================================================
+   ATUALIZAÇÃO AUTOMÁTICA
+========================================================= */
 
 setInterval(
     carregarConsultas,
     5000
 );
 
+
 </script>
 
+
 </body>
+
 </html>
