@@ -1,89 +1,62 @@
 /* =========================================================
    SAÚDE INTEGRA
-   Sistema Hospitalar — Tema Azul Personalizado
+   SISTEMA HOSPITALAR INTEGRADO
+   TEMA AZUL
 ========================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    /* AZUIS PRINCIPAIS */
-    --azul: #0b84d8;
-    --azul-hover: #066bb5;
-    --azul-claro: #e8f5ff;
-    --azul-suave: #f5fbff;
-
-    --azul-escuro: #063b6d;
-    --azul-profundo: #03294d;
-
-    /* CORES */
-    --branco: #ffffff;
-    --texto: #172b3a;
-    --texto-secundario: #64748b;
-
-    --borda: #d7e7f2;
-
-    --verde: #16a36a;
-    --vermelho: #dc3545;
-    --amarelo: #f59e0b;
-
-    /* SOMBRAS */
-    --sombra:
-        0 8px 28px rgba(3, 59, 109, .09);
-
-    --sombra-hover:
-        0 15px 38px rgba(3, 59, 109, .16);
-
-    --sombra-forte:
-        0 15px 40px rgba(3, 59, 109, .22);
-
-    /* ARREDONDAMENTO */
-    --radius: 16px;
-    --radius-pequeno: 10px;
-}
 
 /* =========================================================
-   BASE
+   RESET
 ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
-    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
     background:
-        radial-gradient(
-            circle at top right,
-            rgba(11, 132, 216, .10),
-            transparent 30%
-        ),
         linear-gradient(
             135deg,
-            #edf8ff,
-            #f9fcff 50%,
-            #e9f6ff
+            #eaf6ff 0%,
+            #f5fbff 50%,
+            #dcefff 100%
         );
 
-    color: var(--texto);
+    color: #16324f;
 
     min-height: 100vh;
+
+    line-height: 1.6;
 }
 
+
 /* =========================================================
-   CONTAINER
+   CONTAINER PRINCIPAL
 ========================================================= */
 
 .container {
-    width: min(94%, 1250px);
-    margin: 30px auto;
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    padding: 25px;
 }
+
 
 /* =========================================================
    CABEÇALHO
@@ -91,277 +64,250 @@ body {
 
 .topo,
 .painel-header {
-    position: relative;
-    overflow: hidden;
 
     background:
         linear-gradient(
             135deg,
-            #03294d 0%,
-            #075da5 50%,
-            #0b8eea 100%
+            #003b73,
+            #0066cc,
+            #008ee8
         );
 
     color: white;
 
-    padding: 32px 38px;
+    border-radius: 18px;
 
-    border-radius: 22px;
+    padding: 25px 30px;
 
     display: flex;
-    justify-content: space-between;
+
     align-items: center;
 
-    margin-bottom: 18px;
+    justify-content: space-between;
 
-    box-shadow: var(--sombra-forte);
+    gap: 20px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 75, 150, 0.22);
 }
 
-/* EFEITOS DECORATIVOS */
-
-.topo::before,
-.painel-header::before {
-    content: "";
-
-    position: absolute;
-
-    width: 280px;
-    height: 280px;
-
-    right: -100px;
-    top: -150px;
-
-    background: rgba(255,255,255,.08);
-
-    border-radius: 50%;
-}
-
-.topo::after,
-.painel-header::after {
-    content: "";
-
-    position: absolute;
-
-    width: 180px;
-    height: 180px;
-
-    right: 180px;
-    bottom: -140px;
-
-    background: rgba(255,255,255,.05);
-
-    border-radius: 50%;
-}
-
-.topo > *,
-.painel-header > * {
-    position: relative;
-    z-index: 2;
-}
 
 .topo h1,
 .topo h2,
 .painel-header h1,
 .painel-header h2 {
+
+    margin: 0;
+
     color: white;
 
-    margin-bottom: 8px;
+    font-size: 30px;
 
     font-weight: 800;
-
-    letter-spacing: -.6px;
 }
 
-.topo h1 {
-    font-size: 30px;
-}
-
-.topo h2,
-.painel-header h2 {
-    font-size: 25px;
-}
 
 .topo p,
 .painel-header p {
-    color: #d9efff;
 
-    font-size: 14px;
+    margin-top: 5px;
+
+    color: #dff3ff;
+
+    font-size: 15px;
 }
 
-/* =========================================================
-   MENU
-========================================================= */
-
-.menu {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    gap: 5px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #03294d,
-            #064b82
-        );
-
-    padding: 8px;
-
-    border-radius: 14px;
-
-    margin-bottom: 25px;
-
-    box-shadow:
-        0 6px 20px rgba(3, 59, 109, .16);
-}
-
-.menu a {
-    position: relative;
-
-    text-decoration: none;
-
-    color: #dcefff;
-
-    padding: 12px 17px;
-
-    border-radius: 9px;
-
-    font-size: 13px;
-
-    font-weight: 600;
-
-    transition: .2s ease;
-}
-
-.menu a:hover {
-    background: rgba(255,255,255,.13);
-
-    color: white;
-
-    transform: translateY(-1px);
-}
-
-.menu a:active,
-.menu a.active {
-    background:
-        linear-gradient(
-            135deg,
-            #0879d1,
-            #0797ed
-        );
-
-    color: white;
-
-    box-shadow:
-        0 4px 12px rgba(8,121,209,.25);
-}
 
 /* =========================================================
    BOTÃO VOLTAR
 ========================================================= */
 
 .btn-voltar {
+
     display: inline-flex;
 
     align-items: center;
-    justify-content: center;
 
-    gap: 7px;
+    justify-content: center;
 
     text-decoration: none;
 
-    background: rgba(255,255,255,.13);
+    background: white;
 
-    border: 1px solid rgba(255,255,255,.25);
+    color: #005eb8;
 
-    color: white;
-
-    padding: 11px 18px;
+    padding: 11px 20px;
 
     border-radius: 10px;
 
-    font-size: 13px;
+    font-weight: bold;
 
-    font-weight: 700;
+    transition:
+        .2s ease;
 
-    transition: .2s ease;
-
-    backdrop-filter: blur(8px);
+    white-space: nowrap;
 }
 
-.btn-voltar:hover {
-    background: white;
 
-    color: var(--azul-escuro);
+.btn-voltar:hover {
+
+    background: #e8f5ff;
+
+    color: #003b73;
 
     transform: translateY(-2px);
 
     box-shadow:
-        0 6px 16px rgba(0,0,0,.12);
+        0 5px 15px
+        rgba(0, 0, 0, .15);
 }
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu {
+
+    background: #ffffff;
+
+    border-radius: 15px;
+
+    padding: 10px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 7px 25px
+        rgba(0, 80, 150, .12);
+
+    border:
+        1px solid #cfe8fa;
+}
+
+
+.menu a {
+
+    flex: 1;
+
+    min-width: 120px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    color: #075b9f;
+
+    background: #f1f9ff;
+
+    padding: 13px 15px;
+
+    border-radius: 10px;
+
+    font-weight: 700;
+
+    transition:
+        .2s ease;
+}
+
+
+.menu a:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #0074d9,
+            #005eb8
+        );
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 94, 184, .25);
+}
+
 
 /* =========================================================
    CARDS
 ========================================================= */
 
 .card {
-    position: relative;
 
-    background: rgba(255,255,255,.96);
+    background: white;
 
-    border: 1px solid var(--borda);
+    border-radius: 18px;
 
-    border-radius: var(--radius);
+    padding: 25px;
 
-    padding: 27px;
+    margin-bottom: 22px;
 
-    margin-bottom: 20px;
+    border:
+        1px solid #cfe5f5;
 
-    box-shadow: var(--sombra);
+    box-shadow:
+        0 8px 28px
+        rgba(0, 75, 150, .10);
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease;
+        transform .2s ease,
+        box-shadow .2s ease;
 }
+
 
 .card:hover {
-    box-shadow: var(--sombra-hover);
+
+    box-shadow:
+        0 12px 35px
+        rgba(0, 75, 150, .15);
 }
 
-.card h2 {
-    color: var(--azul-escuro);
 
-    font-size: 23px;
+.card h2 {
+
+    color: #003b73;
+
+    margin-bottom: 10px;
+
+    font-size: 25px;
+}
+
+
+.card h3 {
+
+    color: #005eb8;
+
+    margin-bottom: 10px;
+
+    font-size: 21px;
+}
+
+
+.card p {
+
+    color: #526b82;
 
     margin-bottom: 12px;
 }
 
-.card h3 {
-    color: var(--azul-escuro);
-
-    font-size: 17px;
-
-    margin-bottom: 16px;
-
-    font-weight: 700;
-}
-
-.card p {
-    color: var(--texto-secundario);
-
-    line-height: 1.7;
-
-    font-size: 14px;
-
-    margin-bottom: 10px;
-}
 
 /* =========================================================
    GRID
 ========================================================= */
 
 .grid {
+
     display: grid;
 
     grid-template-columns:
@@ -371,57 +317,26 @@ body {
         );
 
     gap: 20px;
+
+    margin-bottom: 25px;
 }
 
-.grid .card {
-    min-height: 220px;
 
-    border-top: 4px solid var(--azul);
+.grid .card {
+
+    margin-bottom: 0;
 
     display: flex;
 
     flex-direction: column;
-
-    align-items: flex-start;
-
-    overflow: hidden;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
 }
 
-.grid .card::before {
-    content: "";
 
-    position: absolute;
+.grid .card .btn {
 
-    width: 100px;
-    height: 100px;
-
-    right: -45px;
-    top: -45px;
-
-    background: rgba(11,132,216,.05);
-
-    border-radius: 50%;
+    margin-top: auto;
 }
 
-.grid .card:hover {
-    transform: translateY(-6px);
-
-    box-shadow: var(--sombra-hover);
-}
-
-.grid .card h3 {
-    color: var(--azul-escuro);
-
-    font-size: 18px;
-}
-
-.grid .card p {
-    flex: 1;
-}
 
 /* =========================================================
    BOTÕES
@@ -429,152 +344,228 @@ body {
 
 button,
 .btn {
-    display: inline-flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 7px;
 
     border: none;
+
+    border-radius: 10px;
+
+    padding: 13px 20px;
 
     background:
         linear-gradient(
             135deg,
-            #0879d1,
-            #0797ed
+            #0066cc,
+            #008ee8
         );
 
     color: white;
 
-    padding: 12px 19px;
+    font-size: 15px;
 
-    border-radius: 10px;
-
-    font-family: inherit;
-
-    font-size: 13px;
-
-    font-weight: 700;
+    font-weight: bold;
 
     cursor: pointer;
 
     text-decoration: none;
 
-    margin-top: 8px;
+    display: inline-flex;
 
-    transition: .2s ease;
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        .2s ease;
 
     box-shadow:
-        0 5px 14px rgba(8,121,209,.20);
+        0 5px 15px
+        rgba(0, 102, 204, .20);
 }
+
 
 button:hover,
 .btn:hover {
+
     background:
         linear-gradient(
             135deg,
-            #0564ad,
-            #0879d1
+            #004f9e,
+            #006dcc
         );
 
     transform: translateY(-2px);
 
     box-shadow:
-        0 8px 20px rgba(8,121,209,.28);
+        0 8px 20px
+        rgba(0, 80, 160, .30);
 }
+
 
 button:active,
 .btn:active {
-    transform: translateY(0);
+
+    transform:
+        translateY(0);
 }
+
 
 /* =========================================================
    FORMULÁRIOS
 ========================================================= */
 
 label {
+
     display: block;
 
-    color: var(--azul-escuro);
+    margin-top: 15px;
 
-    font-size: 13px;
+    margin-bottom: 6px;
 
-    font-weight: 700;
+    color: #174b70;
 
-    margin-top: 10px;
+    font-weight: bold;
+
+    font-size: 14px;
 }
+
 
 input,
 select,
 textarea {
+
     width: 100%;
 
-    padding: 13px 14px;
+    border:
+        1px solid #b9d8ed;
 
-    margin-top: 7px;
+    background: #fafdff;
 
-    margin-bottom: 13px;
-
-    border: 1px solid #cbdde9;
+    color: #18324a;
 
     border-radius: 10px;
 
-    background: #fbfdff;
-
-    color: var(--texto);
+    padding: 13px 14px;
 
     font-family: inherit;
 
-    font-size: 14px;
+    font-size: 15px;
 
     outline: none;
 
-    transition: .2s ease;
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
 }
 
-input:hover,
-select:hover,
-textarea:hover {
-    border-color: #9fc5df;
-}
 
 input:focus,
 select:focus,
 textarea:focus {
+
+    border-color: #0088ee;
+
     background: white;
 
-    border-color: var(--azul);
-
     box-shadow:
-        0 0 0 4px rgba(8,121,209,.10);
+        0 0 0 3px
+        rgba(0, 136, 238, .13);
 }
 
+
+input::placeholder,
+textarea::placeholder {
+
+    color: #8aa1b5;
+}
+
+
 textarea {
-    min-height: 110px;
+
+    min-height: 120px;
 
     resize: vertical;
 }
+
+
+select {
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RESULTADOS
+========================================================= */
+
+#resultado {
+
+    margin-top: 15px;
+
+    padding: 0;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+}
+
+
+.sucesso {
+
+    background: #e7f8ef;
+
+    color: #08783f;
+
+    border:
+        1px solid #a9e6c5;
+
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+    margin-top: 15px;
+}
+
+
+.erro {
+
+    background: #fff0f0;
+
+    color: #c62828;
+
+    border:
+        1px solid #ffc4c4;
+
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+    margin-top: 15px;
+}
+
 
 /* =========================================================
    FILA DE PACIENTES
 ========================================================= */
 
 .fila-item {
+
     background:
         linear-gradient(
             90deg,
-            #f0f9ff,
+            #eef8ff,
             #ffffff
         );
 
-    border: 1px solid #d9eaf5;
+    border:
+        1px solid #c9e4f7;
 
-    border-left: 5px solid var(--azul);
+    border-left:
+        6px solid #0074d9;
 
     border-radius: 12px;
 
-    padding: 16px;
+    padding: 17px;
 
     margin-bottom: 12px;
 
@@ -586,53 +577,72 @@ textarea {
 
     gap: 15px;
 
-    transition: .2s ease;
+    box-shadow:
+        0 4px 15px
+        rgba(0, 75, 150, .07);
+
+    transition:
+        .2s ease;
 }
+
 
 .fila-item:hover {
-    background: #eaf6ff;
 
-    border-left-color: var(--azul-escuro);
+    border-left-color: #00a2ff;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e4f5ff,
+            #ffffff
+        );
 
     transform: translateX(3px);
-
-    box-shadow:
-        0 5px 15px rgba(8,121,209,.08);
 }
 
+
 .fila-item strong {
-    color: var(--azul-escuro);
+
+    color: #003b73;
+
+    font-size: 17px;
+}
+
+
+.fila-item small {
+
+    color: #60788e;
 
     font-size: 14px;
 }
 
-.fila-item small {
-    color: var(--texto-secundario);
 
-    line-height: 1.8;
+.fila-item button {
 
-    font-size: 12px;
+    flex-shrink: 0;
 }
+
 
 /* =========================================================
    CONSULTÓRIO
 ========================================================= */
 
 .consultorio {
+
     background:
         linear-gradient(
             135deg,
-            #03294d,
-            #075da5
+            #003b73,
+            #0066cc
         );
 
     color: white;
 
-    padding: 20px 23px;
+    padding: 17px 20px;
 
     border-radius: 15px;
 
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 
     display: flex;
 
@@ -641,351 +651,326 @@ textarea {
     gap: 12px;
 
     box-shadow:
-        0 8px 22px rgba(7,59,107,.18);
+        0 8px 25px
+        rgba(0, 65, 130, .20);
 }
+
 
 .consultorio strong {
-    font-size: 14px;
+
+    white-space: nowrap;
 }
 
+
 .consultorio input {
+
     width: 90px;
-
-    margin: 0;
-
-    background: rgba(255,255,255,.96);
-
-    border: none;
 
     text-align: center;
 
-    font-weight: 700;
-}
+    font-weight: bold;
 
-/* =========================================================
-   MENSAGENS
-========================================================= */
+    background: white;
 
-.sucesso {
-    background: #e9f9f1;
+    color: #003b73;
 
-    color: #087443;
-
-    border: 1px solid #b9ebd0;
-
-    padding: 14px 16px;
-
-    border-radius: 10px;
-
-    margin-top: 15px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-}
-
-.erro {
-    background: #fff0f1;
-
-    color: #b42333;
-
-    border: 1px solid #f5c2c7;
-
-    padding: 14px 16px;
-
-    border-radius: 10px;
-
-    margin-top: 15px;
-
-    font-size: 13px;
-
-    font-weight: 700;
-}
-
-/* =========================================================
-   CLASSIFICAÇÃO DE RISCO
-========================================================= */
-
-.baixo,
-.moderado,
-.alto,
-.urgente {
-    display: inline-flex;
-
-    align-items: center;
-
-    padding: 7px 12px;
-
-    border-radius: 30px;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    text-transform: uppercase;
-}
-
-.baixo {
-    background: #dcfce7;
-    color: #166534;
-}
-
-.moderado {
-    background: #fef3c7;
-    color: #92400e;
-}
-
-.alto {
-    background: #fed7aa;
-    color: #9a3412;
-}
-
-.urgente {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-/* =========================================================
-   LINHA
-========================================================= */
-
-hr {
     border: none;
-
-    height: 1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #b8d8ec,
-            transparent
-        );
-
-    margin: 30px 0;
 }
 
+
 /* =========================================================
-   RODAPÉ
+   LINKS
+========================================================= */
+
+a {
+
+    transition:
+        .2s ease;
+}
+
+
+/* =========================================================
+   FOOTER
 ========================================================= */
 
 footer {
+
     background:
         linear-gradient(
             135deg,
-            #03294d,
-            #075da5
+            #003b73,
+            #005eb8
         );
 
-    color: #dcefff;
-
-    padding: 23px;
-
-    border-radius: 16px;
+    color: #d9efff;
 
     text-align: center;
-
-    margin-top: 30px;
-
-    font-size: 12px;
-
-    box-shadow:
-        0 7px 20px rgba(7,59,107,.12);
-}
-
-/* =========================================================
-   PAINEL TV
-========================================================= */
-
-.tv-container {
-    min-height: 100vh;
 
     padding: 25px;
 
-    background:
-        radial-gradient(
-            circle at top right,
-            #1299ec,
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #031d35,
-            #064d88 55%,
-            #0788db
-        );
+    border-radius: 16px;
 
-    display: grid;
+    margin-top: 30px;
 
-    grid-template-columns:
-        minmax(280px, 32%)
-        minmax(400px, 68%);
-
-    gap: 25px;
-}
-
-.tv-left,
-.tv-right {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 25px;
-}
-
-.tv-box {
-    background: white;
-
-    border-radius: 20px;
-
-    overflow: hidden;
+    font-size: 14px;
 
     box-shadow:
-        0 15px 40px rgba(0,20,50,.28);
+        0 8px 25px
+        rgba(0, 70, 140, .18);
 }
 
-.tv-title {
-    background:
-        linear-gradient(
-            135deg,
-            #03294d,
-            #0879d1
-        );
+
+footer strong {
 
     color: white;
 
-    padding: 18px 22px;
-
-    font-size: 17px;
-
-    font-weight: 800;
-
-    letter-spacing: .3px;
+    font-size: 16px;
 }
 
-.local-box {
-    text-align: center;
-
-    min-height: 320px;
-}
-
-#local-tipo {
-    color: var(--azul);
-
-    font-size: 25px;
-
-    font-weight: 800;
-
-    margin-top: 45px;
-
-    letter-spacing: 1px;
-}
-
-#local-numero {
-    color: var(--azul-escuro);
-
-    font-size: 82px;
-
-    font-weight: 800;
-
-    padding: 10px;
-
-    text-shadow:
-        0 4px 12px rgba(8,121,209,.12);
-}
-
-#patient-name {
-    color: var(--azul-escuro);
-
-    font-size: clamp(35px, 5vw, 65px);
-
-    font-weight: 800;
-
-    text-align: center;
-
-    padding: 70px 25px;
-
-    min-height: 230px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    word-break: break-word;
-}
-
-.history-box {
-    min-height: 300px;
-}
-
-#history-list {
-    list-style: none;
-
-    padding: 18px;
-}
-
-#history-list li {
-    background:
-        linear-gradient(
-            90deg,
-            #eaf6ff,
-            #f8fcff
-        );
-
-    color: var(--azul-escuro);
-
-    border-left: 5px solid var(--azul);
-
-    padding: 13px;
-
-    margin-bottom: 9px;
-
-    border-radius: 9px;
-
-    font-weight: 700;
-
-    font-size: 13px;
-
-    transition: .2s ease;
-}
-
-#history-list li:hover {
-    background: #e0f2ff;
-
-    transform: translateX(3px);
-}
-
-.logo-box {
-    text-align: center;
-
-    padding: 35px;
-}
-
-.logo-box > div {
-    filter:
-        drop-shadow(
-            0 5px 8px rgba(0,0,0,.15)
-        );
-}
-
-.logo-box h2 {
-    color: var(--azul-escuro);
-
-    font-size: 28px;
-
-    margin: 10px 0;
-}
-
-.logo-box p {
-    color: var(--texto-secundario);
-
-    font-size: 13px;
-}
 
 /* =========================================================
-   ACESSIBILIDADE
+   SCROLLBAR
 ========================================================= */
 
-button:focus-visible,
+::-webkit-scrollbar {
+
+    width: 10px;
+
+    height: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+
+    background: #e6f3fc;
+}
+
+
+::-webkit-scrollbar-thumb {
+
+    background:
+        linear-gradient(
+            #0074d9,
+            #005eb8
+        );
+
+    border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+
+    background: #003b73;
+}
+
+
+/* =========================================================
+   SELEÇÃO DE TEXTO
+========================================================= */
+
+::selection {
+
+    background: #0088ee;
+
+    color: white;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .container {
+
+        padding: 18px;
+    }
+
+
+    .topo,
+    .painel-header {
+
+        padding: 22px;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+
+
+    .btn-voltar {
+
+        width: 100%;
+    }
+
+
+    .menu a {
+
+        flex:
+            1 1 30%;
+    }
+
+
+    .fila-item {
+
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .fila-item button {
+
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    body {
+
+        font-size: 14px;
+    }
+
+
+    .container {
+
+        padding: 10px;
+    }
+
+
+    .topo,
+    .painel-header {
+
+        border-radius: 12px;
+
+        padding: 18px;
+    }
+
+
+    .topo h1,
+    .topo h2,
+    .painel-header h2 {
+
+        font-size: 23px;
+    }
+
+
+    .menu {
+
+        padding: 7px;
+
+        border-radius: 12px;
+    }
+
+
+    .menu a {
+
+        flex:
+            1 1 45%;
+
+        min-width: 0;
+
+        padding: 11px 8px;
+
+        font-size: 13px;
+    }
+
+
+    .card {
+
+        padding: 18px;
+
+        border-radius: 14px;
+    }
+
+
+    .card h2 {
+
+        font-size: 21px;
+    }
+
+
+    .card h3 {
+
+        font-size: 18px;
+    }
+
+
+    button,
+    .btn {
+
+        width: 100%;
+
+        padding: 13px;
+    }
+
+
+    .consultorio {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        text-align: center;
+    }
+
+
+    .consultorio input {
+
+        width: 100%;
+    }
+
+
+    input,
+    select,
+    textarea {
+
+        font-size: 16px;
+    }
+
+
+    footer {
+
+        border-radius: 12px;
+
+        padding: 20px 10px;
+    }
+
+}
+
+
+/* =========================================================
+   ANIMAÇÕES
+========================================================= */
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(10px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+.card,
+.fila-item {
+
+    animation:
+        aparecer .3s ease;
+}
