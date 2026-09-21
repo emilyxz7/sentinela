@@ -2,527 +2,233 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Alta Médica - Saúde Integra</title>
 
-    <title>Alta Hospitalar - Saúde Integra</title>
-
-    <link
-        rel="stylesheet"
-        href="CSS/style.css"
-    >
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 
 <body>
 
+<header class="topbar">
 
-<div class="container">
-
-
-    <!-- =====================================================
-         CABEÇALHO
-    ====================================================== -->
-
-    <header class="topo">
+    <div class="brand">
+        <div class="brand-icon">🏥</div>
 
         <div>
+            <strong>Saúde Integra</strong>
+            <span>Sistema de Gestão em Saúde</span>
+        </div>
+    </div>
 
-            <h2>
-                📋 Alta Hospitalar
-            </h2>
+    <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="atendimento.html">Atendimento</a>
+        <a href="triagem.html">Triagem</a>
+        <a href="medico.html">Painel Médico</a>
+        <a href="medicacoes.html">Medicações</a>
+        <a href="alta.html" class="active">Alta Médica</a>
+        <a href="tv.html">Painel TV</a>
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-title">
+
+        <div>
+            <span class="page-tag">FINALIZAÇÃO</span>
+
+            <h1>✅ Alta médica</h1>
 
             <p>
-                Finalização do atendimento dos pacientes
+                Registre a alta do paciente após o atendimento.
             </p>
-
         </div>
 
-
-        <a
-            href="index.html"
-            class="btn-voltar"
-        >
+        <a href="index.html" class="btn btn-secondary">
             ← Voltar
         </a>
 
-    </header>
-
-
-    <!-- =====================================================
-         MENU
-    ====================================================== -->
-
-    <nav class="menu">
-
-        <a href="index.html">
-            🏠 Início
-        </a>
-
-        <a href="atendimento.html">
-            📝 Atendimento
-        </a>
-
-        <a href="triagem.html">
-            🩺 Triagem
-        </a>
-
-        <a href="medico.html">
-            👨‍⚕️ Médico
-        </a>
-
-        <a href="medicacoes.html">
-            💊 Medicações
-        </a>
-
-        <a href="alta.html">
-            📋 Alta
-        </a>
-
-        <a
-            href="tv.html"
-            target="_blank"
-        >
-            📺 Painel TV
-        </a>
-
-    </nav>
-
-
-    <!-- =====================================================
-         INFORMAÇÃO
-    ====================================================== -->
-
-    <div class="card">
-
-        <h2>
-            🏥 Finalização de atendimento
-        </h2>
-
-        <p>
-            Nesta área são exibidos os pacientes que
-            passaram pelo atendimento médico e estão
-            aguardando a finalização do processo.
-        </p>
-
     </div>
 
 
-    <!-- =====================================================
-         PACIENTES
-    ====================================================== -->
+    <section class="panel">
 
-    <div class="card">
+        <div class="panel-header">
 
-        <h3>
-            👥 Pacientes atendidos
-        </h3>
+            <div>
+                <h2>📋 Registrar alta</h2>
 
-        <p>
-            Selecione um paciente para realizar a alta
-            hospitalar.
-        </p>
-
-
-        <div id="lista">
-
-            Carregando...
-
+                <p>
+                    Preencha os dados para concluir o atendimento.
+                </p>
+            </div>
         </div>
 
-    </div>
 
+        <form id="formAlta">
 
-    <!-- =====================================================
-         RODAPÉ
-    ====================================================== -->
+            <div class="field">
 
-    <footer>
+                <label for="pacienteId">
+                    Código do paciente
+                </label>
 
-        🏥 <strong>Saúde Integra</strong>
-
-        <br>
-
-        Sistema Hospitalar Integrado
-
-        <br><br>
-
-        © 2026 Saúde Integra — Todos os direitos reservados.
-
-    </footer>
-
-
-</div>
-
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
-<script>
-
-
-/* =========================================================
-   CARREGAR CONSULTAS
-========================================================= */
-
-async function carregarConsultas() {
-
-
-    const lista =
-        document.getElementById(
-            "lista"
-        );
-
-
-    try {
-
-
-        const resposta =
-            await fetch(
-                "/consultas"
-            );
-
-
-        const consultas =
-            await resposta.json();
-
-
-        lista.innerHTML =
-            "";
-
-
-        /* -------------------------------------------------
-           NENHUM PACIENTE
-        ------------------------------------------------- */
-
-        if (!consultas.length) {
-
-            lista.innerHTML = `
-
-                <div class="fila-item">
-
-                    <div>
-
-                        <strong>
-                            ✅ Nenhum paciente aguardando alta
-                        </strong>
-
-                        <br>
-
-                        <small>
-                            Quando houver pacientes atendidos
-                            pelo médico, eles aparecerão aqui.
-                        </small>
-
-                    </div>
-
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        /* -------------------------------------------------
-           LISTAR CONSULTAS
-        ------------------------------------------------- */
-
-        consultas.forEach(
-            (consulta, index) => {
-
-
-                const item =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                item.className =
-                    "fila-item";
-
-
-                /* -----------------------------------------
-                   INFORMAÇÕES DO PACIENTE
-                ------------------------------------------ */
-
-                const informacoes =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                informacoes.innerHTML = `
-
-                    <strong>
-
-                        👤
-                        ${escapeHTML(
-                            consulta.paciente ||
-                            "Paciente"
-                        )}
-
-                    </strong>
-
-                    <br>
-
-                    <small>
-
-                        🩺 Diagnóstico:
-                        ${escapeHTML(
-                            consulta.diagnostico ||
-                            "Não informado"
-                        )}
-
-                    </small>
-
-                    <br>
-
-                    <small>
-
-                        💊 Medicação:
-                        ${escapeHTML(
-                            consulta.medicacao ||
-                            "Não informada"
-                        )}
-
-                    </small>
-
-                    <br>
-
-                    <small>
-
-                        📋 Observações:
-                        ${escapeHTML(
-                            consulta.obs ||
-                            "Nenhuma observação"
-                        )}
-
-                    </small>
-
-                `;
-
-
-                /* -----------------------------------------
-                   BOTÃO DE ALTA
-                ------------------------------------------ */
-
-                const botao =
-                    document.createElement(
-                        "button"
-                    );
-
-
-                botao.type =
-                    "button";
-
-
-                botao.textContent =
-                    "📋 Dar alta";
-
-
-                botao.onclick =
-                    () => darAlta(index);
-
-
-                item.appendChild(
-                    informacoes
-                );
-
-
-                item.appendChild(
-                    botao
-                );
-
-
-                lista.appendChild(
-                    item
-                );
-
-            }
-        );
-
-    }
-
-
-    catch (erro) {
-
-        lista.innerHTML = `
-
-            <div class="erro">
-
-                ❌ Erro ao carregar as consultas.
+                <input
+                    type="text"
+                    id="pacienteId"
+                    placeholder="Informe o código do paciente"
+                    required
+                >
 
             </div>
 
-        `;
 
-    }
+            <div class="field">
 
-}
+                <label for="paciente">
+                    Nome do paciente
+                </label>
 
+                <input
+                    type="text"
+                    id="paciente"
+                    placeholder="Nome completo do paciente"
+                    required
+                >
 
-/* =========================================================
-   DAR ALTA
-========================================================= */
-
-async function darAlta(index) {
-
-
-    const confirmar =
-        confirm(
-            "Deseja realmente dar alta para este paciente?"
-        );
+            </div>
 
 
-    if (!confirmar) {
+            <div class="field">
 
-        return;
+                <label for="orientacoes">
+                    Orientações para o paciente
+                </label>
 
-    }
+                <textarea
+                    id="orientacoes"
+                    rows="5"
+                    placeholder="Digite as orientações médicas..."
+                    required
+                ></textarea>
 
-
-    try {
-
-
-        const resposta =
-            await fetch(
-                "/alta",
-                {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json"
-
-                    },
-
-                    body:
-                        JSON.stringify({
-
-                            index
-
-                        })
-
-                }
-            );
+            </div>
 
 
-        const data =
-            await resposta.json();
+            <div class="actions">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary">
+                    ✅ Confirmar alta
+                </button>
+
+                <button
+                    type="reset"
+                    class="btn btn-secondary">
+                    🧹 Limpar
+                </button>
+
+            </div>
+
+        </form>
 
 
-        /* -------------------------------------------------
-           VERIFICAR ERRO
-        ------------------------------------------------- */
+        <div id="mensagem" class="message"></div>
 
-        if (!resposta.ok) {
+    </section>
 
-            throw new Error(
+</main>
 
-                data.erro ||
-                "Erro ao dar alta."
 
-            );
+<footer class="footer">
+
+    <p>
+        © 2026 Saúde Integra — Sistema de Gestão em Saúde
+    </p>
+
+</footer>
+
+
+<script>
+
+    const formAlta = document.getElementById("formAlta");
+    const mensagem = document.getElementById("mensagem");
+
+
+    formAlta.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const dados = {
+
+            pacienteId:
+                document.getElementById("pacienteId").value.trim(),
+
+            paciente:
+                document.getElementById("paciente").value.trim(),
+
+            orientacoes:
+                document.getElementById("orientacoes").value.trim()
+
+        };
+
+
+        try {
+
+            const resposta = await fetch("/alta", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(dados)
+
+            });
+
+
+            const resultado = await resposta.json();
+
+
+            if (!resposta.ok) {
+
+                throw new Error(
+                    resultado.mensagem || "Não foi possível registrar a alta."
+                );
+
+            }
+
+
+            mensagem.className = "message success";
+
+            mensagem.textContent =
+                "✅ Alta médica registrada com sucesso!";
+
+
+            formAlta.reset();
+
+
+        } catch (erro) {
+
+            mensagem.className = "message error";
+
+            mensagem.textContent =
+                "❌ " + erro.message;
 
         }
 
-
-        /* -------------------------------------------------
-           SUCESSO
-        ------------------------------------------------- */
-
-        alert(
-            "✅ Alta realizada com sucesso!"
-        );
-
-
-        /* -------------------------------------------------
-           ATUALIZAR LISTA
-        ------------------------------------------------- */
-
-        carregarConsultas();
-
-    }
-
-
-    catch (erro) {
-
-        alert(
-            "❌ " + erro.message
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   PROTEÇÃO CONTRA HTML
-========================================================= */
-
-function escapeHTML(texto) {
-
-    return String(texto)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
-
-carregarConsultas();
-
-
-/* =========================================================
-   ATUALIZAÇÃO AUTOMÁTICA
-========================================================= */
-
-setInterval(
-    carregarConsultas,
-    5000
-);
-
+    });
 
 </script>
 
-
 </body>
-
 </html>
