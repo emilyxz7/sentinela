@@ -2,1042 +2,187 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Painel de Chamada - Saúde Integra</title>
 
-    <title>Painel TV - Saúde Integra</title>
-
-    <link
-        rel="stylesheet"
-        href="CSS/style.css"
-    >
-
-    <style>
-
-        /* =====================================================
-           PAINEL TV
-        ====================================================== */
-
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-
-
-        .tv-container {
-
-            min-height: 100vh;
-
-            padding: 25px;
-
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(0, 190, 255, .35),
-                    transparent 35%
-                ),
-                linear-gradient(
-                    135deg,
-                    #001f4d,
-                    #003b73 45%,
-                    #0066cc
-                );
-
-            display: grid;
-
-            grid-template-columns:
-                34% 66%;
-
-            gap: 25px;
-
-            color: #18324a;
-
-        }
-
-
-        .tv-left,
-        .tv-right {
-
-            display: flex;
-
-            flex-direction: column;
-
-            gap: 25px;
-
-            min-width: 0;
-
-        }
-
-
-        .tv-box {
-
-            background: #ffffff;
-
-            border-radius: 22px;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 15px 40px
-                rgba(0, 25, 70, .35);
-
-            border:
-                1px solid
-                rgba(255,255,255,.4);
-
-        }
-
-
-        /* =====================================================
-           TÍTULOS
-        ====================================================== */
-
-        .tv-title {
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #003b73,
-                    #0066cc,
-                    #0088ee
-                );
-
-            color: white;
-
-            padding: 20px 24px;
-
-            font-size: 22px;
-
-            font-weight: bold;
-
-            letter-spacing: .5px;
-
-            text-align: center;
-
-        }
-
-
-        /* =====================================================
-           LOCAL
-        ====================================================== */
-
-        .local-box {
-
-            text-align: center;
-
-        }
-
-
-        #local-tipo {
-
-            color: #0066cc;
-
-            font-size: 28px;
-
-            font-weight: bold;
-
-            margin-top: 35px;
-
-            letter-spacing: 1px;
-
-        }
-
-
-        #local-numero {
-
-            color: #003b73;
-
-            font-size: 90px;
-
-            line-height: 1;
-
-            font-weight: 900;
-
-            padding: 25px 20px 40px;
-
-            text-shadow:
-                0 3px 10px
-                rgba(0, 70, 150, .15);
-
-        }
-
-
-        /* =====================================================
-           PACIENTE
-        ====================================================== */
-
-        .patient-box {
-
-            flex: 1;
-
-            display: flex;
-
-            flex-direction: column;
-
-        }
-
-
-        #patient-name {
-
-            flex: 1;
-
-            min-height: 280px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            text-align: center;
-
-            color: #003b73;
-
-            font-size: clamp(
-                45px,
-                6vw,
-                90px
-            );
-
-            font-weight: 900;
-
-            padding: 30px;
-
-            line-height: 1.05;
-
-            text-transform: uppercase;
-
-        }
-
-
-        /* =====================================================
-           HISTÓRICO
-        ====================================================== */
-
-        .history-box {
-
-            flex: 1;
-
-            min-height: 0;
-
-        }
-
-
-        #history-list {
-
-            list-style: none;
-
-            padding: 20px;
-
-            margin: 0;
-
-        }
-
-
-        #history-list li {
-
-            background:
-                linear-gradient(
-                    90deg,
-                    #eef8ff,
-                    #ffffff
-                );
-
-            color: #003b73;
-
-            border-left:
-                7px solid
-                #0066cc;
-
-            padding: 17px;
-
-            margin-bottom: 12px;
-
-            border-radius: 10px;
-
-            font-size: 19px;
-
-            font-weight: bold;
-
-            box-shadow:
-                0 4px 12px
-                rgba(0, 80, 160, .08);
-
-        }
-
-
-        #history-list li:last-child {
-
-            margin-bottom: 0;
-
-        }
-
-
-        /* =====================================================
-           LOGO
-        ====================================================== */
-
-        .logo-box {
-
-            text-align: center;
-
-            padding: 30px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #ffffff,
-                    #eef8ff
-                );
-
-        }
-
-
-        .logo-icon {
-
-            width: 90px;
-
-            height: 90px;
-
-            margin: 0 auto 15px;
-
-            border-radius: 50%;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #003b73,
-                    #0088ee
-                );
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 48px;
-
-            box-shadow:
-                0 8px 25px
-                rgba(0, 90, 180, .3);
-
-        }
-
-
-        .logo-box h2 {
-
-            color: #003b73;
-
-            font-size: 30px;
-
-            margin: 5px 0;
-
-        }
-
-
-        .logo-box p {
-
-            color: #64748b;
-
-            margin: 0;
-
-            font-size: 17px;
-
-        }
-
-
-        /* =====================================================
-           ANIMAÇÃO DE CHAMADA
-        ====================================================== */
-
-        .chamada-ativa {
-
-            animation:
-                destaquePaciente
-                1s ease-in-out 3;
-
-        }
-
-
-        @keyframes destaquePaciente {
-
-            0% {
-                background: #ffffff;
-            }
-
-            50% {
-                background: #d9efff;
-            }
-
-            100% {
-                background: #ffffff;
-            }
-
-        }
-
-
-        /* =====================================================
-           INDICADOR
-        ====================================================== */
-
-        .status-painel {
-
-            position: fixed;
-
-            right: 25px;
-
-            bottom: 20px;
-
-            background:
-                rgba(0, 59, 115, .9);
-
-            color: white;
-
-            padding: 9px 15px;
-
-            border-radius: 20px;
-
-            font-size: 13px;
-
-            box-shadow:
-                0 5px 15px
-                rgba(0,0,0,.2);
-
-        }
-
-
-        .status-ponto {
-
-            display: inline-block;
-
-            width: 9px;
-
-            height: 9px;
-
-            background: #35e879;
-
-            border-radius: 50%;
-
-            margin-right: 7px;
-
-            box-shadow:
-                0 0 8px
-                #35e879;
-
-        }
-
-
-        /* =====================================================
-           RESPONSIVO
-        ====================================================== */
-
-        @media (max-width: 1000px) {
-
-            body {
-                overflow: auto;
-            }
-
-
-            .tv-container {
-
-                grid-template-columns: 1fr;
-
-                min-height: 100vh;
-
-            }
-
-
-            #patient-name {
-
-                min-height: 220px;
-
-                font-size: 55px;
-
-            }
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            .tv-container {
-
-                padding: 12px;
-
-                gap: 12px;
-
-            }
-
-
-            .tv-left,
-            .tv-right {
-
-                gap: 12px;
-
-            }
-
-
-            .tv-title {
-
-                font-size: 17px;
-
-                padding: 15px;
-
-            }
-
-
-            #local-tipo {
-
-                font-size: 21px;
-
-                margin-top: 25px;
-
-            }
-
-
-            #local-numero {
-
-                font-size: 65px;
-
-                padding: 20px;
-
-            }
-
-
-            #patient-name {
-
-                min-height: 180px;
-
-                font-size: 38px;
-
-            }
-
-
-            #history-list li {
-
-                font-size: 15px;
-
-                padding: 12px;
-
-            }
-
-
-            .logo-box {
-
-                padding: 20px;
-
-            }
-
-
-            .logo-box h2 {
-
-                font-size: 24px;
-
-            }
-
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 
 <body>
 
+<header class="topbar">
 
-<div class="tv-container">
+    <div class="brand">
+        <div class="brand-icon">🏥</div>
 
-
-    <!-- =====================================================
-         LADO ESQUERDO
-    ====================================================== -->
-
-    <div class="tv-left">
-
-
-        <!-- LOCAL -->
-
-        <div class="tv-box local-box">
-
-            <div class="tv-title">
-
-                📍 LOCAL DE ATENDIMENTO
-
-            </div>
-
-
-            <div id="local-tipo">
-
-                CONSULTÓRIO
-
-            </div>
-
-
-            <div id="local-numero">
-
-                --
-
-            </div>
-
+        <div>
+            <strong>Saúde Integra</strong>
+            <span>Sistema de Gestão em Saúde</span>
         </div>
-
-
-        <!-- HISTÓRICO -->
-
-        <div class="tv-box history-box">
-
-            <div class="tv-title">
-
-                📋 ÚLTIMAS CHAMADAS
-
-            </div>
-
-
-            <ul id="history-list">
-
-                <li>
-                    Nenhuma chamada realizada.
-                </li>
-
-            </ul>
-
-        </div>
-
-
     </div>
 
+    <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="atendimento.html">Atendimento</a>
+        <a href="triagem.html">Triagem</a>
+        <a href="medico.html">Painel Médico</a>
+        <a href="medicacoes.html">Medicações</a>
+        <a href="alta.html">Alta Médica</a>
+        <a href="tv.html" class="active">Painel TV</a>
+    </nav>
 
-    <!-- =====================================================
-         LADO DIREITO
-    ====================================================== -->
-
-    <div class="tv-right">
-
-
-        <!-- PACIENTE -->
-
-        <div
-            class="tv-box patient-box"
-            id="patient-box"
-        >
-
-            <div class="tv-title">
-
-                👤 PACIENTE
-
-            </div>
+</header>
 
 
-            <div id="patient-name">
+<main class="container">
 
-                AGUARDANDO...
+    <div class="page-title">
 
-            </div>
+        <div>
+            <span class="page-tag">CHAMADA DE PACIENTES</span>
 
-        </div>
-
-
-        <!-- LOGO -->
-
-        <div class="tv-box logo-box">
-
-            <div class="logo-icon">
-
-                🏥
-
-            </div>
-
-
-            <h2>
-
-                Saúde Integra
-
-            </h2>
-
+            <h1>📺 Painel de chamada</h1>
 
             <p>
-
-                Sistema Hospitalar Integrado
-
+                Acompanhe o paciente chamado para atendimento.
             </p>
-
         </div>
 
+        <a href="index.html" class="btn btn-secondary">
+            ← Voltar
+        </a>
 
     </div>
 
 
-</div>
+    <section class="tv-screen">
+
+        <div class="tv-logo">
+            🏥
+        </div>
+
+        <h2>SAÚDE INTEGRA</h2>
+
+        <p class="tv-subtitle">
+            Atenção ao chamado
+        </p>
 
 
-<!-- =====================================================
-     STATUS
-====================================================== -->
+        <div class="tv-call">
 
-<div class="status-painel">
+            <span>Paciente chamado</span>
 
-    <span class="status-ponto"></span>
+            <strong id="nomePaciente">
+                Aguardando chamada...
+            </strong>
 
-    Painel conectado
+            <div class="tv-local" id="localPaciente">
+                —
+            </div>
 
-</div>
+        </div>
+
+
+        <div class="tv-clock" id="relogio">
+            00:00:00
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="footer">
+
+    <p>
+        © 2026 Saúde Integra — Sistema de Gestão em Saúde
+    </p>
+
+</footer>
 
 
 <script>
 
-
-/* =========================================================
-   VARIÁVEIS
-========================================================= */
-
-let ultimoId = null;
+    let ultimaChamada = null;
 
 
-/* =========================================================
-   ATUALIZAR PAINEL
-========================================================= */
+    function atualizarRelogio() {
 
-async function atualizarPainel() {
+        const agora = new Date();
 
+        const hora = String(agora.getHours()).padStart(2, "0");
 
-    try {
+        const minuto = String(agora.getMinutes()).padStart(2, "0");
 
-
-        const resposta =
-            await fetch(
-                "/tv/chamada",
-                {
-                    cache: "no-store"
-                }
-            );
+        const segundo = String(agora.getSeconds()).padStart(2, "0");
 
 
-        if (!resposta.ok) {
+        document.getElementById("relogio").textContent =
+            `${hora}:${minuto}:${segundo}`;
 
-            throw new Error(
-                "Servidor indisponível"
-            );
-
-        }
+    }
 
 
-        const data =
-            await resposta.json();
+    async function carregarChamada() {
+
+        try {
+
+            const resposta = await fetch("/tv/atual");
+
+            if (!resposta.ok) {
+                return;
+            }
+
+            const chamada = await resposta.json();
 
 
-        const chamada =
-            data.chamada;
+            if (!chamada || !chamada.paciente) {
+                return;
+            }
 
 
-        const historico =
-            Array.isArray(
-                data.historico
-            )
-                ? data.historico
-                : [];
+            const identificador =
+                JSON.stringify(chamada);
 
 
-        /* =================================================
-           CHAMADA ATUAL
-        ================================================== */
+            if (identificador !== ultimaChamada) {
 
-        if (chamada) {
+                ultimaChamada = identificador;
 
 
-            const tipo =
-                chamada.localTipo ||
-                "CONSULTÓRIO";
+                document.getElementById("nomePaciente").textContent =
+                    chamada.paciente;
 
 
-            const numero =
-                chamada.localNumero ||
-                "--";
-
-
-            const paciente =
-                chamada.paciente ||
-                "AGUARDANDO...";
-
-
-            document.getElementById(
-                "local-tipo"
-            ).textContent =
-                tipo;
-
-
-            document.getElementById(
-                "local-numero"
-            ).textContent =
-                numero;
-
-
-            document.getElementById(
-                "patient-name"
-            ).textContent =
-                paciente;
-
-
-            /* ---------------------------------------------
-               NOVA CHAMADA
-            ---------------------------------------------- */
-
-            if (
-                chamada.id !==
-                ultimoId
-            ) {
-
-
-                ultimoId =
-                    chamada.id;
-
-
-                destacarPaciente();
-
-
-                falarChamada(
-                    paciente,
-                    tipo,
-                    numero
-                );
+                document.getElementById("localPaciente").textContent =
+                    `${chamada.localTipo || "LOCAL"} ${
+                        chamada.localNumero || ""
+                    }`;
 
             }
 
-        }
+        } catch (erro) {
 
-
-        /* =================================================
-           HISTÓRICO
-        ================================================== */
-
-        atualizarHistorico(
-            historico
-        );
-
-    }
-
-
-    catch (erro) {
-
-        console.error(
-            "Erro no painel:",
-            erro
-        );
-
-    }
-
-}
-
-
-/* =========================================================
-   ATUALIZAR HISTÓRICO
-========================================================= */
-
-function atualizarHistorico(
-    historico
-) {
-
-
-    const lista =
-        document.getElementById(
-            "history-list"
-        );
-
-
-    lista.innerHTML =
-        "";
-
-
-    const ultimas =
-        historico.slice(
-            0,
-            5
-        );
-
-
-    if (!ultimas.length) {
-
-        const li =
-            document.createElement(
-                "li"
-            );
-
-
-        li.textContent =
-            "Nenhuma chamada realizada.";
-
-
-        lista.appendChild(
-            li
-        );
-
-
-        return;
-
-    }
-
-
-    ultimas.forEach(
-        chamada => {
-
-
-            const li =
-                document.createElement(
-                    "li"
-                );
-
-
-            const paciente =
-                chamada.paciente ||
-                "Paciente";
-
-
-            const tipo =
-                chamada.localTipo ||
-                "CONSULTÓRIO";
-
-
-            const numero =
-                chamada.localNumero ||
-                "";
-
-
-            li.textContent =
-
-                `${paciente} — ` +
-                `${tipo} ${numero}`;
-
-
-            lista.appendChild(
-                li
+            console.log(
+                "Aguardando conexão com o servidor..."
             );
 
         }
-    );
-
-}
-
-
-/* =========================================================
-   DESTACAR PACIENTE
-========================================================= */
-
-function destacarPaciente() {
-
-
-    const box =
-        document.getElementById(
-            "patient-box"
-        );
-
-
-    box.classList.remove(
-        "chamada-ativa"
-    );
-
-
-    /* Força reinício da animação */
-
-    void box.offsetWidth;
-
-
-    box.classList.add(
-        "chamada-ativa"
-    );
-
-}
-
-
-/* =========================================================
-   FALAR CHAMADA
-========================================================= */
-
-function falarChamada(
-    paciente,
-    tipo,
-    numero
-) {
-
-
-    if (
-        !("speechSynthesis" in window)
-    ) {
-
-        return;
 
     }
 
 
-    const texto =
+    atualizarRelogio();
 
-        `Atenção. ` +
+    setInterval(atualizarRelogio, 1000);
 
-        `Paciente ${paciente}. ` +
+    carregarChamada();
 
-        `Comparecer ao ` +
-
-        `${tipo || "consultório"} ` +
-
-        `${numero || ""}.`;
-
-
-    const fala =
-        new SpeechSynthesisUtterance(
-            texto
-        );
-
-
-    fala.lang =
-        "pt-BR";
-
-
-    fala.rate =
-        0.9;
-
-
-    fala.pitch =
-        1;
-
-
-    fala.volume =
-        1;
-
-
-    window.speechSynthesis.cancel();
-
-
-    window.speechSynthesis.speak(
-        fala
-    );
-
-}
-
-
-/* =========================================================
-   INICIAR
-========================================================= */
-
-atualizarPainel();
-
-
-/* =========================================================
-   ATUALIZA A CADA 2 SEGUNDOS
-========================================================= */
-
-setInterval(
-    atualizarPainel,
-    2000
-);
-
+    setInterval(carregarChamada, 3000);
 
 </script>
 
-
 </body>
-
 </html>
