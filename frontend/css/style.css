@@ -1,6 +1,6 @@
 /* =========================================================
    SAÚDE INTEGRA
-   Sistema Hospitalar - Tema Azul
+   Sistema Hospitalar — Tema Azul Personalizado
 ========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -12,30 +12,44 @@
 }
 
 :root {
-    --azul: #0879d1;
-    --azul-hover: #0564ad;
-    --azul-escuro: #073b6b;
-    --azul-profundo: #062d52;
-    --azul-claro: #eaf6ff;
-    --azul-suave: #f4faff;
+    /* AZUIS PRINCIPAIS */
+    --azul: #0b84d8;
+    --azul-hover: #066bb5;
+    --azul-claro: #e8f5ff;
+    --azul-suave: #f5fbff;
 
+    --azul-escuro: #063b6d;
+    --azul-profundo: #03294d;
+
+    /* CORES */
     --branco: #ffffff;
-
     --texto: #172b3a;
     --texto-secundario: #64748b;
 
-    --borda: #d9e8f3;
+    --borda: #d7e7f2;
 
     --verde: #16a36a;
     --vermelho: #dc3545;
     --amarelo: #f59e0b;
 
+    /* SOMBRAS */
     --sombra:
-        0 8px 30px rgba(7, 59, 107, 0.10);
+        0 8px 28px rgba(3, 59, 109, .09);
+
+    --sombra-hover:
+        0 15px 38px rgba(3, 59, 109, .16);
 
     --sombra-forte:
-        0 12px 35px rgba(7, 59, 107, 0.18);
+        0 15px 40px rgba(3, 59, 109, .22);
+
+    /* ARREDONDAMENTO */
+    --radius: 16px;
+    --radius-pequeno: 10px;
 }
+
+/* =========================================================
+   BASE
+========================================================= */
 
 html {
     scroll-behavior: smooth;
@@ -45,11 +59,16 @@ body {
     font-family: "Inter", Arial, Helvetica, sans-serif;
 
     background:
+        radial-gradient(
+            circle at top right,
+            rgba(11, 132, 216, .10),
+            transparent 30%
+        ),
         linear-gradient(
             135deg,
-            #eef8ff 0%,
-            #f8fcff 50%,
-            #e8f5ff 100%
+            #edf8ff,
+            #f9fcff 50%,
+            #e9f6ff
         );
 
     color: var(--texto);
@@ -73,15 +92,14 @@ body {
 .topo,
 .painel-header {
     position: relative;
-
     overflow: hidden;
 
     background:
         linear-gradient(
             135deg,
-            #062d52 0%,
-            #075da5 48%,
-            #0789e8 100%
+            #03294d 0%,
+            #075da5 50%,
+            #0b8eea 100%
         );
 
     color: white;
@@ -99,7 +117,7 @@ body {
     box-shadow: var(--sombra-forte);
 }
 
-/* brilho decorativo */
+/* EFEITOS DECORATIVOS */
 
 .topo::before,
 .painel-header::before {
@@ -107,11 +125,11 @@ body {
 
     position: absolute;
 
-    width: 220px;
-    height: 220px;
+    width: 280px;
+    height: 280px;
 
-    right: -80px;
-    top: -100px;
+    right: -100px;
+    top: -150px;
 
     background: rgba(255,255,255,.08);
 
@@ -124,13 +142,13 @@ body {
 
     position: absolute;
 
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
 
-    right: 100px;
-    bottom: -100px;
+    right: 180px;
+    bottom: -140px;
 
-    background: rgba(255,255,255,.06);
+    background: rgba(255,255,255,.05);
 
     border-radius: 50%;
 }
@@ -151,7 +169,7 @@ body {
 
     font-weight: 800;
 
-    letter-spacing: -0.5px;
+    letter-spacing: -.6px;
 }
 
 .topo h1 {
@@ -181,7 +199,12 @@ body {
 
     gap: 5px;
 
-    background: rgba(6, 45, 82, 0.97);
+    background:
+        linear-gradient(
+            135deg,
+            #03294d,
+            #064b82
+        );
 
     padding: 8px;
 
@@ -190,7 +213,7 @@ body {
     margin-bottom: 25px;
 
     box-shadow:
-        0 5px 18px rgba(7, 59, 107, 0.15);
+        0 6px 20px rgba(3, 59, 109, .16);
 }
 
 .menu a {
@@ -198,9 +221,9 @@ body {
 
     text-decoration: none;
 
-    color: #dbeeff;
+    color: #dcefff;
 
-    padding: 12px 16px;
+    padding: 12px 17px;
 
     border-radius: 9px;
 
@@ -208,24 +231,30 @@ body {
 
     font-weight: 600;
 
-    transition:
-        background .2s ease,
-        color .2s ease,
-        transform .2s ease;
+    transition: .2s ease;
 }
 
 .menu a:hover {
-    background: rgba(255,255,255,.12);
+    background: rgba(255,255,255,.13);
 
     color: white;
 
     transform: translateY(-1px);
 }
 
-.menu a:active {
-    background: var(--azul);
+.menu a:active,
+.menu a.active {
+    background:
+        linear-gradient(
+            135deg,
+            #0879d1,
+            #0797ed
+        );
 
     color: white;
+
+    box-shadow:
+        0 4px 12px rgba(8,121,209,.25);
 }
 
 /* =========================================================
@@ -238,17 +267,17 @@ body {
     align-items: center;
     justify-content: center;
 
-    gap: 6px;
+    gap: 7px;
 
     text-decoration: none;
 
-    background: rgba(255,255,255,.14);
+    background: rgba(255,255,255,.13);
 
     border: 1px solid rgba(255,255,255,.25);
 
     color: white;
 
-    padding: 11px 17px;
+    padding: 11px 18px;
 
     border-radius: 10px;
 
@@ -256,9 +285,9 @@ body {
 
     font-weight: 700;
 
-    transition: .2s;
+    transition: .2s ease;
 
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
 }
 
 .btn-voltar:hover {
@@ -267,6 +296,9 @@ body {
     color: var(--azul-escuro);
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 16px rgba(0,0,0,.12);
 }
 
 /* =========================================================
@@ -274,11 +306,13 @@ body {
 ========================================================= */
 
 .card {
-    background: var(--branco);
+    position: relative;
+
+    background: rgba(255,255,255,.96);
 
     border: 1px solid var(--borda);
 
-    border-radius: 18px;
+    border-radius: var(--radius);
 
     padding: 27px;
 
@@ -287,8 +321,12 @@ body {
     box-shadow: var(--sombra);
 
     transition:
-        box-shadow .2s ease,
-        transform .2s ease;
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.card:hover {
+    box-shadow: var(--sombra-hover);
 }
 
 .card h2 {
@@ -336,10 +374,6 @@ body {
 }
 
 .grid .card {
-    position: relative;
-
-    overflow: hidden;
-
     min-height: 220px;
 
     border-top: 4px solid var(--azul);
@@ -350,17 +384,33 @@ body {
 
     align-items: flex-start;
 
+    overflow: hidden;
+
     transition:
         transform .25s ease,
         box-shadow .25s ease;
 }
 
+.grid .card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -45px;
+    top: -45px;
+
+    background: rgba(11,132,216,.05);
+
+    border-radius: 50%;
+}
+
 .grid .card:hover {
     transform: translateY(-6px);
 
-    box-shadow:
-        0 15px 35px
-        rgba(7, 59, 107, 0.16);
+    box-shadow: var(--sombra-hover);
 }
 
 .grid .card h3 {
@@ -413,14 +463,10 @@ button,
 
     margin-top: 8px;
 
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+    transition: .2s ease;
 
     box-shadow:
-        0 5px 14px
-        rgba(8, 121, 209, .20);
+        0 5px 14px rgba(8,121,209,.20);
 }
 
 button:hover,
@@ -435,8 +481,7 @@ button:hover,
     transform: translateY(-2px);
 
     box-shadow:
-        0 8px 18px
-        rgba(8, 121, 209, .28);
+        0 8px 20px rgba(8,121,209,.28);
 }
 
 button:active,
@@ -485,10 +530,7 @@ textarea {
 
     outline: none;
 
-    transition:
-        border .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+    transition: .2s ease;
 }
 
 input:hover,
@@ -505,8 +547,7 @@ textarea:focus {
     border-color: var(--azul);
 
     box-shadow:
-        0 0 0 4px
-        rgba(8, 121, 209, .10);
+        0 0 0 4px rgba(8,121,209,.10);
 }
 
 textarea {
@@ -523,7 +564,7 @@ textarea {
     background:
         linear-gradient(
             90deg,
-            #f1f9ff,
+            #f0f9ff,
             #ffffff
         );
 
@@ -545,7 +586,7 @@ textarea {
 
     gap: 15px;
 
-    transition: .2s;
+    transition: .2s ease;
 }
 
 .fila-item:hover {
@@ -554,6 +595,9 @@ textarea {
     border-left-color: var(--azul-escuro);
 
     transform: translateX(3px);
+
+    box-shadow:
+        0 5px 15px rgba(8,121,209,.08);
 }
 
 .fila-item strong {
@@ -578,7 +622,7 @@ textarea {
     background:
         linear-gradient(
             135deg,
-            #062d52,
+            #03294d,
             #075da5
         );
 
@@ -597,8 +641,7 @@ textarea {
     gap: 12px;
 
     box-shadow:
-        0 8px 22px
-        rgba(7, 59, 107, .18);
+        0 8px 22px rgba(7,59,107,.18);
 }
 
 .consultorio strong {
@@ -610,7 +653,7 @@ textarea {
 
     margin: 0;
 
-    background: rgba(255,255,255,.95);
+    background: rgba(255,255,255,.96);
 
     border: none;
 
@@ -730,7 +773,7 @@ footer {
     background:
         linear-gradient(
             135deg,
-            #062d52,
+            #03294d,
             #075da5
         );
 
@@ -747,8 +790,7 @@ footer {
     font-size: 12px;
 
     box-shadow:
-        0 7px 20px
-        rgba(7, 59, 107, .12);
+        0 7px 20px rgba(7,59,107,.12);
 }
 
 /* =========================================================
@@ -799,15 +841,14 @@ footer {
     overflow: hidden;
 
     box-shadow:
-        0 15px 40px
-        rgba(0, 20, 50, .28);
+        0 15px 40px rgba(0,20,50,.28);
 }
 
 .tv-title {
     background:
         linear-gradient(
             135deg,
-            #062d52,
+            #03294d,
             #0879d1
         );
 
@@ -848,6 +889,9 @@ footer {
     font-weight: 800;
 
     padding: 10px;
+
+    text-shadow:
+        0 4px 12px rgba(8,121,209,.12);
 }
 
 #patient-name {
@@ -903,6 +947,14 @@ footer {
     font-weight: 700;
 
     font-size: 13px;
+
+    transition: .2s ease;
+}
+
+#history-list li:hover {
+    background: #e0f2ff;
+
+    transform: translateX(3px);
 }
 
 .logo-box {
@@ -914,8 +966,7 @@ footer {
 .logo-box > div {
     filter:
         drop-shadow(
-            0 5px 8px
-            rgba(0,0,0,.15)
+            0 5px 8px rgba(0,0,0,.15)
         );
 }
 
@@ -934,112 +985,7 @@ footer {
 }
 
 /* =========================================================
-   RESPONSIVO
+   ACESSIBILIDADE
 ========================================================= */
 
-@media (max-width: 900px) {
-
-    .container {
-        width: 94%;
-
-        margin: 18px auto;
-    }
-
-    .tv-container {
-        grid-template-columns: 1fr;
-
-        padding: 15px;
-    }
-
-    .tv-left,
-    .tv-right {
-        gap: 15px;
-    }
-
-    .topo,
-    .painel-header {
-        flex-direction: column;
-
-        align-items: flex-start;
-
-        gap: 18px;
-
-        padding: 27px;
-    }
-
-    .btn-voltar {
-        width: 100%;
-    }
-
-    .menu {
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-    .menu a {
-        width: 100%;
-
-        text-align: center;
-    }
-
-    .consultorio {
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-    .consultorio input {
-        width: 100%;
-    }
-
-    .fila-item {
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-    .fila-item button {
-        width: 100%;
-    }
-}
-
-@media (max-width: 500px) {
-
-    .container {
-        width: 95%;
-    }
-
-    .topo,
-    .painel-header {
-        padding: 22px;
-    }
-
-    .topo h1 {
-        font-size: 25px;
-    }
-
-    .topo h2,
-    .painel-header h2 {
-        font-size: 21px;
-    }
-
-    .card {
-        padding: 20px;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    #local-numero {
-        font-size: 65px;
-    }
-
-    #patient-name {
-        font-size: 32px;
-
-        padding: 55px 15px;
-    }
-
-}
+button:focus-visible,
