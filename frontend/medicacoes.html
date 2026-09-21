@@ -2,367 +2,189 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Medicações Prescritas - Saúde Integra</title>
 
-    <title>Medicações - Saúde Integra</title>
-
-    <link
-        rel="stylesheet"
-        href="CSS/style.css"
-    >
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 
 <body>
 
+<header class="topbar">
 
-<div class="container">
-
-
-    <!-- =====================================================
-         CABEÇALHO
-    ====================================================== -->
-
-    <header class="topo">
+    <div class="brand">
+        <div class="brand-icon">🏥</div>
 
         <div>
+            <strong>Saúde Integra</strong>
+            <span>Sistema de Gestão em Saúde</span>
+        </div>
+    </div>
 
-            <h2>
-                💊 Medicações
-            </h2>
+    <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="atendimento.html">Atendimento</a>
+        <a href="triagem.html">Triagem</a>
+        <a href="medico.html">Painel Médico</a>
+        <a href="medicacoes.html" class="active">Medicações</a>
+        <a href="tv.html">Painel TV</a>
+    </nav>
+
+</header>
+
+
+<main class="container">
+
+    <div class="page-title">
+
+        <div>
+            <span class="page-tag">CONTROLE MÉDICO</span>
+
+            <h1>💊 Medicações prescritas</h1>
 
             <p>
-                Medicamentos disponíveis no sistema
+                Consulte as medicações indicadas durante as consultas.
             </p>
-
         </div>
 
-
-        <a
-            href="index.html"
-            class="btn-voltar"
-        >
+        <a href="index.html" class="btn btn-secondary">
             ← Voltar
         </a>
 
-    </header>
-
-
-    <!-- =====================================================
-         MENU
-    ====================================================== -->
-
-    <nav class="menu">
-
-        <a href="index.html">
-            🏠 Início
-        </a>
-
-        <a href="atendimento.html">
-            📝 Atendimento
-        </a>
-
-        <a href="triagem.html">
-            🩺 Triagem
-        </a>
-
-        <a href="medico.html">
-            👨‍⚕️ Médico
-        </a>
-
-        <a href="medicacoes.html">
-            💊 Medicações
-        </a>
-
-        <a href="alta.html">
-            📋 Alta
-        </a>
-
-        <a
-            href="tv.html"
-            target="_blank"
-        >
-            📺 Painel TV
-        </a>
-
-    </nav>
-
-
-    <!-- =====================================================
-         INFORMAÇÃO
-    ====================================================== -->
-
-    <div class="card">
-
-        <h2>
-            💊 Central de medicações
-        </h2>
-
-        <p>
-            Consulte abaixo os medicamentos cadastrados
-            e disponíveis para utilização durante os
-            atendimentos.
-        </p>
-
     </div>
 
 
-    <!-- =====================================================
-         LISTA DE MEDICAMENTOS
-    ====================================================== -->
+    <section class="panel">
 
-    <div class="card">
+        <div class="panel-header">
 
-        <h3>
-            📋 Lista de medicamentos
-        </h3>
+            <div>
+                <h2>📋 Lista de prescrições</h2>
 
-        <p>
-            Medicamentos disponíveis atualmente:
-        </p>
+                <p>
+                    Acompanhe os medicamentos prescritos aos pacientes.
+                </p>
+            </div>
 
-
-        <div id="lista">
-
-            Carregando...
+            <button
+                class="btn btn-primary"
+                onclick="carregarMedicacoes()">
+                🔄 Atualizar
+            </button>
 
         </div>
 
-    </div>
+
+        <div id="listaMedicacoes" class="cards">
+
+            <div class="empty">
+                Carregando medicações...
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
 
 
-    <!-- =====================================================
-         RODAPÉ
-    ====================================================== -->
+<footer class="footer">
 
-    <footer>
+    <p>
+        © 2026 Saúde Integra — Sistema de Gestão em Saúde
+    </p>
 
-        🏥 <strong>Saúde Integra</strong>
+</footer>
 
-        <br>
-
-        Sistema Hospitalar Integrado
-
-        <br><br>
-
-        © 2026 Saúde Integra — Todos os direitos reservados.
-
-    </footer>
-
-
-</div>
-
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
 
 <script>
 
+    async function carregarMedicacoes() {
 
-/* =========================================================
-   CARREGAR MEDICAÇÕES
-========================================================= */
+        const lista = document.getElementById("listaMedicacoes");
 
-async function carregarMedicacoes() {
+        lista.innerHTML = `
+            <div class="empty">
+                Carregando medicações...
+            </div>
+        `;
 
+        try {
 
-    const lista =
-        document.getElementById(
-            "lista"
-        );
+            const resposta = await fetch("/medicacoes");
 
+            if (!resposta.ok) {
+                throw new Error("Não foi possível carregar as medicações.");
+            }
 
-    try {
+            const medicacoes = await resposta.json();
 
+            lista.innerHTML = "";
 
-        const resposta =
-            await fetch(
-                "/lista-medicacoes"
-            );
+            if (!Array.isArray(medicacoes) || medicacoes.length === 0) {
 
-
-        const medicamentos =
-            await resposta.json();
-
-
-        lista.innerHTML =
-            "";
-
-
-        /* -------------------------------------------------
-           NENHUMA MEDICAÇÃO
-        ------------------------------------------------- */
-
-        if (!medicamentos.length) {
-
-            lista.innerHTML = `
-
-                <div class="fila-item">
-
-                    <div>
-
-                        <strong>
-                            💊 Nenhuma medicação cadastrada
-                        </strong>
-
-                        <br>
-
-                        <small>
-                            Não existem medicamentos disponíveis
-                            no momento.
-                        </small>
-
+                lista.innerHTML = `
+                    <div class="empty">
+                        Nenhuma medicação prescrita.
                     </div>
+                `;
 
-                </div>
-
-            `;
-
-            return;
-
-        }
+                return;
+            }
 
 
-        /* -------------------------------------------------
-           LISTAR MEDICAMENTOS
-        ------------------------------------------------- */
+            medicacoes.forEach(item => {
 
-        medicamentos.forEach(
-            medicamento => {
+                const card = document.createElement("div");
 
+                card.className = "card";
 
-                const item =
-                    document.createElement(
-                        "div"
-                    );
+                card.innerHTML = `
 
+                    <div class="card-icon">💊</div>
 
-                item.className =
-                    "fila-item";
+                    <h3>
+                        ${item.medicacao || "Medicação não informada"}
+                    </h3>
 
+                    <p>
+                        <strong>Paciente:</strong>
+                        ${item.paciente || "Não informado"}
+                    </p>
 
-                /* -----------------------------------------
-                   NOME DO MEDICAMENTO
-                ------------------------------------------ */
+                    <p>
+                        <strong>Diagnóstico:</strong>
+                        ${item.diagnostico || "Não informado"}
+                    </p>
 
-                const nome =
-                    document.createElement(
-                        "div"
-                    );
-
-
-                nome.innerHTML = `
-
-                    <strong>
-
-                        💊
-                        ${escapeHTML(
-                            medicamento
-                        )}
-
-                    </strong>
-
-                    <br>
-
-                    <small>
-                        Medicamento disponível
-                    </small>
+                    <p>
+                        <strong>Observações:</strong>
+                        ${item.obs || "Nenhuma"}
+                    </p>
 
                 `;
 
+                lista.appendChild(card);
 
-                item.appendChild(
-                    nome
-                );
+            });
 
+        } catch (erro) {
 
-                lista.appendChild(
-                    item
-                );
+            lista.innerHTML = `
+                <div class="empty">
+                    ❌ ${erro.message}
+                </div>
+            `;
 
-            }
-        );
-
-    }
-
-
-    catch (erro) {
-
-        lista.innerHTML = `
-
-            <div class="erro">
-
-                ❌ Erro ao carregar as medicações.
-
-                <br>
-
-                <small>
-                    Verifique se o servidor está funcionando.
-                </small>
-
-            </div>
-
-        `;
+        }
 
     }
 
-}
-
-
-/* =========================================================
-   PROTEÇÃO CONTRA HTML
-========================================================= */
-
-function escapeHTML(texto) {
-
-    return String(texto)
-
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
-}
-
-
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
-
-carregarMedicacoes();
-
+    carregarMedicacoes();
 
 </script>
 
-
 </body>
-
 </html>
