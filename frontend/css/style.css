@@ -1,102 +1,209 @@
-```html
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+```css
+* {
+    box-sizing: border-box;
+}
 
-    <title>Projeto Sentinela</title>
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #eaf2fa;
+    color: #263b50;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+/* CABEÇALHO */
 
-        body {
-            margin: 0;
-            padding: 30px 20px;
-            font-family: Arial, sans-serif;
-            background: #ffffff;
-            color: #333333;
-        }
+header.topo,
+.topo {
+    background: #174873;
+    color: white;
+    padding: 24px;
+    margin-bottom: 25px;
+}
 
-        main {
-            width: 100%;
-            max-width: 480px;
-            margin: 45px auto;
-        }
+.topo h1,
+.topo h2 {
+    color: white;
+    margin: 0 0 8px;
+}
 
-        h1 {
-            margin: 0 0 10px;
-            color: #245987;
-            font-size: 27px;
-            font-weight: 600;
-        }
+.topo p {
+    color: #d7e8f8;
+}
 
-        p {
-            margin: 0 0 28px;
-            color: #777777;
-            font-size: 15px;
-        }
+/* CONTEÚDO */
 
-        .botoes {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+.container {
+    width: 92%;
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border: 1px solid #c8dced;
+    border-radius: 7px;
+}
 
-        .botoes a {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background: #245987;
-            color: #ffffff;
-            text-align: center;
-            text-decoration: none;
-            font-size: 15px;
-            border-radius: 4px;
-        }
+h1, h2, h3 {
+    color: #174873;
+}
 
-        .botoes a:hover {
-            background: #173f67;
-        }
+p {
+    line-height: 1.5;
+}
 
-        footer {
-            margin-top: 30px;
-            color: #999999;
-            font-size: 12px;
-            text-align: center;
-        }
+/* CAMPOS */
 
-        @media (max-width: 500px) {
-            main {
-                margin-top: 25px;
-            }
-        }
-    </style>
-</head>
+label {
+    display: block;
+    margin-bottom: 7px;
+    color: #174873;
+    font-weight: bold;
+}
 
-<body>
+input,
+select,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #c8dced;
+    border-radius: 5px;
+    background: #fff;
+    color: #263b50;
+    font: inherit;
+}
 
-    <main>
-        <h1>Projeto Sentinela</h1>
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #8abce5;
+    border-color: #2784c5;
+}
 
-        <p>Selecione uma opção para continuar.</p>
+/* BOTÕES */
 
-        <nav class="botoes">
-            <a href="atendimento.html">Atendimento</a>
-            <a href="triagem.html">Triagem</a>
-            <a href="medico.html">Painel médico</a>
-            <a href="medicacoes.html">Medicações</a>
-            <a href="alta.html">Alta</a>
-            <a href="tv.html">Painel de TV</a>
-        </nav>
+button,
+.btn,
+.btn-voltar {
+    display: inline-block;
+    padding: 12px 18px;
+    background: #1769aa;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font: inherit;
+    cursor: pointer;
+}
 
-        <footer>
-            Projeto Sentinela
-        </footer>
-    </main>
+button:hover,
+.btn:hover,
+.btn-voltar:hover {
+    background: #174873;
+}
 
-</body>
-</html>
+/* PACIENTES E LISTAS */
+
+.card,
+.paciente-card,
+.caixa {
+    padding: 18px;
+    margin-bottom: 14px;
+    background: #f7fbff;
+    border: 1px solid #c8dced;
+    border-left: 4px solid #2784c5;
+    border-radius: 6px;
+}
+
+.card h3,
+.paciente-card h3 {
+    color: #174873;
+}
+
+/* TABELAS */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th {
+    padding: 13px;
+    background: #174873;
+    color: white;
+    text-align: left;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #dce7f1;
+}
+
+tr:hover td {
+    background: #edf5fc;
+}
+
+/* MENSAGENS */
+
+#mensagem,
+.mensagem {
+    margin-top: 12px;
+    line-height: 1.5;
+}
+
+/* LOGIN */
+
+.login-box {
+    width: 92%;
+    max-width: 430px;
+    margin: 60px auto;
+    padding: 30px;
+    background: white;
+    border: 1px solid #c8dced;
+    border-radius: 8px;
+}
+
+.login-box h1 {
+    color: #174873;
+}
+
+/* TV */
+
+.tv-page {
+    min-height: 100vh;
+    padding: 30px;
+    background: #174873;
+    color: white;
+}
+
+.tv-page h1,
+.tv-page h2 {
+    color: white;
+}
+
+/* CELULAR */
+
+@media (max-width: 600px) {
+    .container {
+        width: 96%;
+        margin: 12px auto;
+        padding: 17px;
+    }
+
+    .topo {
+        padding: 18px;
+    }
+
+    button,
+    .btn,
+    .btn-voltar {
+        max-width: 100%;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
 ```
