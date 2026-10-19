@@ -1,187 +1,340 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Painel de Chamada - Saúde Integra</title>
-
+    <title>Painel de Chamadas | Projeto-Sentinela</title>
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: #111315;
+            color: #ffffff;
+        }
+
+        .tv-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 22px 5%;
+            background: #1c1f22;
+            border-bottom: 1px solid #35393d;
+        }
+
+        .tv-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .tv-logo {
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            background: #ffffff;
+            color: #17191b;
+            font-size: 25px;
+        }
+
+        .tv-brand h1 {
+            margin: 0;
+            font-size: clamp(18px, 2vw, 25px);
+        }
+
+        .tv-brand p {
+            margin: 5px 0 0;
+            color: #aeb4ba;
+            font-size: 13px;
+        }
+
+        .tv-clock {
+            font-size: clamp(24px, 3vw, 38px);
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 2px;
+        }
+
+        .tv-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 45px 5%;
+            text-align: center;
+        }
+
+        .tv-label {
+            margin-bottom: 18px;
+            color: #b9c0c6;
+            font-size: clamp(14px, 1.5vw, 20px);
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+        }
+
+        .tv-call-box {
+            width: 100%;
+            max-width: 1100px;
+            padding: clamp(28px, 6vw, 70px) 20px;
+            border: 1px solid #3b4045;
+            border-radius: 28px;
+            background: linear-gradient(145deg, #222629, #181a1c);
+            box-shadow: 0 20px 70px rgba(0, 0, 0, .3);
+        }
+
+        .tv-patient {
+            margin: 0;
+            overflow-wrap: anywhere;
+            font-size: clamp(34px, 6vw, 76px);
+            font-weight: 800;
+            line-height: 1.15;
+        }
+
+        .tv-divider {
+            width: 100px;
+            height: 5px;
+            margin: 32px auto;
+            border-radius: 10px;
+            background: #ffffff;
+        }
+
+        .tv-location-label {
+            margin-bottom: 12px;
+            color: #aeb4ba;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .tv-location {
+            margin: 0;
+            font-size: clamp(25px, 4vw, 48px);
+            font-weight: 700;
+        }
+
+        .tv-waiting {
+            margin-top: 25px;
+            color: #c2c7cc;
+            font-size: 17px;
+        }
+
+        .tv-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 30px;
+            padding: 10px 16px;
+            border: 1px solid #41464b;
+            border-radius: 30px;
+            color: #d4d8dc;
+            font-size: 13px;
+        }
+
+        .tv-status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: #8b9299;
+        }
+
+        .tv-status.online .tv-status-dot {
+            background: #54d68b;
+        }
+
+        .tv-status.offline .tv-status-dot {
+            background: #ff7272;
+        }
+
+        .tv-footer {
+            padding: 20px;
+            border-top: 1px solid #35393d;
+            color: #aeb4ba;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .tv-footer strong {
+            color: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+            .tv-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .tv-brand {
+                flex-direction: column;
+            }
+
+            .tv-label {
+                letter-spacing: 3px;
+            }
+
+            .tv-call-box {
+                box-sizing: border-box;
+            }
+        }
+    </style>
 </head>
 
 <body>
+<div class="tv-wrapper">
 
-<header class="topbar">
-
-    <div class="brand">
-        <div class="brand-icon">🏥</div>
-
-        <div>
-            <strong>Saúde Integra</strong>
-            <span>Sistema de Gestão em Saúde</span>
-        </div>
-    </div>
-
-    <nav class="nav">
-        <a href="index.html">Início</a>
-        <a href="atendimento.html">Atendimento</a>
-        <a href="triagem.html">Triagem</a>
-        <a href="medico.html">Painel Médico</a>
-        <a href="medicacoes.html">Medicações</a>
-        <a href="alta.html">Alta Médica</a>
-        <a href="tv.html" class="active">Painel TV</a>
-    </nav>
-
-</header>
-
-
-<main class="container">
-
-    <div class="page-title">
-
-        <div>
-            <span class="page-tag">CHAMADA DE PACIENTES</span>
-
-            <h1>📺 Painel de chamada</h1>
-
-            <p>
-                Acompanhe o paciente chamado para atendimento.
-            </p>
-        </div>
-
-        <a href="index.html" class="btn btn-secondary">
-            ← Voltar
-        </a>
-
-    </div>
-
-
-    <section class="tv-screen">
-
-        <div class="tv-logo">
-            🏥
-        </div>
-
-        <h2>SAÚDE INTEGRA</h2>
-
-        <p class="tv-subtitle">
-            Atenção ao chamado
-        </p>
-
-
-        <div class="tv-call">
-
-            <span>Paciente chamado</span>
-
-            <strong id="nomePaciente">
-                Aguardando chamada...
-            </strong>
-
-            <div class="tv-local" id="localPaciente">
-                —
+    <header class="tv-header">
+        <div class="tv-brand">
+            <div class="tv-logo">🏥</div>
+            <div>
+                <h1>Projeto-Sentinela</h1>
+                <p>Painel de chamadas de pacientes</p>
             </div>
-
         </div>
 
+        <div id="relogio" class="tv-clock">--:--:--</div>
+    </header>
 
-        <div class="tv-clock" id="relogio">
-            00:00:00
+    <main class="tv-main">
+        <div class="tv-label">Atenção, paciente chamado</div>
+
+        <section class="tv-call-box" aria-live="polite">
+            <p class="tv-location-label">Paciente</p>
+            <h2 id="nomePaciente" class="tv-patient">
+                Aguardando chamada
+            </h2>
+
+            <div class="tv-divider"></div>
+
+            <p class="tv-location-label">Dirija-se ao local</p>
+            <h3 id="localPaciente" class="tv-location">
+                Aguarde sua chamada
+            </h3>
+
+            <p id="mensagemTV" class="tv-waiting">
+                Assim que houver uma chamada, ela aparecerá aqui.
+            </p>
+        </section>
+
+        <div id="statusConexao" class="tv-status">
+            <span class="tv-status-dot"></span>
+            <span id="textoConexao">Conectando ao sistema...</span>
         </div>
+    </main>
 
-    </section>
+    <footer class="tv-footer">
+        <strong>Projeto-Sentinela</strong> · Sistema de Gestão em Saúde
+    </footer>
 
-</main>
-
-
-<footer class="footer">
-
-    <p>
-        © 2026 Saúde Integra — Sistema de Gestão em Saúde
-    </p>
-
-</footer>
-
+</div>
 
 <script>
+const nomePaciente = document.getElementById("nomePaciente");
+const localPaciente = document.getElementById("localPaciente");
+const mensagemTV = document.getElementById("mensagemTV");
+const relogio = document.getElementById("relogio");
+const statusConexao = document.getElementById("statusConexao");
+const textoConexao = document.getElementById("textoConexao");
 
-    let ultimaChamada = null;
+let ultimaChamada = null;
+let conectado = false;
 
+function atualizarRelogio() {
+    const agora = new Date();
 
-    function atualizarRelogio() {
+    relogio.textContent = agora.toLocaleTimeString("pt-BR", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+    });
+}
 
-        const agora = new Date();
+function atualizarStatus(online) {
+    conectado = online;
 
-        const hora = String(agora.getHours()).padStart(2, "0");
+    statusConexao.classList.toggle("online", online);
+    statusConexao.classList.toggle("offline", !online);
 
-        const minuto = String(agora.getMinutes()).padStart(2, "0");
+    textoConexao.textContent = online
+        ? "Sistema conectado"
+        : "Sem conexão com o servidor";
+}
 
-        const segundo = String(agora.getSeconds()).padStart(2, "0");
+async function carregarChamada() {
+    try {
+        const resposta = await fetch("/tv/atual", {
+            cache: "no-store"
+        });
 
-
-        document.getElementById("relogio").textContent =
-            `${hora}:${minuto}:${segundo}`;
-
-    }
-
-
-    async function carregarChamada() {
-
-        try {
-
-            const resposta = await fetch("/tv/atual");
-
-            if (!resposta.ok) {
-                return;
-            }
-
-            const chamada = await resposta.json();
-
-
-            if (!chamada || !chamada.paciente) {
-                return;
-            }
-
-
-            const identificador =
-                JSON.stringify(chamada);
-
-
-            if (identificador !== ultimaChamada) {
-
-                ultimaChamada = identificador;
-
-
-                document.getElementById("nomePaciente").textContent =
-                    chamada.paciente;
-
-
-                document.getElementById("localPaciente").textContent =
-                    `${chamada.localTipo || "LOCAL"} ${
-                        chamada.localNumero || ""
-                    }`;
-
-            }
-
-        } catch (erro) {
-
-            console.log(
-                "Aguardando conexão com o servidor..."
-            );
-
+        if (!resposta.ok) {
+            throw new Error("Não foi possível consultar a chamada.");
         }
 
+        const chamada = await resposta.json();
+
+        atualizarStatus(true);
+
+        if (!chamada || !chamada.paciente) {
+            return;
+        }
+
+        const identificador = JSON.stringify(chamada);
+
+        if (identificador !== ultimaChamada) {
+            ultimaChamada = identificador;
+
+            nomePaciente.textContent = chamada.paciente;
+
+            const localTipo = chamada.localTipo || "LOCAL";
+            const localNumero = chamada.localNumero || "";
+
+            localPaciente.textContent =
+                `${localTipo} ${localNumero}`.trim();
+
+            mensagemTV.textContent =
+                "Por favor, dirija-se ao local indicado.";
+
+            // Som opcional para avisar sobre uma nova chamada.
+            try {
+                if ("speechSynthesis" in window) {
+                    window.speechSynthesis.cancel();
+
+                    const aviso = new SpeechSynthesisUtterance(
+                        "Paciente " + chamada.paciente +
+                        ". Dirija-se a " + localPaciente.textContent
+                    );
+
+                    aviso.lang = "pt-BR";
+                    window.speechSynthesis.speak(aviso);
+                }
+            } catch (erroAudio) {
+                // O painel continua funcionando mesmo sem áudio.
+            }
+        }
+
+    } catch (erro) {
+        atualizarStatus(false);
+        console.error("Erro ao carregar chamada:", erro);
     }
+}
 
+atualizarRelogio();
+carregarChamada();
 
-    atualizarRelogio();
-
-    setInterval(atualizarRelogio, 1000);
-
-    carregarChamada();
-
-    setInterval(carregarChamada, 3000);
-
+setInterval(atualizarRelogio, 1000);
+setInterval(carregarChamada, 3000);
 </script>
 
 </body>
