@@ -1,133 +1,254 @@
-```css
-* {
-    box-sizing: border-box;
-}
 
-body {
-    margin: 0;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
-    color: #333;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projeto Sentinela</title>
 
-.container {
-    max-width: 850px;
-    margin: 20px auto;
-    padding: 22px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-h1, h2, h3 {
-    color: #174873;
-    margin-top: 0;
-}
-
-p {
-    line-height: 1.5;
-}
-
-.topo {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-}
-
-.menu {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
-}
-
-.menu a {
-    display: block;
-    padding: 12px;
-    color: #174873;
-    background: #f0f5fa;
-    border: 1px solid #d8e2ec;
-    border-radius: 4px;
-    text-decoration: none;
-}
-
-.menu a:hover {
-    background: #e0edf8;
-}
-
-label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: bold;
-}
-
-input, select, textarea {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: white;
-}
-
-button, .btn, .btn-voltar {
-    display: inline-block;
-    padding: 10px 16px;
-    border: 0;
-    border-radius: 4px;
-    background: #205b8e;
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-button:hover, .btn:hover, .btn-voltar:hover {
-    background: #174873;
-}
-
-.card, .paciente-card, .caixa {
-    padding: 15px;
-    margin-bottom: 12px;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background: #f0f5fa;
-    color: #174873;
-}
-
-@media (max-width: 600px) {
     body {
-        padding: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #000;
+      padding: 13px 17px;
+      color: #171717;
     }
 
     .container {
-        margin: 5px auto;
-        padding: 15px;
+      width: 100%;
+      min-height: calc(100vh - 26px);
+      background: #fff;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 24px;
     }
 
-    table {
-        display: block;
-        overflow-x: auto;
+    .cabecalho {
+      background: #203f67;
+      color: #fff;
+      padding: 25px 18px 19px;
+      border-radius: 7px;
+      margin-bottom: 25px;
     }
-}
-```
+
+    .cabecalho h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .cabecalho p {
+      font-size: 20px;
+      color: #dbe5f2;
+    }
+
+    .titulo {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 27px;
+    }
+
+    .descricao {
+      font-size: 20px;
+      color: #6b7690;
+      margin-bottom: 19px;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .opcao {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      min-height: 77px;
+      padding: 18px;
+      border: 1px solid #d8e1ed;
+      border-radius: 8px;
+      background: #fff;
+      color: #304055;
+      text-decoration: none;
+      font-size: 23px;
+      font-weight: 600;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .opcao:hover {
+      background: #f2f6fb;
+      border-color: #9bb5d4;
+    }
+
+    .icone {
+      width: 25px;
+      height: 25px;
+      color: #2d5c91;
+      flex-shrink: 0;
+    }
+
+    .seta {
+      margin-left: auto;
+      width: 20px;
+      height: 20px;
+      color: #8793a5;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 8px;
+      }
+
+      .container {
+        padding: 14px;
+        min-height: calc(100vh - 16px);
+      }
+
+      .cabecalho {
+        padding: 22px 15px;
+      }
+
+      .cabecalho h1 {
+        font-size: 23px;
+      }
+
+      .cabecalho p {
+        font-size: 17px;
+      }
+
+      .titulo {
+        font-size: 21px;
+        margin-bottom: 22px;
+      }
+
+      .descricao {
+        font-size: 16px;
+      }
+
+      .opcao {
+        min-height: 66px;
+        padding: 15px;
+        gap: 14px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <header class="cabecalho">
+      <h1>Projeto Sentinela</h1>
+      <p>Sistema de atendimento</p>
+    </header>
+
+    <section>
+      <h2 class="titulo">Painel principal</h2>
+      <p class="descricao">
+        Selecione uma opção para continuar.
+      </p>
+
+      <nav class="menu">
+
+        <a href="atendimento.html" class="opcao">
+          <svg class="icone" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="1.9" stroke-linecap="round"
+               stroke-linejoin="round">
+            <circle cx="12" cy="7" r="4"/>
+            <path d="M4.5 21v-2a7.5 7.5 0 0 1 15 0v2"/>
+          </svg>
+          <span>Atendimento</span>
+          <svg class="seta" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+
+        <a href="triagem.html" class="opcao">
+          <svg class="icone" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="1.9" stroke-linecap="round"
+               stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="18" rx="2"/>
+            <path d="M9 4V2h6v2M8 10h2m4 0h2M8 15h2m4 0h2"/>
+          </svg>
+          <span>Triagem</span>
+          <svg class="seta" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+
+        <a href="painel-medico.html" class="opcao">
+          <svg class="icone" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="1.9" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="M6 3a3 3 0 0 0-3 3v2a3 3 0 0 0 3 3h1l3 7a3 3 0 0 0 5.5-.5l1.5-4"/>
+            <path d="M16 5a3 3 0 0 1 5 2l-2 4a3 3 0 0 1-5-2z"/>
+            <circle cx="4" cy="15" r="2"/>
+          </svg>
+          <span>Painel médico</span>
+          <svg class="seta" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+
+        <a href="medicacoes.html" class="opcao">
+          <svg class="icone" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="1.9" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="m10 14 4-4"/>
+            <path d="M7 17a5 5 0 0 1 0-7l5-5a5 5 0 0 1 7 7l-5 5a5 5 0 0 1-7 0Z"/>
+            <path d="m8 8 8 8"/>
+          </svg>
+          <span>Medicações</span>
+          <svg class="seta" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+
+        <a href="painel-tv.html" class="opcao">
+          <svg class="icone" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="1.9" stroke-linecap="round"
+               stroke-linejoin="round">
+            <rect x="2.5" y="4" width="19" height="14" rx="2"/>
+            <path d="M9 22h6m-3-4v4"/>
+          </svg>
+          <span>Painel de TV</span>
+          <svg class="seta" viewBox="0 0 24 24"
+               fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </a>
+
+      </nav>
+    </section>
+  </main>
+</body>
+</html>
