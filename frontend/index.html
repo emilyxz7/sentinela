@@ -1,141 +1,120 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto-Sentinela</title>
-    <link rel="stylesheet" href="css/style.css">
+
+    <title>Projeto Sentinela</title>
 
     <style>
-        .atalhos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 25px;
+        * {
+            box-sizing: border-box;
         }
 
-        .atalho {
-            display: block;
-            padding: 25px;
-            background: #fff;
-            border: 1px solid #e1e3e6;
-            border-radius: 16px;
-            color: #202328;
-            text-decoration: none;
-            transition: transform .2s, box-shadow .2s;
-        }
-
-        .atalho:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .09);
-        }
-
-        .atalho:focus-visible {
-            outline: 3px solid #555;
-            outline-offset: 4px;
-        }
-
-        .atalho .icone {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-
-        .atalho h2 {
-            margin: 0 0 10px;
-            font-size: 19px;
-        }
-
-        .atalho p {
+        body {
             margin: 0;
-            color: #6d737a;
-            line-height: 1.5;
+            padding: 30px 25px;
+            font-family: Arial, sans-serif;
+            background: #ffffff;
+            color: #333333;
         }
 
-        .btn-entrar {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 20px;
-            border-radius: 9px;
-            background: #202328;
-            color: white;
+        main {
+            width: 100%;
+            max-width: 480px;
+            margin: 40px auto;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            color: #245987;
+            font-size: 27px;
+            font-weight: normal;
+        }
+
+        p {
+            margin: 0 0 25px;
+            color: #777777;
+            font-size: 15px;
+        }
+
+        .botoes {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0;
+        }
+
+        .botoes a {
+            display: block;
+            padding: 12px 0;
+            color: #245987;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            outline: none;
             text-decoration: none;
+            font-size: 16px;
+        }
+
+        .botoes a:hover {
+            color: #173f67;
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #999999;
+            font-size: 12px;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 20px;
+            }
+
+            main {
+                margin-top: 25px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-<header class="topbar">
-    <a href="index.html" class="brand">
-        <div class="brand-icon">🏥</div>
-        <div>
-            <strong>Projeto-Sentinela</strong>
-            <span>Sistema de Gestão em Saúde</span>
-        </div>
-    </a>
+    <main>
 
-    <nav class="nav">
-        <a href="index.html">Início</a>
-        <a href="login.html">Entrar</a>
-    </nav>
-</header>
+        <h1>Projeto Sentinela</h1>
 
-<main class="container">
-    <section class="hero">
-        <span class="page-tag">SISTEMA DE SAÚDE</span>
-        <h1>Bem-vindo ao Projeto-Sentinela</h1>
-        <p>Gestão de pacientes, triagens e atendimentos em um só lugar.</p>
-        <a href="login.html" class="btn-entrar">Entrar no sistema →</a>
-    </section>
+        <p>Selecione uma opção para continuar.</p>
 
-    <section>
-        <h2 class="secao">Áreas do sistema</h2>
+        <nav class="botoes">
 
-        <div class="atalhos">
+            <a href="atendimento.html">Atendimento</a>
 
-            <a class="atalho" href="atendimento.html">
-                <div class="icone">🧑‍💼</div>
-                <h2>Atendimento</h2>
-                <p>Cadastre pacientes e confira os dados de identificação.</p>
-            </a>
+            <a href="triagem.html">Triagem</a>
 
-            <a class="atalho" href="triagem.html">
-                <div class="icone">🩺</div>
-                <h2>Triagem</h2>
-                <p>Registre sintomas, temperatura e classificação de risco.</p>
-            </a>
+            <a href="medico.html">Painel médico</a>
 
-            <a class="atalho" href="medico.html">
-                <div class="icone">👨‍⚕️</div>
-                <h2>Painel Médico</h2>
-                <p>Consulte pacientes aguardando atendimento.</p>
-            </a>
+            <a href="medicacoes.html">Medicações</a>
 
-            <a class="atalho" href="tv.html">
-                <div class="icone">📺</div>
-                <h2>Painel de TV</h2>
-                <p>Exiba as chamadas dos pacientes e os locais de atendimento.</p>
-            </a>
+            <a href="alta.html">Alta</a>
 
-            <a class="atalho" href="medicacoes.html">
-                <div class="icone">💊</div>
-                <h2>Medicações</h2>
-                <p>Consulte os registros de medicações prescritas.</p>
-            </a>
+            <a href="tv.html">Painel de TV</a>
 
-            <a class="atalho" href="alta.html">
-                <div class="icone">📄</div>
-                <h2>Alta Médica</h2>
-                <p>Registre a alta e as orientações fornecidas ao paciente.</p>
-            </a>
+        </nav>
 
-        </div>
-    </section>
-</main>
+        <footer>
+            Projeto Sentinela
+        </footer>
 
-<footer class="footer">
-    <p>© 2026 Projeto-Sentinela</p>
-</footer>
+    </main>
 
 </body>
 </html>
+```
