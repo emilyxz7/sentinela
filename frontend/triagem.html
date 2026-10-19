@@ -1,588 +1,294 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Triagem | Saúde Integra</title>
-
+    <title>Triagem | Projeto-Sentinela</title>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
-
 <body>
 
-    <!-- =====================================
-         CABEÇALHO
-    ====================================== -->
+<header class="topbar">
+    <a href="index.html" class="brand">
+        <div class="brand-icon">🏥</div>
+        <div>
+            <strong>Projeto-Sentinela</strong>
+            <span>Sistema de Gestão em Saúde</span>
+        </div>
+    </a>
 
-    <header class="topbar">
+    <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="atendimento.html">Atendimento</a>
+        <a href="triagem.html" class="active">Triagem</a>
+        <a href="medico.html">Painel Médico</a>
+        <a href="medicacoes.html">Medicações</a>
+        <a href="alta.html">Alta Médica</a>
+        <a href="tv.html">Painel TV</a>
+    </nav>
+</header>
 
-        <div class="brand">
+<main class="container">
 
-            <div class="brand-icon">
-                🏥
-            </div>
-
-            <div>
-
-                <h1>
-                    Saúde <span>Integra</span>
-                </h1>
-
-                <p>
-                    Sistema de Gestão e Atendimento em Saúde
-                </p>
-
-            </div>
-
+    <div class="page-title">
+        <div>
+            <span class="page-tag">AVALIAÇÃO INICIAL</span>
+            <h1>Triagem de pacientes</h1>
+            <p>Registre os sinais e sintomas e classifique o nível de risco.</p>
         </div>
 
+        <a href="index.html" class="btn btn-secondary">← Início</a>
+    </div>
 
-        <nav class="nav">
+    <section class="panel">
+        <h2>Classificação de risco</h2>
 
-            <a href="index.html">
-                🏠 Início
-            </a>
-
-            <a href="atendimento.html">
-                🧑‍💼 Atendimento
-            </a>
-
-            <a href="triagem.html" class="active">
-                🩺 Triagem
-            </a>
-
-            <a href="medico.html">
-                👨‍⚕️ Médico
-            </a>
-
-            <a href="tv.html">
-                📺 Painel TV
-            </a>
-
-        </nav>
-
-    </header>
-
-
-    <!-- =====================================
-         CONTEÚDO PRINCIPAL
-    ====================================== -->
-
-    <main class="container">
-
-
-        <!-- TÍTULO DA PÁGINA -->
-
-        <div class="page-title">
-
-            <div>
-
-                <h2>
-                    🩺 Triagem de pacientes
-                </h2>
-
-                <p>
-                    Avalie os sinais e sintomas
-                    e registre a classificação de risco.
-                </p>
-
+        <div class="legenda">
+            <div class="legenda-item">
+                <span class="risco risco-verde">VERDE</span>
+                <p>Menor prioridade relativa, conforme protocolo adotado.</p>
             </div>
 
+            <div class="legenda-item">
+                <span class="risco risco-amarelo">AMARELO</span>
+                <p>Necessita avaliação prioritária conforme a condição clínica.</p>
+            </div>
 
-            <a href="index.html" class="btn secondary">
-
-                ← Voltar
-
-            </a>
-
+            <div class="legenda-item">
+                <span class="risco risco-vermelho">VERMELHO</span>
+                <p>Possível emergência. Acione imediatamente a equipe responsável.</p>
+            </div>
         </div>
 
+        <p class="muted">
+            A classificação deve seguir o protocolo clínico da instituição.
+            Este formulário não substitui avaliação profissional.
+        </p>
+    </section>
 
+    <section class="form-card">
+        <h2>📋 Dados da triagem</h2>
 
-        <!-- =====================================
-             FORMULÁRIO DE TRIAGEM
-        ====================================== -->
+        <form id="formTriagem">
+            <div class="form-grid">
 
-        <section class="panel">
-
-            <h3>
-                📋 Informações da triagem
-            </h3>
-
-            <p style="color:#4d6e91; margin-bottom:25px;">
-
-                Preencha os dados do paciente
-                para encaminhá-lo ao atendimento médico.
-
-            </p>
-
-
-            <form id="formTriagem">
-
-
-                <!-- DADOS DO PACIENTE -->
-
-                <h3>
-                    👤 Dados do paciente
-                </h3>
-
-
-                <div class="grid">
-
-
-                    <!-- ID -->
-
-                    <div class="field">
-
-                        <label for="pacienteId">
-
-                            ID do paciente *
-
-                        </label>
-
-                        <input
-                            type="text"
-                            id="pacienteId"
-                            placeholder="Digite o ID do paciente"
-                            required
-                        >
-
-                    </div>
-
-
-
-                    <!-- NOME -->
-
-                    <div class="field">
-
-                        <label for="nome">
-
-                            Nome completo *
-
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nome"
-                            placeholder="Nome do paciente"
-                            required
-                        >
-
-                    </div>
-
-
+                <div class="form-group">
+                    <label for="pacienteId">ID do paciente *</label>
+                    <input
+                        type="number"
+                        id="pacienteId"
+                        name="pacienteId"
+                        min="1"
+                        placeholder="Número do cadastro"
+                        required
+                    >
                 </div>
 
-
-
-                <!-- SINAIS E SINTOMAS -->
-
-                <h3 style="margin-top:30px;">
-
-                    🌡️ Avaliação clínica
-
-                </h3>
-
-
-                <div class="grid">
-
-
-                    <!-- SINTOMAS -->
-
-                    <div class="field">
-
-                        <label for="sintoma">
-
-                            Sintomas apresentados
-
-                        </label>
-
-                        <input
-                            type="text"
-                            id="sintoma"
-                            placeholder="Ex.: Febre, dor, tontura..."
-                        >
-
-                    </div>
-
-
-
-                    <!-- TEMPERATURA -->
-
-                    <div class="field">
-
-                        <label for="temperatura">
-
-                            Temperatura
-
-                        </label>
-
-                        <input
-                            type="text"
-                            id="temperatura"
-                            placeholder="Ex.: 36,5 °C"
-                        >
-
-                    </div>
-
-
-
-                    <!-- RISCO -->
-
-                    <div class="field">
-
-                        <label for="risco">
-
-                            Classificação de risco *
-
-                        </label>
-
-                        <select id="risco" required>
-
-                            <option value="">
-
-                                Selecione o nível de risco
-
-                            </option>
-
-                            <option value="verde">
-
-                                🟢 Verde — Pouco urgente
-
-                            </option>
-
-                            <option value="amarelo">
-
-                                🟡 Amarelo — Urgente
-
-                            </option>
-
-                            <option value="vermelho">
-
-                                🔴 Vermelho — Emergência
-
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-
-                    <!-- ALERGIA -->
-
-                    <div class="field">
-
-                        <label for="alergia">
-
-                            Alergias
-
-                        </label>
-
-                        <input
-                            type="text"
-                            id="alergia"
-                            placeholder="Informe alergias ou Nenhuma"
-                        >
-
-                    </div>
-
-
+                <div class="form-group">
+                    <label for="nome">Nome do paciente *</label>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Nome completo"
+                        required
+                    >
                 </div>
 
+                <div class="form-group full">
+                    <label for="sintoma">Sintomas e queixa principal *</label>
+                    <textarea
+                        id="sintoma"
+                        name="sintoma"
+                        placeholder="Descreva os sintomas relatados..."
+                        required
+                    ></textarea>
+                </div>
 
+                <div class="form-group">
+                    <label for="temperatura">Temperatura (°C) *</label>
+                    <input
+                        type="number"
+                        id="temperatura"
+                        name="temperatura"
+                        min="25"
+                        max="45"
+                        step="0.1"
+                        placeholder="Ex.: 36.5"
+                        required
+                    >
+                </div>
 
-                <!-- OBSERVAÇÕES -->
+                <div class="form-group">
+                    <label for="risco">Classificação de risco *</label>
+                    <select id="risco" name="risco" required>
+                        <option value="">Selecione o risco</option>
+                        <option value="verde">Verde</option>
+                        <option value="amarelo">Amarelo</option>
+                        <option value="vermelho">Vermelho</option>
+                    </select>
+                </div>
 
-                <div class="field" style="margin-top:25px;">
+                <div class="form-group full">
+                    <label for="alergia">Alergias</label>
+                    <input
+                        type="text"
+                        id="alergia"
+                        name="alergia"
+                        placeholder="Informe as alergias ou escreva 'Nenhuma informada'"
+                    >
+                </div>
 
-                    <label for="observacao">
-
-                        📝 Observações da triagem
-
-                    </label>
-
+                <div class="form-group full">
+                    <label for="observacao">Observações adicionais</label>
                     <textarea
                         id="observacao"
-                        placeholder="Digite observações importantes sobre o paciente..."
+                        name="observacao"
+                        placeholder="Outras informações relevantes..."
                     ></textarea>
-
                 </div>
-
-
-
-                <!-- BOTÕES -->
-
-                <div class="actions">
-
-
-                    <button
-                        type="submit"
-                        class="btn"
-                    >
-
-                        💾 Salvar triagem
-
-                    </button>
-
-
-
-                    <button
-                        type="reset"
-                        class="btn secondary"
-                    >
-
-                        🔄 Limpar campos
-
-                    </button>
-
-
-                </div>
-
-
-
-                <!-- MENSAGEM -->
-
-                <div
-                    id="mensagem"
-                    class="message"
-                ></div>
-
-
-            </form>
-
-        </section>
-
-
-
-        <!-- =====================================
-             LEGENDA DE RISCO
-        ====================================== -->
-
-        <section class="panel">
-
-            <h3>
-                ⚠️ Níveis de classificação
-            </h3>
-
-
-            <div class="cards">
-
-
-                <div class="card">
-
-                    <span class="badge verde">
-
-                        🟢 Verde
-
-                    </span>
-
-                    <h3 style="margin-top:15px;">
-
-                        Pouco urgente
-
-                    </h3>
-
-                    <p>
-
-                        Atendimento conforme a avaliação
-                        e a prioridade clínica.
-
-                    </p>
-
-                </div>
-
-
-
-                <div class="card">
-
-                    <span class="badge amarelo">
-
-                        🟡 Amarelo
-
-                    </span>
-
-                    <h3 style="margin-top:15px;">
-
-                        Urgente
-
-                    </h3>
-
-                    <p>
-
-                        Necessita de avaliação em
-                        tempo oportuno.
-
-                    </p>
-
-                </div>
-
-
-
-                <div class="card">
-
-                    <span class="badge vermelho">
-
-                        🔴 Vermelho
-
-                    </span>
-
-                    <h3 style="margin-top:15px;">
-
-                        Emergência
-
-                    </h3>
-
-                    <p>
-
-                        Requer atendimento imediato,
-                        conforme avaliação clínica.
-
-                    </p>
-
-                </div>
-
 
             </div>
 
-        </section>
+            <div class="actions">
+                <button type="submit" class="btn" id="btnSalvar">
+                    Salvar triagem →
+                </button>
 
+                <button type="reset" class="btn btn-secondary">
+                    Limpar formulário
+                </button>
+            </div>
 
-    </main>
+            <div id="mensagem" class="mensagem" role="status"
+                 aria-live="polite"></div>
+        </form>
+    </section>
 
+</main>
 
+<footer class="footer">
+    <p>© 2026 Projeto-Sentinela — Sistema de Gestão em Saúde</p>
+</footer>
 
-    <!-- =====================================
-         RODAPÉ
-    ====================================== -->
+<script>
+const formTriagem = document.getElementById("formTriagem");
+const mensagemTriagem = document.getElementById("mensagem");
+const btnSalvar = document.getElementById("btnSalvar");
+const campoRisco = document.getElementById("risco");
 
-    <footer class="footer">
+function mostrarMensagem(texto, tipo) {
+    mensagemTriagem.textContent = texto;
+    mensagemTriagem.className = "mensagem " + tipo;
+}
 
-        💙 <strong>Saúde Integra</strong>
+function atualizarCorRisco() {
+    const cores = {
+        verde: "var(--verde)",
+        amarelo: "var(--amarelo)",
+        vermelho: "var(--vermelho)"
+    };
 
-        — Mais organização, mais cuidado.
+    campoRisco.style.borderColor =
+        cores[campoRisco.value] || "#d4d4d4";
+}
 
-    </footer>
+campoRisco.addEventListener("change", atualizarCorRisco);
 
+formTriagem.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
+    const pacienteId = document.getElementById("pacienteId").value;
+    const nome = document.getElementById("nome").value.trim();
+    const sintoma = document.getElementById("sintoma").value.trim();
+    const temperatura = document.getElementById("temperatura").value;
+    const risco = campoRisco.value;
+    const alergia =
+        document.getElementById("alergia").value.trim() ||
+        "Não informada";
+    const observacao =
+        document.getElementById("observacao").value.trim();
 
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
+    if (!pacienteId || !nome || !sintoma ||
+        temperatura === "" || !risco) {
+        mostrarMensagem(
+            "Preencha todos os campos obrigatórios.",
+            "erro"
+        );
+        return;
+    }
 
-    <script>
+    const temperaturaNumero = Number(temperatura);
 
-        const formulario =
-            document.getElementById("formTriagem");
+    if (!Number.isFinite(temperaturaNumero) ||
+        temperaturaNumero < 25 || temperaturaNumero > 45) {
+        mostrarMensagem(
+            "Confira a temperatura informada.",
+            "erro"
+        );
+        return;
+    }
 
-        const mensagem =
-            document.getElementById("mensagem");
+    const dadosTriagem = {
+        pacienteId: Number(pacienteId),
+        nome,
+        sintoma,
+        temperatura: temperaturaNumero,
+        risco,
+        alergia,
+        observacao
+    };
 
+    btnSalvar.disabled = true;
+    btnSalvar.textContent = "Salvando...";
+    mensagemTriagem.textContent = "";
+    mensagemTriagem.className = "mensagem";
 
-        formulario.addEventListener("submit", async function (event) {
-
-            event.preventDefault();
-
-
-            const dados = {
-
-                pacienteId:
-                    document.getElementById("pacienteId").value.trim(),
-
-                nome:
-                    document.getElementById("nome").value.trim(),
-
-                sintoma:
-                    document.getElementById("sintoma").value.trim(),
-
-                temperatura:
-                    document.getElementById("temperatura").value.trim(),
-
-                risco:
-                    document.getElementById("risco").value,
-
-                alergia:
-                    document.getElementById("alergia").value.trim(),
-
-                observacao:
-                    document.getElementById("observacao").value.trim()
-
-            };
-
-
-            if (!dados.pacienteId || !dados.nome) {
-
-                mensagem.textContent =
-                    "❌ Preencha os dados obrigatórios.";
-
-                return;
-
-            }
-
-
-            mensagem.textContent =
-                "⏳ Salvando triagem...";
-
-
-            try {
-
-
-                const resposta = await fetch("/triagem", {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type": "application/json"
-
-                    },
-
-                    body: JSON.stringify(dados)
-
-                });
-
-
-                const resultado =
-                    await resposta.json();
-
-
-                if (!resposta.ok) {
-
-                    throw new Error(
-
-                        resultado.mensagem ||
-                        resultado.erro ||
-                        "Erro ao salvar a triagem."
-
-                    );
-
-                }
-
-
-                mensagem.textContent =
-                    "✅ Triagem registrada com sucesso!";
-
-
-                formulario.reset();
-
-
-            } catch (erro) {
-
-                mensagem.textContent =
-                    "❌ " + erro.message;
-
-            }
-
+    try {
+        const resposta = await fetch("/triagem", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dadosTriagem)
         });
 
-    </script>
+        const resultado = await resposta.json().catch(() => ({}));
 
+        if (!resposta.ok) {
+            throw new Error(
+                resultado.mensagem ||
+                resultado.erro ||
+                "Não foi possível salvar a triagem."
+            );
+        }
+
+        mostrarMensagem(
+            resultado.mensagem || "Triagem registrada com sucesso!",
+            "sucesso"
+        );
+
+        formTriagem.reset();
+        atualizarCorRisco();
+
+    } catch (erro) {
+        mostrarMensagem(
+            erro.message || "Erro de conexão com o servidor.",
+            "erro"
+        );
+    } finally {
+        btnSalvar.disabled = false;
+        btnSalvar.textContent = "Salvar triagem →";
+    }
+});
+
+formTriagem.addEventListener("reset", function() {
+    mensagemTriagem.textContent = "";
+    mensagemTriagem.className = "mensagem";
+    setTimeout(atualizarCorRisco, 0);
+});
+</script>
 
 </body>
-
 </html>
