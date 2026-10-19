@@ -1,118 +1,138 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Saúde Integra</title>
-
+    <meta name="theme-color" content="#171717">
+    <title>Projeto-Sentinela | Início</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <header class="cabecalho">
-        <div class="logo-area">
-            <div class="logo-icon">🏥</div>
+<header class="cabecalho">
+    <a href="index.html" class="logo">
+        <div class="brand-icon">🏥</div>
+        <div>
+            <strong>Projeto-Sentinela</strong>
+            <div style="color:#d4d4d4;font-size:12px;">
+                Sistema de Gestão em Saúde
+            </div>
+        </div>
+    </a>
 
+    <a href="login.html" class="btn btn-secondary">
+        Entrar no sistema →
+    </a>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container" style="margin:0 auto;">
+            <span class="page-tag" style="color:#d4d4d4;">
+                GESTÃO E ATENDIMENTO
+            </span>
+
+            <h1>Cuidado organizado.<br>Atendimento eficiente.</h1>
+
+            <p>
+                Uma plataforma para organizar o cadastro de pacientes,
+                a triagem, o atendimento médico e o acompanhamento das chamadas.
+            </p>
+
+            <div class="actions">
+                <a href="login.html" class="btn btn-secondary">
+                    Acessar plataforma →
+                </a>
+                <a href="#recursos" class="btn"
+                   style="background:#333;border-color:#555;">
+                    Conhecer recursos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container secao" id="recursos">
+        <div class="page-title">
             <div>
-                <h1>Saúde Integra</h1>
-                <p>Sistema de Gestão em Saúde</p>
+                <span class="page-tag">PLATAFORMA</span>
+                <h1>Recursos do sistema</h1>
+                <p>Conheça as principais etapas do fluxo de atendimento.</p>
             </div>
         </div>
 
-        <a href="login.html" class="btn-entrar">
-            Entrar no sistema
-        </a>
-    </header>
-
-    <main class="conteudo">
-
-        <section class="banner">
-            <div class="banner-texto">
-                <span class="tag">GESTÃO INTELIGENTE EM SAÚDE</span>
-
-                <h2>
-                    Cuidando de pessoas<br>
-                    com mais eficiência
-                </h2>
-
+        <div class="cards-grid">
+            <article class="feature-card">
+                <div style="font-size:30px;">🧑‍💼</div>
+                <h3>Atendimento</h3>
                 <p>
-                    Uma plataforma integrada para organizar atendimentos,
-                    triagens e consultas de forma simples, rápida e segura.
+                    Cadastro e identificação dos pacientes para iniciar
+                    o processo de atendimento.
                 </p>
+            </article>
 
-                <a href="login.html" class="btn-principal">
-                    Acessar sistema
-                </a>
-            </div>
-
-            <div class="banner-ilustracao">
-                🩺
-            </div>
-        </section>
-
-        <section class="secao">
-            <h2 class="titulo-secao">
-                <span>✦</span> Nossa plataforma
-            </h2>
-
-            <div class="cards-funcionalidades">
-
-                <div class="card-funcao">
-                    <div class="icone-funcao">👥</div>
-                    <h3>Atendimento</h3>
-                    <p>
-                        Cadastro e organização dos pacientes.
-                    </p>
-                </div>
-
-                <div class="card-funcao">
-                    <div class="icone-funcao">📋</div>
-                    <h3>Triagem</h3>
-                    <p>
-                        Classificação de risco e registro de sintomas.
-                    </p>
-                </div>
-
-                <div class="card-funcao">
-                    <div class="icone-funcao">🩺</div>
-                    <h3>Consultas</h3>
-                    <p>
-                        Acompanhamento médico e registro de diagnósticos.
-                    </p>
-                </div>
-
-                <div class="card-funcao">
-                    <div class="icone-funcao">🔒</div>
-                    <h3>Acesso protegido</h3>
-                    <p>
-                        Áreas internas acessíveis somente com login.
-                    </p>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="sobre">
-            <div class="icone-sobre">💙</div>
-
-            <div>
-                <h2>Sobre o Saúde Integra</h2>
-
+            <article class="feature-card">
+                <div style="font-size:30px;">📋</div>
+                <h3>Triagem</h3>
                 <p>
-                    O Saúde Integra foi desenvolvido para facilitar a rotina
-                    dos profissionais da saúde, centralizando informações
-                    e melhorando a organização dos atendimentos.
+                    Registro de sintomas, temperatura, alergias e
+                    classificação de risco.
                 </p>
-            </div>
-        </section>
+            </article>
 
-    </main>
+            <article class="feature-card">
+                <div style="font-size:30px;">🩺</div>
+                <h3>Painel médico</h3>
+                <p>
+                    Consulta das triagens pendentes e registro das
+                    informações das consultas.
+                </p>
+            </article>
 
-    <footer class="rodape">
-        <p>© 2026 Saúde Integra. Todos os direitos reservados.</p>
-    </footer>
+            <article class="feature-card">
+                <div style="font-size:30px;">📺</div>
+                <h3>Painel de chamada</h3>
+                <p>
+                    Exibição do paciente chamado e do local de atendimento
+                    na tela de TV.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <div style="font-size:30px;">💊</div>
+                <h3>Medicações</h3>
+                <p>
+                    Visualização dos registros de medicações prescritas
+                    no sistema.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <div style="font-size:30px;">📄</div>
+                <h3>Alta médica</h3>
+                <p>
+                    Registro da alta e das orientações fornecidas
+                    ao paciente.
+                </p>
+            </article>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="panel" style="text-align:center;padding:35px 20px;">
+            <h2>Pronto para começar?</h2>
+            <p class="muted">
+                Entre com suas credenciais para acessar as funcionalidades
+                disponíveis para o seu perfil.
+            </p>
+            <a href="login.html" class="btn">Acessar o sistema →</a>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>© 2026 Projeto-Sentinela — Sistema de Gestão em Saúde</p>
+</footer>
 
 </body>
 </html>
