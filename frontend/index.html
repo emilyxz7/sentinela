@@ -14,72 +14,60 @@
 
         body {
             margin: 0;
-            padding: 30px 25px;
-            font-family: Arial, sans-serif;
             background: #ffffff;
+            font-family: Arial, sans-serif;
             color: #333333;
         }
 
-        main {
+        .pagina {
             width: 100%;
-            max-width: 480px;
-            margin: 40px auto;
+            max-width: 500px;
+            margin: 70px auto;
+            padding: 0 25px;
         }
 
         h1 {
             margin: 0 0 10px;
             color: #245987;
-            font-size: 27px;
+            font-size: 28px;
             font-weight: normal;
+            text-align: center;
         }
 
-        p {
-            margin: 0 0 25px;
+        .subtitulo {
+            margin: 0 0 35px;
             color: #777777;
             font-size: 15px;
+            text-align: center;
         }
 
-        .botoes {
+        .opcoes {
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            gap: 0;
+            align-items: stretch;
+            width: 100%;
         }
 
-        .botoes a {
+        .opcoes a {
             display: block;
-            padding: 12px 0;
+            padding: 16px 0;
             color: #245987;
-            background: transparent;
+            background: none;
             border: none;
             border-radius: 0;
-            outline: none;
             text-decoration: none;
-            font-size: 16px;
+            text-align: center;
+            font-size: 17px;
         }
 
-        .botoes a:hover {
-            color: #173f67;
+        .opcoes a:hover {
+            color: #123b60;
             text-decoration: underline;
         }
 
-        footer {
-            margin-top: 30px;
-            color: #999999;
-            font-size: 12px;
-        }
-
-        @media (max-width: 500px) {
-            body {
-                padding: 20px;
-            }
-
-            main {
-                margin-top: 25px;
-            }
-
-            h1 {
-                font-size: 24px;
+        @media (max-width: 600px) {
+            .pagina {
+                margin-top: 40px;
             }
         }
     </style>
@@ -87,31 +75,22 @@
 
 <body>
 
-    <main>
+    <main class="pagina">
 
         <h1>Projeto Sentinela</h1>
 
-        <p>Selecione uma opção para continuar.</p>
+        <p class="subtitulo">
+            Sistema de atendimento
+        </p>
 
-        <nav class="botoes">
-
+        <nav class="opcoes">
             <a href="atendimento.html">Atendimento</a>
-
             <a href="triagem.html">Triagem</a>
-
-            <a href="medico.html">Painel médico</a>
-
+            <a href="medico.html">Painel Médico</a>
             <a href="medicacoes.html">Medicações</a>
-
             <a href="alta.html">Alta</a>
-
             <a href="tv.html">Painel de TV</a>
-
         </nav>
-
-        <footer>
-            Projeto Sentinela
-        </footer>
 
     </main>
 
