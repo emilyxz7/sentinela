@@ -4,41 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Atendimento | Projeto-Sentinela</title>
 
-    <link rel="stylesheet" href="css/style.css">
-
     <style>
-        :root {
-            --azul-escuro: #174873;
-            --azul: #1769aa;
-            --azul-claro: #eaf4fc;
-            --borda: #d4e4f2;
-            --texto: #263b50;
-            --branco: #ffffff;
-        }
-
         * {
             box-sizing: border-box;
         }
 
+        :root {
+            --azul-escuro: #123c63;
+            --azul: #1769aa;
+            --azul-hover: #0d5089;
+            --fundo: #edf5fc;
+            --borda: #d4e4f2;
+            --texto: #263b50;
+        }
+
         body {
             margin: 0;
-            background: #edf4fa;
-            color: var(--texto);
             font-family: Arial, Helvetica, sans-serif;
+            color: var(--texto);
+            background: var(--fundo);
+            min-height: 100vh;
         }
 
         .topbar {
             background: var(--azul-escuro);
             color: white;
-            padding: 16px 5%;
+            padding: 18px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 18px;
+            box-shadow: 0 3px 12px #123c6320;
         }
 
         .brand {
@@ -50,14 +49,14 @@
         }
 
         .brand-icon {
+            background: white;
+            color: var(--azul);
+            border-radius: 12px;
             width: 48px;
             height: 48px;
-            border-radius: 12px;
-            background: #ffffff;
-            color: var(--azul);
             display: grid;
             place-items: center;
-            font-size: 25px;
+            font-size: 26px;
         }
 
         .brand strong,
@@ -72,34 +71,35 @@
         .brand span {
             margin-top: 5px;
             font-size: 12px;
-            color: #d6e9f8;
+            color: #d4e8fa;
         }
 
         .nav {
             display: flex;
-            align-items: center;
-            gap: 7px;
             flex-wrap: wrap;
+            gap: 5px;
         }
 
         .nav a {
+            display: inline-block;
+            padding: 10px 12px;
             color: #e5f1fb;
             text-decoration: none;
-            padding: 10px 12px;
-            border-radius: 7px;
             font-size: 13px;
-            transition: background 0.2s;
+            border-radius: 7px;
+            transition: 0.2s;
         }
 
         .nav a:hover,
         .nav a.active {
-            background: #2c6595;
             color: white;
+            background: #2c6595;
         }
 
         .container {
-            width: min(1100px, 92%);
-            margin: 32px auto;
+            width: 92%;
+            max-width: 1080px;
+            margin: 35px auto;
         }
 
         .page-title {
@@ -113,167 +113,166 @@
 
         .page-tag {
             display: inline-block;
-            color: var(--azul);
             background: #dcecf9;
-            padding: 7px 11px;
-            border-radius: 5px;
+            color: var(--azul);
             font-size: 11px;
             font-weight: bold;
-            letter-spacing: 0.7px;
+            letter-spacing: 1px;
+            padding: 8px 12px;
+            border-radius: 5px;
         }
 
-        .page-title h1 {
-            margin: 12px 0 8px;
+        h1 {
             color: var(--azul-escuro);
-            font-size: clamp(25px, 4vw, 32px);
+            font-size: 30px;
+            margin: 13px 0 8px;
         }
 
         .page-title p {
+            color: #687f93;
             margin: 0;
-            color: #657b8e;
             line-height: 1.6;
         }
 
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 16px;
+            gap: 17px;
             margin-bottom: 26px;
         }
 
         .card {
             background: white;
             border: 1px solid var(--borda);
-            border-left: 4px solid var(--azul);
+            border-left: 5px solid var(--azul);
             border-radius: 9px;
-            padding: 21px;
-            box-shadow: 0 4px 12px rgba(23, 72, 115, 0.04);
+            padding: 22px;
+            box-shadow: 0 4px 15px #1748730a;
         }
 
         .card-numero {
             color: var(--azul);
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            margin-bottom: 13px;
+            margin-bottom: 12px;
         }
 
         .card h3 {
-            margin: 0 0 8px;
             color: var(--azul-escuro);
             font-size: 16px;
+            margin: 0 0 9px;
         }
 
         .card p {
-            margin: 0;
-            color: #657b8e;
+            color: #687f93;
             font-size: 13px;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin: 0;
         }
 
         .form-card {
             background: white;
             border: 1px solid var(--borda);
-            border-radius: 10px;
+            border-radius: 11px;
             padding: 28px;
-            box-shadow: 0 6px 20px rgba(23, 72, 115, 0.06);
+            box-shadow: 0 5px 22px #1748730d;
         }
 
         .form-cabecalho {
             display: flex;
             align-items: center;
-            gap: 13px;
-            padding-bottom: 20px;
-            margin-bottom: 23px;
-            border-bottom: 1px solid #e5edf5;
+            gap: 14px;
+            padding-bottom: 21px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #e4edf5;
         }
 
         .form-icone {
-            width: 46px;
-            height: 46px;
             display: grid;
             place-items: center;
+            width: 48px;
+            height: 48px;
+            background: #e3f0fc;
             border-radius: 10px;
-            background: var(--azul-claro);
-            font-size: 23px;
+            font-size: 24px;
         }
 
         .form-cabecalho h2 {
-            margin: 0 0 5px;
             color: var(--azul-escuro);
-            font-size: 20px;
+            margin: 0 0 6px;
+            font-size: 21px;
         }
 
         .form-cabecalho p {
-            margin: 0;
-            color: #708497;
+            color: #72869a;
             font-size: 13px;
+            margin: 0;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 20px;
+            gap: 22px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 9px;
         }
 
         .form-group.full {
             grid-column: 1 / -1;
         }
 
-        .form-group label {
+        label {
             color: #344f68;
             font-size: 14px;
             font-weight: bold;
         }
 
-        .form-group input,
-        .form-group select {
+        input,
+        select {
             width: 100%;
-            min-height: 47px;
+            min-height: 48px;
             padding: 12px 14px;
             border: 1px solid #c8d9e8;
             border-radius: 7px;
             background: white;
             color: var(--texto);
+            font-family: inherit;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: 0.2s;
         }
 
-        .form-group input::placeholder {
+        input::placeholder {
             color: #9aabba;
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
+        input:focus,
+        select:focus {
             border-color: var(--azul);
-            box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.12);
+            box-shadow: 0 0 0 3px #1769aa20;
         }
 
         .dica {
-            color: #74899b;
+            color: #72869a;
             font-size: 12px;
-            line-height: 1.5;
         }
 
         .actions {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            margin-top: 27px;
+            margin-top: 28px;
         }
 
         .btn {
-            min-height: 44px;
             display: inline-flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            min-height: 45px;
             padding: 12px 19px;
             border: 1px solid var(--azul);
             border-radius: 7px;
@@ -281,22 +280,19 @@
             color: white;
             font-size: 14px;
             font-weight: bold;
+            font-family: inherit;
             text-decoration: none;
             cursor: pointer;
-            transition: background 0.2s, transform 0.2s;
+            transition: 0.2s;
         }
 
         .btn:hover {
-            background: var(--azul-escuro);
-            border-color: var(--azul-escuro);
-        }
-
-        .btn:active {
-            transform: scale(0.98);
+            background: var(--azul-hover);
+            border-color: var(--azul-hover);
         }
 
         .btn:disabled {
-            opacity: 0.65;
+            opacity: 0.6;
             cursor: wait;
         }
 
@@ -307,69 +303,65 @@
         }
 
         .btn-secondary:hover {
-            background: #e5f1fb;
+            background: #e3f0fc;
             color: var(--azul-escuro);
-            border-color: #b6d1e8;
+            border-color: #a9c9e4;
         }
 
         .mensagem {
             display: none;
             margin-top: 20px;
-            padding: 13px 15px;
+            padding: 14px 16px;
             border-radius: 7px;
             font-size: 14px;
             line-height: 1.5;
         }
 
-        .mensagem.sucesso,
+        .mensagem.sucesso {
+            display: block;
+            color: #17663a;
+            background: #e7f7ed;
+            border: 1px solid #b8e4c9;
+        }
+
         .mensagem.erro {
             display: block;
-        }
-
-        .mensagem.sucesso {
-            background: #e6f6ed;
-            border: 1px solid #b8e4c9;
-            color: #17663a;
-        }
-
-        .mensagem.erro {
+            color: #a12626;
             background: #fff0f0;
             border: 1px solid #f0c4c4;
-            color: #a12626;
         }
 
         .footer {
+            border-top: 1px solid #d8e5f0;
             margin-top: 45px;
-            padding: 22px;
+            padding: 23px 15px;
             text-align: center;
             color: #72879a;
             font-size: 12px;
-            border-top: 1px solid #d8e5f0;
         }
 
-        @media (max-width: 800px) {
+        @media (max-width: 850px) {
             .topbar {
                 align-items: flex-start;
                 flex-direction: column;
             }
 
-            .nav {
-                width: 100%;
-            }
-
-            .nav a {
-                padding: 9px 10px;
-            }
-
             .cards-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .nav {
+                width: 100%;
             }
         }
 
         @media (max-width: 560px) {
             .container {
-                width: 92%;
                 margin: 24px auto;
+            }
+
+            h1 {
+                font-size: 25px;
             }
 
             .form-card {
@@ -384,15 +376,12 @@
                 grid-column: auto;
             }
 
-            .page-title .btn {
-                width: 100%;
-            }
-
             .actions {
                 flex-direction: column;
             }
 
-            .actions .btn {
+            .actions .btn,
+            .page-title > .btn {
                 width: 100%;
             }
         }
@@ -458,7 +447,7 @@
             <div class="form-icone">📋</div>
             <div>
                 <h2>Dados do paciente</h2>
-                <p>Os campos marcados com * são obrigatórios.</p>
+                <p>Preencha os campos abaixo para realizar o cadastro.</p>
             </div>
         </div>
 
@@ -487,7 +476,6 @@
                         placeholder="000.000.000-00"
                         maxlength="14"
                         inputmode="numeric"
-                        autocomplete="off"
                         required
                     >
                     <span class="dica">Digite os 11 números do CPF.</span>
@@ -514,12 +502,8 @@
                 </button>
             </div>
 
-            <div
-                id="mensagem"
-                class="mensagem"
-                role="status"
-                aria-live="polite"
-            ></div>
+            <div id="mensagem" class="mensagem"
+                 role="status" aria-live="polite"></div>
         </form>
     </section>
 
