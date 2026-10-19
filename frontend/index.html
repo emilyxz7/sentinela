@@ -14,60 +14,75 @@
 
         body {
             margin: 0;
-            background: #ffffff;
+            padding: 30px 20px;
+            background: #f4f7fb;
             font-family: Arial, sans-serif;
-            color: #333333;
+            color: #263445;
         }
 
-        .pagina {
+        main {
             width: 100%;
-            max-width: 500px;
-            margin: 70px auto;
-            padding: 0 25px;
+            max-width: 520px;
+            margin: 35px auto;
+        }
+
+        header {
+            margin-bottom: 28px;
         }
 
         h1 {
-            margin: 0 0 10px;
-            color: #245987;
+            margin: 0 0 8px;
+            color: #173f67;
             font-size: 28px;
-            font-weight: normal;
-            text-align: center;
         }
 
-        .subtitulo {
-            margin: 0 0 35px;
-            color: #777777;
+        header p {
+            margin: 0;
+            color: #718096;
             font-size: 15px;
-            text-align: center;
         }
 
         .opcoes {
             display: flex;
             flex-direction: column;
-            align-items: stretch;
-            width: 100%;
+            gap: 12px;
         }
 
-        .opcoes a {
-            display: block;
-            padding: 16px 0;
+        .opcao {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 60px;
+            padding: 17px 18px;
+            background: #ffffff;
+            border: 1px solid #d8e2ec;
+            border-radius: 6px;
             color: #245987;
-            background: none;
-            border: none;
-            border-radius: 0;
+            font-size: 16px;
             text-decoration: none;
-            text-align: center;
-            font-size: 17px;
         }
 
-        .opcoes a:hover {
-            color: #123b60;
-            text-decoration: underline;
+        .opcao:hover {
+            background: #edf5fc;
+            border-color: #8eafcf;
         }
 
-        @media (max-width: 600px) {
-            .pagina {
-                margin-top: 40px;
+        .seta {
+            color: #718096;
+            font-size: 22px;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            main {
+                margin-top: 20px;
+            }
+
+            h1 {
+                font-size: 25px;
             }
         }
     </style>
@@ -75,21 +90,45 @@
 
 <body>
 
-    <main class="pagina">
+    <main>
 
-        <h1>Projeto Sentinela</h1>
-
-        <p class="subtitulo">
-            Sistema de atendimento
-        </p>
+        <header>
+            <h1>Projeto Sentinela</h1>
+            <p>Sistema de atendimento</p>
+        </header>
 
         <nav class="opcoes">
-            <a href="atendimento.html">Atendimento</a>
-            <a href="triagem.html">Triagem</a>
-            <a href="medico.html">Painel Médico</a>
-            <a href="medicacoes.html">Medicações</a>
-            <a href="alta.html">Alta</a>
-            <a href="tv.html">Painel de TV</a>
+
+            <a href="atendimento.html" class="opcao">
+                <span>Atendimento</span>
+                <span class="seta">›</span>
+            </a>
+
+            <a href="triagem.html" class="opcao">
+                <span>Triagem</span>
+                <span class="seta">›</span>
+            </a>
+
+            <a href="medico.html" class="opcao">
+                <span>Painel Médico</span>
+                <span class="seta">›</span>
+            </a>
+
+            <a href="medicacoes.html" class="opcao">
+                <span>Medicações</span>
+                <span class="seta">›</span>
+            </a>
+
+            <a href="alta.html" class="opcao">
+                <span>Alta</span>
+                <span class="seta">›</span>
+            </a>
+
+            <a href="tv.html" class="opcao">
+                <span>Painel de TV</span>
+                <span class="seta">›</span>
+            </a>
+
         </nav>
 
     </main>
