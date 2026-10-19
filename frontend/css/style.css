@@ -1,162 +1,133 @@
 ```css
-/* =====================================
-   PROJETO SENTINELA
-   Design simples, moderno e azul
-===================================== */
-
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
-:root {
-    --azul-escuro: #12345a;
-    --azul: #1769aa;
-    --azul-claro: #eaf4fc;
-    --fundo: #f5f8fc;
-    --branco: #ffffff;
-    --texto: #26384a;
-    --cinza: #718096;
-    --borda: #e1e8f0;
-    --verde: #16845b;
-    --vermelho: #d94343;
-}
-
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: var(--fundo);
-    color: var(--texto);
-    min-height: 100vh;
-    font-size: 15px;
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    color: #333;
 }
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button,
-input,
-select,
-textarea {
-    font: inherit;
-}
-
-/* CONTEÚDO PRINCIPAL */
 
 .container {
-    width: min(1100px, 92%);
-    margin: 35px auto;
-    padding: 30px;
-    background: var(--branco);
-    border: 1px solid var(--borda);
-    border-radius: 12px;
+    max-width: 850px;
+    margin: 20px auto;
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-main {
-    min-width: 0;
-}
-
-h1,
-h2,
-h3 {
-    color: var(--azul-escuro);
-    margin-bottom: 10px;
-}
-
-h1 {
-    font-size: 26px;
-}
-
-h2 {
-    font-size: 22px;
+h1, h2, h3 {
+    color: #174873;
+    margin-top: 0;
 }
 
 p {
-    line-height: 1.6;
+    line-height: 1.5;
 }
-
-/* CABEÇALHO */
 
 .topo {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 18px;
-    flex-wrap: wrap;
-    margin-bottom: 28px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--borda);
+    flex-direction: column;
+    gap: 8px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
 }
-
-.topo h1,
-.topo h2 {
-    margin-bottom: 5px;
-}
-
-.topo p {
-    color: var(--cinza);
-}
-
-/* MENU DE NAVEGAÇÃO */
 
 .menu {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 8px;
-    flex-wrap: wrap;
-    background: var(--azul-escuro);
-    padding: 14px 20px;
-    border-radius: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .menu a {
-    color: white;
-    padding: 10px 14px;
-    border-radius: 6px;
-    transition: background 0.2s;
+    display: block;
+    padding: 12px;
+    color: #174873;
+    background: #f0f5fa;
+    border: 1px solid #d8e2ec;
+    border-radius: 4px;
+    text-decoration: none;
 }
 
-.menu a:hover,
-.menu a.ativo {
-    background: var(--azul);
-}
-
-/* FORMULÁRIOS */
-
-form {
-    width: 100%;
+.menu a:hover {
+    background: #e0edf8;
 }
 
 label {
     display: block;
-    margin-bottom: 7px;
-    font-weight: 600;
-    color: var(--azul-escuro);
+    margin-bottom: 6px;
+    font-weight: bold;
 }
 
-input,
-select,
-textarea {
+input, select, textarea {
+    display: block;
     width: 100%;
-    padding: 12px 14px;
-    margin-bottom: 18px;
-    border: 1px solid #d4deea;
-    border-radius: 7px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     background: white;
-    color: var(--texto);
-    outline: none;
-    transition: border 0.2s, box-shadow 0.2s;
 }
 
-input:focus,
-select:focus,
-textarea:focus {
-    border-color: var(--azul);
-    box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.12);
+button, .btn, .btn-voltar {
+    display: inline-block;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 4px;
+    background: #205b8e;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-textarea {
-    min
+button:hover, .btn:hover, .btn-voltar:hover {
+    background: #174873;
+}
+
+.card, .paciente-card, .caixa {
+    padding: 15px;
+    margin-bottom: 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #f0f5fa;
+    color: #174873;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 5px auto;
+        padding: 15px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+```
