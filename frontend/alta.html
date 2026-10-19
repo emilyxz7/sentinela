@@ -1,27 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Alta Médica - Saúde Integra</title>
-
+    <title>Alta Médica | Projeto-Sentinela</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
 <header class="topbar">
-
-    <div class="brand">
+    <a href="index.html" class="brand">
         <div class="brand-icon">🏥</div>
-
         <div>
-            <strong>Saúde Integra</strong>
+            <strong>Projeto-Sentinela</strong>
             <span>Sistema de Gestão em Saúde</span>
         </div>
-    </div>
+    </a>
 
     <nav class="nav">
         <a href="index.html">Início</a>
@@ -32,202 +27,183 @@
         <a href="alta.html" class="active">Alta Médica</a>
         <a href="tv.html">Painel TV</a>
     </nav>
-
 </header>
-
 
 <main class="container">
 
     <div class="page-title">
-
         <div>
-            <span class="page-tag">FINALIZAÇÃO</span>
-
-            <h1>✅ Alta médica</h1>
-
-            <p>
-                Registre a alta do paciente após o atendimento.
-            </p>
+            <span class="page-tag">ENCERRAMENTO DO ATENDIMENTO</span>
+            <h1>Alta médica</h1>
+            <p>Registre os dados do paciente e as orientações de alta.</p>
         </div>
 
-        <a href="index.html" class="btn btn-secondary">
-            ← Voltar
+        <a href="medico.html" class="btn btn-secondary">
+            ← Painel médico
         </a>
-
     </div>
 
-
     <section class="panel">
+        <h2>Informações importantes</h2>
+        <p class="muted">
+            Confira a identificação do paciente e registre as orientações
+            definidas pelo profissional responsável antes de concluir a alta.
+        </p>
+    </section>
 
-        <div class="panel-header">
-
-            <div>
-                <h2>📋 Registrar alta</h2>
-
-                <p>
-                    Preencha os dados para concluir o atendimento.
-                </p>
-            </div>
-        </div>
-
+    <section class="form-card">
+        <h2>📄 Registro de alta</h2>
 
         <form id="formAlta">
+            <div class="form-grid">
 
-            <div class="field">
+                <div class="form-group">
+                    <label for="pacienteId">ID do paciente *</label>
+                    <input
+                        type="number"
+                        id="pacienteId"
+                        name="pacienteId"
+                        min="1"
+                        placeholder="Número do cadastro"
+                        required
+                    >
+                </div>
 
-                <label for="pacienteId">
-                    Código do paciente
-                </label>
+                <div class="form-group">
+                    <label for="paciente">Nome do paciente *</label>
+                    <input
+                        type="text"
+                        id="paciente"
+                        name="paciente"
+                        placeholder="Nome completo"
+                        required
+                    >
+                </div>
 
-                <input
-                    type="text"
-                    id="pacienteId"
-                    placeholder="Informe o código do paciente"
-                    required
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="paciente">
-                    Nome do paciente
-                </label>
-
-                <input
-                    type="text"
-                    id="paciente"
-                    placeholder="Nome completo do paciente"
-                    required
-                >
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="orientacoes">
-                    Orientações para o paciente
-                </label>
-
-                <textarea
-                    id="orientacoes"
-                    rows="5"
-                    placeholder="Digite as orientações médicas..."
-                    required
-                ></textarea>
+                <div class="form-group full">
+                    <label for="orientacoes">Orientações de alta *</label>
+                    <textarea
+                        id="orientacoes"
+                        name="orientacoes"
+                        placeholder="Registre as orientações fornecidas pelo profissional responsável..."
+                        required
+                    ></textarea>
+                </div>
 
             </div>
-
 
             <div class="actions">
-
-                <button
-                    type="submit"
-                    class="btn btn-primary">
-                    ✅ Confirmar alta
+                <button type="submit" class="btn" id="btnSalvar">
+                    Registrar alta
                 </button>
 
-                <button
-                    type="reset"
-                    class="btn btn-secondary">
-                    🧹 Limpar
+                <button type="reset" class="btn btn-secondary">
+                    Limpar formulário
                 </button>
-
             </div>
 
+            <div id="mensagem" class="mensagem" role="status"
+                 aria-live="polite"></div>
         </form>
-
-
-        <div id="mensagem" class="message"></div>
-
     </section>
 
 </main>
 
-
 <footer class="footer">
-
-    <p>
-        © 2026 Saúde Integra — Sistema de Gestão em Saúde
-    </p>
-
+    <p>© 2026 Projeto-Sentinela — Sistema de Gestão em Saúde</p>
 </footer>
 
-
 <script>
+const formAlta = document.getElementById("formAlta");
+const mensagem = document.getElementById("mensagem");
+const btnSalvar = document.getElementById("btnSalvar");
 
-    const formAlta = document.getElementById("formAlta");
-    const mensagem = document.getElementById("mensagem");
+function mostrarMensagem(texto, tipo) {
+    mensagem.textContent = texto;
+    mensagem.className = "mensagem " + tipo;
+}
 
+formAlta.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-    formAlta.addEventListener("submit", async function(event) {
+    const pacienteId = document
+        .getElementById("pacienteId").value.trim();
 
-        event.preventDefault();
+    const paciente = document
+        .getElementById("paciente").value.trim();
 
+    const orientacoes = document
+        .getElementById("orientacoes").value.trim();
 
-        const dados = {
+    if (!pacienteId || !paciente || !orientacoes) {
+        mostrarMensagem(
+            "Preencha todos os campos obrigatórios.",
+            "erro"
+        );
+        return;
+    }
 
-            pacienteId:
-                document.getElementById("pacienteId").value.trim(),
+    if (!Number.isInteger(Number(pacienteId)) ||
+        Number(pacienteId) < 1) {
+        mostrarMensagem(
+            "Informe um ID de paciente válido.",
+            "erro"
+        );
+        return;
+    }
 
-            paciente:
-                document.getElementById("paciente").value.trim(),
+    const dadosAlta = {
+        pacienteId: Number(pacienteId),
+        paciente,
+        orientacoes
+    };
 
-            orientacoes:
-                document.getElementById("orientacoes").value.trim()
+    btnSalvar.disabled = true;
+    btnSalvar.textContent = "Registrando...";
+    mensagem.textContent = "";
+    mensagem.className = "mensagem";
 
-        };
+    try {
+        const resposta = await fetch("/alta", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(dadosAlta)
+        });
 
+        const resultado = await resposta.json().catch(() => ({}));
 
-        try {
-
-            const resposta = await fetch("/alta", {
-
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify(dados)
-
-            });
-
-
-            const resultado = await resposta.json();
-
-
-            if (!resposta.ok) {
-
-                throw new Error(
-                    resultado.mensagem || "Não foi possível registrar a alta."
-                );
-
-            }
-
-
-            mensagem.className = "message success";
-
-            mensagem.textContent =
-                "✅ Alta médica registrada com sucesso!";
-
-
-            formAlta.reset();
-
-
-        } catch (erro) {
-
-            mensagem.className = "message error";
-
-            mensagem.textContent =
-                "❌ " + erro.message;
-
+        if (!resposta.ok) {
+            throw new Error(
+                resultado.mensagem ||
+                resultado.erro ||
+                "Não foi possível registrar a alta."
+            );
         }
 
-    });
+        mostrarMensagem(
+            resultado.mensagem || "Alta registrada com sucesso!",
+            "sucesso"
+        );
 
+        formAlta.reset();
+
+    } catch (erro) {
+        mostrarMensagem(
+            erro.message || "Erro de conexão com o servidor.",
+            "erro"
+        );
+    } finally {
+        btnSalvar.disabled = false;
+        btnSalvar.textContent = "Registrar alta";
+    }
+});
+
+formAlta.addEventListener("reset", function() {
+    mensagem.textContent = "";
+    mensagem.className = "mensagem";
+});
 </script>
 
 </body>
