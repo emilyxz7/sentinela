@@ -1,69 +1,88 @@
 
-/* AZUL MAIS FORTE - PROJETO SENTINELA */
+/* ==================================================
+   PROJETO-SENTINELA | AZUL-MARINHO MODERNO
+   ================================================== */
 
 :root {
-    --azul-principal: #2788cf;
-    --azul-medio: #4b9fdf;
-    --azul-claro: #d4eaff;
-    --azul-fundo: #e5f1fc;
-    --azul-escuro: #164e80;
-    --azul-hover: #176db0;
-
-    --cinza-borda: #c3d9ec;
-    --cinza-texto: #536b80;
+    --azul-principal: #123d68;
+    --azul-medio: #1d5688;
+    --azul-claro: #e8f0f8;
+    --azul-fundo: #f1f5fa;
+    --azul-escuro: #0b2545;
+    --azul-hover: #245f94;
+    --branco: #ffffff;
+    --cinza-fundo: #f8fafc;
+    --cinza-borda: #d9e2ed;
+    --cinza-texto: #64748b;
+    --texto-principal: #1e293b;
+    --sombra: 0 8px 28px rgba(11, 37, 69, 0.08);
+    --raio: 16px;
 }
 
-/* Fundo geral */
+/* FUNDO E TEXTO */
+
 body {
-    background: #e5f1fc;
-    color: #243b50;
+    background: #f1f5fa;
+    color: #1e293b;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Barra superior */
+/* BARRA SUPERIOR */
+
 .topbar {
-    background: #ffffff;
-    border-bottom: 2px solid #c3ddf4;
+    background: #0b2545;
+    color: #ffffff;
+    border-bottom: 3px solid #285b89;
+    box-shadow: 0 5px 18px rgba(11, 37, 69, 0.16);
 }
 
-/* Títulos */
+.brand,
+.topbar .brand {
+    color: #ffffff;
+}
+
+.brand-icon {
+    background: #244e77;
+    color: #ffffff;
+    border: 1px solid #426b91;
+    border-radius: 13px;
+}
+
+.nav a {
+    color: #dce8f5;
+    border-radius: 9px;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover,
+.nav a.ativo {
+    background: #244e77;
+    color: #ffffff;
+}
+
+/* TÍTULOS */
+
 .page-title,
 .cabecalho h1,
-.cabecalho h2,
-.panel h2,
-.panel h3,
-.form-card h2,
-.form-card h3 {
-    color: #164e80;
+.cabecalho h2 {
+    color: #0b2545;
+    font-weight: 800;
 }
 
-/* Botões principais */
-.btn,
-button.btn {
-    background: #2788cf;
-    color: #ffffff;
+.page-title {
+    letter-spacing: -0.6px;
 }
 
-.btn:hover,
-button.btn:hover {
-    background: #176db0;
-    color: #ffffff;
+.page-tag,
+.badge {
+    background: #dce9f6;
+    color: #123d68;
+    border: 1px solid #c8d9eb;
+    border-radius: 30px;
 }
 
-/* Botões secundários */
-.btn-secondary,
-.btn-voltar {
-    background: #d4eaff;
-    color: #164e80;
-    border-color: #a9cce9;
-}
+/* PAINÉIS E CARTÕES */
 
-.btn-secondary:hover,
-.btn-voltar:hover {
-    background: #b9dcfa;
-    color: #164e80;
-}
-
-/* Cartões e painéis */
 .panel,
 .form-card,
 .card,
@@ -71,84 +90,360 @@ button.btn:hover {
 .feature-card,
 .card-paciente {
     background: #ffffff;
-    border-color: #c3d9ec;
+    border: 1px solid #d9e2ed;
+    border-radius: 16px;
+    box-shadow: 0 6px 22px rgba(11, 37, 69, 0.06);
 }
 
-/* Cartões clicáveis */
+.panel,
+.form-card,
+.secao {
+    padding: 26px;
+}
+
+.panel h2,
+.panel h3,
+.form-card h2,
+.form-card h3,
+.card h2,
+.card h3,
+.secao h2 {
+    color: #123d68;
+}
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(11, 37, 69, 0.12);
+}
+
+/* INÍCIO */
+
+.hero {
+    background: linear-gradient(135deg, #0b2545, #174a78);
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 12px 30px rgba(11, 37, 69, 0.16);
+}
+
+.hero h1 {
+    color: #ffffff;
+}
+
+.hero p {
+    color: #dce8f5;
+}
+
+.atalhos {
+    gap: 20px;
+}
+
 .atalho {
     background: #ffffff;
-    border-color: #b6d4ee;
+    color: #1e293b;
+    border: 1px solid #d9e2ed;
+    border-radius: 16px;
+    box-shadow: 0 6px 22px rgba(11, 37, 69, 0.06);
+    transition: transform 0.2s ease, border-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .atalho:hover {
-    background: #eaf5ff;
-    border-color: #4b9fdf;
+    background: #f6f9fd;
+    color: #123d68;
+    border-color: #789bbc;
+    box-shadow: 0 12px 28px rgba(11, 37, 69, 0.12);
+    transform: translateY(-4px);
 }
 
-/* Ícones */
-.brand-icon,
+.atalho h3 {
+    color: #123d68;
+}
+
+.atalho p {
+    color: #64748b;
+}
+
 .atalho .icone,
 .atalho .icon {
-    background: #d4eaff;
-    color: #164e80;
+    background: #e5edf7;
+    color: #123d68;
+    border-radius: 13px;
 }
 
-/* Campos */
+/* FORMULÁRIOS */
+
+.form-group label,
+label {
+    color: #243b53;
+    font-weight: 700;
+}
+
 input,
 select,
 textarea {
-    border-color: #bfd5e8;
     background: #ffffff;
+    color: #1e293b;
+    border: 1px solid #cbd7e4;
+    border-radius: 10px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-    border-color: #2788cf;
-    box-shadow: 0 0 0 3px rgba(39, 136, 207, 0.18);
+    border-color: #1d5688;
+    box-shadow: 0 0 0 3px rgba(29, 86, 136, 0.13);
+    outline: none;
 }
 
-/* Etiquetas */
-.page-tag,
-.badge {
-    background: #d4eaff;
-    color: #164e80;
+/* BOTÕES PRINCIPAIS */
+
+.btn,
+button.btn {
+    background: #123d68;
+    color: #ffffff;
+    border: 1px solid #123d68;
+    border-radius: 10px;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-/* Tela de login */
-.login-page {
-    background: linear-gradient(135deg, #8fc8f3, #d8ecff, #a9d6f8);
+.btn:hover,
+button.btn:hover {
+    background: #245f94;
+    color: #ffffff;
+    border-color: #245f94;
+    box-shadow: 0 5px 14px rgba(11, 37, 69, 0.16);
+    transform: translateY(-1px);
 }
 
-.login-logo {
-    background: linear-gradient(135deg, #2788cf, #164e80);
+.btn-secondary,
+.btn-voltar {
+    background: #e8f0f8;
+    color: #123d68;
+    border: 1px solid #cbdbea;
+    border-radius: 10px;
+}
+
+.btn-secondary:hover,
+.btn-voltar:hover {
+    background: #d5e3f1;
+    color: #0b2545;
+}
+
+.btn-success {
+    background: #21835d;
     color: #ffffff;
 }
 
-/* Tela da TV */
+.btn-success:hover {
+    background: #176947;
+    color: #ffffff;
+}
+
+.btn-danger {
+    background: #bd3948;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background: #9f2937;
+    color: #ffffff;
+}
+
+.btn-warning {
+    background: #f0c66b;
+    color: #493712;
+}
+
+.btn-warning:hover {
+    background: #e2b44b;
+    color: #493712;
+}
+
+/* PACIENTES E TRIAGEM */
+
+.card-paciente {
+    border-left: 5px solid #1d5688;
+    padding: 23px;
+}
+
+.card-paciente h3 {
+    color: #123d68;
+}
+
+.risco-verde {
+    background: #dcf4e7;
+    color: #176a45;
+}
+
+.risco-amarelo {
+    background: #fff0c9;
+    color: #835c0b;
+}
+
+.risco-vermelho {
+    background: #fde1e4;
+    color: #a12636;
+}
+
+/* MENSAGENS */
+
+.mensagem {
+    background: #e8f0f8;
+    color: #123d68;
+    border: 1px solid #cbdbea;
+    border-radius: 10px;
+}
+
+.mensagem.sucesso {
+    background: #e4f6ec;
+    color: #176a45;
+    border-color: #b9e5cc;
+}
+
+.mensagem.erro {
+    background: #fdebed;
+    color: #a12636;
+    border-color: #f2c4ca;
+}
+
+.mensagem.aviso {
+    background: #fff5dc;
+    color: #835c0b;
+    border-color: #f0dfad;
+}
+
+/* TABELAS */
+
+th {
+    background: #e8f0f8;
+    color: #123d68;
+}
+
+th,
+td {
+    border-bottom: 1px solid #d9e2ed;
+}
+
+tr:hover td {
+    background: #f5f8fc;
+}
+
+/* LOGIN */
+
+.login-page {
+    background: linear-gradient(135deg, #0b2545, #174a78);
+}
+
+.login-box {
+    background: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 22px;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.22);
+}
+
+.login-box h1 {
+    color: #0b2545;
+}
+
+.login-logo {
+    background: linear-gradient(135deg, #123d68, #28669a);
+    color: #ffffff;
+    border-radius: 20px;
+}
+
+/* TELA DA TV */
+
 .tv-screen {
-    background: linear-gradient(135deg, #d4eaff, #f0f7ff);
+    background: linear-gradient(135deg, #0b2545, #174a78);
+    color: #ffffff;
+}
+
+.tv-screen h1,
+.tv-screen h2 {
+    color: #ffffff;
+}
+
+.tv-screen p {
+    color: #dce8f5;
 }
 
 .tv-call {
-    border-color: #9dc9ed;
     background: #ffffff;
+    border: 2px solid #8daecc;
+    border-radius: 24px;
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.2);
+}
+
+.tv-call h2 {
+    color: #123d68;
 }
 
 .tv-paciente {
-    color: #176db0;
+    color: #123d68;
 }
 
 .tv-local {
-    background: #d4eaff;
-    color: #164e80;
+    background: #e8f0f8;
+    color: #123d68;
 }
 
 .tv-clock {
-    color: #164e80;
+    color: #ffffff;
 }
 
-/* Bordas e divisórias */
+/* LISTAS E DIVISÓRIAS */
+
+.lista-item {
+    background: #ffffff;
+    border: 1px solid #d9e2ed;
+    border-radius: 12px;
+}
+
+.lista-item h3 {
+    color: #123d68;
+}
+
 hr {
-    background: #c3d9ec;
+    border: 0;
+    height: 1px;
+    background: #d9e2ed;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 760px) {
+    .topbar {
+        background: #0b2545;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    .panel,
+    .form-card,
+    .secao {
+        padding: 20px;
+    }
+
+    .nav {
+        gap: 6px;
+    }
+
+    .nav a {
+        padding: 8px 10px;
+    }
 }
