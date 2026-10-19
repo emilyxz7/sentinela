@@ -14,75 +14,144 @@
 
         body {
             margin: 0;
-            padding: 30px 20px;
-            background: #f4f7fb;
-            font-family: Arial, sans-serif;
-            color: #263445;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eaf2fa;
+            color: #263b50;
+        }
+
+        .cabecalho {
+            background: #174873;
+            color: white;
+            padding: 28px 20px;
+        }
+
+        .cabecalho-conteudo {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .cabecalho h1 {
+            margin: 0 0 8px;
+            font-size: 28px;
+        }
+
+        .cabecalho p {
+            margin: 0;
+            color: #d7e8f8;
+            font-size: 15px;
         }
 
         main {
             width: 100%;
-            max-width: 520px;
+            max-width: 850px;
             margin: 35px auto;
+            padding: 0 20px;
         }
 
-        header {
-            margin-bottom: 28px;
+        .titulo-secao {
+            margin-bottom: 8px;
+            color: #174873;
+            font-size: 23px;
         }
 
-        h1 {
-            margin: 0 0 8px;
-            color: #173f67;
-            font-size: 28px;
-        }
-
-        header p {
-            margin: 0;
-            color: #718096;
+        .descricao {
+            margin: 0 0 25px;
+            color: #61758a;
             font-size: 15px;
         }
 
         .opcoes {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 13px;
         }
 
         .opcao {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            min-height: 60px;
-            padding: 17px 18px;
+            gap: 15px;
+            min-height: 72px;
+            padding: 15px 20px;
             background: #ffffff;
-            border: 1px solid #d8e2ec;
-            border-radius: 6px;
-            color: #245987;
-            font-size: 16px;
+            border: 1px solid #c8dced;
+            border-left: 5px solid #2784c5;
+            border-radius: 7px;
+            color: #174873;
             text-decoration: none;
+            box-shadow: 0 2px 5px rgba(23, 72, 115, 0.06);
+            transition: background 0.2s, transform 0.2s;
         }
 
         .opcao:hover {
-            background: #edf5fc;
-            border-color: #8eafcf;
+            background: #dcecf9;
+            transform: translateX(3px);
+        }
+
+        .icone {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            background: #dcecf9;
+            border-radius: 6px;
+            color: #1769aa;
+            font-size: 21px;
+        }
+
+        .texto {
+            flex: 1;
+        }
+
+        .texto strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .texto small {
+            color: #71869a;
+            font-size: 13px;
         }
 
         .seta {
-            color: #718096;
-            font-size: 22px;
+            color: #2784c5;
+            font-size: 26px;
         }
 
-        @media (max-width: 500px) {
-            body {
-                padding: 20px 16px;
+        footer {
+            max-width: 810px;
+            margin: 35px auto 0;
+            padding: 18px 20px;
+            border-top: 1px solid #ccdae7;
+            color: #71869a;
+            font-size: 12px;
+        }
+
+        @media (max-width: 600px) {
+            .cabecalho {
+                padding: 23px 18px;
+            }
+
+            .cabecalho h1 {
+                font-size: 24px;
             }
 
             main {
-                margin-top: 20px;
+                margin-top: 25px;
+                padding: 0 15px;
             }
 
-            h1 {
-                font-size: 25px;
+            .opcao {
+                min-height: 68px;
+                padding: 12px;
+            }
+
+            .icone {
+                width: 38px;
+                height: 38px;
             }
         }
     </style>
@@ -90,48 +159,84 @@
 
 <body>
 
+    <header class="cabecalho">
+        <div class="cabecalho-conteudo">
+            <h1>Projeto Sentinela</h1>
+            <p>Sistema de atendimento em saúde</p>
+        </div>
+    </header>
+
     <main>
 
-        <header>
-            <h1>Projeto Sentinela</h1>
-            <p>Sistema de atendimento</p>
-        </header>
+        <h2 class="titulo-secao">Painel principal</h2>
+
+        <p class="descricao">
+            Selecione a área que deseja acessar.
+        </p>
 
         <nav class="opcoes">
 
             <a href="atendimento.html" class="opcao">
-                <span>Atendimento</span>
+                <span class="icone">👤</span>
+                <span class="texto">
+                    <strong>Atendimento</strong>
+                    <small>Cadastro de pacientes</small>
+                </span>
                 <span class="seta">›</span>
             </a>
 
             <a href="triagem.html" class="opcao">
-                <span>Triagem</span>
+                <span class="icone">📋</span>
+                <span class="texto">
+                    <strong>Triagem</strong>
+                    <small>Registro e avaliação inicial</small>
+                </span>
                 <span class="seta">›</span>
             </a>
 
             <a href="medico.html" class="opcao">
-                <span>Painel Médico</span>
+                <span class="icone">🩺</span>
+                <span class="texto">
+                    <strong>Painel Médico</strong>
+                    <small>Atendimento dos pacientes</small>
+                </span>
                 <span class="seta">›</span>
             </a>
 
             <a href="medicacoes.html" class="opcao">
-                <span>Medicações</span>
+                <span class="icone">💊</span>
+                <span class="texto">
+                    <strong>Medicações</strong>
+                    <small>Consulta de medicações prescritas</small>
+                </span>
                 <span class="seta">›</span>
             </a>
 
             <a href="alta.html" class="opcao">
-                <span>Alta</span>
+                <span class="icone">✓</span>
+                <span class="texto">
+                    <strong>Alta</strong>
+                    <small>Orientações de alta do paciente</small>
+                </span>
                 <span class="seta">›</span>
             </a>
 
             <a href="tv.html" class="opcao">
-                <span>Painel de TV</span>
+                <span class="icone">📺</span>
+                <span class="texto">
+                    <strong>Painel de TV</strong>
+                    <small>Chamadas de pacientes</small>
+                </span>
                 <span class="seta">›</span>
             </a>
 
         </nav>
 
     </main>
+
+    <footer>
+        Projeto Sentinela · Sistema de atendimento
+    </footer>
 
 </body>
 </html>
