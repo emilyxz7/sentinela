@@ -1,378 +1,229 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Atendimento | Saúde Integra</title>
-
+    <title>Atendimento | Projeto-Sentinela</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
-    <!-- =====================================
-         CABEÇALHO
-    ====================================== -->
+<header class="topbar">
+    <a href="index.html" class="brand">
+        <div class="brand-icon">🏥</div>
+        <div>
+            <strong>Projeto-Sentinela</strong>
+            <span>Sistema de Gestão em Saúde</span>
+        </div>
+    </a>
 
-    <header class="topbar">
+    <nav class="nav">
+        <a href="index.html">Início</a>
+        <a href="atendimento.html" class="active">Atendimento</a>
+        <a href="triagem.html">Triagem</a>
+        <a href="medico.html">Painel Médico</a>
+        <a href="medicacoes.html">Medicações</a>
+        <a href="alta.html">Alta Médica</a>
+        <a href="tv.html">Painel TV</a>
+    </nav>
+</header>
 
-        <div class="brand">
+<main class="container">
 
-            <div class="brand-icon">
-                🏥
-            </div>
-
-            <div>
-                <h1>Saúde <span>Integra</span></h1>
-
-                <p>
-                    Sistema de Gestão e Atendimento em Saúde
-                </p>
-            </div>
-
+    <div class="page-title">
+        <div>
+            <span class="page-tag">RECEPÇÃO E CADASTRO</span>
+            <h1>Cadastro de pacientes</h1>
+            <p>Preencha os dados para encaminhar o paciente à triagem.</p>
         </div>
 
-        <nav class="nav">
+        <a href="index.html" class="btn btn-secondary">← Início</a>
+    </div>
 
-            <a href="index.html">
-                🏠 Início
-            </a>
+    <div class="cards-grid" style="margin-bottom:24px;">
+        <article class="card">
+            <div style="font-size:28px;">01</div>
+            <h3>Identificação</h3>
+            <p>Informe o nome completo e o CPF do paciente.</p>
+        </article>
 
-            <a href="atendimento.html" class="active">
-                🧑‍💼 Atendimento
-            </a>
+        <article class="card">
+            <div style="font-size:28px;">02</div>
+            <h3>Tipo de atendimento</h3>
+            <p>Indique se o atendimento é particular ou por convênio.</p>
+        </article>
 
-            <a href="triagem.html">
-                🩺 Triagem
-            </a>
+        <article class="card">
+            <div style="font-size:28px;">03</div>
+            <h3>Encaminhamento</h3>
+            <p>Após o cadastro, o paciente poderá seguir para a triagem.</p>
+        </article>
+    </div>
 
-            <a href="medico.html">
-                👨‍⚕️ Médico
-            </a>
+    <section class="form-card">
+        <h2>📋 Dados do paciente</h2>
 
-            <a href="tv.html">
-                📺 Painel TV
-            </a>
+        <form id="formAtendimento">
+            <div class="form-grid">
 
-        </nav>
-
-    </header>
-
-
-    <!-- =====================================
-         CONTEÚDO PRINCIPAL
-    ====================================== -->
-
-    <main class="container">
-
-        <!-- TÍTULO -->
-
-        <div class="page-title">
-
-            <div>
-
-                <h2>
-                    🧑‍💼 Cadastro de pacientes
-                </h2>
-
-                <p>
-                    Registre os dados do paciente
-                    e encaminhe-o para a triagem.
-                </p>
-
-            </div>
-
-            <a href="index.html" class="btn secondary">
-                ← Voltar
-            </a>
-
-        </div>
-
-
-        <!-- =====================================
-             FORMULÁRIO DE CADASTRO
-        ====================================== -->
-
-        <section class="panel">
-
-            <h3>
-                📋 Informações do paciente
-            </h3>
-
-            <p style="color: #4d6e91; margin-bottom: 25px;">
-                Preencha os campos abaixo para realizar o cadastro.
-            </p>
-
-
-            <form id="formAtendimento">
-
-                <div class="grid">
-
-                    <!-- NOME -->
-
-                    <div class="field">
-
-                        <label for="nome">
-                            Nome completo *
-                        </label>
-
-                        <input
-                            type="text"
-                            id="nome"
-                            placeholder="Digite o nome completo"
-                            required
-                        >
-
-                    </div>
-
-
-                    <!-- CPF -->
-
-                    <div class="field">
-
-                        <label for="cpf">
-                            CPF
-                        </label>
-
-                        <input
-                            type="text"
-                            id="cpf"
-                            placeholder="Digite o CPF"
-                        >
-
-                    </div>
-
-
-                    <!-- TIPO DE ATENDIMENTO -->
-
-                    <div class="field">
-
-                        <label for="tipo">
-                            Tipo de atendimento *
-                        </label>
-
-                        <select id="tipo" required>
-
-                            <option value="">
-                                Selecione uma opção
-                            </option>
-
-                            <option value="Convenio">
-                                Convênio
-                            </option>
-
-                            <option value="Particular">
-                                Particular
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <!-- BOTÕES -->
-
-                <div class="actions">
-
-                    <button
-                        type="submit"
-                        class="btn"
+                <div class="form-group full">
+                    <label for="nome">Nome completo *</label>
+                    <input
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o nome completo"
+                        autocomplete="name"
+                        required
                     >
-                        💾 Cadastrar paciente
-                    </button>
+                </div>
 
-                    <button
-                        type="reset"
-                        class="btn secondary"
+                <div class="form-group">
+                    <label for="cpf">CPF *</label>
+                    <input
+                        type="text"
+                        id="cpf"
+                        name="cpf"
+                        placeholder="000.000.000-00"
+                        maxlength="14"
+                        inputmode="numeric"
+                        required
                     >
-                        🔄 Limpar
-                    </button>
-
                 </div>
 
-
-                <!-- MENSAGEM -->
-
-                <div
-                    id="mensagem"
-                    class="message"
-                ></div>
-
-            </form>
-
-        </section>
-
-
-        <!-- =====================================
-             INFORMAÇÃO
-        ====================================== -->
-
-        <section class="panel">
-
-            <h3>
-                💙 Como funciona?
-            </h3>
-
-            <div class="cards">
-
-                <div class="card">
-
-                    <h3>01. Cadastro</h3>
-
-                    <p>
-                        Informe os dados básicos
-                        do paciente.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <h3>02. Triagem</h3>
-
-                    <p>
-                        O paciente será encaminhado
-                        para avaliação.
-                    </p>
-
-                </div>
-
-
-                <div class="card">
-
-                    <h3>03. Atendimento</h3>
-
-                    <p>
-                        O paciente poderá ser atendido
-                        pela equipe médica.
-                    </p>
-
+                <div class="form-group">
+                    <label for="tipo">Tipo de atendimento *</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="">Selecione uma opção</option>
+                        <option value="Convenio">Convênio</option>
+                        <option value="Particular">Particular</option>
+                    </select>
                 </div>
 
             </div>
 
-        </section>
+            <div class="actions">
+                <button type="submit" class="btn" id="btnCadastrar">
+                    Cadastrar paciente →
+                </button>
 
-    </main>
+                <button type="reset" class="btn btn-secondary">
+                    Limpar formulário
+                </button>
+            </div>
 
+            <div id="mensagem" class="mensagem" role="status"
+                 aria-live="polite"></div>
+        </form>
+    </section>
 
-    <!-- =====================================
-         RODAPÉ
-    ====================================== -->
+</main>
 
-    <footer class="footer">
+<footer class="footer">
+    <p>© 2026 Projeto-Sentinela — Sistema de Gestão em Saúde</p>
+</footer>
 
-        💙 <strong>Saúde Integra</strong>
+<script>
+const form = document.getElementById("formAtendimento");
+const mensagem = document.getElementById("mensagem");
+const btnCadastrar = document.getElementById("btnCadastrar");
+const campoCpf = document.getElementById("cpf");
 
-        — Mais organização, mais cuidado.
+function mostrarMensagem(texto, tipo) {
+    mensagem.textContent = texto;
+    mensagem.className = "mensagem " + tipo;
+}
 
-    </footer>
+campoCpf.addEventListener("input", function () {
+    let valor = this.value.replace(/\D/g, "").slice(0, 11);
 
+    if (valor.length > 9) {
+        valor = valor.replace(
+            /^(\d{3})(\d{3})(\d{3})(\d{0,2}).*/,
+            "$1.$2.$3-$4"
+        );
+    } else if (valor.length > 6) {
+        valor = valor.replace(
+            /^(\d{3})(\d{3})(\d{0,3}).*/,
+            "$1.$2.$3"
+        );
+    } else if (valor.length > 3) {
+        valor = valor.replace(
+            /^(\d{3})(\d{0,3}).*/,
+            "$1.$2"
+        );
+    }
 
-    <!-- =====================================
-         JAVASCRIPT
-    ====================================== -->
+    this.value = valor;
+});
 
-    <script>
+form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-        const formulario =
-            document.getElementById("formAtendimento");
+    const nome = document.getElementById("nome").value.trim();
+    const cpf = campoCpf.value.trim();
+    const tipo = document.getElementById("tipo").value;
 
-        const mensagem =
-            document.getElementById("mensagem");
+    if (!nome || !cpf || !tipo) {
+        mostrarMensagem("Preencha todos os campos obrigatórios.", "erro");
+        return;
+    }
 
+    if (cpf.replace(/\D/g, "").length !== 11) {
+        mostrarMensagem("Digite um CPF com 11 números.", "erro");
+        campoCpf.focus();
+        return;
+    }
 
-        formulario.addEventListener("submit", async function (event) {
+    btnCadastrar.disabled = true;
+    btnCadastrar.textContent = "Cadastrando...";
+    mensagem.textContent = "";
+    mensagem.className = "mensagem";
 
-            event.preventDefault();
-
-
-            const nome =
-                document.getElementById("nome").value.trim();
-
-            const cpf =
-                document.getElementById("cpf").value.trim();
-
-            const tipo =
-                document.getElementById("tipo").value;
-
-
-            if (!nome) {
-
-                mensagem.textContent =
-                    "❌ Informe o nome do paciente.";
-
-                return;
-
-            }
-
-
-            mensagem.textContent =
-                "⏳ Cadastrando paciente...";
-
-
-            try {
-
-                const resposta = await fetch("/atendimento", {
-
-                    method: "POST",
-
-                    headers: {
-
-                        "Content-Type": "application/json"
-
-                    },
-
-                    body: JSON.stringify({
-
-                        nome: nome,
-
-                        cpf: cpf,
-
-                        tipo: tipo
-
-                    })
-
-                });
-
-
-                const dados = await resposta.json();
-
-
-                if (!resposta.ok) {
-
-                    throw new Error(
-                        dados.mensagem ||
-                        dados.erro ||
-                        "Erro ao cadastrar paciente."
-                    );
-
-                }
-
-
-                mensagem.textContent =
-                    "✅ Paciente cadastrado e enviado para a triagem!";
-
-
-                formulario.reset();
-
-
-            } catch (erro) {
-
-                mensagem.textContent =
-                    "❌ " + erro.message;
-
-            }
-
+    try {
+        const resposta = await fetch("/atendimento", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ nome, cpf, tipo })
         });
 
-    </script>
+        const dados = await resposta.json().catch(() => ({}));
+
+        if (!resposta.ok) {
+            throw new Error(
+                dados.mensagem ||
+                dados.erro ||
+                "Não foi possível cadastrar o paciente."
+            );
+        }
+
+        mostrarMensagem(
+            dados.mensagem ||
+            "Paciente cadastrado e enviado para a triagem!",
+            "sucesso"
+        );
+
+        form.reset();
+
+    } catch (erro) {
+        mostrarMensagem(
+            erro.message || "Erro de conexão com o servidor.",
+            "erro"
+        );
+    } finally {
+        btnCadastrar.disabled = false;
+        btnCadastrar.textContent = "Cadastrar paciente →";
+    }
+});
+
+form.addEventListener("reset", function () {
+    mensagem.textContent = "";
+    mensagem.className = "mensagem";
+});
+</script>
 
 </body>
-
 </html>
