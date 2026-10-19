@@ -1,12 +1,404 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Atendimento | Projeto-Sentinela</title>
+
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        :root {
+            --azul-escuro: #174873;
+            --azul: #1769aa;
+            --azul-claro: #eaf4fc;
+            --borda: #d4e4f2;
+            --texto: #263b50;
+            --branco: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #edf4fa;
+            color: var(--texto);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topbar {
+            background: var(--azul-escuro);
+            color: white;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: #ffffff;
+            color: var(--azul);
+            display: grid;
+            place-items: center;
+            font-size: 25px;
+        }
+
+        .brand strong,
+        .brand span {
+            display: block;
+        }
+
+        .brand strong {
+            font-size: 19px;
+        }
+
+        .brand span {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #d6e9f8;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: #e5f1fb;
+            text-decoration: none;
+            padding: 10px 12px;
+            border-radius: 7px;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            background: #2c6595;
+            color: white;
+        }
+
+        .container {
+            width: min(1100px, 92%);
+            margin: 32px auto;
+        }
+
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 26px;
+        }
+
+        .page-tag {
+            display: inline-block;
+            color: var(--azul);
+            background: #dcecf9;
+            padding: 7px 11px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0.7px;
+        }
+
+        .page-title h1 {
+            margin: 12px 0 8px;
+            color: var(--azul-escuro);
+            font-size: clamp(25px, 4vw, 32px);
+        }
+
+        .page-title p {
+            margin: 0;
+            color: #657b8e;
+            line-height: 1.6;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 26px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--borda);
+            border-left: 4px solid var(--azul);
+            border-radius: 9px;
+            padding: 21px;
+            box-shadow: 0 4px 12px rgba(23, 72, 115, 0.04);
+        }
+
+        .card-numero {
+            color: var(--azul);
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 13px;
+        }
+
+        .card h3 {
+            margin: 0 0 8px;
+            color: var(--azul-escuro);
+            font-size: 16px;
+        }
+
+        .card p {
+            margin: 0;
+            color: #657b8e;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .form-card {
+            background: white;
+            border: 1px solid var(--borda);
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 6px 20px rgba(23, 72, 115, 0.06);
+        }
+
+        .form-cabecalho {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding-bottom: 20px;
+            margin-bottom: 23px;
+            border-bottom: 1px solid #e5edf5;
+        }
+
+        .form-icone {
+            width: 46px;
+            height: 46px;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: var(--azul-claro);
+            font-size: 23px;
+        }
+
+        .form-cabecalho h2 {
+            margin: 0 0 5px;
+            color: var(--azul-escuro);
+            font-size: 20px;
+        }
+
+        .form-cabecalho p {
+            margin: 0;
+            color: #708497;
+            font-size: 13px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #344f68;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            min-height: 47px;
+            padding: 12px 14px;
+            border: 1px solid #c8d9e8;
+            border-radius: 7px;
+            background: white;
+            color: var(--texto);
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input::placeholder {
+            color: #9aabba;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--azul);
+            box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.12);
+        }
+
+        .dica {
+            color: #74899b;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 27px;
+        }
+
+        .btn {
+            min-height: 44px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 19px;
+            border: 1px solid var(--azul);
+            border-radius: 7px;
+            background: var(--azul);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--azul-escuro);
+            border-color: var(--azul-escuro);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: wait;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--azul);
+            border-color: #c8d9e8;
+        }
+
+        .btn-secondary:hover {
+            background: #e5f1fb;
+            color: var(--azul-escuro);
+            border-color: #b6d1e8;
+        }
+
+        .mensagem {
+            display: none;
+            margin-top: 20px;
+            padding: 13px 15px;
+            border-radius: 7px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .mensagem.sucesso,
+        .mensagem.erro {
+            display: block;
+        }
+
+        .mensagem.sucesso {
+            background: #e6f6ed;
+            border: 1px solid #b8e4c9;
+            color: #17663a;
+        }
+
+        .mensagem.erro {
+            background: #fff0f0;
+            border: 1px solid #f0c4c4;
+            color: #a12626;
+        }
+
+        .footer {
+            margin-top: 45px;
+            padding: 22px;
+            text-align: center;
+            color: #72879a;
+            font-size: 12px;
+            border-top: 1px solid #d8e5f0;
+        }
+
+        @media (max-width: 800px) {
+            .topbar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .nav {
+                width: 100%;
+            }
+
+            .nav a {
+                padding: 9px 10px;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .container {
+                width: 92%;
+                margin: 24px auto;
+            }
+
+            .form-card {
+                padding: 20px 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .page-title .btn {
+                width: 100%;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
 <header class="topbar">
@@ -31,7 +423,7 @@
 
 <main class="container">
 
-    <div class="page-title">
+    <section class="page-title">
         <div>
             <span class="page-tag">RECEPÇÃO E CADASTRO</span>
             <h1>Cadastro de pacientes</h1>
@@ -39,30 +431,36 @@
         </div>
 
         <a href="index.html" class="btn btn-secondary">← Início</a>
-    </div>
+    </section>
 
-    <div class="cards-grid" style="margin-bottom:24px;">
+    <section class="cards-grid">
         <article class="card">
-            <div style="font-size:28px;">01</div>
+            <div class="card-numero">01</div>
             <h3>Identificação</h3>
             <p>Informe o nome completo e o CPF do paciente.</p>
         </article>
 
         <article class="card">
-            <div style="font-size:28px;">02</div>
+            <div class="card-numero">02</div>
             <h3>Tipo de atendimento</h3>
             <p>Indique se o atendimento é particular ou por convênio.</p>
         </article>
 
         <article class="card">
-            <div style="font-size:28px;">03</div>
+            <div class="card-numero">03</div>
             <h3>Encaminhamento</h3>
             <p>Após o cadastro, o paciente poderá seguir para a triagem.</p>
         </article>
-    </div>
+    </section>
 
     <section class="form-card">
-        <h2>📋 Dados do paciente</h2>
+        <div class="form-cabecalho">
+            <div class="form-icone">📋</div>
+            <div>
+                <h2>Dados do paciente</h2>
+                <p>Os campos marcados com * são obrigatórios.</p>
+            </div>
+        </div>
 
         <form id="formAtendimento">
             <div class="form-grid">
@@ -75,6 +473,7 @@
                         name="nome"
                         placeholder="Digite o nome completo"
                         autocomplete="name"
+                        maxlength="150"
                         required
                     >
                 </div>
@@ -88,8 +487,10 @@
                         placeholder="000.000.000-00"
                         maxlength="14"
                         inputmode="numeric"
+                        autocomplete="off"
                         required
                     >
+                    <span class="dica">Digite os 11 números do CPF.</span>
                 </div>
 
                 <div class="form-group">
@@ -113,8 +514,12 @@
                 </button>
             </div>
 
-            <div id="mensagem" class="mensagem" role="status"
-                 aria-live="polite"></div>
+            <div
+                id="mensagem"
+                class="mensagem"
+                role="status"
+                aria-live="polite"
+            ></div>
         </form>
     </section>
 
@@ -166,12 +571,18 @@ form.addEventListener("submit", async function (event) {
     const tipo = document.getElementById("tipo").value;
 
     if (!nome || !cpf || !tipo) {
-        mostrarMensagem("Preencha todos os campos obrigatórios.", "erro");
+        mostrarMensagem(
+            "Preencha todos os campos obrigatórios.",
+            "erro"
+        );
         return;
     }
 
     if (cpf.replace(/\D/g, "").length !== 11) {
-        mostrarMensagem("Digite um CPF com 11 números.", "erro");
+        mostrarMensagem(
+            "Digite um CPF com 11 números.",
+            "erro"
+        );
         campoCpf.focus();
         return;
     }
@@ -227,3 +638,4 @@ form.addEventListener("reset", function () {
 
 </body>
 </html>
+```
