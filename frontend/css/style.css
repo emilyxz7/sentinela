@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projeto Sentinela</title>
 
-    <link rel="stylesheet" href="css/style.css">
-
     <style>
         * {
             box-sizing: border-box;
@@ -15,115 +13,218 @@
 
         body {
             margin: 0;
-            padding: 20px;
-            background: #f5f7fa;
             font-family: Arial, sans-serif;
-            color: #333;
+            background: #f4f7fb;
+            color: #263445;
         }
 
-        .pagina {
-            max-width: 600px;
-            margin: 25px auto;
-            padding: 22px;
-            background: #fff;
-            border: 1px solid #dce3eb;
-            border-radius: 6px;
+        .layout {
+            display: flex;
+            min-height: 100vh;
         }
 
-        .cabecalho {
+        /* MENU LATERAL */
+
+        .sidebar {
+            width: 235px;
+            flex-shrink: 0;
             background: #173f67;
             color: white;
-            padding: 20px;
-            border-radius: 4px;
-            margin-bottom: 25px;
+            padding: 28px 18px;
         }
 
-        .cabecalho h1 {
-            margin: 0 0 7px;
-            font-size: 24px;
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            padding: 0 10px 25px;
+            border-bottom: 1px solid #426184;
+            margin-bottom: 28px;
+        }
+
+        .logo small {
+            display: block;
+            margin-top: 7px;
+            font-size: 12px;
+            font-weight: normal;
+            color: #cbd9e8;
+        }
+
+        .menu-titulo {
+            padding: 0 10px;
+            margin-bottom: 12px;
+            color: #cbd9e8;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .menu {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 13px 12px;
+            border-radius: 5px;
+            color: #edf4fb;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .menu a:hover,
+        .menu a.ativo {
+            background: #285985;
             color: white;
         }
 
-        .cabecalho p {
+        /* ÁREA PRINCIPAL */
+
+        .principal {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .topo {
+            height: 75px;
+            padding: 0 35px;
+            display: flex;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #e0e6ed;
+        }
+
+        .topo h1 {
             margin: 0;
-            font-size: 14px;
-            color: #e2edf7;
+            font-size: 19px;
+            font-weight: 600;
+            color: #173f67;
+        }
+
+        .conteudo {
+            padding: 35px;
+            max-width: 1000px;
         }
 
         .conteudo h2 {
-            margin: 0 0 8px;
-            font-size: 21px;
-            color: #26384a;
+            margin: 0 0 10px;
+            font-size: 25px;
+            font-weight: 600;
+            color: #263445;
         }
 
         .descricao {
-            margin: 0 0 20px;
+            margin: 0 0 30px;
+            color: #718096;
             font-size: 14px;
-            color: #667085;
         }
 
-        .opcoes {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .secao-titulo {
+            margin-bottom: 12px;
+            color: #526174;
+            font-size: 13px;
+            font-weight: bold;
         }
 
-        .opcao {
+        /* LISTA DE OPÇÕES */
+
+        .lista {
+            background: white;
+            border: 1px solid #e0e6ed;
+            border-radius: 6px;
+        }
+
+        .item {
             display: flex;
             align-items: center;
-            gap: 13px;
-            width: 100%;
-            min-height: 55px;
-            padding: 14px;
-            background: #fff;
-            border: 1px solid #dce3eb;
-            border-radius: 5px;
-            color: #26384a;
+            min-height: 65px;
+            padding: 15px 20px;
+            gap: 15px;
             text-decoration: none;
-            transition: background 0.2s;
+            color: #263445;
+            border-bottom: 1px solid #edf0f4;
         }
 
-        .opcao:hover {
-            background: #f0f5fa;
+        .item:last-child {
+            border-bottom: none;
         }
 
-        .icone {
-            width: 25px;
+        .item:hover {
+            background: #f7faff;
+        }
+
+        .item-icone {
+            width: 30px;
+            color: #246398;
+            font-size: 18px;
             text-align: center;
-            font-size: 19px;
         }
 
-        .nome-opcao {
+        .item-texto {
             flex: 1;
-            font-size: 15px;
         }
 
-        .seta {
-            color: #7b8794;
-            font-size: 20px;
+        .item-texto strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 14px;
+            font-weight: 600;
         }
 
-        .rodape {
-            margin-top: 22px;
-            padding-top: 15px;
-            border-top: 1px solid #e5e7eb;
-            text-align: center;
+        .item-texto small {
             color: #7b8794;
             font-size: 12px;
         }
 
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
+        .seta {
+            color: #8b98a8;
+            font-size: 22px;
+        }
+
+        .rodape {
+            margin-top: 30px;
+            color: #8a96a5;
+            font-size: 12px;
+        }
+
+        /* CELULAR */
+
+        @media (max-width: 700px) {
+            .layout {
+                flex-direction: column;
             }
 
-            .pagina {
-                margin: 5px auto;
-                padding: 15px;
+            .sidebar {
+                width: 100%;
+                padding: 18px;
             }
 
-            .cabecalho h1 {
-                font-size: 21px;
+            .logo {
+                padding-bottom: 15px;
+                margin-bottom: 15px;
+            }
+
+            .menu {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .menu-titulo {
+                margin-top: 15px;
+            }
+
+            .topo {
+                height: 60px;
+                padding: 0 20px;
+            }
+
+            .conteudo {
+                padding: 22px 16px;
+            }
+
+            .conteudo h2 {
+                font-size: 22px;
             }
         }
     </style>
@@ -131,60 +232,112 @@
 
 <body>
 
-    <main class="pagina">
+<div class="layout">
 
-        <header class="cabecalho">
-            <h1>Projeto Sentinela</h1>
-            <p>Sistema de atendimento</p>
+    <aside class="sidebar">
+
+        <div class="logo">
+            Projeto Sentinela
+            <small>Sistema de atendimento</small>
+        </div>
+
+        <div class="menu-titulo">Navegação</div>
+
+        <nav class="menu">
+            <a href="index.html" class="ativo">⌂ &nbsp; Início</a>
+            <a href="atendimento.html">＋ &nbsp; Atendimento</a>
+            <a href="triagem.html">▤ &nbsp; Triagem</a>
+            <a href="medico.html">⚕ &nbsp; Painel médico</a>
+            <a href="medicacoes.html">＋ &nbsp; Medicações</a>
+            <a href="alta.html">✓ &nbsp; Alta</a>
+            <a href="tv.html">▣ &nbsp; Painel de TV</a>
+        </nav>
+
+    </aside>
+
+    <main class="principal">
+
+        <header class="topo">
+            <h1>Painel principal</h1>
         </header>
 
         <section class="conteudo">
-            <h2>Painel principal</h2>
+
+            <h2>Bem-vindo ao Sentinela</h2>
 
             <p class="descricao">
-                Selecione uma opção para continuar.
+                Selecione uma área para continuar.
             </p>
 
-            <nav class="opcoes">
+            <div class="secao-titulo">ÁREAS DO SISTEMA</div>
 
-                <a href="atendimento.html" class="opcao">
-                    <span class="icone">👤</span>
-                    <span class="nome-opcao">Atendimento</span>
+            <div class="lista">
+
+                <a href="atendimento.html" class="item">
+                    <span class="item-icone">＋</span>
+                    <span class="item-texto">
+                        <strong>Atendimento</strong>
+                        <small>Cadastro de pacientes</small>
+                    </span>
                     <span class="seta">›</span>
                 </a>
 
-                <a href="triagem.html" class="opcao">
-                    <span class="icone">📋</span>
-                    <span class="nome-opcao">Triagem</span>
+                <a href="triagem.html" class="item">
+                    <span class="item-icone">▤</span>
+                    <span class="item-texto">
+                        <strong>Triagem</strong>
+                        <small>Registro inicial do paciente</small>
+                    </span>
                     <span class="seta">›</span>
                 </a>
 
-                <a href="medico.html" class="opcao">
-                    <span class="icone">🩺</span>
-                    <span class="nome-opcao">Painel médico</span>
+                <a href="medico.html" class="item">
+                    <span class="item-icone">⚕</span>
+                    <span class="item-texto">
+                        <strong>Painel médico</strong>
+                        <small>Atendimento dos pacientes</small>
+                    </span>
                     <span class="seta">›</span>
                 </a>
 
-                <a href="medicacoes.html" class="opcao">
-                    <span class="icone">💊</span>
-                    <span class="nome-opcao">Medicações</span>
+                <a href="medicacoes.html" class="item">
+                    <span class="item-icone">＋</span>
+                    <span class="item-texto">
+                        <strong>Medicações</strong>
+                        <small>Consultar medicações prescritas</small>
+                    </span>
                     <span class="seta">›</span>
                 </a>
 
-                <a href="tv.html" class="opcao">
-                    <span class="icone">🖥️</span>
-                    <span class="nome-opcao">Painel de TV</span>
+                <a href="alta.html" class="item">
+                    <span class="item-icone">✓</span>
+                    <span class="item-texto">
+                        <strong>Alta</strong>
+                        <small>Orientações e finalização</small>
+                    </span>
                     <span class="seta">›</span>
                 </a>
 
-            </nav>
+                <a href="tv.html" class="item">
+                    <span class="item-icone">▣</span>
+                    <span class="item-texto">
+                        <strong>Painel de TV</strong>
+                        <small>Chamadas de pacientes</small>
+                    </span>
+                    <span class="seta">›</span>
+                </a>
+
+            </div>
+
+            <footer class="rodape">
+                Projeto Sentinela
+            </footer>
+
         </section>
 
-        <footer class="rodape">
-            Projeto Sentinela
-        </footer>
-
     </main>
+
+</div>
 
 </body>
 </html>
