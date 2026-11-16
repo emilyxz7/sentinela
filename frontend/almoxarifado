@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almoxerifado</title>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-brand">
+        <div class="logo-icon">📦</div>
+        <div>
+            <h1>Hospital Pro - Almoxerifado</h1>
+            <span>Gestão de entrada e controle de estoque</span>
+        </div>
+        </div>
+        <div class="nav-user">
+            <span class="user-pill" id="nomeUsuario">📦Almoxerifado</span>
+            <a href="index.html" class="btn-nav">🚪Sair</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- ALERTA -->
+         <div class="alerta-estoque" id="alertaEstoque" style="display: none;">
+           ⚠️ <strong>Atenção:</strong> <span id="alertaTexto"></span>
+    </div>
+
+    <!-- STATS -->
+     <div class="stats-bar">
+        <div class="stat-card">
+            <div class="stat-icon purple">📦</div>
+            <div>
+                <div class="stat-value" id="statItens">_</div>
+                <div class="stat-label">Tipos de cadastros</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon green">🟢</div>
+            <div>
+                <div class="stat-value" id="statOK">_</div>
+                <div class="stat-label">Estoque normal</div>
+            </div>
+            </div>
+        <div class="stat-card">
+            <div class="stat-icon orange">⚠️</div>
+            <div>
+                <div class="stat-value" id="statBaixo">_</div>
+                <div class="stat-label">Estoque baixo ( menor que 10) </div>
+            </div>
+            </div>
+        <div class="stat-card">
+            <div class="stat-icon red">❌</div>
+            <div>
+                <div class="stat-value" id="statZerado">_</div>
+                <div class="stat-label">Zerados/Esgotados </div>
+            </div>
+        </div>
+     </div>
+     
+     <!-- MAIN GRID -->
+      <div class="main-grid">
+
+        
+    <!--COLUNA ESQUERDA: FORMULÁRIO ENTRADA -->
+<div class="card">
+    <div class="card-header">
+        <h2> Entrada de Medicamentos </h2>
+    </div>
+    <div class="card-body">
+
+        <!-- Tabs: Novo ou Repor-->
+         <div class="entrada tabs">
+            <button class="tab-btn active" id="tabNovo"
+            onclick="setTab('novo')">➕ Novo Medicamento</button>
+            <button class="tab-btn" id="tabRepor" onclick="setTab('repor')">📦 Repor Existente"</button>
+         </div>
+<!-- PAINEL: Cadastrar Novo -->
+ <div id="painelNovo">
+    <div class="form-group">
+        <label for="emNome">Nome do Medicamento</label>
+        <input type="text" id="emNome" class="form-control" placeholder="Ex: Paracetamol 750mg" autocomplete="off">
+    </div>
+    <div class="form-group">
+    <label for="emOK">Quantidade <small>(unidades a adicionar)</small></label>
+    <input type="number" id="emQtd"
+    class="form-control" value="10" min="1">
+ </div>
+<div class="form-group">
+    <label for="emUnidade">Tipo de Unidade</label>
+    <select id="emUnidade" class="form-control">
+        <option value="comprimidos">Comprimidos</option>
+        <option value="capsulas">Capsulas</option>
+        <option value="frascos">Frascos</option>
+        <option value="ampolas">Ampolas</option>
+        <option value="unidades">Unidades</option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="emCategoria">Categoria Farmacologica</label>
+    <select id="emCategoria" class="form-control">
+            <option value="Analgesico/Antipiretico">Analgésico/Antipirético</option>
+            <option value="Antibiotico">Antibiótico</option>
+            <option value="Anti-inflamatorio">Anti-inflamatório</option>
+            <option value="Antialergico">Antialérgico</option>
+            <option value="Protetor Gastrico">Protetor Gastrico</option>
+            <option value="Antiespasmodico">Antiespasmodico</option>
+            <option value="Antiemetico">Antiemetico</option>
+            <option value="Solucão">Solução</option>
+            <option value="Vitamina/Suplemento">Vitamina / Suplemento </option>
+            <option value="Geral">Geral</option>
+    </select>
+</div>
+<button class="btn-full btn-purple" onclick="darEntrada()">
+    📩 Registrar Entrada no Estoque
+</button>
+    </div>
+
+    <!-- PAINEL: Repor Existente -->
+     <div id="painelRepor" style="display: none">
+        <div class="form-group">
+            <label for="selReporMed">Selecionar Medicamento</label>
+            <select id="selReporMed" class="form-control">
+                    <option value="">-- Selecione --</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="reporOtd">Quantidade a adicionar</label>
+            <input type="number" id="reporOTD"
+            class="form-control" value="10" min="1">
+        </div>
+        <div class="form=group">
+            <label for="reporObs">Observando<small>
+                (opcional)</small></label>
+                <input type="text" id="reporObs"
+                class="form-control" placeholder="Ex: Nota final NF-001">
+        </div>
+        <button class="btn-full btn-purple"
+        onclick="reporEstoque()">
+    ☂️ Adicionar ao Estoque Existente</button>
+     </div>
+</div>
+</div>
+
+<!-- Histórico de Entradas-->
+ <div class="card" style="margin-top:20px">
+    <div class="card-header">
+        <h2> 📝 Últimas Entradas Registradas </h2>
+        <button class="btn-em btn-secondary"
+        onclick="carregarhistoricoEntradas()">🔄️</button>
+    </div>
+    <div class="card-body" id="historicoEntradas">
+        <div class="empty-state">
+            <div class="empty-icon">📝</div>
+            <p>Nenhuma entrada registrada ainda.</p>
+        </div>
+    </div>
+ </div>
+
+ <!-- COLUNA DIREITA: ESTOQUE ATUAL -->
+<div>
+    <div class="card">
+        <div class="card-header">
+            <h2> 📚 Estoque Atual de Medicamentos </h2>
+            <button class="btn-sm btn-secondary"
+            onclick="carregarEstoque()">🔄️ Atualizar</button>
+        </div>
+        <div class="card-body">
+
+            <div class="search-bar">
+                <input type="text" class="search-input"
+                id="buscaMed" placeholder="🔍 Buscar medicamento..."
+                oninput="filtrarTabela()">
+            </div>
+
+            <div class="filter-chips" id="filterChips">
+                <span class="chip active" onclick="setFiltro('todos', this)">Todos</span>
+            </div>
+
+            <div style="overflow-x:auto">
+            <table class="estoque-table">
+                <thead>
+                    <tr>
+                        <th>Medicamento</th>
+                        <th>Categoria</th>
+                        <th>Disponivel</th>
+                        <th>Unidade</th>
+                        <th style="text-align: right;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaEstoque">
+                    <tr>
+                        <td colspan="5">
+                            <div class="empty-state">
+                                <div class="empty-icon">⌛</div>
+                                <p>Carregando...</p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- Modal: Editor quantidade manualmente -->
+ <div class="modal-overlay" id="modalEditor">
+    <div class="modal-box">
+<div class="modal-title">✏️ Editar Estoque</div>
+<div class="form-group">
+    <label id="modalMedNome" style="font-size:15px; color:var(--dark);
+    margin-bottom:12px; display:block"></label>
+    <label>Quantidade a adicionar (negativo para remover):</label>
+    <input type="number" id="modalQtd" class="form-control" value="10">
+</div>
+<div class="modal-actions">
+    <button class="btn-sm btn-secondary" style="padding:11px"
+    onclick="fecharModal()">Cancelar</button>
+    <button class="btn-sm btn-success" style="padding:11px; flex:2"
+    onclick="confirmarEdicao()">🟢Confirmar</button>
+</div>
+    </div>
+ </div>
+
+ <div id="toast" class="toast"></div>
+
+ <script>
+    // ESTADO GROBAL
+    let estoqueGlobal = [];
+    let filtroAtivo = "todos";
+    let editandoId = null;
+    let historicoEntradas = [];
+
+    // identificação do usúario logado
+const usuario = JSON.parse(localStrorage.getItem("hospital_user")  || "{}");
+if (usuario.nome) {
+    document.getElementById("nomeUsuario").textContent = "📦 " + usuario.nome;
+}
+
+// TOAST
+function showToast(msg, tipo = "sucess") {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = `toast toast-${tipo} show`;
+    setTimeout(() => {t.className = "toast";}, 4000);
+}
+
+// TABS
+
+function setTab(tab) {
+    document.getElementById("painelNovo").style.display = tab === "novo" ? "block" : "none";
+     document.getElementById("painelRepor").style.display = tab === "repor" ? "block" : "none";
+      document.getElementById("tabNovo").className = "tab-btn" + (tab === "novo" ? "active" : "");
+       document.getElementById("tabRepor").className = "tab-btn" + (tab === "repor" ? "active" : "");
+
+       if (tab === "repor") preencherSelectRepor();
+}
+
+// CARREGAR ESTOQUE
+
+function carregarEstoque() {
+    fetch("/estoque")
+    .then(r => r.json())
+    .then(data => {
+        estoqueGlobal = data;
+        atualizarStats(data);
+        renderizarTabela(data);
+        verificarAlertas(data);
+    })
+    .catch(() => showToast("❌ Erro ao carregar estoque.", "error"));
+}
+
+//STATS
+function atualizarStats(data) {
+     document.getElementById("statitems").textContent = data.length;
+      document.getElementById("statOk").textContent = data.filter(m => m.quantidade > 10).length;
+
+       document.getElementById("statZerado").textContent = data.filter(m => m.quantidade === 0).length;
+}
+
+function verificarAlertas(data) {
+    const baixos = data.filter(m => m.quantidade > 0 && m.quantidade <= 10);
+    const zerados = data.filter(m => m.quantidade === 0);
+    const el =  document.getElementById("alertaEstoque");
+    const msgs = [];
+    if (zerados.length) msgs.push(`${zerados.length} medicamentos(s) zerados(s): ${zerados.map(m => m.nome).join(", ")}`);
+
+    if (baixos.length) msgs.push(`${baixos.length} com estoque baixo:`);
+    if(msgs.length) {  document.getElementById("alertaTexto").textContent = msgs.join(" | ") + " - repor com urgência!";
+        el.style.display = "flex";
+    } else {
+        el.style.display = "none";
+    }
+    
+}
+
+// FILTROS
+
+function renderizarFiltros(data) {
+    const cats = [...new Set(data.map(m => m.categoria).filter(Boolean))];
+    const el =  document.getElementById("filterChips");
+    el.innerHTML = `<span class="chip ${filtroAtivo ==='todos' ? 'active' : ''}" onclick="setFiltro('todos', this)">Todos</span>`;
+    cats.forEach(c => { el.innerHTML += `<span class="chip ${filtroAtivo === c ? `active` : ''}" onclick="setFiltro('${c}', this)">
+        ${c}</span>`});
+}
+
+function setFiltro(cat, el){
+    filtroAtivo = cat;
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    el.classList.add("active");
+    filtrarTabela();
+}
+
+function filtrarTabela(){
+    const busca = document.getElementById("buscaMed").value.toLowerCase();
+    const filtrados = estoqueGlobal.filter(m => {
+        const matchCat = filtroAtivo === "todos" || m.categoria === filtroAtivo;
+        const matchBusc = m.nome.toLowerCase()
+        .includes(busca) || (m.categoria || "")
+        .toLowerCase() .includes(busca);
+        return matchCat && matchBusc;
+    });
+    renderizarTabela(filtrados);
+
+}
+
+// RENDERIZAR TABELA
+
+ </script>
+</body>
+</html>
