@@ -1,213 +1,63 @@
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medicações | Projeto-Sentinela</title>
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<header class="topbar">
-    <a href="index.html" class="brand">
-        <div class="brand-icon">🏥</div>
-        <div>
-            <strong>Projeto-Sentinela</strong>
-            <span>Sistema de Gestão em Saúde</span>
-        </div>
-    </a>
+<div class="container">
 
-    <nav class="nav">
-        <a href="index.html">Início</a>
-        <a href="atendimento.html">Atendimento</a>
-        <a href="triagem.html">Triagem</a>
-        <a href="medico.html">Painel Médico</a>
-        <a href="medicacoes.html" class="active">Medicações</a>
-        <a href="alta.html">Alta Médica</a>
-        <a href="tv.html">Painel TV</a>
-    </nav>
-</header>
+  <h2>💊 Medicações Prescritas</h2>
 
-<main class="container">
+  <!-- IMPLEMENTADO: local onde a lista de medicações será exibida -->
+  <div id="listaMedicacoes"></div>
 
-    <div class="page-title">
-        <div>
-            <span class="page-tag">REGISTROS CLÍNICOS</span>
-            <h1>💊 Medicações prescritas</h1>
-            <p>Consulte os registros de medicações e suas informações.</p>
-        </div>
-
-        <button type="button" class="btn" id="btnAtualizar">
-            ↻ Atualizar lista
-        </button>
-    </div>
-
-    <section class="cards-grid" style="margin-bottom:25px;">
-        <article class="stat-card card">
-            <span class="muted">Registros encontrados</span>
-            <h2 id="totalRegistros">—</h2>
-        </article>
-
-        <article class="stat-card card">
-            <span class="muted">Situação</span>
-            <h2 id="situacaoLista" style="font-size:20px;">
-                Carregando...
-            </h2>
-        </article>
-    </section>
-
-    <section class="panel">
-        <h2>Lista de medicações</h2>
-
-        <div id="listaMedicacoes" class="cards-grid">
-            <div class="empty-state">
-                Carregando registros...
-            </div>
-        </div>
-
-        <div id="mensagem" class="mensagem" role="status"
-             aria-live="polite"></div>
-    </section>
-
-</main>
-
-<footer class="footer">
-    <p>© 2026 Projeto-Sentinela — Sistema de Gestão em Saúde</p>
-</footer>
+</div>
 
 <script>
-const listaMedicacoes = document.getElementById("listaMedicacoes");
-const mensagem = document.getElementById("mensagem");
-const totalRegistros = document.getElementById("totalRegistros");
-const situacaoLista = document.getElementById("situacaoLista");
-const btnAtualizar = document.getElementById("btnAtualizar");
 
-function criarElemento(tag, texto, classe) {
-    const elemento = document.createElement(tag);
+// IMPLEMENTADO: busca as consultas salvas e mostra as medicações
+function carregarMedicacoesPrescritas() {
+  fetch("/medicacoes")
+    .then(r => r.json())
+    .then(data => {
+      const div = document.getElementById("listaMedicacoes");
 
-    if (texto !== undefined && texto !== null) {
-        elemento.textContent = String(texto);
-    }
+      div.innerHTML = "";
 
-    if (classe) {
-        elemento.className = classe;
-    }
+      if (data.length === 0) {
+        div.innerHTML = "<p>Nenhuma medicação prescrita.</p>";
+        return;
+      }
 
-    return elemento;
+      data.forEach(c => {
+        div.innerHTML += `
+          <div class="card">
+            <h3>${c.paciente}</h3>
+
+            <p>
+              <b>Medicação:</b>
+              ${c.medicacao}
+            </p>
+
+            <p>
+              <b>Diagnóstico:</b>
+              ${c.diagnostico}
+            </p>
+
+            <p>
+              <b>Observações:</b>
+              ${c.obs || "Nenhuma"}
+            </p>
+          </div>
+        `;
+      });
+    });
 }
 
-function adicionarCampo(card, rotulo, valor) {
-    const paragrafo = document.createElement("p");
-    const titulo = criarElemento("strong", rotulo + ": ");
+carregarMedicacoesPrescritas();
 
-    const conteudo = document.createTextNode(
-        valor !== undefined && valor !== null && String(valor).trim()
-            ? String(valor)
-            : "Não informado"
-    );
-
-    paragrafo.append(titulo, conteudo);
-    card.appendChild(paragrafo);
-}
-
-async function carregarMedicacoes() {
-    btnAtualizar.disabled = true;
-    btnAtualizar.textContent = "Carregando...";
-    situacaoLista.textContent = "Carregando...";
-    mensagem.textContent = "";
-    mensagem.className = "mensagem";
-
-    try {
-        const resposta = await fetch("/medicacoes");
-
-        if (!resposta.ok) {
-            throw new Error("Não foi possível carregar as medicações.");
-        }
-
-        const dados = await resposta.json();
-
-        if (!Array.isArray(dados)) {
-            throw new Error("O servidor retornou uma lista inválida.");
-        }
-
-        listaMedicacoes.replaceChildren();
-        totalRegistros.textContent = dados.length;
-        situacaoLista.textContent = "Atualizada";
-
-        if (dados.length === 0) {
-            const vazio = criarElemento("div", null, "empty-state");
-            vazio.style.gridColumn = "1 / -1";
-
-            vazio.appendChild(
-                criarElemento("h3", "Nenhuma medicação registrada")
-            );
-
-            vazio.appendChild(
-                criarElemento(
-                    "p",
-                    "Os registros aparecerão aqui quando estiverem disponíveis."
-                )
-            );
-
-            listaMedicacoes.appendChild(vazio);
-            return;
-        }
-
-        dados.forEach(item => {
-            const card = criarElemento("article", null, "card");
-
-            const icone = criarElemento("div", "💊");
-            icone.style.fontSize = "28px";
-            icone.style.marginBottom = "10px";
-
-            const nomeMedicacao =
-                item.medicacao || item.nome || "Medicação sem nome";
-
-            card.appendChild(icone);
-            card.appendChild(criarElemento("h3", nomeMedicacao));
-
-            adicionarCampo(card, "Paciente", item.paciente);
-            adicionarCampo(card, "Diagnóstico", item.diagnostico);
-            adicionarCampo(card, "Observações", item.obs);
-
-            listaMedicacoes.appendChild(card);
-        });
-
-    } catch (erro) {
-        situacaoLista.textContent = "Indisponível";
-
-        listaMedicacoes.replaceChildren();
-
-        const vazio = criarElemento("div", null, "empty-state");
-        vazio.style.gridColumn = "1 / -1";
-
-        vazio.appendChild(
-            criarElemento("h3", "Não foi possível carregar")
-        );
-
-        vazio.appendChild(
-            criarElemento(
-                "p",
-                "Verifique a conexão com o servidor e tente novamente."
-            )
-        );
-
-        listaMedicacoes.appendChild(vazio);
-
-        mensagem.textContent =
-            erro.message || "Erro ao carregar a lista.";
-        mensagem.className = "mensagem erro";
-
-    } finally {
-        btnAtualizar.disabled = false;
-        btnAtualizar.textContent = "↻ Atualizar lista";
-    }
-}
-
-btnAtualizar.addEventListener("click", carregarMedicacoes);
-
-carregarMedicacoes();
 </script>
 
 </body>
