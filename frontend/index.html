@@ -1,243 +1,398 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Projeto Sentinela</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Saúde Integra - Login</title>
 
     <style>
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             min-height: 100vh;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #eaf2fa;
-            color: #263b50;
-        }
 
-        .cabecalho {
-            background: #174873;
-            color: white;
-            padding: 28px 20px;
-        }
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
 
-        .cabecalho-conteudo {
-            max-width: 850px;
-            margin: auto;
-        }
+            background:
+                linear-gradient(
+                    135deg,
+                    #003b73 0%,
+                    #0066b3 50%,
+                    #00a6d6 100%
+                );
 
-        .cabecalho h1 {
-            margin: 0 0 8px;
-            font-size: 28px;
-        }
-
-        .cabecalho p {
-            margin: 0;
-            color: #d7e8f8;
-            font-size: 15px;
-        }
-
-        main {
-            width: 100%;
-            max-width: 850px;
-            margin: 35px auto;
-            padding: 0 20px;
-        }
-
-        .titulo-secao {
-            margin-bottom: 8px;
-            color: #174873;
-            font-size: 23px;
-        }
-
-        .descricao {
-            margin: 0 0 25px;
-            color: #61758a;
-            font-size: 15px;
-        }
-
-        .opcoes {
-            display: flex;
-            flex-direction: column;
-            gap: 13px;
-        }
-
-        .opcao {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            min-height: 72px;
-            padding: 15px 20px;
-            background: #ffffff;
-            border: 1px solid #c8dced;
-            border-left: 5px solid #2784c5;
-            border-radius: 7px;
-            color: #174873;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(23, 72, 115, 0.06);
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .opcao:hover {
-            background: #dcecf9;
-            transform: translateX(3px);
-        }
-
-        .icone {
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            width: 42px;
-            height: 42px;
-            background: #dcecf9;
-            border-radius: 6px;
-            color: #1769aa;
-            font-size: 21px;
+
+            padding: 20px;
         }
 
-        .texto {
-            flex: 1;
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
         }
 
-        .texto strong {
+
+        .login-box {
+            background: white;
+
+            border-radius: 20px;
+
+            padding: 40px 35px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0, 0, 0, 0.25);
+
+            text-align: center;
+        }
+
+
+        .logo {
+            width: 90px;
+            height: 90px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0066b3,
+                    #00a6d6
+                );
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 48px;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0, 102, 179, 0.30);
+        }
+
+
+        h1 {
+            color: #004b87;
+
+            font-size: 32px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .subtitulo {
+            color: #777;
+
+            font-size: 15px;
+
+            margin-bottom: 30px;
+        }
+
+
+        .campo {
+            text-align: left;
+
+            margin-bottom: 18px;
+        }
+
+
+        .campo label {
             display: block;
-            margin-bottom: 5px;
+
+            color: #333;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+
+        .campo input {
+            width: 100%;
+
+            height: 48px;
+
+            border: 1px solid #d2dbe5;
+
+            border-radius: 9px;
+
+            padding: 0 14px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+        }
+
+
+        .campo input:focus {
+            border-color: #0074c8;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(0, 116, 200, 0.12);
+        }
+
+
+        .btn-entrar {
+            width: 100%;
+
+            height: 50px;
+
+            margin-top: 8px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #005ca8,
+                    #008fd1
+                );
+
+            color: white;
+
             font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s;
         }
 
-        .texto small {
-            color: #71869a;
-            font-size: 13px;
+
+        .btn-entrar:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 18px
+                rgba(0, 92, 168, 0.30);
         }
 
-        .seta {
-            color: #2784c5;
-            font-size: 26px;
+
+        .btn-entrar:active {
+            transform: translateY(0);
         }
 
-        footer {
-            max-width: 810px;
-            margin: 35px auto 0;
-            padding: 18px 20px;
-            border-top: 1px solid #ccdae7;
-            color: #71869a;
+
+        #mensagem {
+            min-height: 22px;
+
+            margin-top: 15px;
+
+            font-size: 14px;
+        }
+
+
+        .erro {
+            color: #d62828;
+        }
+
+
+        .sucesso {
+            color: #198754;
+        }
+
+
+        .rodape {
+            margin-top: 25px;
+
+            color: #888;
+
             font-size: 12px;
+
+            line-height: 1.5;
         }
 
-        @media (max-width: 600px) {
-            .cabecalho {
-                padding: 23px 18px;
+
+        @media (max-width: 480px) {
+
+            .login-box {
+                padding: 32px 25px;
             }
 
-            .cabecalho h1 {
-                font-size: 24px;
+            h1 {
+                font-size: 28px;
             }
 
-            main {
-                margin-top: 25px;
-                padding: 0 15px;
-            }
-
-            .opcao {
-                min-height: 68px;
-                padding: 12px;
-            }
-
-            .icone {
-                width: 38px;
-                height: 38px;
-            }
         }
+
     </style>
+
 </head>
+
 
 <body>
 
-    <header class="cabecalho">
-        <div class="cabecalho-conteudo">
-            <h1>Projeto Sentinela</h1>
-            <p>Sistema de atendimento em saúde</p>
+
+<div class="login-container">
+
+
+    <div class="login-box">
+
+
+        <div class="logo">
+            🏥
         </div>
-    </header>
 
-    <main>
 
-        <h2 class="titulo-secao">Painel principal</h2>
+        <h1>
+            Saúde Integra
+        </h1>
 
-        <p class="descricao">
-            Selecione a área que deseja acessar.
+
+        <p class="subtitulo">
+            Sistema de Gestão e Atendimento em Saúde
         </p>
 
-        <nav class="opcoes">
 
-            <a href="atendimento.html" class="opcao">
-                <span class="icone">👤</span>
-                <span class="texto">
-                    <strong>Atendimento</strong>
-                    <small>Cadastro de pacientes</small>
-                </span>
-                <span class="seta">›</span>
-            </a>
+        <form onsubmit="entrar(event)">
 
-            <a href="triagem.html" class="opcao">
-                <span class="icone">📋</span>
-                <span class="texto">
-                    <strong>Triagem</strong>
-                    <small>Registro e avaliação inicial</small>
-                </span>
-                <span class="seta">›</span>
-            </a>
 
-            <a href="medico.html" class="opcao">
-                <span class="icone">🩺</span>
-                <span class="texto">
-                    <strong>Painel Médico</strong>
-                    <small>Atendimento dos pacientes</small>
-                </span>
-                <span class="seta">›</span>
-            </a>
+            <div class="campo">
 
-            <a href="medicacoes.html" class="opcao">
-                <span class="icone">💊</span>
-                <span class="texto">
-                    <strong>Medicações</strong>
-                    <small>Consulta de medicações prescritas</small>
-                </span>
-                <span class="seta">›</span>
-            </a>
+                <label for="usuario">
+                    Usuário
+                </label>
 
-            <a href="alta.html" class="opcao">
-                <span class="icone">✓</span>
-                <span class="texto">
-                    <strong>Alta</strong>
-                    <small>Orientações de alta do paciente</small>
-                </span>
-                <span class="seta">›</span>
-            </a>
+                <input
+                    type="text"
+                    id="usuario"
+                    placeholder="Digite seu usuário"
+                    autocomplete="username"
+                    required
+                >
 
-            <a href="tv.html" class="opcao">
-                <span class="icone">📺</span>
-                <span class="texto">
-                    <strong>Painel de TV</strong>
-                    <small>Chamadas de pacientes</small>
-                </span>
-                <span class="seta">›</span>
-            </a>
+            </div>
 
-        </nav>
 
-    </main>
+            <div class="campo">
 
-    <footer>
-        Projeto Sentinela · Sistema de atendimento
-    </footer>
+                <label for="senha">
+                    Senha
+                </label>
+
+                <input
+                    type="password"
+                    id="senha"
+                    placeholder="Digite sua senha"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn-entrar"
+            >
+                Entrar
+            </button>
+
+
+        </form>
+
+
+        <div id="mensagem"></div>
+
+
+        <div class="rodape">
+
+            Saúde Integra<br>
+
+            Sistema de Gestão Hospitalar
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+function entrar(event) {
+
+    event.preventDefault();
+
+    const usuario =
+        document.getElementById("usuario").value.trim();
+
+    const senha =
+        document.getElementById("senha").value;
+
+    const mensagem =
+        document.getElementById("mensagem");
+
+
+    if (
+        usuario === "triagem" &&
+        senha === "123"
+    ) {
+
+        mensagem.className = "sucesso";
+
+        mensagem.textContent =
+            "✅ Login realizado com sucesso!";
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "triagem.html";
+
+        }, 500);
+
+
+    } else {
+
+        mensagem.className = "erro";
+
+        mensagem.textContent =
+            "❌ Usuário ou senha incorretos.";
+
+    }
+
+}
+
+</script>
+
 
 </body>
+
 </html>
-```
