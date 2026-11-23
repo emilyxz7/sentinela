@@ -1,63 +1,431 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-  <link rel="stylesheet" href="css/style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medicações | Projeto-Sentinela</title>
+    <style>
+     
+        :root {
+            --cor-primaria: #0284c7;
+            --cor-primaria-hover: #0369a1;
+            --cor-fundo: #f4f7fa;
+            --cor-superficie: #ffffff;
+            --cor-texto: #0f172a;
+            --cor-texto-suave: #64748b;
+            --cor-borda: #e2e8f0;
+            --cor-tag-fundo: #e0f2fe;
+            --cor-tag-texto: #0369a1;
+            --cor-destaque-fundo: #f0f9ff;
 
+            --raio-borda: 12px;
+            --sombra-suave: 0 2px 8px rgba(15, 23, 42, 0.04);
+            --sombra-card: 0 8px 20px -6px rgba(2, 132, 199, 0.12);
+            --transicao: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* =========================================
+           LAYOUT PRINCIPAL
+           ========================================= */
+        .container {
+            width: 100%;
+            max-width: 1020px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            flex: 1;
+        }
+
+        /* =========================================
+           CABEÇALHO DA PÁGINA (.page-title)
+           ========================================= */
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .page-tag {
+            display: inline-block;
+            background-color: var(--cor-tag-fundo);
+            color: var(--cor-tag-texto);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            padding: 4px 11px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+
+        .page-title h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        .page-title p {
+            color: var(--cor-texto-suave);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        /* =========================================
+           BOTÕES (.btn)
+           ========================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 9px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .btn-secondary {
+            background-color: var(--cor-superficie);
+            color: var(--cor-texto);
+            border-color: var(--cor-borda);
+            box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        }
+
+        .btn-secondary:hover {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.84rem;
+        }
+
+        /* =========================================
+           PAINEL E FORMULÁRIO DE BUSCA (.panel)
+           ========================================= */
+        .panel {
+            background-color: var(--cor-superficie);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 24px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--cor-borda);
+            gap: 12px;
+        }
+
+        .panel-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--cor-texto-suave);
+            margin-bottom: 6px;
+        }
+
+        input[type="search"] {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            color: var(--cor-texto);
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 9px;
+            transition: var(--transicao);
+        }
+
+        input[type="search"]::placeholder {
+            color: #94a3b8;
+        }
+
+        input[type="search"]:focus {
+            outline: none;
+            background-color: var(--cor-superficie);
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.12);
+        }
+
+        /* =========================================
+           LISTA E CARDS DE MEDICAÇÕES (.item-card)
+           ========================================= */
+        #listaMedicacoes {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .item-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-left: 4px solid var(--cor-primaria);
+            border-radius: 10px;
+            padding: 16px 20px;
+            transition: var(--transicao);
+        }
+
+        .item-card:hover {
+            background-color: var(--cor-superficie);
+            border-color: #bae6fd;
+            border-left-color: var(--cor-primaria-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-card);
+        }
+
+        .item-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--cor-borda);
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .item-topo h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            color: var(--cor-primaria-hover);
+        }
+
+        .muted {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--cor-texto-suave);
+            background-color: #e2e8f0;
+            padding: 3px 9px;
+            border-radius: 999px;
+        }
+
+        .item-card p {
+            font-size: 0.92rem;
+            margin-bottom: 5px;
+            color: var(--cor-texto);
+        }
+
+        .item-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-card strong {
+            color: #334155;
+            font-weight: 600;
+        }
+
+        /* =========================================
+           ESTADO VAZIO / CARREGAMENTO (.empty-state)
+           ========================================= */
+        .empty-state {
+            text-align: center;
+            padding: 44px 20px;
+            color: var(--cor-texto-suave);
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .empty-icon {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .empty-state p {
+            font-size: 0.94rem;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           HEADER E FOOTER DINÂMICOS (app.js)
+           ========================================= */
+        #topbar {
+            background-color: var(--cor-superficie);
+            border-bottom: 1px solid var(--cor-borda);
+            padding: 14px 20px;
+        }
+
+        #rodape {
+            background-color: var(--cor-superficie);
+            border-top: 1px solid var(--cor-borda);
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 0.85rem;
+            color: var(--cor-texto-suave);
+            margin-top: auto;
+        }
+
+        /* =========================================
+           RESPONSIVIDADE (CELULARES)
+           ========================================= */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 14px;
+            }
+
+            .page-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .panel {
+                padding: 16px;
+            }
+
+            .item-topo {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
 <body>
 
-<div class="container">
+<header id="topbar"></header>
 
-  <h2>💊 Medicações Prescritas</h2>
+<main class="container">
 
-  <!-- IMPLEMENTADO: local onde a lista de medicações será exibida -->
-  <div id="listaMedicacoes"></div>
+    <section class="page-title">
+        <div>
+            <span class="page-tag">PRESCRIÇÕES</span>
+            <h1>Medicações prescritas</h1>
+            <p>Consulte as medicações registradas nas consultas.</p>
+        </div>
 
-</div>
+        <a href="inicio.html" class="btn btn-secondary">← Início</a>
+    </section>
 
+    <section class="panel">
+        <div class="panel-header">
+            <h2>Lista de prescrições</h2>
+            <button type="button" class="btn btn-secondary btn-sm" id="btnAtualizar">
+                Atualizar
+            </button>
+        </div>
+
+        <div class="form-group">
+            <label for="busca">Buscar por paciente ou medicação</label>
+            <input type="search" id="busca" placeholder="🔍 Digite para filtrar..." autocomplete="off">
+        </div>
+
+        <div id="listaMedicacoes" aria-live="polite"></div>
+    </section>
+
+</main>
+
+<footer id="rodape"></footer>
+
+<script src="js/app.js"></script>
 <script>
+Sentinela.montarLayout("medicacoes");
 
-// IMPLEMENTADO: busca as consultas salvas e mostra as medicações
-function carregarMedicacoesPrescritas() {
-  fetch("/medicacoes")
-    .then(r => r.json())
-    .then(data => {
-      const div = document.getElementById("listaMedicacoes");
+const esc = Sentinela.esc;
+const lista = document.getElementById("listaMedicacoes");
+const busca = document.getElementById("busca");
 
-      div.innerHTML = "";
+let prescricoes = [];
 
-      if (data.length === 0) {
-        div.innerHTML = "<p>Nenhuma medicação prescrita.</p>";
-        return;
-      }
-
-      data.forEach(c => {
-        div.innerHTML += `
-          <div class="card">
-            <h3>${c.paciente}</h3>
-
-            <p>
-              <b>Medicação:</b>
-              ${c.medicacao}
-            </p>
-
-            <p>
-              <b>Diagnóstico:</b>
-              ${c.diagnostico}
-            </p>
-
-            <p>
-              <b>Observações:</b>
-              ${c.obs || "Nenhuma"}
-            </p>
-          </div>
-        `;
-      });
-    });
+function estadoVazio(icone, texto) {
+    return '<div class="empty-state"><div class="empty-icon">' + icone +
+           "</div><p>" + esc(texto) + "</p></div>";
 }
 
-carregarMedicacoesPrescritas();
+function renderizar() {
+    const termo = busca.value.trim().toLowerCase();
 
+    const filtradas = prescricoes.filter(function (c) {
+        return !termo ||
+            String(c.paciente || "").toLowerCase().indexOf(termo) !== -1 ||
+            String(c.medicacao || "").toLowerCase().indexOf(termo) !== -1;
+    });
+
+    if (!prescricoes.length) {
+        lista.innerHTML = estadoVazio("💊", "Nenhuma medicação prescrita.");
+        return;
+    }
+
+    if (!filtradas.length) {
+        lista.innerHTML = estadoVazio("🔍", "Nenhum resultado para essa busca.");
+        return;
+    }
+
+    // Todo texto vem do servidor, então é escapado com esc().
+    lista.innerHTML = filtradas.map(function (c) {
+        const data = c.criadoEm ? Sentinela.formatarData(c.criadoEm) : "";
+
+        return '<article class="item-card">' +
+            '<div class="item-topo">' +
+                "<h3>" + esc(c.paciente) + "</h3>" +
+                (data ? '<span class="muted">' + esc(data) + "</span>" : "") +
+            "</div>" +
+            "<p><strong>Medicação:</strong> " + esc(c.medicacao) + "</p>" +
+            "<p><strong>Diagnóstico:</strong> " + esc(c.diagnostico) + "</p>" +
+            "<p><strong>Observações:</strong> " + esc(c.obs || "Nenhuma") + "</p>" +
+        "</article>";
+    }).join("");
+}
+
+async function carregarMedicacoesPrescritas() {
+    lista.innerHTML = estadoVazio("⏳", "Carregando...");
+
+    try {
+        const dados = await Sentinela.api("/medicacoes");
+        prescricoes = Array.isArray(dados) ? dados : [];
+        renderizar();
+    } catch (erro) {
+        lista.innerHTML = estadoVazio("❌", erro.message || "Não foi possível carregar as medicações.");
+    }
+}
+
+busca.addEventListener("input", renderizar);
+document.getElementById("btnAtualizar").addEventListener("click", carregarMedicacoesPrescritas);
+
+carregarMedicacoesPrescritas();
 </script>
 
 </body>
