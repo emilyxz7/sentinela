@@ -1,33 +1,348 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Triagem | Projeto-Sentinela</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+       
+        :root {
+            --cor-primaria: #0284c7;
+            --cor-primaria-hover: #0369a1;
+            --cor-fundo: #f1f5f9;
+            --cor-superficie: #ffffff;
+            --cor-texto: #1e293b;
+            --cor-texto-suave: #64748b;
+            --cor-borda: #e2e8f0;
+            --cor-tag-fundo: #e0f2fe;
+            --cor-tag-texto: #0369a1;
+
+         
+            --verde: #16a34a;
+            --verde-fundo: #dcfce7;
+            --amarelo: #d97706;
+            --amarelo-fundo: #fef3c7;
+            --vermelho: #dc2626;
+            --vermelho-fundo: #fee2e2;
+
+            --raio-borda: 10px;
+            --sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --transicao: all 0.2s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+   
+        .container {
+            width: 100%;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+       
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .page-tag {
+            display: inline-block;
+            background-color: var(--cor-tag-fundo);
+            color: var(--cor-tag-texto);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .page-title h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            line-height: 1.2;
+        }
+
+        .page-title p {
+            color: var(--cor-texto-suave);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+       
+        .panel,
+        .form-card {
+            background-color: var(--cor-superficie);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 24px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .panel h2,
+        .form-card h2 {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .legenda {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .legenda-item {
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .risco {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            padding: 3px 10px;
+            border-radius: 999px;
+            margin-bottom: 8px;
+        }
+
+        .risco-verde {
+            background-color: var(--verde-fundo);
+            color: var(--verde);
+        }
+
+        .risco-amarelo {
+            background-color: var(--amarelo-fundo);
+            color: var(--amarelo);
+        }
+
+        .risco-vermelho {
+            background-color: var(--vermelho-fundo);
+            color: var(--vermelho);
+        }
+
+        .legenda-item p {
+            font-size: 0.88rem;
+            color: var(--cor-texto-suave);
+            line-height: 1.45;
+        }
+
+        .muted {
+            font-size: 0.84rem;
+            color: var(--cor-texto-suave);
+        }
+
+       
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--cor-texto-suave);
+            margin-bottom: 6px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 11px 14px;
+            font-size: 0.94rem;
+            color: var(--cor-texto);
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            transition: var(--transicao);
+        }
+
+        textarea {
+            min-height: 88px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            background-color: var(--cor-superficie);
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+       
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 18px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background-color: var(--cor-primaria);
+            color: #ffffff;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: var(--cor-primaria-hover);
+        }
+
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: var(--cor-superficie);
+            color: var(--cor-texto);
+            border-color: var(--cor-borda);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-success {
+            background-color: var(--verde);
+            color: #ffffff;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background-color: #15803d;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+       
+        .mensagem:empty {
+            display: none;
+        }
+
+        .mensagem {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .mensagem.sucesso {
+            background-color: var(--verde-fundo);
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        .mensagem.erro {
+            background-color: var(--vermelho-fundo);
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+
+        #topbar {
+            background-color: var(--cor-superficie);
+            border-bottom: 1px solid var(--cor-borda);
+            padding: 14px 20px;
+        }
+
+        #rodape {
+            background-color: var(--cor-superficie);
+            border-top: 1px solid var(--cor-borda);
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 0.85rem;
+            color: var(--cor-texto-suave);
+            margin-top: auto;
+        }
+
+     
+        @media (max-width: 768px) {
+            .legenda,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 14px;
+            }
+
+            .page-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .panel,
+            .form-card {
+                padding: 16px;
+            }
+
+            .actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
 
-<header class="topbar">
-    <a href="index.html" class="brand">
-        <div class="brand-icon">🏥</div>
-        <div>
-            <strong>Projeto-Sentinela</strong>
-            <span>Sistema de Gestão em Saúde</span>
-        </div>
-    </a>
-
-    <nav class="nav">
-        <a href="index.html">Início</a>
-        <a href="atendimento.html">Atendimento</a>
-        <a href="triagem.html" class="active">Triagem</a>
-        <a href="medico.html">Painel Médico</a>
-        <a href="medicacoes.html">Medicações</a>
-        <a href="alta.html">Alta Médica</a>
-        <a href="tv.html">Painel TV</a>
-    </nav>
-</header>
+<header id="topbar"></header>
 
 <main class="container">
 
@@ -38,7 +353,7 @@
             <p>Registre os sinais e sintomas e classifique o nível de risco.</p>
         </div>
 
-        <a href="index.html" class="btn btn-secondary">← Início</a>
+        <a href="inicio.html" class="btn btn-secondary">← Início</a>
     </div>
 
     <section class="panel">
@@ -68,9 +383,9 @@
     </section>
 
     <section class="form-card">
-        <h2>📋 Dados da triagem</h2>
+        <h2>Dados da triagem</h2>
 
-        <form id="formTriagem">
+        <form id="formTriagem" novalidate>
             <div class="form-grid">
 
                 <div class="form-group">
@@ -80,6 +395,7 @@
                         id="pacienteId"
                         name="pacienteId"
                         min="1"
+                        step="1"
                         placeholder="Número do cadastro"
                         required
                     >
@@ -92,6 +408,7 @@
                         id="nome"
                         name="nome"
                         placeholder="Nome completo"
+                        autocomplete="off"
                         required
                     >
                 </div>
@@ -136,7 +453,7 @@
                         type="text"
                         id="alergia"
                         name="alergia"
-                        placeholder="Informe as alergias ou escreva 'Nenhuma informada'"
+                        placeholder="Informe as alergias ou deixe em branco se não houver informação"
                     >
                 </div>
 
@@ -163,26 +480,41 @@
 
             <div id="mensagem" class="mensagem" role="status"
                  aria-live="polite"></div>
+
+            <div class="actions" id="proximoPasso" hidden>
+                <a href="medico.html" class="btn btn-success">
+                    Ver fila no painel médico →
+                </a>
+            </div>
         </form>
     </section>
 
 </main>
 
-<footer class="footer">
-    <p>© 2026 Projeto-Sentinela — Sistema de Gestão em Saúde</p>
-</footer>
+<footer id="rodape"></footer>
 
+<script src="js/app.js"></script>
 <script>
+Sentinela.montarLayout("triagem");
+
 const formTriagem = document.getElementById("formTriagem");
 const mensagemTriagem = document.getElementById("mensagem");
 const btnSalvar = document.getElementById("btnSalvar");
 const campoRisco = document.getElementById("risco");
+const proximoPasso = document.getElementById("proximoPasso");
 
 function mostrarMensagem(texto, tipo) {
     mensagemTriagem.textContent = texto;
     mensagemTriagem.className = "mensagem " + tipo;
 }
 
+function limparMensagem() {
+    mensagemTriagem.textContent = "";
+    mensagemTriagem.className = "mensagem";
+    proximoPasso.hidden = true;
+}
+
+// Colore a borda do campo de acordo com o risco escolhido.
 function atualizarCorRisco() {
     const cores = {
         verde: "var(--verde)",
@@ -190,32 +522,31 @@ function atualizarCorRisco() {
         vermelho: "var(--vermelho)"
     };
 
-    campoRisco.style.borderColor =
-        cores[campoRisco.value] || "#d4d4d4";
+    campoRisco.style.borderColor = cores[campoRisco.value] || "";
 }
 
 campoRisco.addEventListener("change", atualizarCorRisco);
 
-formTriagem.addEventListener("submit", async function(event) {
+formTriagem.addEventListener("submit", async function (event) {
     event.preventDefault();
 
-    const pacienteId = document.getElementById("pacienteId").value;
+    const pacienteId = document.getElementById("pacienteId").value.trim();
     const nome = document.getElementById("nome").value.trim();
     const sintoma = document.getElementById("sintoma").value.trim();
     const temperatura = document.getElementById("temperatura").value;
     const risco = campoRisco.value;
     const alergia =
-        document.getElementById("alergia").value.trim() ||
-        "Não informada";
+        document.getElementById("alergia").value.trim() || "Não informada";
     const observacao =
         document.getElementById("observacao").value.trim();
 
-    if (!pacienteId || !nome || !sintoma ||
-        temperatura === "" || !risco) {
-        mostrarMensagem(
-            "Preencha todos os campos obrigatórios.",
-            "erro"
-        );
+    if (!pacienteId || !nome || !sintoma || temperatura === "" || !risco) {
+        mostrarMensagem("Preencha todos os campos obrigatórios.", "erro");
+        return;
+    }
+
+    if (!Number.isInteger(Number(pacienteId)) || Number(pacienteId) < 1) {
+        mostrarMensagem("Informe um ID de paciente válido.", "erro");
         return;
     }
 
@@ -223,54 +554,37 @@ formTriagem.addEventListener("submit", async function(event) {
 
     if (!Number.isFinite(temperaturaNumero) ||
         temperaturaNumero < 25 || temperaturaNumero > 45) {
-        mostrarMensagem(
-            "Confira a temperatura informada.",
-            "erro"
-        );
+        mostrarMensagem("Confira a temperatura informada.", "erro");
         return;
     }
 
-    const dadosTriagem = {
-        pacienteId: Number(pacienteId),
-        nome,
-        sintoma,
-        temperatura: temperaturaNumero,
-        risco,
-        alergia,
-        observacao
-    };
-
     btnSalvar.disabled = true;
     btnSalvar.textContent = "Salvando...";
-    mensagemTriagem.textContent = "";
-    mensagemTriagem.className = "mensagem";
+    limparMensagem();
 
     try {
-        const resposta = await fetch("/triagem", {
+        const resultado = await Sentinela.api("/triagem", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(dadosTriagem)
+            body: {
+                pacienteId: Number(pacienteId),
+                nome,
+                sintoma,
+                temperatura: temperaturaNumero,
+                risco,
+                alergia,
+                observacao
+            }
         });
 
-        const resultado = await resposta.json().catch(() => ({}));
-
-        if (!resposta.ok) {
-            throw new Error(
-                resultado.mensagem ||
-                resultado.erro ||
-                "Não foi possível salvar a triagem."
-            );
-        }
+        // reset() também limpa a mensagem, por isso vem antes de exibi-la.
+        formTriagem.reset();
+        atualizarCorRisco();
 
         mostrarMensagem(
             resultado.mensagem || "Triagem registrada com sucesso!",
             "sucesso"
         );
-
-        formTriagem.reset();
-        atualizarCorRisco();
+        proximoPasso.hidden = false;
 
     } catch (erro) {
         mostrarMensagem(
@@ -283,9 +597,8 @@ formTriagem.addEventListener("submit", async function(event) {
     }
 });
 
-formTriagem.addEventListener("reset", function() {
-    mensagemTriagem.textContent = "";
-    mensagemTriagem.className = "mensagem";
+formTriagem.addEventListener("reset", function () {
+    limparMensagem();
     setTimeout(atualizarCorRisco, 0);
 });
 </script>
