@@ -1,209 +1,819 @@
-```css
-* {
-    box-sizing: border-box;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Médico | Projeto-Sentinela</title>
+    <style>
+       
+        :root {
+            --cor-primaria: #0284c7;
+            --cor-primaria-hover: #0369a1;
+            --cor-fundo: #f1f5f9;
+            --cor-superficie: #ffffff;
+            --cor-texto: #1e293b;
+            --cor-texto-suave: #64748b;
+            --cor-borda: #e2e8f0;
+            --cor-tag-fundo: #e0f2fe;
+            --cor-tag-texto: #0369a1;
+
+            /* Cores de risco e status */
+            --verde: #16a34a;
+            --verde-fundo: #dcfce7;
+            --amarelo: #d97706;
+            --amarelo-fundo: #fef3c7;
+            --vermelho: #dc2626;
+            --vermelho-fundo: #fee2e2;
+
+            --raio-borda: 10px;
+            --sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --transicao: all 0.2s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* =========================================
+           LAYOUT PRINCIPAL
+           ========================================= */
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            flex: 1;
+        }
+
+        /* =========================================
+           CABEÇALHO DA PÁGINA (.page-title)
+           ========================================= */
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 24px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .page-tag {
+            display: inline-block;
+            background-color: var(--cor-tag-fundo);
+            color: var(--cor-tag-texto);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .page-title h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            line-height: 1.2;
+        }
+
+        .page-title p {
+            color: var(--cor-texto-suave);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        /* =========================================
+           GRADE DIVIDIDA (.split)
+           ========================================= */
+        .split {
+            display: grid;
+            grid-template-columns: minmax(340px, 460px) minmax(0, 1fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        /* =========================================
+           PAINÉIS (.panel / .form-card)
+           ========================================= */
+        .panel,
+        .form-card {
+            background-color: var(--cor-superficie);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 24px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--cor-borda);
+            gap: 10px;
+        }
+
+        .panel-header h2,
+        .form-card h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .form-card h2 {
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .muted {
+            font-size: 0.86rem;
+            color: var(--cor-texto-suave);
+        }
+
+        /* =========================================
+           FORMULÁRIOS (.form-grid / .form-group)
+           ========================================= */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--cor-texto-suave);
+            margin-bottom: 6px;
+        }
+
+        .form-group small {
+            font-weight: 400;
+            color: #94a3b8;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 0.92rem;
+            color: var(--cor-texto);
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            transition: var(--transicao);
+        }
+
+        textarea {
+            min-height: 84px;
+            resize: vertical;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            background-color: var(--cor-superficie);
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        /* =========================================
+           FILA E CARDS DE PACIENTES (.item-card)
+           ========================================= */
+        #fila {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .item-card {
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-left: 4px solid var(--cor-primaria);
+            border-radius: 8px;
+            padding: 15px 16px;
+            transition: var(--transicao);
+        }
+
+        .item-card:hover {
+            background-color: var(--cor-superficie);
+            box-shadow: var(--sombra-suave);
+        }
+
+        .item-card.borda-vermelho {
+            border-left-color: var(--vermelho);
+        }
+
+        .item-card.borda-amarelo {
+            border-left-color: var(--amarelo);
+        }
+
+        .item-card.borda-verde {
+            border-left-color: var(--verde);
+        }
+
+        .item-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .item-topo h3 {
+            font-size: 1.04rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        .risco {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            padding: 3px 9px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .risco-vermelho {
+            background-color: var(--vermelho-fundo);
+            color: var(--vermelho);
+        }
+
+        .risco-amarelo {
+            background-color: var(--amarelo-fundo);
+            color: var(--amarelo);
+        }
+
+        .risco-verde {
+            background-color: var(--verde-fundo);
+            color: var(--verde);
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 12px;
+            font-size: 0.8rem;
+            color: var(--cor-texto-suave);
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--cor-borda);
+        }
+
+        .item-card p {
+            font-size: 0.9rem;
+            color: var(--cor-texto);
+            margin-bottom: 8px;
+        }
+
+        .aviso-alergia:not([hidden]) {
+            background-color: var(--vermelho-fundo);
+            border: 1px solid #fca5a5;
+            border-left: 3px solid var(--vermelho);
+            color: #991b1b;
+            border-radius: 8px;
+            padding: 9px 12px;
+            font-size: 0.85rem;
+            margin-top: 8px;
+        }
+
+        .card-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--cor-borda);
+        }
+
+        /* =========================================
+           BOTÕES E AÇÕES (.btn / .actions)
+           ========================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 18px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background-color: var(--cor-primaria);
+            color: #ffffff;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: var(--cor-primaria-hover);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: var(--cor-superficie);
+            color: var(--cor-texto);
+            border-color: var(--cor-borda);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-success {
+            background-color: var(--verde);
+            color: #ffffff;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background-color: #15803d;
+        }
+
+        .btn-sm {
+            padding: 6px 12px;
+            font-size: 0.82rem;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        /* =========================================
+           MENSAGENS E ESTADO VAZIO
+           ========================================= */
+        .mensagem:empty {
+            display: none;
+        }
+
+        .mensagem {
+            margin-top: 14px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .mensagem.sucesso {
+            background-color: var(--verde-fundo);
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        .mensagem.erro {
+            background-color: var(--vermelho-fundo);
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 18px;
+            color: var(--cor-texto-suave);
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .empty-icon {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .empty-state p {
+            font-size: 0.92rem;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           HEADER E FOOTER DINÂMICOS (app.js)
+           ========================================= */
+        #topbar {
+            background-color: var(--cor-superficie);
+            border-bottom: 1px solid var(--cor-borda);
+            padding: 14px 20px;
+        }
+
+        #rodape {
+            background-color: var(--cor-superficie);
+            border-top: 1px solid var(--cor-borda);
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 0.85rem;
+            color: var(--cor-texto-suave);
+            margin-top: auto;
+        }
+
+        /* =========================================
+           RESPONSIVIDADE
+           ========================================= */
+        @media (max-width: 960px) {
+            .split {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 14px;
+            }
+
+            .page-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .panel,
+            .form-card {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header id="topbar"></header>
+
+<main class="container">
+
+    <section class="page-title">
+        <div>
+            <span class="page-tag">ATENDIMENTO MÉDICO</span>
+            <h1>Painel médico</h1>
+            <p>Chame o próximo paciente, registre a consulta e a medicação prescrita.</p>
+        </div>
+
+        <a href="inicio.html" class="btn btn-secondary">← Início</a>
+    </section>
+
+    <div class="split">
+
+        <!-- FILA -->
+        <section class="panel">
+            <div class="panel-header">
+                <h2>Fila de atendimento</h2>
+                <button type="button" class="btn btn-secondary btn-sm" id="btnAtualizar">
+                    Atualizar
+                </button>
+            </div>
+
+            <p class="muted">
+                Pacientes triados, ordenados por risco (vermelho primeiro) e
+                depois por ordem de chegada.
+            </p>
+
+            <div class="form-grid" style="margin: 16px 0 20px;">
+                <div class="form-group">
+                    <label for="localTipo">Local da chamada</label>
+                    <select id="localTipo">
+                        <option value="Consultório">Consultório</option>
+                        <option value="Sala">Sala</option>
+                        <option value="Triagem">Triagem</option>
+                        <option value="Emergência">Emergência</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="localNumero">Número</label>
+                    <input type="text" id="localNumero" value="1" maxlength="10">
+                </div>
+            </div>
+
+            <div id="fila" aria-live="polite"></div>
+        </section>
+
+        <!-- CONSULTA -->
+        <section class="form-card">
+            <h2>Registrar consulta</h2>
+
+            <div class="aviso-alergia" id="infoPaciente" hidden></div>
+
+            <form id="formConsulta" novalidate>
+                <div class="form-grid" style="margin-top: 16px;">
+
+                    <div class="form-group">
+                        <label for="pacienteId">ID do paciente *</label>
+                        <input type="number" id="pacienteId" min="1" step="1"
+                               placeholder="Número do cadastro" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="paciente">Nome do paciente *</label>
+                        <input type="text" id="paciente" placeholder="Nome completo"
+                               autocomplete="off" required>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="diagnostico">Diagnóstico *</label>
+                        <textarea id="diagnostico" required
+                                  placeholder="Descreva o diagnóstico ou hipótese diagnóstica..."></textarea>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="medicacao">
+                            Medicação prescrita
+                            <small>(deixe em branco se não houver)</small>
+                        </label>
+                        <input type="text" id="medicacao"
+                               placeholder="Ex.: Dipirona 500mg, 1 comprimido a cada 6 horas">
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="obs">Observações</label>
+                        <textarea id="obs" placeholder="Outras orientações relevantes..."></textarea>
+                    </div>
+
+                </div>
+
+                <div class="actions">
+                    <button type="submit" class="btn" id="btnSalvar">Salvar consulta</button>
+                    <button type="reset" class="btn btn-secondary">Limpar</button>
+                    <a href="alta.html" class="btn btn-secondary" id="linkAlta">📄 Dar alta</a>
+                </div>
+
+                <div id="mensagem" class="mensagem" role="status" aria-live="polite"></div>
+
+                <div class="actions" id="proximoPasso" hidden>
+                    <a href="medicacoes.html" class="btn btn-success">Ver medicações prescritas →</a>
+                </div>
+            </form>
+        </section>
+
+    </div>
+
+</main>
+
+<footer id="rodape"></footer>
+
+<script src="js/app.js"></script>
+<script>
+Sentinela.montarLayout("medico");
+
+const esc = Sentinela.esc;
+const $ = (id) => document.getElementById(id);
+
+const ORDEM_RISCO = { vermelho: 0, amarelo: 1, verde: 2 };
+
+let fila = [];
+
+function chave(t) {
+    return t.id != null ? t.id : t.pacienteId;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #eaf2fa;
-    color: #263b50;
+function temAlergia(texto) {
+    const t = String(texto || "").trim().toLowerCase();
+    return t !== "" &&
+        !t.startsWith("nenhuma") &&
+        !t.startsWith("não informada") &&
+        !t.startsWith("nao informada");
 }
 
-/* CABEÇALHO */
-
-header.topo,
-.topo {
-    background: #174873;
-    color: white;
-    padding: 24px;
-    margin-bottom: 25px;
+function estadoVazio(icone, texto) {
+    return '<div class="empty-state"><div class="empty-icon">' + icone +
+           "</div><p>" + esc(texto) + "</p></div>";
 }
 
-.topo h1,
-.topo h2 {
-    color: white;
-    margin: 0 0 8px;
-}
+function renderizarFila() {
+    const el = $("fila");
 
-.topo p {
-    color: #d7e8f8;
-}
-
-/* CONTEÚDO */
-
-.container {
-    width: 92%;
-    max-width: 850px;
-    margin: 30px auto;
-    padding: 25px;
-    background: white;
-    border: 1px solid #c8dced;
-    border-radius: 7px;
-}
-
-h1, h2, h3 {
-    color: #174873;
-}
-
-p {
-    line-height: 1.5;
-}
-
-/* CAMPOS */
-
-label {
-    display: block;
-    margin-bottom: 7px;
-    color: #174873;
-    font-weight: bold;
-}
-
-input,
-select,
-textarea {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 18px;
-    border: 1px solid #c8dced;
-    border-radius: 5px;
-    background: #fff;
-    color: #263b50;
-    font: inherit;
-}
-
-input:focus,
-select:focus,
-textarea:focus {
-    outline: 2px solid #8abce5;
-    border-color: #2784c5;
-}
-
-/* BOTÕES */
-
-button,
-.btn,
-.btn-voltar {
-    display: inline-block;
-    padding: 12px 18px;
-    background: #1769aa;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    font: inherit;
-    cursor: pointer;
-}
-
-button:hover,
-.btn:hover,
-.btn-voltar:hover {
-    background: #174873;
-}
-
-/* PACIENTES E LISTAS */
-
-.card,
-.paciente-card,
-.caixa {
-    padding: 18px;
-    margin-bottom: 14px;
-    background: #f7fbff;
-    border: 1px solid #c8dced;
-    border-left: 4px solid #2784c5;
-    border-radius: 6px;
-}
-
-.card h3,
-.paciente-card h3 {
-    color: #174873;
-}
-
-/* TABELAS */
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-}
-
-th {
-    padding: 13px;
-    background: #174873;
-    color: white;
-    text-align: left;
-}
-
-td {
-    padding: 12px;
-    border-bottom: 1px solid #dce7f1;
-}
-
-tr:hover td {
-    background: #edf5fc;
-}
-
-/* MENSAGENS */
-
-#mensagem,
-.mensagem {
-    margin-top: 12px;
-    line-height: 1.5;
-}
-
-/* LOGIN */
-
-.login-box {
-    width: 92%;
-    max-width: 430px;
-    margin: 60px auto;
-    padding: 30px;
-    background: white;
-    border: 1px solid #c8dced;
-    border-radius: 8px;
-}
-
-.login-box h1 {
-    color: #174873;
-}
-
-/* TV */
-
-.tv-page {
-    min-height: 100vh;
-    padding: 30px;
-    background: #174873;
-    color: white;
-}
-
-.tv-page h1,
-.tv-page h2 {
-    color: white;
-}
-
-/* CELULAR */
-
-@media (max-width: 600px) {
-    .container {
-        width: 96%;
-        margin: 12px auto;
-        padding: 17px;
+    if (!fila.length) {
+        el.innerHTML = estadoVazio("✅", "Nenhum paciente aguardando atendimento.");
+        return;
     }
 
-    .topo {
-        padding: 18px;
-    }
+    el.innerHTML = fila.map(function (t) {
+        const risco = String(t.risco || "").toLowerCase();
+        const alerta = temAlergia(t.alergia)
+            ? '<div class="aviso-alergia"><strong>Alergias:</strong> ' + esc(t.alergia) + "</div>"
+            : "";
+        const jaChamado = t.status === "chamado" ? "<span>📣 Já chamado(a)</span>" : "";
+        const linkAlta = "alta.html?id=" + encodeURIComponent(t.pacienteId) +
+                         "&nome=" + encodeURIComponent(t.nome);
 
-    button,
-    .btn,
-    .btn-voltar {
-        max-width: 100%;
-    }
+        return '<article class="item-card borda-' + esc(risco) + '">' +
+            '<div class="item-topo">' +
+                "<h3>" + esc(t.nome) + "</h3>" +
+                '<span class="risco risco-' + esc(risco) + '">' + esc(risco.toUpperCase()) + "</span>" +
+            "</div>" +
+            '<div class="meta">' +
+                "<span>ID " + esc(t.pacienteId) + "</span>" +
+                "<span>🌡️ " + esc(t.temperatura) + " °C</span>" +
+                "<span>🕒 " + esc(Sentinela.formatarData(t.criadoEm)) + "</span>" +
+                jaChamado +
+            "</div>" +
+            "<p><strong>Queixa:</strong> " + esc(t.sintoma) + "</p>" +
+            alerta +
+            '<div class="card-actions">' +
+                '<button type="button" class="btn btn-secondary btn-sm" data-acao="chamar" data-id="' + esc(chave(t)) + '">📣 Chamar na TV</button>' +
+                '<button type="button" class="btn btn-sm" data-acao="atender" data-id="' + esc(chave(t)) + '">🩺 Atender</button>' +
+                '<a class="btn btn-secondary btn-sm" href="' + linkAlta + '">📄 Alta</a>' +
+            "</div>" +
+        "</article>";
+    }).join("");
+}
 
-    table {
-        display: block;
-        overflow-x: auto;
+async function carregarFila() {
+    $("fila").innerHTML = estadoVazio("⌛", "Carregando...");
+
+    try {
+        const dados = await Sentinela.api("/triagem");
+
+        fila = (Array.isArray(dados) ? dados : [])
+            .filter(function (t) { return ["atendido", "alta"].indexOf(t.status) === -1; })
+            .sort(function (a, b) {
+                const ra = ORDEM_RISCO[a.risco] != null ? ORDEM_RISCO[a.risco] : 3;
+                const rb = ORDEM_RISCO[b.risco] != null ? ORDEM_RISCO[b.risco] : 3;
+                if (ra !== rb) return ra - rb;
+                return String(a.criadoEm || "").localeCompare(String(b.criadoEm || ""));
+            });
+
+        renderizarFila();
+    } catch (erro) {
+        $("fila").innerHTML = estadoVazio("X", erro.message || "Não foi possível carregar a fila.");
     }
 }
-```
+
+async function chamarPaciente(t, botao) {
+    const localTipo = $("localTipo").value;
+    const localNumero = $("localNumero").value.trim() || "1";
+
+    botao.disabled = true;
+
+    try {
+        await Sentinela.api("/tv/chamar", {
+            method: "POST",
+            body: {
+                pacienteId: t.pacienteId,
+                paciente: t.nome,
+                localTipo: localTipo,
+                localNumero: localNumero
+            }
+        });
+
+        Sentinela.toast("✅ " + t.nome + " chamado(a): " + localTipo + " " + localNumero, "sucesso");
+        carregarFila();
+    } catch (erro) {
+        Sentinela.toast("❌ " + (erro.message || "Não foi possível chamar o paciente."), "erro");
+        botao.disabled = false;
+    }
+}
+
+function atualizarLinkAlta() {
+    const id = $("pacienteId").value.trim();
+    const nome = $("paciente").value.trim();
+    const params = [];
+
+    if (id) params.push("id=" + encodeURIComponent(id));
+    if (nome) params.push("nome=" + encodeURIComponent(nome));
+
+    $("linkAlta").href = "alta.html" + (params.length ? "?" + params.join("&") : "");
+}
+
+function iniciarAtendimento(t) {
+    $("pacienteId").value = t.pacienteId;
+    $("paciente").value = t.nome;
+
+    const info = $("infoPaciente");
+    info.innerHTML =
+        "<strong>Triagem:</strong> " + esc(t.sintoma) +
+        " · 🌡️ " + esc(t.temperatura) + " °C" +
+        " · <strong>Alergias:</strong> " + esc(t.alergia || "Não informada");
+    info.hidden = false;
+
+    atualizarLinkAlta();
+    limparMensagem();
+
+    $("diagnostico").focus();
+    $("formConsulta").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+$("fila").addEventListener("click", function (e) {
+    const botao = e.target.closest("button[data-acao]");
+    if (!botao) return;
+
+    const t = fila.find(function (x) { return String(chave(x)) === botao.dataset.id; });
+    if (!t) return;
+
+    if (botao.dataset.acao === "chamar") chamarPaciente(t, botao);
+    if (botao.dataset.acao === "atender") iniciarAtendimento(t);
+});
+
+$("btnAtualizar").addEventListener("click", carregarFila);
+$("pacienteId").addEventListener("input", atualizarLinkAlta);
+$("paciente").addEventListener("input", atualizarLinkAlta);
+
+/* ---------- Formulário da consulta ---------- */
+
+const mensagem = $("mensagem");
+const proximoPasso = $("proximoPasso");
+const formConsulta = $("formConsulta");
+
+function mostrarMensagem(texto, tipo) {
+    mensagem.textContent = texto;
+    mensagem.className = "mensagem " + tipo;
+}
+
+function limparMensagem() {
+    mensagem.textContent = "";
+    mensagem.className = "mensagem";
+    proximoPasso.hidden = true;
+}
+
+formConsulta.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const pacienteId = $("pacienteId").value.trim();
+    const paciente = $("paciente").value.trim();
+    const diagnostico = $("diagnostico").value.trim();
+    const medicacao = $("medicacao").value.trim();
+    const obs = $("obs").value.trim();
+
+    if (!pacienteId || !paciente || !diagnostico) {
+        mostrarMensagem("Preencha o ID, o nome do paciente e o diagnóstico.", "erro");
+        return;
+    }
+
+    if (!Number.isInteger(Number(pacienteId)) || Number(pacienteId) < 1) {
+        mostrarMensagem("Informe um ID de paciente válido.", "erro");
+        return;
+    }
+
+    const botao = $("btnSalvar");
+    botao.disabled = true;
+    botao.textContent = "Salvando...";
+    limparMensagem();
+
+    try {
+        const resultado = await Sentinela.api("/consulta", {
+            method: "POST",
+            body: { pacienteId: Number(pacienteId), paciente, diagnostico, medicacao, obs }
+        });
+
+        formConsulta.reset();
+
+        mostrarMensagem(resultado.mensagem || "Consulta registrada com sucesso!", "sucesso");
+        proximoPasso.hidden = false;
+        carregarFila();
+
+    } catch (erro) {
+        mostrarMensagem(erro.message || "Erro de conexão com o servidor.", "erro");
+    } finally {
+        botao.disabled = false;
+        botao.textContent = "Salvar consulta";
+    }
+});
+
+formConsulta.addEventListener("reset", function () {
+    limparMensagem();
+    $("infoPaciente").hidden = true;
+    setTimeout(atualizarLinkAlta, 0);
+});
+
+carregarFila();
+</script>
+
+</body>
+</html>
