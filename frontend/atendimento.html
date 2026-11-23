@@ -1,412 +1,812 @@
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atendimento | Projeto-Sentinela</title>
-
     <style>
-        * {
-            box-sizing: border-box;
-        }
 
-        :root {
-            --azul-escuro: #123c63;
-            --azul: #1769aa;
-            --azul-hover: #0d5089;
-            --fundo: #edf5fc;
-            --borda: #d4e4f2;
-            --texto: #263b50;
-        }
 
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            color: var(--texto);
-            background: var(--fundo);
-            min-height: 100vh;
-        }
+*, *::before, *::after { box-sizing: border-box; }
 
-        .topbar {
-            background: var(--azul-escuro);
-            color: white;
-            padding: 18px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 18px;
-            box-shadow: 0 3px 12px #123c6320;
-        }
+:root {
+    --azul-escuro: #123c63;
+    --azul: #1769aa;
+    --azul-hover: #0d5089;
+    --fundo: #edf5fc;
+    --borda: #d4e4f2;
+    --texto: #263b50;
+    --suave: #687f93;
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: white;
-            text-decoration: none;
-        }
+    --verde: #2e9e5b;
+    --amarelo: #e8a317;
+    --vermelho: #d64545;
 
-        .brand-icon {
-            background: white;
-            color: var(--azul);
-            border-radius: 12px;
-            width: 48px;
-            height: 48px;
-            display: grid;
-            place-items: center;
-            font-size: 26px;
-        }
+    --sombra: 0 5px 22px #1748730d;
+}
 
-        .brand strong,
-        .brand span {
-            display: block;
-        }
+[hidden] { display: none !important; }
 
-        .brand strong {
-            font-size: 19px;
-        }
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--texto);
+    background: var(--fundo);
+    line-height: 1.5;
+}
 
-        .brand span {
-            margin-top: 5px;
-            font-size: 12px;
-            color: #d4e8fa;
-        }
+:focus-visible {
+    outline: 3px solid #1769aa55;
+    outline-offset: 2px;
+}
 
-        .nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
+/* ---------- Barra superior ---------- */
 
-        .nav a {
-            display: inline-block;
-            padding: 10px 12px;
-            color: #e5f1fb;
-            text-decoration: none;
-            font-size: 13px;
-            border-radius: 7px;
-            transition: 0.2s;
-        }
+.topbar {
+    background: var(--azul-escuro);
+    color: white;
+    padding: 18px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    box-shadow: 0 3px 12px #123c6320;
+}
 
-        .nav a:hover,
-        .nav a.active {
-            color: white;
-            background: #2c6595;
-        }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+}
 
-        .container {
-            width: 92%;
-            max-width: 1080px;
-            margin: 35px auto;
-        }
+.brand-icon {
+    background: white;
+    color: var(--azul);
+    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    font-size: 26px;
+}
 
-        .page-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 26px;
-        }
+.brand strong, .brand span { display: block; }
+.brand strong { font-size: 19px; }
+.brand span { margin-top: 5px; font-size: 12px; color: #d4e8fa; }
 
-        .page-tag {
-            display: inline-block;
-            background: #dcecf9;
-            color: var(--azul);
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            padding: 8px 12px;
-            border-radius: 5px;
-        }
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 5px;
+}
 
-        h1 {
-            color: var(--azul-escuro);
-            font-size: 30px;
-            margin: 13px 0 8px;
-        }
+.nav a {
+    display: inline-block;
+    padding: 10px 12px;
+    color: #e5f1fb;
+    text-decoration: none;
+    font-size: 13px;
+    border-radius: 7px;
+    transition: 0.2s;
+}
 
-        .page-title p {
-            color: #687f93;
-            margin: 0;
-            line-height: 1.6;
-        }
+.nav a:hover,
+.nav a.active {
+    color: white;
+    background: #2c6595;
+}
 
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 17px;
-            margin-bottom: 26px;
-        }
+.demo-badge {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #fff4dc;
+    color: #7a4e00;
+    font-size: 11px;
+    font-weight: bold;
+}
 
-        .card {
-            background: white;
-            border: 1px solid var(--borda);
-            border-left: 5px solid var(--azul);
-            border-radius: 9px;
-            padding: 22px;
-            box-shadow: 0 4px 15px #1748730a;
-        }
+/* ---------- Estrutura da página ---------- */
 
-        .card-numero {
-            color: var(--azul);
-            font-size: 26px;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
+.container {
+    width: 92%;
+    max-width: 1080px;
+    margin: 35px auto;
+    flex: 1 0 auto;
+}
 
-        .card h3 {
-            color: var(--azul-escuro);
-            font-size: 16px;
-            margin: 0 0 9px;
-        }
+.page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 26px;
+}
 
-        .card p {
-            color: #687f93;
-            font-size: 13px;
-            line-height: 1.7;
-            margin: 0;
-        }
+.page-tag {
+    display: inline-block;
+    background: #dcecf9;
+    color: var(--azul);
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
 
-        .form-card {
-            background: white;
-            border: 1px solid var(--borda);
-            border-radius: 11px;
-            padding: 28px;
-            box-shadow: 0 5px 22px #1748730d;
-        }
+h1 {
+    color: var(--azul-escuro);
+    font-size: 30px;
+    margin: 13px 0 8px;
+}
 
-        .form-cabecalho {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding-bottom: 21px;
-            margin-bottom: 24px;
-            border-bottom: 1px solid #e4edf5;
-        }
+.page-title p {
+    color: var(--suave);
+    margin: 0;
+    line-height: 1.6;
+}
 
-        .form-icone {
-            display: grid;
-            place-items: center;
-            width: 48px;
-            height: 48px;
-            background: #e3f0fc;
-            border-radius: 10px;
-            font-size: 24px;
-        }
+.footer {
+    border-top: 1px solid #d8e5f0;
+    margin-top: 45px;
+    padding: 23px 15px;
+    text-align: center;
+    color: #72879a;
+    font-size: 12px;
+}
 
-        .form-cabecalho h2 {
-            color: var(--azul-escuro);
-            margin: 0 0 6px;
-            font-size: 21px;
-        }
+.footer p { margin: 0; }
 
-        .form-cabecalho p {
-            color: #72869a;
-            font-size: 13px;
-            margin: 0;
-        }
+.split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 22px;
+    align-items: start;
+}
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 22px;
-        }
+/* ---------- Painéis e cartões ---------- */
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
-        }
+.panel {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 11px;
+    padding: 24px;
+    box-shadow: var(--sombra);
+    margin-bottom: 22px;
+}
 
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
+.panel h2 {
+    margin: 0 0 10px;
+    color: var(--azul-escuro);
+    font-size: 19px;
+}
 
-        label {
-            color: #344f68;
-            font-size: 14px;
-            font-weight: bold;
-        }
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
 
-        input,
-        select {
-            width: 100%;
-            min-height: 48px;
-            padding: 12px 14px;
-            border: 1px solid #c8d9e8;
-            border-radius: 7px;
-            background: white;
-            color: var(--texto);
-            font-family: inherit;
-            font-size: 14px;
-            outline: none;
-            transition: 0.2s;
-        }
+.panel-header h2 { margin: 0; }
 
-        input::placeholder {
-            color: #9aabba;
-        }
+.muted {
+    color: var(--suave);
+    font-size: 13px;
+    line-height: 1.6;
+}
 
-        input:focus,
-        select:focus {
-            border-color: var(--azul);
-            box-shadow: 0 0 0 3px #1769aa20;
-        }
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+    margin-bottom: 26px;
+}
 
-        .dica {
-            color: #72869a;
-            font-size: 12px;
-        }
+.card {
+    background: white;
+    border: 1px solid var(--borda);
+    border-left: 5px solid var(--azul);
+    border-radius: 9px;
+    padding: 22px;
+    box-shadow: 0 4px 15px #1748730a;
+}
 
-        .actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 28px;
-        }
+.card-numero {
+    color: var(--azul);
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
 
-        .btn {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 45px;
-            padding: 12px 19px;
-            border: 1px solid var(--azul);
-            border-radius: 7px;
-            background: var(--azul);
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            font-family: inherit;
-            text-decoration: none;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.card h3 {
+    color: var(--azul-escuro);
+    font-size: 16px;
+    margin: 0 0 9px;
+}
 
-        .btn:hover {
-            background: var(--azul-hover);
-            border-color: var(--azul-hover);
-        }
+.card p {
+    color: var(--suave);
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 0;
+}
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: wait;
-        }
+/* Item de lista (pacientes na fila, medicações) */
 
-        .btn-secondary {
-            background: white;
-            color: var(--azul);
-            border-color: #c8d9e8;
-        }
+.item-card {
+    background: white;
+    border: 1px solid var(--borda);
+    border-left: 5px solid var(--azul);
+    border-radius: 9px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+}
 
-        .btn-secondary:hover {
-            background: #e3f0fc;
-            color: var(--azul-escuro);
-            border-color: #a9c9e4;
-        }
+.item-card h3 {
+    margin: 0 0 6px;
+    color: var(--azul-escuro);
+    font-size: 17px;
+}
 
-        .mensagem {
-            display: none;
-            margin-top: 20px;
-            padding: 14px 16px;
-            border-radius: 7px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
+.item-card p { margin: 6px 0; font-size: 14px; }
 
-        .mensagem.sucesso {
-            display: block;
-            color: #17663a;
-            background: #e7f7ed;
-            border: 1px solid #b8e4c9;
-        }
+.item-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+}
 
-        .mensagem.erro {
-            display: block;
-            color: #a12626;
-            background: #fff0f0;
-            border: 1px solid #f0c4c4;
-        }
+.borda-verde { border-left-color: var(--verde); }
+.borda-amarelo { border-left-color: var(--amarelo); }
+.borda-vermelho { border-left-color: var(--vermelho); }
 
-        .footer {
-            border-top: 1px solid #d8e5f0;
-            margin-top: 45px;
-            padding: 23px 15px;
-            text-align: center;
-            color: #72879a;
-            font-size: 12px;
-        }
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: var(--suave);
+}
 
-        @media (max-width: 850px) {
-            .topbar {
-                align-items: flex-start;
-                flex-direction: column;
-            }
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
 
-            .cards-grid {
-                grid-template-columns: 1fr;
-            }
+.aviso-alergia {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border-radius: 7px;
+    background: #fff4dc;
+    border: 1px solid #f1d28a;
+    color: #6b4700;
+    font-size: 13px;
+}
 
-            .nav {
-                width: 100%;
-            }
-        }
+.empty-state {
+    text-align: center;
+    padding: 30px 14px;
+    color: var(--suave);
+    font-size: 14px;
+}
 
-        @media (max-width: 560px) {
-            .container {
-                margin: 24px auto;
-            }
+.empty-icon { font-size: 36px; margin-bottom: 6px; }
 
-            h1 {
-                font-size: 25px;
-            }
+/* ---------- Classificação de risco (triagem) ---------- */
 
-            .form-card {
-                padding: 20px 16px;
-            }
+.legenda {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 16px 0;
+}
 
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
+.legenda-item {
+    border: 1px solid var(--borda);
+    border-radius: 9px;
+    padding: 14px;
+    background: #fafcfe;
+}
 
-            .form-group.full {
-                grid-column: auto;
-            }
+.legenda-item p {
+    margin: 10px 0 0;
+    font-size: 13px;
+    color: var(--suave);
+    line-height: 1.5;
+}
 
-            .actions {
-                flex-direction: column;
-            }
+.risco {
+    display: inline-block;
+    padding: 5px 11px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    color: white;
+    white-space: nowrap;
+}
 
-            .actions .btn,
-            .page-title > .btn {
-                width: 100%;
-            }
-        }
-    </style>
+.risco-verde { background: var(--verde); }
+.risco-amarelo { background: var(--amarelo); color: #3b2a00; }
+.risco-vermelho { background: var(--vermelho); }
+
+/* ---------- Formulários ---------- */
+
+.form-card {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 11px;
+    padding: 28px;
+    box-shadow: var(--sombra);
+    margin-bottom: 22px;
+}
+
+.form-card > h2 {
+    margin: 0 0 22px;
+    color: var(--azul-escuro);
+    font-size: 21px;
+}
+
+.form-cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 21px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #e4edf5;
+}
+
+.form-icone {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    background: #e3f0fc;
+    border-radius: 10px;
+    font-size: 24px;
+}
+
+.form-cabecalho h2 { color: var(--azul-escuro); margin: 0 0 6px; font-size: 21px; }
+.form-cabecalho p { color: #72869a; font-size: 13px; margin: 0; }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-group.full { grid-column: 1 / -1; }
+
+label {
+    color: #344f68;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+label small { font-weight: normal; color: var(--suave); }
+
+input, select, textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid #c8d9e8;
+    border-radius: 7px;
+    background: white;
+    color: var(--texto);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+textarea {
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+input::placeholder, textarea::placeholder { color: #9aabba; }
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px #1769aa20;
+}
+
+.dica { color: #72869a; font-size: 12px; }
+
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+
+/* ---------- Botões ---------- */
+
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    min-height: 45px;
+    padding: 12px 19px;
+    border: 1px solid var(--azul);
+    border-radius: 7px;
+    background: var(--azul);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover { background: var(--azul-hover); border-color: var(--azul-hover); }
+.btn:disabled { opacity: 0.6; cursor: wait; }
+
+.btn-secondary { background: white; color: var(--azul); border-color: #c8d9e8; }
+.btn-secondary:hover { background: #e3f0fc; color: var(--azul-escuro); border-color: #a9c9e4; }
+
+.btn-success { background: var(--verde); border-color: var(--verde); }
+.btn-success:hover { background: #247d48; border-color: #247d48; }
+
+.btn-sm { min-height: 36px; padding: 7px 12px; font-size: 13px; }
+.btn-block { width: 100%; }
+
+/* ---------- Mensagens ---------- */
+
+.mensagem {
+    display: none;
+    margin-top: 20px;
+    padding: 14px 16px;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.mensagem.sucesso {
+    display: block;
+    color: #17663a;
+    background: #e7f7ed;
+    border: 1px solid #b8e4c9;
+}
+
+.mensagem.erro {
+    display: block;
+    color: #a12626;
+    background: #fff0f0;
+    border: 1px solid #f0c4c4;
+}
+
+.toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    max-width: 340px;
+    padding: 14px 18px;
+    border-radius: 9px;
+    color: white;
+    font-size: 14px;
+    opacity: 0;
+    transform: translateY(12px);
+    pointer-events: none;
+    transition: 0.25s;
+    z-index: 60;
+}
+
+.toast.show { opacity: 1; transform: none; }
+.toast-sucesso { background: #17663a; }
+.toast-erro { background: #a12626; }
+.toast-info { background: var(--azul-escuro); }
+
+/* ---------- Tabelas ---------- */
+
+.table-wrap { overflow-x: auto; }
+
+table { width: 100%; border-collapse: collapse; }
+
+th {
+    text-align: left;
+    padding: 12px;
+    background: var(--azul-escuro);
+    color: white;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e4edf5;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+tbody tr:hover td { background: #f3f8fd; }
+
+.badge {
+    display: inline-block;
+    min-width: 38px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.badge-ok { background: #e7f7ed; color: #17663a; }
+.badge-baixo { background: #fff4dc; color: #8a5a00; }
+.badge-zero { background: #fdeaea; color: #a12626; }
+
+/* ---------- Central (inicio.html) ---------- */
+
+.hub-secao {
+    margin: 30px 0 14px;
+    color: var(--azul-escuro);
+    font-size: 18px;
+}
+
+.hub-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 18px;
+}
+
+.hub-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 22px;
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.hub-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--azul);
+    box-shadow: 0 10px 28px #17487322;
+}
+
+.hub-icone { font-size: 32px; line-height: 1; }
+.hub-card h3 { margin: 6px 0 0; font-size: 17px; color: var(--azul-escuro); }
+.hub-card p { margin: 0; font-size: 13px; color: var(--suave); line-height: 1.6; }
+.hub-ir { margin-top: auto; padding-top: 8px; font-size: 13px; font-weight: bold; color: var(--azul); }
+
+.hub-passo {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: #dcecf9;
+    color: var(--azul);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.aviso-demo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+    padding: 14px 16px;
+    border-radius: 9px;
+    background: #fff4dc;
+    border: 1px solid #f1d28a;
+    color: #6b4700;
+    font-size: 13px;
+}
+
+/* ---------- Almoxarifado ---------- */
+
+.alerta-estoque {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 22px;
+    padding: 14px 16px;
+    border-radius: 9px;
+    background: #fff4dc;
+    border: 1px solid #f1d28a;
+    color: #6b4700;
+    font-size: 14px;
+}
+
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px;
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 11px;
+    box-shadow: var(--sombra);
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    font-size: 22px;
+}
+
+.stat-icon.purple { background: #ece7fa; }
+.stat-icon.green { background: #e3f5ea; }
+.stat-icon.orange { background: #fff0dc; }
+.stat-icon.red { background: #fde7e7; }
+
+.stat-value { font-size: 26px; font-weight: bold; color: var(--azul-escuro); line-height: 1.1; }
+.stat-label { margin-top: 3px; font-size: 12px; color: var(--suave); }
+
+.tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+    padding: 5px;
+    background: #eef4fa;
+    border-radius: 9px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: var(--suave);
+    font: inherit;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: white;
+    color: var(--azul);
+    box-shadow: 0 1px 4px #12395f1a;
+}
+
+.painel-form { display: flex; flex-direction: column; gap: 16px; }
+
+.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+
+.chip {
+    padding: 6px 12px;
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    background: white;
+    color: var(--suave);
+    font: inherit;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.chip.active { background: var(--azul); border-color: var(--azul); color: white; }
+
+.historico-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid #e4edf5;
+    font-size: 13px;
+}
+
+.historico-item:last-child { border-bottom: none; }
+.historico-item small { display: block; color: var(--suave); margin-top: 2px; }
+.historico-qtd { font-weight: bold; white-space: nowrap; }
+.historico-qtd.mais { color: #17663a; }
+.historico-qtd.menos { color: #a12626; }
+
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    display: none;
+    place-items: center;
+    padding: 16px;
+    background: #0b223a99;
+    z-index: 50;
+}
+
+.modal-overlay.show { display: grid; }
+
+.modal-box {
+    width: 100%;
+    max-width: 420px;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px #0b223a55;
+}
+
+.modal-title { margin-bottom: 16px; color: var(--azul-escuro); font-size: 19px; font-weight: bold; }
+.modal-actions { display: flex; gap: 10px; margin-top: 18px; }
+.modal-actions .btn { flex: 1; }
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 900px) {
+    .topbar { align-items: flex-start; flex-direction: column; }
+    .nav { width: 100%; }
+    .cards-grid, .legenda { grid-template-columns: 1fr; }
+    .split { grid-template-columns: 1fr; }
+    .stats-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+    .container { margin: 24px auto; }
+    h1 { font-size: 25px; }
+    .form-card, .panel { padding: 20px 16px; }
+    .form-grid { grid-template-columns: 1fr; }
+    .form-group.full { grid-column: auto; }
+    .actions { flex-direction: column; }
+    .actions .btn, .page-title > .btn { width: 100%; }
+    .stats-bar { grid-template-columns: 1fr; }
+}
+
+</style>
 </head>
-
 <body>
 
-<header class="topbar">
-    <a href="index.html" class="brand">
-        <div class="brand-icon">🏥</div>
+<header id="topbar" class="topbar">
+    <a href="inicio.html" class="brand">
+        <div class="brand-icon"></div>
         <div>
             <strong>Projeto-Sentinela</strong>
             <span>Sistema de Gestão em Saúde</span>
         </div>
     </a>
 
-    <nav class="nav">
-        <a href="index.html">Início</a>
-        <a href="atendimento.html" class="active">Atendimento</a>
-        <a href="triagem.html">Triagem</a>
-        <a href="medico.html">Painel Médico</a>
-        <a href="medicacoes.html">Medicações</a>
-        <a href="alta.html">Alta Médica</a>
-        <a href="tv.html">Painel TV</a>
+    <nav class="nav" aria-label="Navegação principal">
+            <a href="atendimento.html" class="active" aria-current="page">Atendimento</a>
+            <a href="triagem.html">Triagem</a>
+            <a href="medico.html">Painel Médico</a>
+            <a href="medicacoes.html">Medicações</a>
+            <a href="alta.html">Alta Médica</a>
+            <a href="almoxarifado.html">Almoxarifado</a>
+            <a href="tv.html">Painel TV</a>
     </nav>
 </header>
 
@@ -419,7 +819,7 @@
             <p>Preencha os dados para encaminhar o paciente à triagem.</p>
         </div>
 
-        <a href="index.html" class="btn btn-secondary">← Início</a>
+        <a href="inicio.html" class="btn btn-secondary">← Início</a>
     </section>
 
     <section class="cards-grid">
@@ -438,7 +838,7 @@
         <article class="card">
             <div class="card-numero">03</div>
             <h3>Encaminhamento</h3>
-            <p>Após o cadastro, o paciente poderá seguir para a triagem.</p>
+            <p>Após o cadastro, anote o ID do paciente e siga para a triagem.</p>
         </article>
     </section>
 
@@ -451,7 +851,7 @@
             </div>
         </div>
 
-        <form id="formAtendimento">
+        <form id="formAtendimento" novalidate>
             <div class="form-grid">
 
                 <div class="form-group full">
@@ -504,44 +904,75 @@
 
             <div id="mensagem" class="mensagem"
                  role="status" aria-live="polite"></div>
+
+            <div class="actions" id="proximoPasso" hidden>
+                <a href="triagem.html" class="btn btn-success">
+                    Seguir para a triagem →
+                </a>
+            </div>
         </form>
     </section>
 
 </main>
 
-<footer class="footer">
+<footer id="rodape" class="footer">
     <p>© 2026 Projeto-Sentinela — Sistema de Gestão em Saúde</p>
 </footer>
 
+<script src="js/app.js"></script>
 <script>
+if (window.Sentinela) Sentinela.montarLayout("atendimento");
+
+// Usa a API compartilhada (js/app.js) quando existir; senão, fetch simples.
+async function chamarApi(caminho, opcoes) {
+    if (window.Sentinela) return Sentinela.api(caminho, opcoes);
+
+    let resposta;
+    try {
+        resposta = await fetch(caminho, {
+            method: opcoes.method,
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(opcoes.body)
+        });
+    } catch (e) {
+        throw new Error("Erro de conexão com o servidor.");
+    }
+
+    const dados = await resposta.json().catch(() => ({}));
+
+    if (!resposta.ok) {
+        throw new Error(dados.mensagem || dados.erro || "Não foi possível cadastrar o paciente.");
+    }
+    return dados;
+}
+
 const form = document.getElementById("formAtendimento");
 const mensagem = document.getElementById("mensagem");
 const btnCadastrar = document.getElementById("btnCadastrar");
 const campoCpf = document.getElementById("cpf");
+const proximoPasso = document.getElementById("proximoPasso");
 
 function mostrarMensagem(texto, tipo) {
     mensagem.textContent = texto;
     mensagem.className = "mensagem " + tipo;
 }
 
+function limparMensagem() {
+    mensagem.textContent = "";
+    mensagem.className = "mensagem";
+    proximoPasso.hidden = true;
+}
+
+// Máscara do CPF: 000.000.000-00
 campoCpf.addEventListener("input", function () {
     let valor = this.value.replace(/\D/g, "").slice(0, 11);
 
     if (valor.length > 9) {
-        valor = valor.replace(
-            /^(\d{3})(\d{3})(\d{3})(\d{0,2}).*/,
-            "$1.$2.$3-$4"
-        );
+        valor = valor.replace(/^(\d{3})(\d{3})(\d{3})(\d{0,2}).*/, "$1.$2.$3-$4");
     } else if (valor.length > 6) {
-        valor = valor.replace(
-            /^(\d{3})(\d{3})(\d{0,3}).*/,
-            "$1.$2.$3"
-        );
+        valor = valor.replace(/^(\d{3})(\d{3})(\d{0,3}).*/, "$1.$2.$3");
     } else if (valor.length > 3) {
-        valor = valor.replace(
-            /^(\d{3})(\d{0,3}).*/,
-            "$1.$2"
-        );
+        valor = valor.replace(/^(\d{3})(\d{0,3}).*/, "$1.$2");
     }
 
     this.value = valor;
@@ -555,53 +986,34 @@ form.addEventListener("submit", async function (event) {
     const tipo = document.getElementById("tipo").value;
 
     if (!nome || !cpf || !tipo) {
-        mostrarMensagem(
-            "Preencha todos os campos obrigatórios.",
-            "erro"
-        );
+        mostrarMensagem("Preencha todos os campos obrigatórios.", "erro");
         return;
     }
 
     if (cpf.replace(/\D/g, "").length !== 11) {
-        mostrarMensagem(
-            "Digite um CPF com 11 números.",
-            "erro"
-        );
+        mostrarMensagem("Digite um CPF com 11 números.", "erro");
         campoCpf.focus();
         return;
     }
 
     btnCadastrar.disabled = true;
     btnCadastrar.textContent = "Cadastrando...";
-    mensagem.textContent = "";
-    mensagem.className = "mensagem";
+    limparMensagem();
 
     try {
-        const resposta = await fetch("/atendimento", {
+        const dados = await chamarApi("/atendimento", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ nome, cpf, tipo })
+            body: { nome, cpf, tipo }
         });
 
-        const dados = await resposta.json().catch(() => ({}));
-
-        if (!resposta.ok) {
-            throw new Error(
-                dados.mensagem ||
-                dados.erro ||
-                "Não foi possível cadastrar o paciente."
-            );
-        }
+        // reset() também limpa a mensagem, por isso vem antes de exibi-la.
+        form.reset();
 
         mostrarMensagem(
-            dados.mensagem ||
-            "Paciente cadastrado e enviado para a triagem!",
+            dados.mensagem || "Paciente cadastrado e enviado para a triagem!",
             "sucesso"
         );
-
-        form.reset();
+        proximoPasso.hidden = false;
 
     } catch (erro) {
         mostrarMensagem(
@@ -614,12 +1026,8 @@ form.addEventListener("submit", async function (event) {
     }
 });
 
-form.addEventListener("reset", function () {
-    mensagem.textContent = "";
-    mensagem.className = "mensagem";
-});
+form.addEventListener("reset", limparMensagem);
 </script>
 
 </body>
 </html>
-```
