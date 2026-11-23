@@ -1,333 +1,770 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Almoxerifado</title>
+    <title>Almoxarifado | Projeto-Sentinela</title>
+    <style>
+       
+        :root {
+            --cor-primaria: #0284c7;
+            --cor-primaria-hover: #0369a1;
+            --cor-fundo: #f1f5f9;
+            --cor-superficie: #ffffff;
+            --cor-texto: #1e293b;
+            --cor-texto-suave: #64748b;
+            --cor-borda: #e2e8f0;
+            --cor-tag-fundo: #e0f2fe;
+            --cor-tag-texto: #0369a1;
+
+            --cor-sucesso: #16a34a;
+            --cor-sucesso-fundo: #dcfce7;
+            --cor-aviso: #d97706;
+            --cor-aviso-fundo: #fef3c7;
+            --cor-erro: #dc2626;
+            --cor-erro-fundo: #fee2e2;
+            --cor-roxo: #7c3aed;
+            --cor-roxo-fundo: #ede9fe;
+
+            --raio-borda: 10px;
+            --sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --sombra-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --transicao: all 0.2s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* =========================================
+           LAYOUT PRINCIPAL
+           ========================================= */
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            flex: 1;
+        }
+
+        /* =========================================
+           CABEÇALHO DA PÁGINA (.page-title)
+           ========================================= */
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 22px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .page-tag {
+            display: inline-block;
+            background-color: var(--cor-tag-fundo);
+            color: var(--cor-tag-texto);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .page-title h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            line-height: 1.2;
+        }
+
+        .page-title p {
+            color: var(--cor-texto-suave);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        /* =========================================
+           ALERTA DE ESTOQUE (.alerta-estoque)
+           ========================================= */
+        .alerta-estoque:not([hidden]) {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--cor-aviso-fundo);
+            border: 1px solid #fcd34d;
+            border-left: 4px solid var(--cor-aviso);
+            color: #92400e;
+            padding: 13px 18px;
+            border-radius: var(--raio-borda);
+            margin-bottom: 22px;
+            font-size: 0.92rem;
+            box-shadow: var(--sombra-suave);
+        }
+
+        /* =========================================
+           INDICADORES (.stats-bar / .stat-card)
+           ========================================= */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background-color: var(--cor-superficie);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .stat-icon.purple {
+            background-color: var(--cor-roxo-fundo);
+            color: var(--cor-roxo);
+        }
+
+        .stat-icon.green {
+            background-color: var(--cor-sucesso-fundo);
+            color: var(--cor-sucesso);
+        }
+
+        .stat-icon.orange {
+            background-color: var(--cor-aviso-fundo);
+            color: var(--cor-aviso);
+        }
+
+        .stat-icon.red {
+            background-color: var(--cor-erro-fundo);
+            color: var(--cor-erro);
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--cor-texto);
+        }
+
+        .stat-label {
+            font-size: 0.82rem;
+            color: var(--cor-texto-suave);
+            margin-top: 2px;
+        }
+
+        /* =========================================
+           GRADE DIVIDIDA (.split-estoque)
+           ========================================= */
+        .split-estoque {
+            display: grid;
+            grid-template-columns: minmax(340px, 420px) minmax(0, 1fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .split-estoque > div {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* =========================================
+           PAINÉIS (.panel)
+           ========================================= */
+        .panel {
+            background-color: var(--cor-superficie);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 22px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--cor-borda);
+            gap: 10px;
+        }
+
+        .panel-header h2 {
+            font-size: 1.12rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+        }
+
+        /* =========================================
+           ABAS (.tabs / .tab-btn)
+           ========================================= */
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            background-color: #f1f5f9;
+            padding: 5px;
+            border-radius: 9px;
+            margin-bottom: 18px;
+        }
+
+        .tab-btn {
+            padding: 9px 12px;
+            border: none;
+            background: transparent;
+            color: var(--cor-texto-suave);
+            font-size: 0.86rem;
+            font-weight: 600;
+            border-radius: 7px;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .tab-btn:hover {
+            color: var(--cor-texto);
+        }
+
+        .tab-btn.active {
+            background-color: var(--cor-superficie);
+            color: var(--cor-primaria-hover);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        /* =========================================
+           FORMULÁRIOS E BOTÕES
+           ========================================= */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--cor-texto-suave);
+            margin-bottom: 6px;
+        }
+
+        .form-group small {
+            font-weight: 400;
+            color: #94a3b8;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="search"],
+        select {
+            width: 100%;
+            padding: 10px 14px;
+            font-size: 0.92rem;
+            color: var(--cor-texto);
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            transition: var(--transicao);
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            background-color: var(--cor-superficie);
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background-color: var(--cor-primaria);
+            color: #ffffff;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: var(--cor-primaria-hover);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-block {
+            width: 100%;
+            margin-top: 4px;
+        }
+
+        .btn-secondary {
+            background-color: var(--cor-superficie);
+            color: var(--cor-texto);
+            border-color: var(--cor-borda);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .btn-success {
+            background-color: var(--cor-sucesso);
+            color: #ffffff;
+        }
+
+        .btn-success:hover:not(:disabled) {
+            background-color: #15803d;
+        }
+
+        .btn-sm {
+            padding: 6px 11px;
+            font-size: 0.82rem;
+        }
+
+        /* =========================================
+           HISTÓRICO DE MOVIMENTAÇÕES
+           ========================================= */
+        #historicoEntradas {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .historico-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 14px;
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+        }
+
+        .historico-item strong {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--cor-texto);
+        }
+
+        .historico-item small {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--cor-texto-suave);
+            margin-top: 2px;
+        }
+
+        .historico-qtd {
+            font-weight: 700;
+            font-size: 0.88rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .historico-qtd.mais {
+            background-color: var(--cor-sucesso-fundo);
+            color: var(--cor-sucesso);
+        }
+
+        .historico-qtd.menos {
+            background-color: var(--cor-erro-fundo);
+            color: var(--cor-erro);
+        }
+
+        /* =========================================
+           FILTROS (.filter-chips / .chip)
+           ========================================= */
+        .filter-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .chip {
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 999px;
+            border: 1px solid var(--cor-borda);
+            background-color: #f8fafc;
+            color: var(--cor-texto-suave);
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .chip:hover {
+            border-color: #cbd5e1;
+            color: var(--cor-texto);
+        }
+
+        .chip.active {
+            background-color: var(--cor-primaria);
+            border-color: var(--cor-primaria);
+            color: #ffffff;
+        }
+
+        /* =========================================
+           TABELA DE ESTOQUE (.table-wrap / table)
+           ========================================= */
+        .table-wrap {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        thead th {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--cor-texto-suave);
+            background-color: #f8fafc;
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        tbody td {
+            padding: 13px 14px;
+            border-bottom: 1px solid var(--cor-borda);
+            font-size: 0.9rem;
+            vertical-align: middle;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 9px;
+            border-radius: 999px;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .badge-ok {
+            background-color: var(--cor-sucesso-fundo);
+            color: var(--cor-sucesso);
+        }
+
+        .badge-baixo {
+            background-color: var(--cor-aviso-fundo);
+            color: #b45309;
+        }
+
+        .badge-zero {
+            background-color: var(--cor-erro-fundo);
+            color: var(--cor-erro);
+        }
+
+        .unidade {
+            margin-left: 6px;
+            font-size: 0.82rem;
+            color: var(--cor-texto-suave);
+        }
+
+        /* =========================================
+           ESTADO VAZIO (.empty-state)
+           ========================================= */
+        .empty-state {
+            text-align: center;
+            padding: 36px 18px;
+            color: var(--cor-texto-suave);
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .empty-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+
+        .empty-state p {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* =========================================
+           MODAL DE AJUSTE (.modal-overlay / .modal-box)
+           ========================================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(15, 23, 42, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            z-index: 1000;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 440px;
+            background-color: var(--cor-superficie);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 24px;
+            box-shadow: var(--sombra-modal);
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        #modalMedNome {
+            display: block;
+            font-size: 0.95rem;
+            color: var(--cor-primaria-hover);
+            margin-bottom: 12px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        /* =========================================
+           HEADER E FOOTER DINÂMICOS (app.js)
+           ========================================= */
+        #topbar {
+            background-color: var(--cor-superficie);
+            border-bottom: 1px solid var(--cor-borda);
+            padding: 14px 20px;
+        }
+
+        #rodape {
+            background-color: var(--cor-superficie);
+            border-top: 1px solid var(--cor-borda);
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 0.85rem;
+            color: var(--cor-texto-suave);
+            margin-top: auto;
+        }
+
+        /* =========================================
+           RESPONSIVIDADE
+           ========================================= */
+        @media (max-width: 1024px) {
+            .stats-bar {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .split-estoque {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 14px;
+            }
+
+            .stats-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .panel {
+                padding: 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- NAVBAR -->
-    <header class="navbar">
-        <div class="nav-brand">
-        <div class="logo-icon">📦</div>
-        <div>
-            <h1>Hospital Pro - Almoxerifado</h1>
-            <span>Gestão de entrada e controle de estoque</span>
-        </div>
-        </div>
-        <div class="nav-user">
-            <span class="user-pill" id="nomeUsuario">📦Almoxerifado</span>
-            <a href="index.html" class="btn-nav">🚪Sair</a>
-        </div>
-    </header>
 
-    <div class="container">
-        <!-- ALERTA -->
-         <div class="alerta-estoque" id="alertaEstoque" style="display: none;">
-           ⚠️ <strong>Atenção:</strong> <span id="alertaTexto"></span>
+<header id="topbar"></header>
+
+<main class="container">
+
+    <section class="page-title">
+        <div>
+            <span class="page-tag">GESTÃO DE ESTOQUE</span>
+            <h1>📦 Almoxarifado</h1>
+            <p>Entrada de medicamentos e controle do estoque.</p>
+        </div>
+
+        <a href="inicio.html" class="btn btn-secondary">← Início</a>
+    </section>
+
+    <!-- ALERTA -->
+    <div class="alerta-estoque" id="alertaEstoque" role="alert" hidden>
+        <span>⚠️</span>
+        <span><strong>Atenção:</strong> <span id="alertaTexto"></span></span>
     </div>
 
-    <!-- STATS -->
-     <div class="stats-bar">
+    <!-- INDICADORES -->
+    <section class="stats-bar" aria-label="Resumo do estoque">
         <div class="stat-card">
             <div class="stat-icon purple">📦</div>
             <div>
-                <div class="stat-value" id="statItens">_</div>
-                <div class="stat-label">Tipos de cadastros</div>
+                <div class="stat-value" id="statItens">–</div>
+                <div class="stat-label">Medicamentos cadastrados</div>
             </div>
         </div>
+
         <div class="stat-card">
             <div class="stat-icon green">🟢</div>
             <div>
-                <div class="stat-value" id="statOK">_</div>
+                <div class="stat-value" id="statOk">–</div>
                 <div class="stat-label">Estoque normal</div>
             </div>
-            </div>
+        </div>
+
         <div class="stat-card">
             <div class="stat-icon orange">⚠️</div>
             <div>
-                <div class="stat-value" id="statBaixo">_</div>
-                <div class="stat-label">Estoque baixo ( menor que 10) </div>
+                <div class="stat-value" id="statBaixo">–</div>
+                <div class="stat-label">Estoque baixo (até 10)</div>
             </div>
-            </div>
+        </div>
+
         <div class="stat-card">
             <div class="stat-icon red">❌</div>
             <div>
-                <div class="stat-value" id="statZerado">_</div>
-                <div class="stat-label">Zerados/Esgotados </div>
+                <div class="stat-value" id="statZerado">–</div>
+                <div class="stat-label">Zerados / esgotados</div>
             </div>
         </div>
-     </div>
-     
-     <!-- MAIN GRID -->
-      <div class="main-grid">
+    </section>
 
-        
-    <!--COLUNA ESQUERDA: FORMULÁRIO ENTRADA -->
-<div class="card">
-    <div class="card-header">
-        <h2> Entrada de Medicamentos </h2>
-    </div>
-    <div class="card-body">
+    <div class="split split-estoque">
 
-        <!-- Tabs: Novo ou Repor-->
-         <div class="entrada tabs">
-            <button class="tab-btn active" id="tabNovo"
-            onclick="setTab('novo')">➕ Novo Medicamento</button>
-            <button class="tab-btn" id="tabRepor" onclick="setTab('repor')">📦 Repor Existente"</button>
-         </div>
-<!-- PAINEL: Cadastrar Novo -->
- <div id="painelNovo">
-    <div class="form-group">
-        <label for="emNome">Nome do Medicamento</label>
-        <input type="text" id="emNome" class="form-control" placeholder="Ex: Paracetamol 750mg" autocomplete="off">
-    </div>
-    <div class="form-group">
-    <label for="emOK">Quantidade <small>(unidades a adicionar)</small></label>
-    <input type="number" id="emQtd"
-    class="form-control" value="10" min="1">
- </div>
-<div class="form-group">
-    <label for="emUnidade">Tipo de Unidade</label>
-    <select id="emUnidade" class="form-control">
-        <option value="comprimidos">Comprimidos</option>
-        <option value="capsulas">Capsulas</option>
-        <option value="frascos">Frascos</option>
-        <option value="ampolas">Ampolas</option>
-        <option value="unidades">Unidades</option>
-    </select>
-</div>
-<div class="form-group">
-    <label for="emCategoria">Categoria Farmacologica</label>
-    <select id="emCategoria" class="form-control">
-            <option value="Analgesico/Antipiretico">Analgésico/Antipirético</option>
-            <option value="Antibiotico">Antibiótico</option>
-            <option value="Anti-inflamatorio">Anti-inflamatório</option>
-            <option value="Antialergico">Antialérgico</option>
-            <option value="Protetor Gastrico">Protetor Gastrico</option>
-            <option value="Antiespasmodico">Antiespasmodico</option>
-            <option value="Antiemetico">Antiemetico</option>
-            <option value="Solucão">Solução</option>
-            <option value="Vitamina/Suplemento">Vitamina / Suplemento </option>
-            <option value="Geral">Geral</option>
-    </select>
-</div>
-<button class="btn-full btn-purple" onclick="darEntrada()">
-    📩 Registrar Entrada no Estoque
-</button>
-    </div>
+        <!-- COLUNA ESQUERDA: ENTRADA + HISTÓRICO -->
+        <div>
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>Entrada de medicamentos</h2>
+                </div>
 
-    <!-- PAINEL: Repor Existente -->
-     <div id="painelRepor" style="display: none">
-        <div class="form-group">
-            <label for="selReporMed">Selecionar Medicamento</label>
-            <select id="selReporMed" class="form-control">
-                    <option value="">-- Selecione --</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="reporOtd">Quantidade a adicionar</label>
-            <input type="number" id="reporOTD"
-            class="form-control" value="10" min="1">
-        </div>
-        <div class="form=group">
-            <label for="reporObs">Observando<small>
-                (opcional)</small></label>
-                <input type="text" id="reporObs"
-                class="form-control" placeholder="Ex: Nota final NF-001">
-        </div>
-        <button class="btn-full btn-purple"
-        onclick="reporEstoque()">
-    ☂️ Adicionar ao Estoque Existente</button>
-     </div>
-</div>
-</div>
+                <div class="tabs" role="tablist">
+                    <button type="button" class="tab-btn active" id="tabNovo"
+                            role="tab" aria-selected="true">➕ Novo medicamento</button>
+                    <button type="button" class="tab-btn" id="tabRepor"
+                            role="tab" aria-selected="false">📦 Repor existente</button>
+                </div>
 
-<!-- Histórico de Entradas-->
- <div class="card" style="margin-top:20px">
-    <div class="card-header">
-        <h2> 📝 Últimas Entradas Registradas </h2>
-        <button class="btn-em btn-secondary"
-        onclick="carregarhistoricoEntradas()">🔄️</button>
-    </div>
-    <div class="card-body" id="historicoEntradas">
-        <div class="empty-state">
-            <div class="empty-icon">📝</div>
-            <p>Nenhuma entrada registrada ainda.</p>
-        </div>
-    </div>
- </div>
+       
+                <div class="painel-form" id="painelNovo">
+                    <div class="form-group">
+                        <label for="emNome">Nome do medicamento</label>
+                        <input type="text" id="emNome" placeholder="Ex.: Paracetamol 750mg" autocomplete="off">
+                    </div>
 
- <!-- COLUNA DIREITA: ESTOQUE ATUAL -->
-<div>
-    <div class="card">
-        <div class="card-header">
-            <h2> 📚 Estoque Atual de Medicamentos </h2>
-            <button class="btn-sm btn-secondary"
-            onclick="carregarEstoque()">🔄️ Atualizar</button>
-        </div>
-        <div class="card-body">
+                    <div class="form-group">
+                        <label for="emQtd">Quantidade <small>(unidades a adicionar)</small></label>
+                        <input type="number" id="emQtd" value="10" min="1" step="1">
+                    </div>
 
-            <div class="search-bar">
-                <input type="text" class="search-input"
-                id="buscaMed" placeholder="🔍 Buscar medicamento..."
-                oninput="filtrarTabela()">
-            </div>
+                    <div class="form-group">
+                        <label for="emUnidade">Tipo de unidade</label>
+                        <select id="emUnidade">
+                            <option value="comprimidos">Comprimidos</option>
+                            <option value="capsulas">Cápsulas</option>
+                            <option value="frascos">Frascos</option>
+                            <option value="ampolas">Ampolas</option>
+                            <option value="unidades">Unidades</option>
+                        </select>
+                    </div>
 
-            <div class="filter-chips" id="filterChips">
-                <span class="chip active" onclick="setFiltro('todos', this)">Todos</span>
-            </div>
+                    <div class="form-group">
+                        <label for="emCategoria">Categoria farmacológica</label>
+                        <select id="emCategoria">
+                            <option value="Analgésico/Antipirético">Analgésico/Antipirético</option>
+                            <option value="Antibiótico">Antibiótico</option>
+                            <option value="Anti-inflamatório">Anti-inflamatório</option>
+                            <option value="Antialérgico">Antialérgico</option>
+                            <option value="Protetor Gástrico">Protetor Gástrico</option>
+                            <option value="Antiespasmódico">Antiespasmódico</option>
+                            <option value="Antiemético">Antiemético</option>
+                            <option value="Solução">Solução</option>
+                            <option value="Vitamina/Suplemento">Vitamina / Suplemento</option>
+                            <option value="Geral">Geral</option>
+                        </select>
+                    </div>
 
-            <div style="overflow-x:auto">
-            <table class="estoque-table">
-                <thead>
-                    <tr>
-                        <th>Medicamento</th>
-                        <th>Categoria</th>
-                        <th>Disponivel</th>
-                        <th>Unidade</th>
-                        <th style="text-align: right;">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaEstoque">
-                    <tr>
-                        <td colspan="5">
-                            <div class="empty-state">
-                                <div class="empty-icon">⌛</div>
-                                <p>Carregando...</p>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-</div>
+                    <button type="button" class="btn btn-block" id="btnEntrada">
+                        📩 Registrar entrada no estoque
+                    </button>
+                </div>
 
-<!-- Modal: Editor quantidade manualmente -->
- <div class="modal-overlay" id="modalEditor">
-    <div class="modal-box">
-<div class="modal-title">✏️ Editar Estoque</div>
-<div class="form-group">
-    <label id="modalMedNome" style="font-size:15px; color:var(--dark);
-    margin-bottom:12px; display:block"></label>
-    <label>Quantidade a adicionar (negativo para remover):</label>
-    <input type="number" id="modalQtd" class="form-control" value="10">
-</div>
-<div class="modal-actions">
-    <button class="btn-sm btn-secondary" style="padding:11px"
-    onclick="fecharModal()">Cancelar</button>
-    <button class="btn-sm btn-success" style="padding:11px; flex:2"
-    onclick="confirmarEdicao()">🟢Confirmar</button>
-</div>
-    </div>
- </div>
+             
+                <div class="painel-form" id="painelRepor" hidden>
+                    <div class="form-group">
+                        <label for="selReporMed">Selecionar medicamento</label>
+                        <select id="selReporMed">
+                            <option value="">-- Selecione --</option>
+                        </select>
+                    </div>
 
- <div id="toast" class="toast"></div>
+                    <div class="form-group">
+                        <label for="reporQtd">Quantidade a adicionar</label>
+                        <input type="number" id="reporQtd" value="10" min="1" step="1">
+                    </div>
 
- <script>
-    // ESTADO GROBAL
-    let estoqueGlobal = [];
-    let filtroAtivo = "todos";
-    let editandoId = null;
-    let historicoEntradas = [];
-
-    // identificação do usúario logado
-const usuario = JSON.parse(localStrorage.getItem("hospital_user")  || "{}");
-if (usuario.nome) {
-    document.getElementById("nomeUsuario").textContent = "📦 " + usuario.nome;
-}
-
-// TOAST
-function showToast(msg, tipo = "sucess") {
-    const t = document.getElementById("toast");
-    t.textContent = msg;
-    t.className = `toast toast-${tipo} show`;
-    setTimeout(() => {t.className = "toast";}, 4000);
-}
-
-// TABS
-
-function setTab(tab) {
-    document.getElementById("painelNovo").style.display = tab === "novo" ? "block" : "none";
-     document.getElementById("painelRepor").style.display = tab === "repor" ? "block" : "none";
-      document.getElementById("tabNovo").className = "tab-btn" + (tab === "novo" ? "active" : "");
-       document.getElementById("tabRepor").className = "tab-btn" + (tab === "repor" ? "active" : "");
-
-       if (tab === "repor") preencherSelectRepor();
-}
-
-// CARREGAR ESTOQUE
-
-function carregarEstoque() {
-    fetch("/estoque")
-    .then(r => r.json())
-    .then(data => {
-        estoqueGlobal = data;
-        atualizarStats(data);
-        renderizarTabela(data);
-        verificarAlertas(data);
-    })
-    .catch(() => showToast("❌ Erro ao carregar estoque.", "error"));
-}
-
-//STATS
-function atualizarStats(data) {
-     document.getElementById("statitems").textContent = data.length;
-      document.getElementById("statOk").textContent = data.filter(m => m.quantidade > 10).length;
-
-       document.getElementById("statZerado").textContent = data.filter(m => m.quantidade === 0).length;
-}
-
-function verificarAlertas(data) {
-    const baixos = data.filter(m => m.quantidade > 0 && m.quantidade <= 10);
-    const zerados = data.filter(m => m.quantidade === 0);
-    const el =  document.getElementById("alertaEstoque");
-    const msgs = [];
-    if (zerados.length) msgs.push(`${zerados.length} medicamentos(s) zerados(s): ${zerados.map(m => m.nome).join(", ")}`);
-
-    if (baixos.length) msgs.push(`${baixos.length} com estoque baixo:`);
-    if(msgs.length) {  document.getElementById("alertaTexto").textContent = msgs.join(" | ") + " - repor com urgência!";
-        el.style.display = "flex";
-    } else {
-        el.style.display = "none";
-    }
-    
-}
-
-// FILTROS
-
-function renderizarFiltros(data) {
-    const cats = [...new Set(data.map(m => m.categoria).filter(Boolean))];
-    const el =  document.getElementById("filterChips");
-    el.innerHTML = `<span class="chip ${filtroAtivo ==='todos' ? 'active' : ''}" onclick="setFiltro('todos', this)">Todos</span>`;
-    cats.forEach(c => { el.innerHTML += `<span class="chip ${filtroAtivo === c ? `active` : ''}" onclick="setFiltro('${c}', this)">
-        ${c}</span>`});
-}
-
-function setFiltro(cat, el){
-    filtroAtivo = cat;
-    document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
-    el.classList.add("active");
-    filtrarTabela();
-}
-
-function filtrarTabela(){
-    const busca = document.getElementById("buscaMed").value.toLowerCase();
-    const filtrados = estoqueGlobal.filter(m => {
-        const matchCat = filtroAtivo === "todos" || m.categoria === filtroAtivo;
-        const matchBusc = m.nome.toLowerCase()
-        .includes(busca) || (m.categoria || "")
-        .toLowerCase() .includes(busca);
-        return matchCat && matchBusc;
-    });
-    renderizarTabela(filtrados);
-
-}
-
-// RENDERIZAR TABELA
-
- </script>
-</body>
-</html>
+                    <div class="form-group">
+                        <label for="reporObs">Observação <small>(opcional)</small></label
