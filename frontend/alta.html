@@ -1,11 +1,372 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alta Médica | Projeto-Sentinela</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+       
+        :root {
+            --cor-primaria: #0284c7;
+            --cor-primaria-hover: #0369a1;
+            --cor-fundo: #f1f5f9;
+            --cor-superficie: #ffffff;
+            --cor-texto: #1e293b;
+            --cor-texto-suave: #64748b;
+            --cor-borda: #e2e8f0;
+            --cor-tag-fundo: #e0f2fe;
+            --cor-tag-texto: #0369a1;
+
+            --cor-sucesso: #16a34a;
+            --cor-sucesso-fundo: #dcfce7;
+            --cor-erro: #dc2626;
+            --cor-erro-fundo: #fee2e2;
+
+            --raio-borda: 10px;
+            --sombra-suave: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+            --transicao: all 0.2s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* =========================================
+           CABEÇALHO E NAVEGAÇÃO (.topbar / .nav)
+           ========================================= */
+        .topbar {
+            background-color: var(--cor-superficie);
+            border-bottom: 1px solid var(--cor-borda);
+            padding: 12px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--cor-texto);
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: var(--cor-tag-fundo);
+            color: var(--cor-primaria-hover);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .brand strong {
+            display: block;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .brand span {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--cor-texto-suave);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--cor-texto-suave);
+            padding: 7px 12px;
+            border-radius: 8px;
+            transition: var(--transicao);
+        }
+
+        .nav a:hover {
+            background-color: #f8fafc;
+            color: var(--cor-texto);
+        }
+
+        .nav a.active {
+            background-color: var(--cor-tag-fundo);
+            color: var(--cor-primaria-hover);
+        }
+
+        /* =========================================
+           LAYOUT PRINCIPAL
+           ========================================= */
+        .container {
+            width: 100%;
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 32px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        /* =========================================
+           TÍTULO DA PÁGINA (.page-title)
+           ========================================= */
+        .page-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .page-tag {
+            display: inline-block;
+            background-color: var(--cor-tag-fundo);
+            color: var(--cor-tag-texto);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin-bottom: 8px;
+        }
+
+        .page-title h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            line-height: 1.2;
+        }
+
+        .page-title p {
+            color: var(--cor-texto-suave);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        /* =========================================
+           PAINÉIS E FORMULÁRIO (.panel / .form-card)
+           ========================================= */
+        .panel,
+        .form-card {
+            background-color: var(--cor-superficie);
+            border: 1px solid var(--cor-borda);
+            border-radius: var(--raio-borda);
+            padding: 24px;
+            box-shadow: var(--sombra-suave);
+        }
+
+        .panel h2,
+        .form-card h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--cor-texto);
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+        .muted {
+            font-size: 0.9rem;
+            color: var(--cor-texto-suave);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--cor-texto-suave);
+            margin-bottom: 6px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 11px 14px;
+            font-size: 0.94rem;
+            color: var(--cor-texto);
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            transition: var(--transicao);
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            background-color: var(--cor-superficie);
+            border-color: var(--cor-primaria);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+        }
+
+        /* =========================================
+           BOTÕES (.btn)
+           ========================================= */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 18px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background-color: var(--cor-primaria);
+            color: #ffffff;
+            cursor: pointer;
+            transition: var(--transicao);
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: var(--cor-primaria-hover);
+        }
+
+        .btn:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: var(--cor-superficie);
+            color: var(--cor-texto);
+            border-color: var(--cor-borda);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background-color: #f8fafc;
+            border-color: #cbd5e1;
+        }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* =========================================
+           MENSAGENS DE STATUS (.mensagem)
+           ========================================= */
+        .mensagem:empty {
+            display: none;
+        }
+
+        .mensagem {
+            margin-top: 16px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .mensagem.sucesso {
+            background-color: var(--cor-sucesso-fundo);
+            border-color: #86efac;
+            color: #166534;
+        }
+
+        .mensagem.erro {
+            background-color: var(--cor-erro-fundo);
+            border-color: #fca5a5;
+            color: #991b1b;
+        }
+
+        /* =========================================
+           RODAPÉ (.footer)
+           ========================================= */
+        .footer {
+            background-color: var(--cor-superficie);
+            border-top: 1px solid var(--cor-borda);
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 0.85rem;
+            color: var(--cor-texto-suave);
+            margin-top: auto;
+        }
+
+        /* =========================================
+           RESPONSIVIDADE
+           ========================================= */
+        @media (max-width: 768px) {
+            .topbar {
+                padding: 12px 16px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px 14px;
+            }
+
+            .page-title {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .panel,
+            .form-card {
+                padding: 16px;
+            }
+
+            .actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
 
